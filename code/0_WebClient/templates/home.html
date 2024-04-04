@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>Subir Archivo .zip</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".zip" required>
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock %}
