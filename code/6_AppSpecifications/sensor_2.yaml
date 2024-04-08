@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Temperature sensor
+  description: |
+    This is a description of a service that recieves temperature from a sensor and
+    add this value to an array list for re-send to the aggregator service  
+  # Extension para SLA
+  x-sla:
+    $ref: ./sla_sensor2.yml
+  version: 1.0.0
+servers:
+- url:
+- description: Classical machine in wich the server is going to be deployed
+paths:
+  /recieve/{temp}:
+    post:
+      summary: Recieve data from sensor
+      description: Function that recieves temperature for the sensor 2.
+      parameters:
+      - name: temp
+        in: path
+        requiered: true 
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      Temperature recieved succesfully.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while recieving the temperature.
+  /reset:
+    get:
+      summary: Reset array of temperature.
+      description: Function to empty the array of temperatures
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      Array of temperature is reset.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while the reset of the temperature.

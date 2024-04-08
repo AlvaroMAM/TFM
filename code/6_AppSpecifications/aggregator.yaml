@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Aggregator service
+  description: |
+    This is a description of a service that is in charge of recieving the temperatures
+    from the sensor microservices and process them to send to the quantum Grover service.
+  # Extension para SLA
+  x-sla:
+    $ref: ./sla_aggregator.yml
+  version: 1.0.0
+servers:
+- url:
+- description: Classical machine in wich the server is going to be deployed
+paths:
+  /status:
+    get:
+      summary: Show the status of the microservice.
+      description: Function that returns the availability of the microservice.
+      responses:
+        "200":
+          description: "Online" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      The microservice is online.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error ocurred.
+  /getData:
+    get:
+      summary: Recieve the temperatures information.
+      description: Function that recieves temperatures from the sensors.
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      Temperatures recieved succesfully.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while recieving the temperatures.
+  /launchAnalysis:
+    get:
+      summary: Launch the analysis of the temperatures.
+      description: Function that transform the temperatures recieved into quantum information and send them to grover service.
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      Analysis launched.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while launching the analysis.
