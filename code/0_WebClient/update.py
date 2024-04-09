@@ -54,7 +54,11 @@ if __name__ == "__main__":
     update_web_task = Thread(updating_web, args=(lock,))
     reset_counter_task = Thread(reset_counter, args=(lock,))
     update_web_task.start()
+    logging.debug("UPDATE WEB TAST LAUNCHED")
     reset_counter_task.start()
+    logging.debug("RESET COUNTER TASK LAUNCHED")
     update_web_task.join()
+    logging.debug("UPDATE WEB TAST LAUNCHED")
     reset_counter_task.join()
+    logging.debug("RESET COUNTER TASK STOPPED")
     

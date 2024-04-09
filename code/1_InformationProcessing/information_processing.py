@@ -7,7 +7,8 @@ Descripcion:
 Proceso encargado de procesar la información de los archivos de especificaciones
 y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 """
-from flask import Flask
+from flask import Flask, request
+from zipfile import ZipFile
 import requests
 
 
@@ -22,12 +23,20 @@ def index():
     return "ONLINE"
 
 
-@app.route('/start')
+@app.route('/start', methods=['POST'])
 def start_processing():
+    qpu_services = {}
+    cpu_services = {}
+    if request.files:
+        uploaded_file = request.files[0] #Leo archivo zip ( ImmutableMultiDict[str, FileStorage])
+        print(type(uploaded_file))
+        app_zip_file = uploaded_file[1]
+
+
     """
-    # Inicializar JSON de cuánticos
-    # Inicializar JSON de clásicos
-    # leer archivo .zip
+    # Inicializar JSON de cuánticos ✅
+    # Inicializar JSON de clásicos ✅
+    # leer archivo .zip ✅
     # descomprimir en carpeta máquina local
     # leer archivos principales
     # Procesar archivo a archivo y leer sus requirements, en el caso de que en los requirements el type sea cuántico, 
