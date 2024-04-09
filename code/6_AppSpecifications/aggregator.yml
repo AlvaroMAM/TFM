@@ -6,7 +6,7 @@ info:
     from the sensor microservices and process them to send to the quantum Grover service.
   # Extension for requirements
   x-req:
-    $ref: ./requirements_aggregator.yml
+    $ref: ./requirements/requirements_aggregator.yml
   version: 1.0.0
 servers:
 - url:

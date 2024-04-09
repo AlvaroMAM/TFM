@@ -7,3 +7,18 @@ Descripcion:
 Servicio encargado de seleccionar un conjunto de máquinas de QPU compatibles
 para la ejecución de los microservicios que conforman la aplicación híbrida (cuántico-clásica)
 """
+
+"""
+JSON SALIDA
+
+app : {
+        microservice_1: {
+            qpu_machines : []
+        }, 
+        ...
+        microservice_n {
+            qpu_machines : []
+        }
+    }
+
+"""

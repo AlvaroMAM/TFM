@@ -5,7 +5,7 @@ info:
     This is a description of a service that is in charge of recieving the results of Grover algorithim.
   # Extension for requirements
   x-req:
-    $ref: ./requirements_quantum_processing.yml
+    $ref: ./requirements/requirements_quantum_processing.yml
   version: 1.0.0
 servers:
 - url:

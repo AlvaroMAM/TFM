@@ -6,7 +6,7 @@ info:
      of the temperatures measured.
   # Extension for requirements
   x-req:
-    $ref: ./requirements_grover.yml
+    $ref: ./requirements/requirements_grover.yml
   version: 1.0.0
 servers:
 - url:

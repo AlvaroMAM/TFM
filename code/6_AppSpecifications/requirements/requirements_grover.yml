@@ -9,3 +9,5 @@ requirements:
   execution_time:
   cpu:
   ram:
+  qubits:
+  shots:
