@@ -25,12 +25,15 @@ def index():
 @app.route('/start')
 def start_processing():
     """
+    # Inicializar JSON de cuánticos
+    # Inicializar JSON de clásicos
     # leer archivo .zip
     # descomprimir en carpeta máquina local
     # leer archivos principales
+    # Procesar archivo a archivo y leer sus requirements, en el caso de que en los requirements el type sea cuántico, 
+    # entonces se añade al json de cuántico, o al de clásico si es de otro tipo.
+    # El nombre a usar será el nombre del archivo principal sin yml.
     # leer archivos de requirements
-    # Crear JSON de cuánticos
-    # Crear JSON de clásicos
     # Tomar los productores previamente creados en el main
     # Enviar los json a cada topic correspondiente
     # Pregunta: ¿Qué hacer con la parte de evaluación de la parte clásica de los servicios cuánticos?
