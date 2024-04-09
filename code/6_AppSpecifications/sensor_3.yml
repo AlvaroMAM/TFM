@@ -4,9 +4,9 @@ info:
   description: |
     This is a description of a service that recieves temperature from a sensor and
     add this value to an array list for re-send to the aggregator service  
-  # Extension para SLA
-  x-sla:
-    $ref: ./sla_sensor2.yml
+  # Extension for requirements
+  x-req:
+    $ref: ./requirements_sensor3.yml
   version: 1.0.0
 servers:
 - url:
@@ -15,7 +15,7 @@ paths:
   /recieve/{temp}:
     post:
       summary: Recieve data from sensor
-      description: Function that recieves temperature for the sensor 2.
+      description: Function that recieves temperature for the sensor 3.
       parameters:
       - name: temp
         in: path

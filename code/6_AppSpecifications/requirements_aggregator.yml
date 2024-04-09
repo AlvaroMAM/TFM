@@ -1,0 +1,11 @@
+spil4ha: 1.0.0 #SPILab 4 hibrid architectures
+context:
+  id: aggregator
+  api: ./aggregator.yml
+  author: SPILab
+requirements:  
+  requests:
+  execution_time:
+  cpu:
+  ram:
+  

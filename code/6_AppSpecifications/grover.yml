@@ -1,16 +1,18 @@
 openapi: 3.1.0
 info:
-  title: Quantum processing microservice
+  title: Grover microservice
   description: |
-    This is a description of a service that is in charge of recieving the results of Grover algorithim.
-  # Extension para SLA
-  x-sla:
-    $ref: ./sla_quantum_processing.yml
+    This is a description of a service that is in charge of recieving the corresponding quantum information
+     of the temperatures measured.
+  # Extension for requirements
+  x-req:
+    $ref: ./requirements_grover.yml
   version: 1.0.0
 servers:
 - url:
 - description: Classical machine in wich the server is going to be deployed
-
+- url:
+- description: Quantum machine in wich the algorithm is going to be executed.
 paths:
   /status:
       get:
@@ -39,10 +41,10 @@ paths:
                       type: string
                       description: |
                         An error ocurred.
-  /processing/{result}:
+  /launchGrover/{qubits_values}:
     get:
-      summary: Processing quantum result
-      description: Process the quantum result of Grover algorithim.
+      summary: Launch the grover algorithim.
+      description: Function that execute the quantum circuit of grover algorithm.
       responses:
         "200":
           description: "OK" 
@@ -54,7 +56,7 @@ paths:
                   result:
                     type: string
                     description: |
-                      Process completed.
+                      Grover algorithim launched.
         default:
           description: error produced.
           content:
@@ -67,15 +69,12 @@ paths:
                     description: |
                       An error occured while launching the analysis.
     parameters:
-    - name: result
+    - name: qubits
       in: paths
-      description: Result of the quantum algorithm.
+      description: Quantum information of temperatures
       required: true
       schema:
-        type: object
-        properties:
-          state:
-            type: string
-          percentage:
-            type: integer
+        type: array
+        items:
+          type: string # Lo he puesto como string porque despues en el proceso de la petición se puede procesar.
       style: simple    

@@ -4,9 +4,9 @@ info:
   description: |
     This is a description of a service that is in charge of recieving the temperatures
     from the sensor microservices and process them to send to the quantum Grover service.
-  # Extension para SLA
-  x-sla:
-    $ref: ./sla_aggregator.yml
+  # Extension for requirements
+  x-req:
+    $ref: ./requirements_aggregator.yml
   version: 1.0.0
 servers:
 - url:

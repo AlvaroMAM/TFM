@@ -1,0 +1,28 @@
+spil4ha: 1.0.0 #SPILab 4 hibrid architectures
+context:
+  id:
+    type: string
+    description: "Identifier of the microservice"
+  api:
+    type: uri
+    description: "URI for the OpenAPI Specification of the microservice"
+  author:
+    type: string
+    description: "Optional field to indicate the creator of the file"
+requirements:  
+  requests:
+    type: integer
+    format: int64
+    description: "Number of requests per minute"
+  execution_time:
+    type: integer
+    format: int64
+    description: "Maximun execution time for the classic microservice"
+  cpu:
+    type: integer
+    format: int64
+    description: "CPU cycles per second"
+  ram:
+    type: integer
+    format: int64
+    description: "Instructions per second" 
