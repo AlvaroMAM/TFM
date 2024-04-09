@@ -56,4 +56,4 @@ def upload_file():
         return 'El archivo no es un archivo .zip válido', 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=8585,debug=True)
