@@ -11,6 +11,8 @@ from kafka import KafkaConsumer, KafkaProducer
 from ..config.config import KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_CPU_CANDIDATES
 import json
 import logging
+import os
+
 """
 # JSON ENTRADA
 {
@@ -58,7 +60,12 @@ def select_cpu (requests, execution_time, cpu, ram):
     
     """
     selected_cpus = []
-    cloud_providers = ""
+    cloud_providers_path = "./cloud-providers"
+    cloud_providers_list = os.listdir(cloud_providers_path)
+    for cloud_provider in cloud_providers_list:
+        cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
+        if os.path.isfile(cloud_provider_file):
+            continue
     return selected_cpus
 
 if __name__ == '__main__':
