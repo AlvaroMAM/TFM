@@ -10,6 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request
 from zipfile import ZipFile
 import requests
+import logging
 
 
 FOLDER_NAME = "deployment_app_folder"
@@ -31,13 +32,15 @@ def start_processing():
         uploaded_file = request.files[0] #Leo archivo zip ( ImmutableMultiDict[str, FileStorage])
         print(type(uploaded_file))
         app_zip_file = uploaded_file[1]
-
+        with ZipFile(app_zip_file, 'r') as zip: 
+            zip.extractall() 
+            logging.debug("ZIP FILE UNZIPPED") 
 
     """
     # Inicializar JSON de cuánticos ✅
     # Inicializar JSON de clásicos ✅
     # leer archivo .zip ✅
-    # descomprimir en carpeta máquina local
+    # descomprimir en carpeta máquina local ✅
     # leer archivos principales
     # Procesar archivo a archivo y leer sus requirements, en el caso de que en los requirements el type sea cuántico, 
     # entonces se añade al json de cuántico, o al de clásico si es de otro tipo.
@@ -61,3 +64,9 @@ def start_processing():
     }
     """
     return None
+
+
+
+if __name__ == '__main__':
+    app.run(host="127.0.0.1", port=8586,debug=True)
+    logging.basicConfig(filename='information-processing.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
