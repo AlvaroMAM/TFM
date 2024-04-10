@@ -11,7 +11,7 @@ from threading import Thread, Lock
 import logging
 import requests
 from kafka import KafkaConsumer
-from ..config.config import TOPIC_WEB, TOPIC_RESET_PHASES, KAFKA_SERVER_URL, WEB_CLIENT_URL
+from ..config.config import TOPIC_WEB, TOPIC_RESET_PHASES, KAFKA_SERVER_URL, WEB_CLIENT_DEVELOPMENT_URL
 
 if __name__ == "__main__":
     FLOW_STATUS = ['INFORMATION_PROCESSING','MACHINES_CANDIDATES', 'DEPLOYMENT_COMBINATIONS', 'COST-PERFORMANCE', 'UTILITY_CALCULATOR'] # DEPLOYMENT_COMBINATIONS = GENERATOR
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         print(message)
         if message.topic == TOPIC_WEB:
             logging.debug("PROCESSING TOPIC - " + message.topic)
-            r = requests.put(WEB_DEVELOPMENT_URL+"/update", data={'phase' : FLOW_STATUS[counter]})
+            r = requests.put(WEB_CLIENT_DEVELOPMENT_URL+"/update", data={'phase' : FLOW_STATUS[counter]})
             logging.debug("RESPONSE FROM WEB - " + r.text)
             counter = counter + 1
             logging.debug("COUNTER INCREMENTED : " + str(counter))
