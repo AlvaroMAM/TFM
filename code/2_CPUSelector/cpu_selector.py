@@ -65,6 +65,9 @@ def select_cpu (requests, execution_time, cpu, ram):
     for cloud_provider in cloud_providers_list:
         cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
         if os.path.isfile(cloud_provider_file):
+            # READ FILE
+            # IF IS COMPATIBLE
+            #   ADD TO SELECTED_CPUS
             continue
     return selected_cpus
 
