@@ -1,10 +1,12 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: sensor-2
-  api: ./sensor_2.yml
+  id: aggregator
+  api: ./aggregator.yml
+  mode: classic
   author: SPILab
 requirements:  
   requests:
   execution_time:
   cpu:
   ram:
+  

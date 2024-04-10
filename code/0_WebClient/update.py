@@ -8,16 +8,18 @@ Proceso encargado de mandar solicitud de actualización del estado a la web
 """
 
 from threading import Thread, Lock
-import logging
-import requests
 from kafka import KafkaConsumer
 from ..config.config import TOPIC_WEB, TOPIC_RESET_PHASES, KAFKA_SERVER_URL, WEB_CLIENT_DEVELOPMENT_URL
+import logging
+import requests
+import json
 
 if __name__ == "__main__":
     FLOW_STATUS = ['INFORMATION_PROCESSING','MACHINES_CANDIDATES', 'DEPLOYMENT_COMBINATIONS', 'COST-PERFORMANCE', 'UTILITY_CALCULATOR'] # DEPLOYMENT_COMBINATIONS = GENERATOR
     logging.basicConfig(filename='update.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     counter = 0
-    consumer = KafkaConsumer([TOPIC_WEB, TOPIC_RESET_PHASES], )
+   
+    consumer = KafkaConsumer([TOPIC_WEB, TOPIC_RESET_PHASES], bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8'))
     for message in consumer: # Solo entra si existe un mensaje
         logging.debug("MESSAGE RECIEVED - " + message) 
         logging.debug(message)

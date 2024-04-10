@@ -1,15 +1,22 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
+  type: object
+  description: "Holds the main information of the requirements"
   id:
     type: string
     description: "Identifier of the microservice"
   api:
     type: uri
     description: "URI for the OpenAPI Specification of the microservice"
+  mode:
+    type: string
+    description: "String to indicate the microservice mode of computing (CPU or QPU)"
   author:
     type: string
     description: "Optional field to indicate the creator of the file"
-requirements:  
+requirements:
+  type: object
+  description: "Holds the value of the requirements"  
   requests:
     type: integer
     format: int64

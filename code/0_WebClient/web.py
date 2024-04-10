@@ -11,6 +11,7 @@ Descripcion:
 from flask import Flask, render_template, request
 import requests
 import os
+import logging
 
 
 
@@ -56,4 +57,6 @@ def upload_file():
         return 'El archivo no es un archivo .zip válido', 400
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='web.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
     app.run(host="127.0.0.1", port=8585,debug=True)
+

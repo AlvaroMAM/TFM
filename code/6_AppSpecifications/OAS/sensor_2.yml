@@ -6,7 +6,7 @@ info:
     add this value to an array list for re-send to the aggregator service  
   # Extension for requirements
   x-req:
-    $ref: ./requirements/requirements_sensor2.yml
+    $ref: ../REQ/sensor2.yml
   version: 1.0.0
 servers:
 - url:
