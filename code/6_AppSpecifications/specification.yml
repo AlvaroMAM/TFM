@@ -32,4 +32,12 @@ requirements:
   ram:
     type: integer
     format: int64
-    description: "Instructions per second" 
+    description: "Required memory needed for a correct execution"
+  qubits:
+    type: integer
+    format: int64
+    description: "Qubits circuit number"
+  shots:
+    type: integer
+    format: int64
+    description: "Number of executions of the circuit"   

@@ -1,8 +1,7 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
   id: grover-alg
-  #type: plans # Este atributo es el que haría falta eliminar porque para nuestro enfoque no tendría sentido ya que no sabemos el plan o acuerdo sujeto del usuario
-  api: ./grover.yml
+  api: ../OAS/grover.yml
   mode: quantum
   author: SPILab
 requirements:  

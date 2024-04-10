@@ -1,7 +1,7 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
   id: quantum-result-processing
-  api: ./quantum_processing.yml
+  api: ../OAS/quantum_processing.yml
   mode: classic
   author: SPILab
 requirements:  

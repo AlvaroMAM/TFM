@@ -1,7 +1,7 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
   id: aggregator
-  api: ./aggregator.yml
+  api: ../OAS/aggregator.yml
   mode: classic
   author: SPILab
 requirements:  
