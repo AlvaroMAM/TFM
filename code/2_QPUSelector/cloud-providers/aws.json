@@ -1,0 +1,137 @@
+{
+    "aquila" : {
+        "type": "qpu",
+        "qubits" : 256,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 1000
+        },
+        "device_cost" : {
+            "price" : 0.01,
+            "unit" : "shot"
+        }
+    },
+
+    "aria_1": {
+        "type": "qpu",
+        "qubits" : 25,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 5000
+        },
+        "device_cost" : {
+            "price" : 0.03,
+            "unit" : "shot"
+        }
+    },
+    "aria_2": {
+        "type": "qpu",
+        "qubits" : 25,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 5000
+        },
+        "device_cost" : {
+            "price" : 0.03,
+            "unit" : "shot"
+        }
+    },
+    "aspen_m_3": {
+        "type": "qpu",
+        "qubits" : 79,
+        "shots_range" : {
+            "minimum" : 10,
+            "maximum" : 100000
+        },
+        "device_cost" : {
+            "price" : 0.00035,
+            "unit" : "shot"
+        }
+    },
+    "forte_1": {
+        "type": "qpu",
+        "qubits" : 36,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 1000
+        },
+        "device_cost" : {
+            "price" : 0,
+            "unit" : "shot"
+        }
+    },
+    "harmony": {
+        "type": "qpu",
+        "qubits" : 11,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 10000
+        },
+        "device_cost" : {
+            "price" : 0.01,
+            "unit" : "shot"
+        }
+    },
+    "lucy": {
+        "type": "qpu",
+        "qubits" : 8,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 10000
+        },
+        "device_cost" : {
+            "price" : 0.00035,
+            "unit" : "shot"
+        }
+    },
+    "dm1": {
+        "type": "simulators",
+        "qubits" : 17,
+        "shots_range" : {
+            "minimum" : 0,
+            "maximum" : 100000
+        },
+        "device_cost" : {
+            "price" : 0.075,
+            "unit" : "minute"
+        }
+    },
+    "sv1": {
+        "type": "simulators",
+        "qubits" : 34,
+        "shots_range" : {
+            "minimum" : 0,
+            "maximum" : 100000
+        },
+        "device_cost" : {
+            "price" : 0.075,
+            "unit" : "minute"
+        }
+    },
+    "tn1": {
+        "type": "simulators",
+        "qubits" : 50,
+        "shots_range" : {
+            "minimum" : 1,
+            "maximum" : 1000
+        },
+        "device_cost" : {
+            "price" : 0.275,
+            "unit" : "minute"
+        }
+    },
+    "local": {
+        "type": "simulators",
+        "qubits" : 26,
+        "shots_range" : {
+            "minimum" : 0,
+            "maximum" : 9223372036854776000
+        },
+        "device_cost" : {
+            "price" : 0,
+            "unit" : "shot"
+        }
+        
+    }
+
+}
