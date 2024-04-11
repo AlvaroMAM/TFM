@@ -11,6 +11,7 @@ from kafka import KafkaConsumer, KafkaProducer
 from ..config.config import KAFKA_SERVER_URL, TOPIC_QPU, TOPIC_QPU_CANDIDATES
 import json
 import logging
+import os
 
 """
 JSON SALIDA
@@ -26,6 +27,9 @@ app : {
     }
 
 """
+
+def is_candidate(machine_information, ms_qubits, ms_shots):
+    return machine_information['qubits']>= ms_qubits and machine_information['shots'] >= ms_shots
 
 def select_qpu(qubits, shots):
     """
@@ -46,6 +50,20 @@ def select_qpu(qubits, shots):
     
     """
     selected_qpus = []
+    cloud_providers_path = "./cloud-providers"
+    cloud_providers_list = os.listdir(cloud_providers_path)
+    for cloud_provider in cloud_providers_list:
+        cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
+        if os.path.isfile(cloud_provider_file):
+            qpu_machines = None
+            with open(cloud_provider_file, 'r') as f:
+                logging.debug("QPU-SELECTOR : QUANTUM MACHINES READING")
+                qpu_machines = json.load(f)
+            for qpu_machine, data in qpu_machines.items():
+                logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "PROCESSING")
+                if is_candidate(data, qubits, shots):
+                    selected_qpus.append((qpu_machine,data))
+                    logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "IS CANDIDATE")
     return selected_qpus
 
 if __name__ == '__main__':
@@ -60,4 +78,4 @@ if __name__ == '__main__':
         for microservice_name, requirements in microservices.items():
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE" + microservice_name)
             app_qpu_machines[microservice_name] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
-
+            logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
