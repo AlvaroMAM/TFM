@@ -1,7 +1,7 @@
 # TFM
 ***Master's Degree in Computer Science and Engineering Thesis at UMA (University of Málaga)***.\
 **Author's Name**: *Álvaro Manuel Aparicio-Morales*.\
-**Professors**: *Javier Cámara & Jose Garcia-Álonso*.
+**Professors**: *Javier Cámara & Jose Garcia-Alonso*.
 ## Abstract
 Due to advance in quantum computing, it results more interesting to incorporate this new computing
 paradigm in the creation of hybrid systems in which both models, classical and quantum coexist. 
