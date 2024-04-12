@@ -11,3 +11,14 @@ requirements:
   ram:
   qubits:
   shots:
+
+#Alternative
+
+minimum_hw_req:
+  cpu:
+  ram:
+  qubits:
+  shots:
+behaviour:
+  requests:
+  execution_time:

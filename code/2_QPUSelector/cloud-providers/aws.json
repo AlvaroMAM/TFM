@@ -11,7 +11,6 @@
             "unit" : "shot"
         }
     },
-
     "aria_1": {
         "type": "qpu",
         "qubits" : 25,

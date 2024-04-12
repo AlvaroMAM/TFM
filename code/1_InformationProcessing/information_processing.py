@@ -100,22 +100,20 @@ def start_processing():
         
 
     """
-    # Pregunta: ¿Qué hacer con la parte de evaluación de la parte clásica de los servicios cuánticos?
-    # Que cada módulo evalúe la parte correspondiente y después en el generador de combinaciones los agrupo
+    # Cada módulo evalúa la parte correspondiente y después en el generador de combinaciones los agrupo
     # generando un único json con la estructura y las características de las máquinas
     app : {
         microservice_1: {
             cpu_machines : [{name: machine 1, cpu: x, ram: y, ...}],
-            qpu_machines : []
+            qpu_machines : [{{name: machine 1, qubits: j, shots: i, ...}}]
         }, 
         ...
         microservice_n {
-            cpu_machines : [],
+            cpu_machines : [{name: machine 1, cpu: x, ram: y, ...}],
             qpu_machines : []
         }
     }
     """
-    return None
 
 
 

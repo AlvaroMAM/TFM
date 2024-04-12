@@ -9,4 +9,11 @@ requirements:
   execution_time:
   cpu:
   ram:
-  
+
+# Alternative
+minimum_hw_req:
+  cpu:
+  ram:
+behaviour:
+  requests:
+  execution_time:
