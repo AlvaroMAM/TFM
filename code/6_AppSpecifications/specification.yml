@@ -30,11 +30,6 @@ minimum-hw-req:
     type: integer
     format: int64
     description: "Minimum number of qubits available in the quantum computer"
-  shots:
-    type: integer
-    format: int64
-    description: "Minimum number of shots available in the quantum computer"
-
 behaviour:
   type: object
   description: "Holds the values of behavioural requirements"
@@ -46,31 +41,7 @@ behaviour:
     type: integer
     format: int64
     description: "Maximun execution time of the classic microservice task"
-
-requirements:
-  type: object
-  description: "Holds the value of the requirements"  
-  requests:
-    type: integer
-    format: int64
-    description: "Number of requests per minute"
-  execution_time:
-    type: integer
-    format: int64
-    description: "Maximun execution time of the classic microservice task"
-  cpu:
-    type: integer
-    format: int64
-    description: "CPU cycles per second"
-  ram:
-    type: integer
-    format: int64
-    description: "Required memory needed for a correct execution"
-  qubits:
-    type: integer
-    format: int64
-    description: "Qubits circuit number"
   shots:
     type: integer
     format: int64
-    description: "Number of executions of the circuit"   
+    description: "Number of shots of the quantum circuit"  

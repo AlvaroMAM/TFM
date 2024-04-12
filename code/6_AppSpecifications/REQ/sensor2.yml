@@ -4,13 +4,6 @@ context:
   api: ../OAS/sensor_2.yml
   mode: classic
   author: SPILab
-requirements:  
-  requests:
-  execution_time:
-  cpu:
-  ram:
-
-# Alternative
 minimum_hw_req:
   cpu:
   ram:

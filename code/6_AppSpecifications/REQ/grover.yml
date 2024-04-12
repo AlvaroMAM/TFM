@@ -4,21 +4,11 @@ context:
   api: ../OAS/grover.yml
   mode: quantum
   author: SPILab
-requirements:  
-  requests:
-  execution_time:
-  cpu:
-  ram:
-  qubits:
-  shots:
-
-#Alternative
-
 minimum_hw_req:
   cpu:
   ram:
   qubits:
-  shots:
 behaviour:
   requests:
   execution_time:
+  shots:
