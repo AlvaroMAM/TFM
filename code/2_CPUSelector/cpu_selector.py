@@ -38,7 +38,7 @@ app : {
     }
 """
 def is_candidate(machine_information,ms_requests, ms_execution_time, ms_cpu, ms_ram):
-     return machine_information['requests']>= ms_requests and machine_information['ram'] >= ms_execution_time and machine_information['cpu'] >= ms_cpu and machine_information['ram'] >= ms_ram
+    return machine_information['requests']>= ms_requests and machine_information['ram'] >= ms_execution_time and machine_information['cpu'] >= ms_cpu and machine_information['ram'] >= ms_ram
 def select_cpu (requests, execution_time, cpu, ram):
     """
     # Leer archivo con características de las máquinas
