@@ -84,6 +84,8 @@ if __name__ == '__main__':
     logging.basicConfig(filename='cpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_cpu_machines = dict()
     for message in consumer:
+        print("CPU RECIEVED")
+        """
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = message.value
 
@@ -91,3 +93,4 @@ if __name__ == '__main__':
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
             app_cpu_machines[microservice_name] = select_cpu(requirements['requests'], requirements['execution_time'], requirements['cpu'], requirements['ram']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
+        """

@@ -72,10 +72,12 @@ if __name__ == '__main__':
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
     for message in consumer:
-        logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
+        print("QPU RECIEVED")
+        """logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
         microservices = message.value
 
         for microservice_name, requirements in microservices.items():
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE" + microservice_name)
             app_qpu_machines[microservice_name] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
             logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
+        """
