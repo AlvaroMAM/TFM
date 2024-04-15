@@ -87,9 +87,9 @@ def start_processing():
                         #ADDING MICROSERVICES TO QUANTUM_JSON
                         qpu_services[req_file_name] = quantum_microservice
                         logging.debug("REQUEST /start --> QPU SERVICES UPDATED")
-        producer.send(TOPIC_CPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
+        #producer.send(TOPIC_CPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
         logging.debug("REQUEST /start --> QUANTUM SERVICES JSON SEND")
-        producer.send(TOPIC_QPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
+        #producer.send(TOPIC_QPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
         logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
                     
         return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
