@@ -1,2 +1,3 @@
 .vscode
 sed_env
+*.log
