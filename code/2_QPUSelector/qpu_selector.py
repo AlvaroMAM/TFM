@@ -8,7 +8,7 @@ Servicio encargado de seleccionar un conjunto de máquinas de QPU compatibles
 para la ejecución de los microservicios que conforman la aplicación híbrida (cuántico-clásica)
 """
 from kafka import KafkaConsumer, KafkaProducer
-from ..config.config import KAFKA_SERVER_URL, TOPIC_QPU, TOPIC_QPU_CANDIDATES
+from config.config import KAFKA_SERVER_URL, TOPIC_QPU, TOPIC_QPU_CANDIDATES
 import json
 import logging
 import os
@@ -67,14 +67,14 @@ def select_qpu(qubits, shots):
     return selected_qpus
 
 if __name__ == '__main__':
-    consumer = KafkaConsumer(TOPIC_QPU, bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.loads(x).encode('utf-8')) # CREATING KAFKA CONSUMER
+    consumer = KafkaConsumer(TOPIC_QPU, bootstrap_servers=[KAFKA_SERVER_URL]) # CREATING KAFKA CONSUMER
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
     for message in consumer:
         print("QPU RECIEVED")
         """logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
-        microservices = message.value
+        microservices = json.loads(message.value.decode('utf-8'))
 
         for microservice_name, requirements in microservices.items():
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE" + microservice_name)

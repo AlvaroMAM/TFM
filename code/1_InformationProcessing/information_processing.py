@@ -10,7 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request, Response
 from zipfile import ZipFile
 from kafka import KafkaProducer
-from ..config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU
+from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU
 import logging
 import os
 import yaml
@@ -25,6 +25,7 @@ app = Flask(__name__)
 @app.route('/')
 # Function to describe the status of the service
 def index():
+    logging.debug("REQUEST / --> STATUS ONLINE")
     return "ONLINE"
 
 

@@ -87,7 +87,7 @@ if __name__ == '__main__':
         print("CPU RECIEVED")
         """
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
-        microservices = message.value
+        microservices = json.loads(message.value.decode('utf-8'))
 
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
