@@ -71,6 +71,7 @@ if __name__ == '__main__':
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
+    print("QPU INIT")
     for message in consumer:
         print("QPU RECIEVED")
         """logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")

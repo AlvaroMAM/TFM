@@ -33,12 +33,15 @@ def index():
 # Function to start the process of evaluating the hybrid application. It will produce a message for each consumer (QPU and CPU modules)
 def start_processing():
     logging.debug("REQUEST RECIEVED --> /start")
+    print("REQUEST RECIEVED --> /start")
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
     if request.files:
+        print("HAY ARCHIVOS")
         logging.debug("REQUEST /start --> FILES RECIEVED")
-        uploaded_file = request.files[0] # READING ZIP FILE FROM REQUEST ( ImmutableMultiDict[str, FileStorage])
+        uploaded_file = request.files['file'] # READING ZIP FILE FROM REQUEST ( ImmutableMultiDict[str, FileStorage])
+        print("FILE READED")
         print(type(uploaded_file))
         app_zip_file = uploaded_file[1]
         logging.debug("REQUEST /start --> PROCESSING ZIP FILE")
@@ -121,4 +124,4 @@ def start_processing():
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=8586,debug=True)
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8'))
-    logging.basicConfig(filename='information-processing.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename='/log/information-processing.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
