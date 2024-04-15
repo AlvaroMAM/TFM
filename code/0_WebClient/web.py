@@ -20,18 +20,22 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    logging.debug("REQUEST / --> RENDERING TEMPLATE")
     return render_template('home.html')
 
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    logging.debug("REQUEST /upload --> STARTS")
     if 'file' not in request.files:
+        logging.debug("REQUEST /upload --> NO FILE SELECTED")
         return 'No se ha seleccionado ningún archivo', 400
 
     file = request.files['file']
 
    
     if file.filename == '':
+        logging.debug("REQUEST /upload --> NO FILE SELECTED")
         return 'No se ha seleccionado ningún archivo', 400
 
     
@@ -54,6 +58,7 @@ def upload_file():
         except Exception as e:
             return f'Ocurrió un error: {str(e)}', 500
     else:
+        logging.debug("REQUEST /upload --> NO ZIP FILE SELECTED")
         return 'El archivo no es un archivo .zip válido', 400
 
 if __name__ == '__main__':
