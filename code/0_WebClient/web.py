@@ -43,7 +43,7 @@ def upload_file():
 
         # Envía el archivo al microservicio
         try:
-            url = 'http://processing_information/start'
+            url = 'http://127.0.0.1:8586/start'
             files = {'file': open(filepath, 'rb')}
             response = requests.post(url, files=files)
             if response.status_code == 200:

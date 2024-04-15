@@ -60,17 +60,17 @@ def start_processing():
                     if req_content["context"]["mode"]: # READING MICROSERVICE MODE
                         microservice_dict["mode"] = req_content["context"]["mode"]
                     logging.debug("REQUEST /start --> LOADING CLASSICAL REQUIREMENTS OF THE MICROSERVICE")
-                    if req_content["requirements"]["requests"]: # READING REQUIREMENTS ATTRIBUTE
-                        microservice_dict["requests"] = req_content["requirements"]["requests"]
+                    if req_content["behaviour"]["requests"]: # READING REQUIREMENTS ATTRIBUTE
+                        microservice_dict["requests"] = req_content["behaviour"]["requests"]
                         logging.debug("REQUEST /start --> REQUESTS LOADED")
-                    if req_content["requirements"]["execution_time"]: # READING EXECUTION TIME ATTRIBUTE
-                        microservice_dict["execution_time"] = req_content["requirements"]["execution_time"]
+                    if req_content["behaviour"]["execution_time"]: # READING EXECUTION TIME ATTRIBUTE
+                        microservice_dict["execution_time"] = req_content["behaviour"]["execution_time"]
                         logging.debug("REQUEST /start --> EXECUTION_TIME LOADED") 
-                    if req_content["requirements"]["cpu"]: # READING CPU ATTRIBUTE
-                        microservice_dict["cpu"] = req_content["requirements"]["cpu"]
+                    if req_content["minimum_hw_req"]["cpu"]: # READING CPU ATTRIBUTE
+                        microservice_dict["cpu"] = req_content["minimum_hw_req"]["cpu"]
                         logging.debug("REQUEST /start --> CPU LOADED") 
-                    if req_content["requirements"]["ram"]: # READING RAM ATTRIBUTE
-                        microservice_dict["ram"] = req_content["requirements"]["ram"]
+                    if req_content["minimum_hw_req"]["ram"]: # READING RAM ATTRIBUTE
+                        microservice_dict["ram"] = req_content["minimum_hw_req"]["ram"]
                         logging.debug("REQUEST /start --> RAM LOADED")
                     cpu_services[req_file_name] = microservice_dict
                     logging.debug("REQUEST /start --> CPU SERVICES UPDATED") 
@@ -78,11 +78,11 @@ def start_processing():
                         logging.debug("REQUEST /start --> LOADING QUANTUM REQUIREMENTS OF THE MICROSERVICE")
                         quantum_microservice = dict()
                         quantum_microservice["id"] = microservice_dict["id"]
-                        if req_content["requirements"]["qubits"]: # READING QUBITS ATTRIBUTE
-                            quantum_microservice["qubits"] = req_content["requirements"]["qubits"]
+                        if req_content["minimum_hw_req"]["qubits"]: # READING QUBITS ATTRIBUTE
+                            quantum_microservice["qubits"] = req_content["minimum_hw_req"]["qubits"]
                             logging.debug("REQUEST /start --> QUBITS LOADED") 
-                        if req_content["requirements"]["shots"]: # READING SHOTS ATTRIBUTE
-                            quantum_microservice["shots"] = req_content["requirements"]["shots"]
+                        if req_content["behaviour"]["shots"]: # READING SHOTS ATTRIBUTE
+                            quantum_microservice["shots"] = req_content["behaviour"]["shots"]
                             logging.debug("REQUEST /start --> SHOTS LOADED")
                         #ADDING MICROSERVICES TO QUANTUM_JSON
                         qpu_services[req_file_name] = quantum_microservice
