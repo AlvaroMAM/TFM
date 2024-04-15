@@ -1,0 +1,12 @@
+spil4ha: 1.0.0 #SPILab 4 hibrid architectures
+context:
+  id: aggregator
+  api: ../OAS/binary_search.yml
+  mode: classic
+  author: SPILab
+minimum_hw_req:
+  cpu:
+  ram:
+behaviour:
+  requests:
+  execution_time:

@@ -1,18 +1,16 @@
 openapi: 3.1.0
 info:
-  title: Grover microservice
+  title: Binary search microservice
   description: |
-    This is a description of a service that is in charge of recieving the corresponding quantum information
+    This is a description of a service that is in charge of recieving the corresponding information
      of the temperatures measured and tries to find any anomaly.
   # Extension for requirements
   x-req:
-    $ref: ../REQ/grover.yml
+    $ref: ../REQ/binary_search.yml
   version: 1.0.0
 servers:
 - url:
 - description: Classical machine in wich the server is going to be deployed
-- url:
-- description: Quantum machine in wich the algorithm is going to be executed.
 paths:
   /status:
       get:
@@ -41,10 +39,10 @@ paths:
                       type: string
                       description: |
                         An error ocurred.
-  /launchGrover/{qubits_values}:
+  /launchBinarySearch/{temperatures_values}:
     get:
-      summary: Launch the grover algorithim.
-      description: Function that execute the quantum circuit of grover algorithm.
+      summary: Launch the binary search algorithim.
+      description: Function that execute the binary search algorithm.
       responses:
         "200":
           description: "OK" 
@@ -56,7 +54,7 @@ paths:
                   result:
                     type: string
                     description: |
-                      Grover algorithim launched.
+                      Binary search algorithim launched.
         default:
           description: error produced.
           content:
@@ -69,9 +67,9 @@ paths:
                     description: |
                       An error occured while launching the analysis.
     parameters:
-    - name: qubits
+    - name: temp
       in: paths
-      description: Quantum information of temperatures
+      description: Information about temperatures
       required: true
       schema:
         type: array
