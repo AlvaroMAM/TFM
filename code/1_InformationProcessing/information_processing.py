@@ -46,7 +46,8 @@ def start_processing():
         app_zip_file = uploaded_file[1]
         logging.debug("REQUEST /start --> PROCESSING ZIP FILE")
         with ZipFile(app_zip_file, 'r') as zip: # EXTRACTING FILES FROM RECIEVED ZIP
-            zip.extractall(extract_path_app) 
+            zip.extractall(extract_path_app)
+            print("FILE READED") 
             logging.debug("ZIP FILE UNZIPPED")
         #app_oas_file_directory = extract_path_app+OPEN_API_SPECIFICATION_PATH # DIRECTORY OF OPEN API SPECIFICATIONS FILES
         app_req_file_directory = extract_path_app+MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
@@ -58,6 +59,7 @@ def start_processing():
             req_file = os.path.join(app_req_file_directory, req_file_name)
             if os.path.isfile(req_file):
                 with open(req_file, 'r') as yaml_file: # PROCESSING YAML FILE
+                    print("READING REQ FILE")
                     req_content = yaml.safe_load(yaml_file)
                     microservice_dict = dict()
                     microservice_dict["id"] = app_req_files.index(req_file_name) # CREATING ID FOR THE MICROSERVICE JSON 
@@ -91,9 +93,11 @@ def start_processing():
                         #ADDING MICROSERVICES TO QUANTUM_JSON
                         qpu_services[req_file_name] = quantum_microservice
                         logging.debug("REQUEST /start --> QPU SERVICES UPDATED")
-        #producer.send(TOPIC_CPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
+        #producer.send(TOPIC_QPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
+        print("SENDIGN QUANTUM SERVICES JSON")
         logging.debug("REQUEST /start --> QUANTUM SERVICES JSON SEND")
-        #producer.send(TOPIC_QPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
+        #producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
+        print("SENDIGN CLASSICAL SERVICES JSON")
         logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
                     
         return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
