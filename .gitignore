@@ -1,6 +1,7 @@
 .vscode
 sed_env
 *.log
+**/config/__pycache__/
 */*/config/
 */*/config/__init__.py
 */*/config/config.py
