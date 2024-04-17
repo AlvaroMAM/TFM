@@ -2,7 +2,6 @@
 sed_env
 *.log
 */*/config/
-*/*/config/__pycache__/*
 */*/config/__init__.py
 */*/config/config.py
 */*/temp
