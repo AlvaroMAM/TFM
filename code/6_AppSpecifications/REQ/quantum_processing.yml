@@ -5,8 +5,8 @@ context:
   mode: classic
   author: SPILab
 minimum_hw_req:
-  cpu:
-  ram:
+  cpu: 5000
+  ram: 6
 behaviour:
-  requests:
-  execution_time:
+  requests: 5
+  execution_time: 100

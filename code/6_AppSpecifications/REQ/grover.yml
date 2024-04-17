@@ -5,10 +5,10 @@ context:
   mode: quantum
   author: SPILab
 minimum_hw_req:
-  cpu:
-  ram:
-  qubits:
+  cpu: 4000
+  ram: 4
+  qubits: 5
 behaviour:
-  requests:
-  execution_time:
-  shots:
+  requests: 5
+  execution_time: #Tiene sentido rellenar el tiempo de ejecución en grover
+  shots: 1000

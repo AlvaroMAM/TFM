@@ -59,14 +59,13 @@ def start_processing():
             
             #app_oas_file_directory = extract_path_app+OPEN_API_SPECIFICATION_PATH # DIRECTORY OF OPEN API SPECIFICATIONS FILES
             #app_req_file_directory = app_zip_file_path + "/"+uploaded_file.name + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
-            app_req_file_directory = current_directory + name # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
+            app_req_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             #app_oas_files = os.listdir(app_oas_file_directory)
             print("LECTURA DIRECTORIO")
             app_req_files = os.listdir(app_req_file_directory)
             print("DIRECTORIO LEIDO")
             print(app_req_files)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
-            """
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES
                 print("REQUIREMENTS FILE PROCESSING")
                 logging.debug("REQUEST /start --> OAS FILE PROCESSING INITIALIZED")
@@ -75,6 +74,7 @@ def start_processing():
                     with open(req_file, 'r') as yaml_file: # PROCESSING YAML FILE
                         print("READING REQ FILE")
                         req_content = yaml.safe_load(yaml_file)
+                        print(req_content)
                         microservice_dict = dict()
                         microservice_dict["id"] = app_req_files.index(req_file_name) # CREATING ID FOR THE MICROSERVICE JSON 
                         if req_content["context"]["mode"]: # READING MICROSERVICE MODE
@@ -109,11 +109,12 @@ def start_processing():
                             logging.debug("REQUEST /start --> QPU SERVICES UPDATED")
             #producer.send(TOPIC_QPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
             print("SENDIGN QUANTUM SERVICES JSON")
+            print(qpu_services)
             logging.debug("REQUEST /start --> QUANTUM SERVICES JSON SEND")
             #producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
             print("SENDIGN CLASSICAL SERVICES JSON")
-            logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
-            """            
+            print(cpu_services)
+            logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")         
             return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
     else:
         logging.debug("REQUEST /start --> FILES NOT RECIEVED")
