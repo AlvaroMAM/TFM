@@ -47,13 +47,13 @@ def upload_file():
         filename = file.filename
         print(filename)
         print("LLEGA ARCHIGO")
-        file.save("./temp"+filename)
+        file.save(os.getcwd()+"/temp/"+filename)
         print("GUARDADO")
 
         # Envía el archivo al microservicio
         try:
             url = 'http://127.0.0.1:8586/start'
-            files = {'file': open("./temp"+filename, 'rb')}
+            files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
             response = requests.post(url, files=files)
             if response.status_code == 200:
                 # Eliminar archivo temporal
@@ -67,6 +67,6 @@ def upload_file():
         return 'El archivo no es un archivo .zip válido', 400
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='web.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
+    logging.basicConfig(filename=os.getcwd()+'/web.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
     app.run(host="127.0.0.1", port=8585,debug=True)
 

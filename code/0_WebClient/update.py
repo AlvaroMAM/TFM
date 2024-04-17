@@ -13,10 +13,11 @@ from config.config import TOPIC_WEB, TOPIC_RESET_PHASES, KAFKA_SERVER_URL, WEB_C
 import logging
 import requests
 import json
+import os
 
 if __name__ == "__main__":
     FLOW_STATUS = ['INFORMATION_PROCESSING','MACHINES_CANDIDATES', 'DEPLOYMENT_COMBINATIONS', 'COST-PERFORMANCE', 'UTILITY_CALCULATOR'] # DEPLOYMENT_COMBINATIONS = GENERATOR
-    logging.basicConfig(filename='update.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename=os.getcwd()+'/update.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     counter = 0
     consumer_topics = [TOPIC_WEB, TOPIC_RESET_PHASES]
    
