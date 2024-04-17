@@ -67,8 +67,8 @@ def select_qpu(qubits, shots):
     return selected_qpus
 
 if __name__ == '__main__':
-    consumer = KafkaConsumer(TOPIC_QPU, bootstrap_servers=[KAFKA_SERVER_URL]) # CREATING KAFKA CONSUMER
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
+    consumer = KafkaConsumer(TOPIC_QPU, bootstrap_servers=[KAFKA_SERVER_URL]) # CREATING KAFKA CONSUMER
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
     print("QPU INIT")
