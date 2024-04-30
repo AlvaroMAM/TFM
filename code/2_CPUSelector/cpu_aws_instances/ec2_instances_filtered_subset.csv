@@ -1,0 +1,15 @@
+Tipo de instancia,CPU virtuales,Núcleos,Velocidad de reloj constante (GHz),Memoria (GiB),Almacenamiento (GB),Rendimiento de la red,Bajo demanda Linux precios,Bajo demanda Windows precios,Bajo demanda SUSE precios,Bajo demanda RHEL precios
+t2.nano,1,1,2.4,0.5,-,Low to Moderate,0.0066 USD por hora,0.0089 USD por hora,0.0066 USD por hora,
+t2.micro,1,1,2.5,1,-,Low to Moderate,0.0132 USD por hora,0.0178 USD por hora,0.0132 USD por hora,0.0732 USD por hora
+t2.small,1,1,2.5,2,-,Low to Moderate,0.026 USD por hora,0.0352 USD por hora,0.056 USD por hora,0.086 USD por hora
+t2.medium,2,2,2.3,4,-,Low to Moderate,0.052 USD por hora,0.0704 USD por hora,0.152 USD por hora,0.112 USD por hora
+t2.large,2,2,2.3,8,-,Low to Moderate,0.1056 USD por hora,0.1336 USD por hora,0.2056 USD por hora,0.1656 USD por hora
+t2.xlarge,4,4,2.3,16,-,Moderate,0.2112 USD por hora,0.2522 USD por hora,0.3112 USD por hora,0.2712 USD por hora
+t2.2xlarge,8,8,2.3,32,-,Moderate,0.4224 USD por hora,0.4844 USD por hora,0.5224 USD por hora,0.5524 USD por hora
+t3.nano,2,1,2.5,0.5,-,5 Gigabit,0.0059 USD por hora,0.0105 USD por hora,0.0059 USD por hora,
+t3.micro,2,1,2.5,1,-,5 Gigabit,0.0118 USD por hora,0.021 USD por hora,0.0118 USD por hora,0.0718 USD por hora
+t3.small,2,1,2.5,2,-,5 Gigabit,0.0236 USD por hora,0.042 USD por hora,0.0546 USD por hora,0.0836 USD por hora
+t3.medium,2,1,2.5,4,-,5 Gigabit,0.0472 USD por hora,0.0656 USD por hora,0.1035 USD por hora,0.1072 USD por hora
+t3.large,2,1,2.5,8,-,5 Gigabit,0.0944 USD por hora,0.122 USD por hora,0.1507 USD por hora,0.1544 USD por hora
+t3.xlarge,4,2,2.5,16,-,5 Gigabit,0.1888 USD por hora,0.2624 USD por hora,0.2451 USD por hora,0.2488 USD por hora
+t3.2xlarge,8,4,2.5,32,-,5 Gigabit,0.3776 USD por hora,0.5248 USD por hora,0.5026 USD por hora,0.5076 USD por hora

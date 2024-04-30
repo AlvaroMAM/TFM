@@ -1,0 +1,477 @@
+Tipo de instancia,CPU virtuales,Núcleos,Velocidad de reloj constante (GHz),Memoria (GiB),Almacenamiento (GB),Rendimiento de la red,Bajo demanda Linux precios,Bajo demanda Windows precios,Bajo demanda SUSE precios,Bajo demanda RHEL precios
+t2.nano,1,1,2.4,0.5,-,Low to Moderate,0.0066 USD por hora,0.0089 USD por hora,0.0066 USD por hora,
+t2.micro,1,1,2.5,1,-,Low to Moderate,0.0132 USD por hora,0.0178 USD por hora,0.0132 USD por hora,0.0732 USD por hora
+t2.small,1,1,2.5,2,-,Low to Moderate,0.026 USD por hora,0.0352 USD por hora,0.056 USD por hora,0.086 USD por hora
+t2.medium,2,2,2.3,4,-,Low to Moderate,0.052 USD por hora,0.0704 USD por hora,0.152 USD por hora,0.112 USD por hora
+t2.large,2,2,2.3,8,-,Low to Moderate,0.1056 USD por hora,0.1336 USD por hora,0.2056 USD por hora,0.1656 USD por hora
+t2.xlarge,4,4,2.3,16,-,Moderate,0.2112 USD por hora,0.2522 USD por hora,0.3112 USD por hora,0.2712 USD por hora
+t2.2xlarge,8,8,2.3,32,-,Moderate,0.4224 USD por hora,0.4844 USD por hora,0.5224 USD por hora,0.5524 USD por hora
+t3.nano,2,1,2.5,0.5,-,5 Gigabit,0.0059 USD por hora,0.0105 USD por hora,0.0059 USD por hora,
+t3.micro,2,1,2.5,1,-,5 Gigabit,0.0118 USD por hora,0.021 USD por hora,0.0118 USD por hora,0.0718 USD por hora
+t3.small,2,1,2.5,2,-,5 Gigabit,0.0236 USD por hora,0.042 USD por hora,0.0546 USD por hora,0.0836 USD por hora
+t3.medium,2,1,2.5,4,-,5 Gigabit,0.0472 USD por hora,0.0656 USD por hora,0.1035 USD por hora,0.1072 USD por hora
+t3.large,2,1,2.5,8,-,5 Gigabit,0.0944 USD por hora,0.122 USD por hora,0.1507 USD por hora,0.1544 USD por hora
+t3.xlarge,4,2,2.5,16,-,5 Gigabit,0.1888 USD por hora,0.2624 USD por hora,0.2451 USD por hora,0.2488 USD por hora
+t3.2xlarge,8,4,2.5,32,-,5 Gigabit,0.3776 USD por hora,0.5248 USD por hora,0.5026 USD por hora,0.5076 USD por hora
+c4.large,2,1,2.9,3.75,-,Moderate,0.119 USD por hora,0.211 USD por hora,0.219 USD por hora,0.179 USD por hora
+c4.xlarge,4,2,2.9,7.5,-,High,0.237 USD por hora,0.421 USD por hora,0.337 USD por hora,0.297 USD por hora
+c4.2xlarge,8,4,2.9,15,-,High,0.476 USD por hora,0.844 USD por hora,0.576 USD por hora,0.606 USD por hora
+c4.4xlarge,16,8,2.9,30,-,High,0.95 USD por hora,1.686 USD por hora,1.05 USD por hora,1.08 USD por hora
+c4.8xlarge,36,18,2.9,60,-,10 Gigabit,1.902 USD por hora,3.558 USD por hora,2.002 USD por hora,2.032 USD por hora
+c5.large,2,1,3.4,4,-,10 Gigabit,0.101 USD por hora,0.193 USD por hora,0.157 USD por hora,0.161 USD por hora
+c5.xlarge,4,2,3.4,8,-,10 Gigabit,0.202 USD por hora,0.386 USD por hora,0.258 USD por hora,0.262 USD por hora
+c5.2xlarge,8,4,3.4,16,-,10 Gigabit,0.404 USD por hora,0.772 USD por hora,0.504 USD por hora,0.534 USD por hora
+c5.4xlarge,16,8,3.4,32,-,10 Gigabit,0.808 USD por hora,1.544 USD por hora,0.908 USD por hora,0.938 USD por hora
+c5.9xlarge,36,18,3.4,72,-,12 Gigabit,1.818 USD por hora,3.474 USD por hora,1.918 USD por hora,1.948 USD por hora
+c5.12xlarge,48,24,3.6,96,-,12 Gigabit,2.424 USD por hora,4.632 USD por hora,2.524 USD por hora,2.554 USD por hora
+c5.18xlarge,72,36,3.4,144,-,25 Gigabit,3.636 USD por hora,6.948 USD por hora,3.736 USD por hora,3.766 USD por hora
+c5.24xlarge,96,48,3.6,192,-,25 Gigabit,4.848 USD por hora,9.264 USD por hora,4.948 USD por hora,4.978 USD por hora
+c5.metal,96,48,3.6,192,-,25 Gigabit,4.848 USD por hora,9.264 USD por hora,4.948 USD por hora,4.978 USD por hora
+c5a.large,2,1,3.3,4,-,10 Gigabit,0.091 USD por hora,0.183 USD por hora,0.147 USD por hora,0.151 USD por hora
+c5a.xlarge,4,2,3.3,8,-,10 Gigabit,0.182 USD por hora,0.366 USD por hora,0.238 USD por hora,0.242 USD por hora
+c5a.2xlarge,8,4,3.3,16,-,10 Gigabit,0.364 USD por hora,0.732 USD por hora,0.489 USD por hora,0.494 USD por hora
+c5a.4xlarge,16,8,3.3,32,-,10 Gigabit,0.728 USD por hora,1.464 USD por hora,0.853 USD por hora,0.858 USD por hora
+c5a.8xlarge,32,16,3.3,64,-,10 Gigabit,1.456 USD por hora,2.928 USD por hora,1.581 USD por hora,1.586 USD por hora
+c5a.12xlarge,48,24,3.3,96,-,12 Gigabit,2.184 USD por hora,4.392 USD por hora,2.309 USD por hora,2.314 USD por hora
+c5a.16xlarge,64,32,3.3,128,-,20 Gigabit,2.912 USD por hora,5.856 USD por hora,3.037 USD por hora,3.042 USD por hora
+c5a.24xlarge,96,48,3.3,192,-,20 Gigabit,4.368 USD por hora,8.784 USD por hora,4.493 USD por hora,4.498 USD por hora
+c5d.large,2,1,3.4,4,50,10 Gigabit,0.115 USD por hora,0.207 USD por hora,0.171 USD por hora,0.175 USD por hora
+c5d.xlarge,4,2,3.4,8,100,10 Gigabit,0.23 USD por hora,0.414 USD por hora,0.286 USD por hora,0.29 USD por hora
+c5d.2xlarge,8,4,3.4,16,200,10 Gigabit,0.46 USD por hora,0.828 USD por hora,0.56 USD por hora,0.59 USD por hora
+c5d.4xlarge,16,8,3.4,32,400,10 Gigabit,0.92 USD por hora,1.656 USD por hora,1.02 USD por hora,1.05 USD por hora
+c5d.9xlarge,36,18,3.4,72,900,12 Gigabit,2.07 USD por hora,3.726 USD por hora,2.17 USD por hora,2.2 USD por hora
+c5d.12xlarge,48,24,3.6,96,1800,12 Gigabit,2.76 USD por hora,4.968 USD por hora,2.86 USD por hora,2.89 USD por hora
+c5d.18xlarge,72,36,3.4,144,1800,25 Gigabit,4.14 USD por hora,7.452 USD por hora,4.24 USD por hora,4.27 USD por hora
+c5d.24xlarge,96,48,3.6,192,3600,25 Gigabit,5.52 USD por hora,9.936 USD por hora,5.62 USD por hora,5.65 USD por hora
+c5d.metal,96,48,3.6,192,3600,25 Gigabit,5.52 USD por hora,9.936 USD por hora,5.62 USD por hora,5.65 USD por hora
+c5n.large,2,1,3.4,5.3,-,25 Gigabit,0.128 USD por hora,0.22 USD por hora,0.184 USD por hora,0.188 USD por hora
+c5n.xlarge,4,2,3.4,10.5,-,25 Gigabit,0.256 USD por hora,0.44 USD por hora,0.312 USD por hora,0.316 USD por hora
+c5n.2xlarge,8,4,3.4,21,-,25 Gigabit,0.512 USD por hora,0.88 USD por hora,0.637 USD por hora,0.642 USD por hora
+c5n.4xlarge,16,8,3.4,42,-,25 Gigabit,1.024 USD por hora,1.76 USD por hora,1.149 USD por hora,1.154 USD por hora
+c5n.9xlarge,36,18,3.4,96,-,50 Gigabit,2.304 USD por hora,3.96 USD por hora,2.429 USD por hora,2.434 USD por hora
+c5n.18xlarge,72,36,3.4,192,-,100 Gigabit,4.608 USD por hora,7.92 USD por hora,4.733 USD por hora,4.738 USD por hora
+c5n.metal,72,36,3.4,192,-,100 Gigabit,4.608 USD por hora,7.92 USD por hora,4.733 USD por hora,4.738 USD por hora
+c6a.large,2,1,3.6,4,-,12.5 Gigabit,0.0909 USD por hora,0.1829 USD por hora,0.1472 USD por hora,0.1509 USD por hora
+c6a.xlarge,4,2,3.6,8,-,12.5 Gigabit,0.1818 USD por hora,0.3658 USD por hora,0.2381 USD por hora,0.2418 USD por hora
+c6a.2xlarge,8,4,3.6,16,-,12.5 Gigabit,0.3636 USD por hora,0.7316 USD por hora,0.4886 USD por hora,0.4936 USD por hora
+c6a.4xlarge,16,8,3.6,32,-,12.5 Gigabit,0.7272 USD por hora,1.4632 USD por hora,0.8522 USD por hora,0.8572 USD por hora
+c6a.8xlarge,32,16,3.6,64,-,12.5 Gigabit,1.4544 USD por hora,2.9264 USD por hora,1.5794 USD por hora,1.5844 USD por hora
+c6a.12xlarge,48,24,3.6,96,-,18.75 Gigabit,2.1816 USD por hora,4.3896 USD por hora,2.3066 USD por hora,2.3116 USD por hora
+c6a.16xlarge,64,32,3.6,128,-,25 Gigabit,2.9088 USD por hora,5.8528 USD por hora,3.0338 USD por hora,3.0388 USD por hora
+c6a.24xlarge,96,48,3.6,192,-,37.5 Gigabit,4.3632 USD por hora,8.7792 USD por hora,4.4882 USD por hora,4.4932 USD por hora
+c6a.32xlarge,128,64,3.6,256,-,50 Gigabit,5.8176 USD por hora,11.7056 USD por hora,5.9426 USD por hora,5.9476 USD por hora
+c6a.48xlarge,192,96,3.6,384,-,50 Gigabit,8.7264 USD por hora,17.5584 USD por hora,8.8514 USD por hora,8.8564 USD por hora
+c6a.metal,192,96,3.6,384,-,50 Gigabit,8.7264 USD por hora,17.5584 USD por hora,8.8514 USD por hora,8.8564 USD por hora
+c6g.medium,1,1,2.5,2,-,10 Gigabit,0.0404 USD por hora,,0.0714 USD por hora,0.1004 USD por hora
+c6g.large,2,2,2.5,4,-,10 Gigabit,0.0808 USD por hora,,0.1371 USD por hora,0.1408 USD por hora
+c6g.xlarge,4,4,2.5,8,-,10 Gigabit,0.1616 USD por hora,,0.2179 USD por hora,0.2216 USD por hora
+c6g.2xlarge,8,8,2.5,16,-,10 Gigabit,0.3232 USD por hora,,0.4482 USD por hora,0.4532 USD por hora
+c6g.4xlarge,16,16,2.5,32,-,10 Gigabit,0.6464 USD por hora,,0.7714 USD por hora,0.7764 USD por hora
+c6g.8xlarge,32,32,2.5,64,-,12 Gigabit,1.2928 USD por hora,,1.4178 USD por hora,1.4228 USD por hora
+c6g.12xlarge,48,48,2.5,96,-,20 Gigabit,1.9392 USD por hora,,2.0642 USD por hora,2.0692 USD por hora
+c6g.16xlarge,64,64,2.5,128,-,25 Gigabit,2.5856 USD por hora,,2.7106 USD por hora,2.7156 USD por hora
+c6g.metal,64,64,2.5,128,-,25 Gigabit,2.5856 USD por hora,,2.7106 USD por hora,2.7156 USD por hora
+c6gd.medium,1,1,2.5,2,59,10 Gigabit,0.046 USD por hora,,0.077 USD por hora,0.106 USD por hora
+c6gd.large,2,2,2.5,4,118,10 Gigabit,0.092 USD por hora,,0.1483 USD por hora,0.152 USD por hora
+c6gd.xlarge,4,4,2.5,8,237,10 Gigabit,0.184 USD por hora,,0.2403 USD por hora,0.244 USD por hora
+c6gd.2xlarge,8,8,2.5,16,474,10 Gigabit,0.368 USD por hora,,0.493 USD por hora,0.498 USD por hora
+c6gd.4xlarge,16,16,2.5,32,950,10 Gigabit,0.736 USD por hora,,0.861 USD por hora,0.866 USD por hora
+c6gd.8xlarge,32,32,2.5,64,1900,12 Gigabit,1.472 USD por hora,,1.597 USD por hora,1.602 USD por hora
+c6gd.12xlarge,48,48,2.5,96,2850,20 Gigabit,2.208 USD por hora,,2.333 USD por hora,2.338 USD por hora
+c6gd.16xlarge,64,64,2.5,128,3800,25 Gigabit,2.944 USD por hora,,3.069 USD por hora,3.074 USD por hora
+c6gd.metal,64,64,2.5,128,3800,25 Gigabit,2.944 USD por hora,,3.069 USD por hora,3.074 USD por hora
+c6gn.medium,1,1,2.5,2,-,16 Gigabit,0.05125 USD por hora,,0.08225 USD por hora,0.11125 USD por hora
+c6gn.large,2,2,2.5,4,-,25 Gigabit,0.1025 USD por hora,,0.1588 USD por hora,0.1625 USD por hora
+c6gn.xlarge,4,4,2.5,8,-,25 Gigabit,0.205 USD por hora,,0.2613 USD por hora,0.265 USD por hora
+c6gn.2xlarge,8,8,2.5,16,-,25 Gigabit,0.41 USD por hora,,0.535 USD por hora,0.54 USD por hora
+c6gn.4xlarge,16,16,2.5,32,-,25 Gigabit,0.82 USD por hora,,0.945 USD por hora,0.95 USD por hora
+c6gn.8xlarge,32,32,2.5,64,-,50 Gigabit,1.64 USD por hora,,1.765 USD por hora,1.77 USD por hora
+c6gn.12xlarge,48,48,2.5,96,-,75 Gigabit,2.46 USD por hora,,2.585 USD por hora,2.59 USD por hora
+c6gn.16xlarge,64,64,2.5,128,-,100 Gigabit,3.28 USD por hora,,3.405 USD por hora,3.41 USD por hora
+c6i.large,2,1,3.5,4,-,12.5 Gigabit,0.101 USD por hora,0.193 USD por hora,0.1573 USD por hora,0.161 USD por hora
+c6i.xlarge,4,2,3.5,8,-,12.5 Gigabit,0.202 USD por hora,0.386 USD por hora,0.2583 USD por hora,0.262 USD por hora
+c6i.2xlarge,8,4,3.5,16,-,12.5 Gigabit,0.404 USD por hora,0.772 USD por hora,0.529 USD por hora,0.534 USD por hora
+c6i.4xlarge,16,8,3.5,32,-,12.5 Gigabit,0.808 USD por hora,1.544 USD por hora,0.933 USD por hora,0.938 USD por hora
+c6i.8xlarge,32,16,3.5,64,-,12.5 Gigabit,1.616 USD por hora,3.088 USD por hora,1.741 USD por hora,1.746 USD por hora
+c6i.12xlarge,48,24,3.5,96,-,18.75 Gigabit,2.424 USD por hora,4.632 USD por hora,2.549 USD por hora,2.554 USD por hora
+c6i.16xlarge,64,32,3.5,128,-,25 Gigabit,3.232 USD por hora,6.176 USD por hora,3.357 USD por hora,3.362 USD por hora
+c6i.24xlarge,96,48,3.5,192,-,37.5 Gigabit,4.848 USD por hora,9.264 USD por hora,4.973 USD por hora,4.978 USD por hora
+c6i.32xlarge,128,64,3.5,256,-,50 Gigabit,6.464 USD por hora,12.352 USD por hora,6.589 USD por hora,6.594 USD por hora
+c6i.metal,128,64,3.5,256,-,50 Gigabit,6.464 USD por hora,12.352 USD por hora,6.589 USD por hora,6.594 USD por hora
+c6id.large,2,1,3.5,4,118,12.5 Gigabit,0.12075 USD por hora,0.21275 USD por hora,0.17705 USD por hora,0.18075 USD por hora
+c6id.xlarge,4,2,3.5,8,237,12.5 Gigabit,0.2415 USD por hora,0.4255 USD por hora,0.2978 USD por hora,0.3015 USD por hora
+c6id.2xlarge,8,4,3.5,16,474,12.5 Gigabit,0.483 USD por hora,0.851 USD por hora,0.608 USD por hora,0.613 USD por hora
+c6id.4xlarge,16,8,3.5,32,950,12.5 Gigabit,0.966 USD por hora,1.702 USD por hora,1.091 USD por hora,1.096 USD por hora
+c6id.8xlarge,32,16,3.5,64,1900,12.5 Gigabit,1.932 USD por hora,3.404 USD por hora,2.057 USD por hora,2.062 USD por hora
+c6id.12xlarge,48,24,3.5,96,2850,18.75 Gigabit,2.898 USD por hora,5.106 USD por hora,3.023 USD por hora,3.028 USD por hora
+c6id.16xlarge,64,32,3.5,128,3800,25 Gigabit,3.864 USD por hora,6.808 USD por hora,3.989 USD por hora,3.994 USD por hora
+c6id.24xlarge,96,48,3.5,192,5700,37.5 Gigabit,5.796 USD por hora,10.212 USD por hora,5.921 USD por hora,5.926 USD por hora
+c6id.32xlarge,128,64,3.5,256,7600,50 Gigabit,7.728 USD por hora,13.616 USD por hora,7.853 USD por hora,7.858 USD por hora
+c6id.metal,128,64,3.5,256,7600,50 Gigabit,7.728 USD por hora,13.616 USD por hora,7.853 USD por hora,7.858 USD por hora
+c6in.large,2,1,3.5,4,-,25 Gigabit,0.1344 USD por hora,0.2264 USD por hora,0.1907 USD por hora,0.1944 USD por hora
+c6in.xlarge,4,2,3.5,8,-,30 Gigabit,0.2688 USD por hora,0.4528 USD por hora,0.3251 USD por hora,0.3288 USD por hora
+c6in.2xlarge,8,4,3.5,16,-,40 Gigabit,0.5376 USD por hora,0.9056 USD por hora,0.6626 USD por hora,0.6676 USD por hora
+c6in.4xlarge,16,8,3.5,32,-,50 Gigabit,1.0752 USD por hora,1.8112 USD por hora,1.2002 USD por hora,1.2052 USD por hora
+c6in.8xlarge,32,16,3.5,64,-,50 Gigabit,2.1504 USD por hora,3.6224 USD por hora,2.2754 USD por hora,2.2804 USD por hora
+c6in.12xlarge,48,24,3.5,96,-,75 Gigabit,3.2256 USD por hora,5.4336 USD por hora,3.3506 USD por hora,3.3556 USD por hora
+c6in.16xlarge,64,32,3.5,128,-,100 Gigabit,4.3008 USD por hora,7.2448 USD por hora,4.4258 USD por hora,4.4308 USD por hora
+c6in.24xlarge,96,48,3.5,192,-,150 Gigabit,6.4512 USD por hora,10.8672 USD por hora,6.5762 USD por hora,6.5812 USD por hora
+c6in.32xlarge,128,64,3.5,256,-,200 Gigabit,8.6016 USD por hora,14.4896 USD por hora,8.7266 USD por hora,8.7316 USD por hora
+c6in.metal,128,64,3.5,256,-,200 Gigabit,8.6016 USD por hora,14.4896 USD por hora,8.7266 USD por hora,8.7316 USD por hora
+c7g.medium,1,1,2.6,2,-,12.5 Gigabit,0.0429 USD por hora,,0.0992 USD por hora,0.1029 USD por hora
+c7g.large,2,2,2.6,4,-,12.5 Gigabit,0.0859 USD por hora,,0.1422 USD por hora,0.1459 USD por hora
+c7g.xlarge,4,4,2.6,8,-,12.5 Gigabit,0.1717 USD por hora,,0.228 USD por hora,0.2317 USD por hora
+c7g.2xlarge,8,8,2.6,16,-,15 Gigabit,0.3434 USD por hora,,0.4684 USD por hora,0.4734 USD por hora
+c7g.4xlarge,16,16,2.6,32,-,15 Gigabit,0.6869 USD por hora,,0.8119 USD por hora,0.8169 USD por hora
+c7g.8xlarge,32,32,2.6,64,-,15 Gigabit,1.3738 USD por hora,,1.4988 USD por hora,1.5038 USD por hora
+c7g.12xlarge,48,48,2.6,96,-,22.5 Gigabit,2.0606 USD por hora,,2.1856 USD por hora,2.1906 USD por hora
+c7g.16xlarge,64,64,2.6,128,-,30 Gigabit,2.7475 USD por hora,,2.8725 USD por hora,2.8775 USD por hora
+c7g.metal,64,64,2.6,128,-,30 Gigabit,2.7475 USD por hora,,2.8725 USD por hora,2.8775 USD por hora
+c7i.large,2,1,3.2,4,-,12.5 Gigabit,0.10605 USD por hora,0.19805 USD por hora,0.16235 USD por hora,0.16605 USD por hora
+c7i.xlarge,4,2,3.2,8,-,12.5 Gigabit,0.2121 USD por hora,0.3961 USD por hora,0.2684 USD por hora,0.2721 USD por hora
+c7i.2xlarge,8,4,3.2,16,-,12.5 Gigabit,0.4242 USD por hora,0.7922 USD por hora,0.5492 USD por hora,0.5542 USD por hora
+c7i.4xlarge,16,8,3.2,32,-,12.5 Gigabit,0.8484 USD por hora,1.5844 USD por hora,0.9734 USD por hora,0.9784 USD por hora
+c7i.8xlarge,32,16,3.2,64,-,12.5 Gigabit,1.6968 USD por hora,3.1688 USD por hora,1.8218 USD por hora,1.8268 USD por hora
+c7i.12xlarge,48,24,3.2,96,-,18.75 Gigabit,2.5452 USD por hora,4.7532 USD por hora,2.6702 USD por hora,2.6752 USD por hora
+c7i.16xlarge,64,32,3.2,128,-,25 Gigabit,3.3936 USD por hora,6.3376 USD por hora,3.5186 USD por hora,3.5236 USD por hora
+c7i.24xlarge,96,48,3.2,192,-,37.5 Gigabit,5.0904 USD por hora,9.5064 USD por hora,5.2154 USD por hora,5.2204 USD por hora
+c7i.48xlarge,192,96,3.2,384,-,50 Gigabit,10.1808 USD por hora,19.0128 USD por hora,10.3058 USD por hora,10.3108 USD por hora
+c7i.metal-24xl,96,48,3.2,192,-,37.5 Gigabit,5.0904 USD por hora,9.5064 USD por hora,5.2154 USD por hora,5.2204 USD por hora
+c7i.metal-48xl,192,96,3.2,384,-,50 Gigabit,10.1808 USD por hora,19.0128 USD por hora,10.3058 USD por hora,10.3108 USD por hora
+d2.xlarge,4,2,2.4,30.5,6144,Moderate,0.772 USD por hora,0.956 USD por hora,0.872 USD por hora,0.832 USD por hora
+d2.2xlarge,8,4,2.4,61,12288,High,1.544 USD por hora,1.912 USD por hora,1.644 USD por hora,1.674 USD por hora
+d2.4xlarge,16,8,2.4,122,24576,High,3.087 USD por hora,3.823 USD por hora,3.187 USD por hora,3.217 USD por hora
+d2.8xlarge,36,18,2.4,244,49152,10 Gigabit,6.174 USD por hora,7.83 USD por hora,6.274 USD por hora,6.304 USD por hora
+d3.xlarge,4,2,3.1,32,5940,15 Gigabit,0.64 USD por hora,0.824 USD por hora,0.696 USD por hora,0.7 USD por hora
+d3.2xlarge,8,4,3.1,64,11880,15 Gigabit,1.28 USD por hora,1.648 USD por hora,1.405 USD por hora,1.41 USD por hora
+d3.4xlarge,16,8,3.1,128,23760,15 Gigabit,2.559 USD por hora,3.295 USD por hora,2.684 USD por hora,2.689 USD por hora
+d3.8xlarge,32,16,3.1,256,47520,25 Gigabit,5.11824 USD por hora,6.59024 USD por hora,5.24324 USD por hora,5.24824 USD por hora
+f1.2xlarge,8,4,2.3,122,470,10 Gigabit,1.906 USD por hora,,2.006 USD por hora,2.036 USD por hora
+f1.4xlarge,16,8,2.3,244,940,10 Gigabit,3.812 USD por hora,,3.912 USD por hora,3.942 USD por hora
+g3.4xlarge,16,8,2.7,122,-,10 Gigabit,1.429 USD por hora,2.165 USD por hora,1.529 USD por hora,1.559 USD por hora
+g3.8xlarge,32,16,2.7,244,-,10 Gigabit,2.858 USD por hora,4.33 USD por hora,2.958 USD por hora,2.988 USD por hora
+g3.16xlarge,64,32,2.3,488,-,25 Gigabit,5.716 USD por hora,8.66 USD por hora,5.816 USD por hora,5.846 USD por hora
+g3s.xlarge,4,2,2.7,30.5,-,10 Gigabit,0.94 USD por hora,1.124 USD por hora,0.996 USD por hora,1 USD por hora
+g4ad.xlarge,4,2,3,16,150,10 Gigabit,0.44271 USD por hora,0.62671 USD por hora,0.49901 USD por hora,0.50271 USD por hora
+g4ad.2xlarge,8,4,3,32,300,10 Gigabit,0.63292 USD por hora,1.00092 USD por hora,0.75792 USD por hora,0.76292 USD por hora
+g4ad.4xlarge,16,8,3,64,600,10 Gigabit,1.014 USD por hora,1.75 USD por hora,1.139 USD por hora,1.144 USD por hora
+g4ad.8xlarge,32,16,3,128,1200,15 Gigabit,2.028 USD por hora,3.5 USD por hora,2.153 USD por hora,2.158 USD por hora
+g4ad.16xlarge,64,32,3,256,2400,25 Gigabit,4.056 USD por hora,7 USD por hora,4.181 USD por hora,4.186 USD por hora
+g4dn.xlarge,4,2,2.5,16,125,25 Gigabit,0.615 USD por hora,0.799 USD por hora,0.672 USD por hora,0.675 USD por hora
+g4dn.2xlarge,8,4,2.5,32,225,25 Gigabit,0.88 USD por hora,1.248 USD por hora,1.005 USD por hora,1.01 USD por hora
+g4dn.4xlarge,16,8,2.5,64,225,25 Gigabit,1.409 USD por hora,2.145 USD por hora,1.534 USD por hora,1.539 USD por hora
+g4dn.8xlarge,32,16,2.5,128,900,50 Gigabit,2.546 USD por hora,4.018 USD por hora,2.671 USD por hora,2.676 USD por hora
+g4dn.12xlarge,48,24,2.5,192,900,50 Gigabit,4.577 USD por hora,6.785 USD por hora,4.702 USD por hora,4.707 USD por hora
+g4dn.16xlarge,64,32,2.5,256,900,50 Gigabit,5.092 USD por hora,8.036 USD por hora,5.217 USD por hora,5.222 USD por hora
+g4dn.metal,96,48,2.5,384,1800,100 Gigabit,9.154 USD por hora,13.57 USD por hora,9.279 USD por hora,9.284 USD por hora
+g5.xlarge,4,2,3.3,16,250,10 Gigabit,1.277 USD por hora,1.461 USD por hora,1.3333 USD por hora,1.337 USD por hora
+g5.2xlarge,8,4,3.3,32,450,10 Gigabit,1.53849 USD por hora,1.90649 USD por hora,1.66349 USD por hora,1.66849 USD por hora
+g5.4xlarge,16,8,3.3,64,600,25 Gigabit,2.06148 USD por hora,2.79748 USD por hora,2.18648 USD por hora,2.19148 USD por hora
+g5.8xlarge,32,16,3.3,128,900,25 Gigabit,3.10745 USD por hora,4.57945 USD por hora,3.23245 USD por hora,3.23745 USD por hora
+g5.12xlarge,48,24,3.3,192,3800,40 Gigabit,7.19994 USD por hora,9.40794 USD por hora,7.32494 USD por hora,7.32994 USD por hora
+g5.16xlarge,64,32,3.3,256,1900,25 Gigabit,5.1994 USD por hora,8.1434 USD por hora,5.3244 USD por hora,5.3294 USD por hora
+g5.24xlarge,96,48,3.3,384,3800,50 Gigabit,10.33786 USD por hora,14.75386 USD por hora,10.46286 USD por hora,10.46786 USD por hora
+g5.48xlarge,192,96,3.3,768,7600,100 Gigabit,20.67572 USD por hora,29.50772 USD por hora,20.80072 USD por hora,20.80572 USD por hora
+i3.large,2,1,2.3,15.3,475,10 Gigabit,0.181 USD por hora,0.273 USD por hora,0.281 USD por hora,0.241 USD por hora
+i3.xlarge,4,2,2.3,30.5,950,10 Gigabit,0.362 USD por hora,0.546 USD por hora,0.462 USD por hora,0.422 USD por hora
+i3.2xlarge,8,4,2.3,61,1900,10 Gigabit,0.724 USD por hora,1.092 USD por hora,0.824 USD por hora,0.854 USD por hora
+i3.4xlarge,16,8,2.3,122,3800,10 Gigabit,1.448 USD por hora,2.184 USD por hora,1.548 USD por hora,1.578 USD por hora
+i3.8xlarge,32,16,2.3,244,7600,10 Gigabit,2.896 USD por hora,4.368 USD por hora,2.996 USD por hora,3.026 USD por hora
+i3.16xlarge,64,32,2.3,488,15200,25 Gigabit,5.792 USD por hora,8.736 USD por hora,5.892 USD por hora,5.922 USD por hora
+i3.metal,72,36,2.3,512,15200,25 Gigabit,5.792 USD por hora,8.736 USD por hora,5.892 USD por hora,5.922 USD por hora
+i3en.large,2,1,3.1,16,1250,25 Gigabit,0.263 USD por hora,0.355 USD por hora,0.319 USD por hora,0.323 USD por hora
+i3en.xlarge,4,2,3.1,32,2500,25 Gigabit,0.526 USD por hora,0.71 USD por hora,0.582 USD por hora,0.586 USD por hora
+i3en.2xlarge,8,4,3.1,64,5000,25 Gigabit,1.052 USD por hora,1.42 USD por hora,1.177 USD por hora,1.182 USD por hora
+i3en.3xlarge,12,6,3.1,96,7500,25 Gigabit,1.578 USD por hora,2.13 USD por hora,1.703 USD por hora,1.708 USD por hora
+i3en.6xlarge,24,12,3.1,192,15000,25 Gigabit,3.156 USD por hora,4.26 USD por hora,3.281 USD por hora,3.286 USD por hora
+i3en.12xlarge,48,24,3.1,384,30000,50 Gigabit,6.312 USD por hora,8.52 USD por hora,6.437 USD por hora,6.442 USD por hora
+i3en.24xlarge,96,48,3.1,768,60000,100 Gigabit,12.624 USD por hora,17.04 USD por hora,12.749 USD por hora,12.754 USD por hora
+i3en.metal,96,48,3.1,768,60000,100 Gigabit,12.624 USD por hora,17.04 USD por hora,12.749 USD por hora,12.754 USD por hora
+i4i.large,2,1,3.5,16,468,10 Gigabit,0.199 USD por hora,0.291 USD por hora,0.255 USD por hora,0.259 USD por hora
+i4i.xlarge,4,2,3.5,32,937,10 Gigabit,0.398 USD por hora,0.582 USD por hora,0.455 USD por hora,0.458 USD por hora
+i4i.2xlarge,8,4,3.5,64,1875,12 Gigabit,0.796 USD por hora,1.164 USD por hora,0.921 USD por hora,0.926 USD por hora
+i4i.4xlarge,16,8,3.5,128,3750,25 Gigabit,1.593 USD por hora,2.329 USD por hora,1.718 USD por hora,1.723 USD por hora
+i4i.8xlarge,32,16,3.5,256,7500,18.75 Gigabit,3.186 USD por hora,4.658 USD por hora,3.311 USD por hora,3.316 USD por hora
+i4i.12xlarge,48,24,3.5,384,11250,28.12 Gigabit,4.778 USD por hora,6.986 USD por hora,4.903 USD por hora,4.908 USD por hora
+i4i.16xlarge,64,32,3.5,512,15000,37.5 Gigabit,6.371 USD por hora,9.315 USD por hora,6.496 USD por hora,6.501 USD por hora
+i4i.24xlarge,96,48,3.5,768,22500,56.25 Gigabit,9.5568 USD por hora,13.9728 USD por hora,9.6818 USD por hora,9.6868 USD por hora
+i4i.32xlarge,128,64,3.5,1024,30000,75 Gigabit,12.7424 USD por hora,18.6304 USD por hora,12.8674 USD por hora,12.8724 USD por hora
+i4i.metal,128,64,3.5,1024,30000,75 Gigabit,12.742 USD por hora,18.63 USD por hora,12.867 USD por hora,12.872 USD por hora
+im4gn.large,2,2,2.5,8,937,25 Gigabit,0.21105 USD por hora,,0.26735 USD por hora,0.27105 USD por hora
+im4gn.xlarge,4,4,2.5,16,1875,25 Gigabit,0.42209 USD por hora,,0.47839 USD por hora,0.48209 USD por hora
+im4gn.2xlarge,8,8,2.5,32,3750,25 Gigabit,0.84418 USD por hora,,0.96918 USD por hora,0.97418 USD por hora
+im4gn.4xlarge,16,16,2.5,64,7500,25 Gigabit,1.68837 USD por hora,,1.81337 USD por hora,1.81837 USD por hora
+im4gn.8xlarge,32,32,2.5,128,15000,50 Gigabit,3.37674 USD por hora,,3.50174 USD por hora,3.50674 USD por hora
+im4gn.16xlarge,64,64,2.5,256,30000,100 Gigabit,6.75347 USD por hora,,6.87847 USD por hora,6.88347 USD por hora
+inf1.xlarge,4,2,2.5,8,-,25 Gigabit,0.267 USD por hora,,0.324 USD por hora,0.327 USD por hora
+inf1.2xlarge,8,4,2.5,16,-,25 Gigabit,0.424 USD por hora,,0.549 USD por hora,0.554 USD por hora
+inf1.6xlarge,24,12,2.5,48,-,25 Gigabit,1.382 USD por hora,,1.507 USD por hora,1.512 USD por hora
+inf1.24xlarge,96,48,2.5,192,-,100 Gigabit,5.53 USD por hora,,5.655 USD por hora,5.66 USD por hora
+is4gen.medium,1,1,2.5,6,937,25 Gigabit,0.16766 USD por hora,,0.22396 USD por hora,0.22766 USD por hora
+is4gen.large,2,2,2.5,12,1875,25 Gigabit,0.33533 USD por hora,,0.39163 USD por hora,0.39533 USD por hora
+is4gen.xlarge,4,4,2.5,24,3750,25 Gigabit,0.67065 USD por hora,,0.72695 USD por hora,0.73065 USD por hora
+is4gen.2xlarge,8,8,2.5,48,7500,25 Gigabit,1.3413 USD por hora,,1.4663 USD por hora,1.4713 USD por hora
+is4gen.4xlarge,16,16,2.5,96,15000,25 Gigabit,2.68261 USD por hora,,2.80761 USD por hora,2.81261 USD por hora
+is4gen.8xlarge,32,32,2.5,192,30000,50 Gigabit,5.36522 USD por hora,,5.49022 USD por hora,5.49522 USD por hora
+m4.large,2,1,2.4,8,-,Moderate,0.116 USD por hora,0.208 USD por hora,0.216 USD por hora,0.176 USD por hora
+m4.xlarge,4,2,2.4,16,-,High,0.232 USD por hora,0.416 USD por hora,0.332 USD por hora,0.292 USD por hora
+m4.2xlarge,8,4,2.4,32,-,High,0.464 USD por hora,0.832 USD por hora,0.564 USD por hora,0.594 USD por hora
+m4.4xlarge,16,8,2.4,64,-,High,0.928 USD por hora,1.664 USD por hora,1.028 USD por hora,1.058 USD por hora
+m4.10xlarge,40,20,2.4,160,-,10 Gigabit,2.32 USD por hora,4.16 USD por hora,2.42 USD por hora,2.45 USD por hora
+m4.16xlarge,64,32,2.3,256,-,25 Gigabit,3.712 USD por hora,6.656 USD por hora,3.812 USD por hora,3.842 USD por hora
+m5.large,2,1,3.1,8,-,10 Gigabit,0.111 USD por hora,0.203 USD por hora,0.167 USD por hora,0.171 USD por hora
+m5.xlarge,4,2,3.1,16,-,10 Gigabit,0.222 USD por hora,0.406 USD por hora,0.278 USD por hora,0.282 USD por hora
+m5.2xlarge,8,4,3.1,32,-,10 Gigabit,0.444 USD por hora,0.812 USD por hora,0.544 USD por hora,0.574 USD por hora
+m5.4xlarge,16,8,3.1,64,-,10 Gigabit,0.888 USD por hora,1.624 USD por hora,0.988 USD por hora,1.018 USD por hora
+m5.8xlarge,32,16,3.1,128,-,10 Gigabit,1.776 USD por hora,3.248 USD por hora,1.876 USD por hora,1.906 USD por hora
+m5.12xlarge,48,24,3.1,192,-,12 Gigabit,2.664 USD por hora,4.872 USD por hora,2.764 USD por hora,2.794 USD por hora
+m5.16xlarge,64,32,3.1,256,-,20 Gigabit,3.552 USD por hora,6.496 USD por hora,3.652 USD por hora,3.682 USD por hora
+m5.24xlarge,96,48,3.1,384,-,25 Gigabit,5.328 USD por hora,9.744 USD por hora,5.428 USD por hora,5.458 USD por hora
+m5.metal,96,48,3.1,384,-,25 Gigabit,5.328 USD por hora,9.744 USD por hora,5.428 USD por hora,5.458 USD por hora
+m5a.large,2,1,2.5,8,-,10 Gigabit,0.1 USD por hora,0.192 USD por hora,0.156 USD por hora,0.16 USD por hora
+m5a.xlarge,4,2,2.5,16,-,10 Gigabit,0.2 USD por hora,0.384 USD por hora,0.256 USD por hora,0.26 USD por hora
+m5a.2xlarge,8,4,2.5,32,-,10 Gigabit,0.4 USD por hora,0.768 USD por hora,0.525 USD por hora,0.53 USD por hora
+m5a.4xlarge,16,8,2.5,64,-,10 Gigabit,0.8 USD por hora,1.536 USD por hora,0.925 USD por hora,0.93 USD por hora
+m5a.8xlarge,32,16,2.5,128,-,10 Gigabit,1.6 USD por hora,3.072 USD por hora,1.725 USD por hora,1.73 USD por hora
+m5a.12xlarge,48,24,2.5,192,-,10 Gigabit,2.4 USD por hora,4.608 USD por hora,2.525 USD por hora,2.53 USD por hora
+m5a.16xlarge,64,32,2.5,256,-,12 Gigabit,3.2 USD por hora,6.144 USD por hora,3.325 USD por hora,3.33 USD por hora
+m5a.24xlarge,96,48,2.5,384,-,20 Gigabit,4.8 USD por hora,9.216 USD por hora,4.925 USD por hora,4.93 USD por hora
+m5ad.large,2,1,2.2,8,75,10 Gigabit,0.12 USD por hora,0.212 USD por hora,0.176 USD por hora,0.18 USD por hora
+m5ad.xlarge,4,2,2.2,16,150,10 Gigabit,0.24 USD por hora,0.424 USD por hora,0.296 USD por hora,0.3 USD por hora
+m5ad.2xlarge,8,4,2.2,32,300,10 Gigabit,0.48 USD por hora,0.848 USD por hora,0.605 USD por hora,0.61 USD por hora
+m5ad.4xlarge,16,8,2.2,64,600,10 Gigabit,0.96 USD por hora,1.696 USD por hora,1.085 USD por hora,1.09 USD por hora
+m5ad.8xlarge,32,16,2.5,128,1200,10 Gigabit,1.92 USD por hora,3.392 USD por hora,2.045 USD por hora,2.05 USD por hora
+m5ad.12xlarge,48,24,2.2,192,1800,10 Gigabit,2.88 USD por hora,5.088 USD por hora,3.005 USD por hora,3.01 USD por hora
+m5ad.16xlarge,64,32,2.5,256,2400,12 Gigabit,3.84 USD por hora,6.784 USD por hora,3.965 USD por hora,3.97 USD por hora
+m5ad.24xlarge,96,48,2.2,384,3600,20 Gigabit,5.76 USD por hora,10.176 USD por hora,5.885 USD por hora,5.89 USD por hora
+m5d.large,2,1,3.1,8,75,10 Gigabit,0.131 USD por hora,0.223 USD por hora,0.187 USD por hora,0.191 USD por hora
+m5d.xlarge,4,2,3.1,16,150,10 Gigabit,0.262 USD por hora,0.446 USD por hora,0.318 USD por hora,0.322 USD por hora
+m5d.2xlarge,8,4,3.1,32,300,10 Gigabit,0.524 USD por hora,0.892 USD por hora,0.624 USD por hora,0.654 USD por hora
+m5d.4xlarge,16,8,3.1,64,600,10 Gigabit,1.048 USD por hora,1.784 USD por hora,1.148 USD por hora,1.178 USD por hora
+m5d.8xlarge,32,16,3.1,128,1200,10 Gigabit,2.096 USD por hora,3.568 USD por hora,2.196 USD por hora,2.226 USD por hora
+m5d.12xlarge,48,24,3.1,192,1800,12 Gigabit,3.144 USD por hora,5.352 USD por hora,3.244 USD por hora,3.274 USD por hora
+m5d.16xlarge,64,32,3.1,256,2400,20 Gigabit,4.192 USD por hora,7.136 USD por hora,4.292 USD por hora,4.322 USD por hora
+m5d.24xlarge,96,48,3.1,384,3600,25 Gigabit,6.288 USD por hora,10.704 USD por hora,6.388 USD por hora,6.418 USD por hora
+m5d.metal,96,48,3.1,384,3600,25 Gigabit,6.288 USD por hora,10.704 USD por hora,6.388 USD por hora,6.418 USD por hora
+m6a.large,2,1,3.6,8,-,12.5 Gigabit,0.0999 USD por hora,0.1919 USD por hora,0.1562 USD por hora,0.1599 USD por hora
+m6a.xlarge,4,2,3.6,16,-,12.5 Gigabit,0.1998 USD por hora,0.3838 USD por hora,0.2561 USD por hora,0.2598 USD por hora
+m6a.2xlarge,8,4,3.6,32,-,12.5 Gigabit,0.3996 USD por hora,0.7676 USD por hora,0.5246 USD por hora,0.5296 USD por hora
+m6a.4xlarge,16,8,3.6,64,-,12.5 Gigabit,0.7992 USD por hora,1.5352 USD por hora,0.9242 USD por hora,0.9292 USD por hora
+m6a.8xlarge,32,16,3.6,128,-,12.5 Gigabit,1.5984 USD por hora,3.0704 USD por hora,1.7234 USD por hora,1.7284 USD por hora
+m6a.12xlarge,48,24,3.6,192,-,18.75 Gigabit,2.3976 USD por hora,4.6056 USD por hora,2.5226 USD por hora,2.5276 USD por hora
+m6a.16xlarge,64,32,3.6,256,-,25 Gigabit,3.1968 USD por hora,6.1408 USD por hora,3.3218 USD por hora,3.3268 USD por hora
+m6a.24xlarge,96,48,3.6,384,-,37.5 Gigabit,4.7952 USD por hora,9.2112 USD por hora,4.9202 USD por hora,4.9252 USD por hora
+m6a.32xlarge,128,64,3.6,512,-,50 Gigabit,6.3936 USD por hora,12.2816 USD por hora,6.5186 USD por hora,6.5236 USD por hora
+m6a.48xlarge,192,96,3.6,768,-,50 Gigabit,9.5904 USD por hora,18.4224 USD por hora,9.7154 USD por hora,9.7204 USD por hora
+m6a.metal,192,96,3.6,768,-,50 Gigabit,9.5904 USD por hora,18.4224 USD por hora,9.7154 USD por hora,9.7204 USD por hora
+m6g.medium,1,1,2.5,4,-,10 Gigabit,0.0444 USD por hora,,0.0754 USD por hora,0.1044 USD por hora
+m6g.large,2,2,2.5,8,-,10 Gigabit,0.0888 USD por hora,,0.1451 USD por hora,0.1488 USD por hora
+m6g.xlarge,4,4,2.5,16,-,10 Gigabit,0.1776 USD por hora,,0.2339 USD por hora,0.2376 USD por hora
+m6g.2xlarge,8,8,2.5,32,-,10 Gigabit,0.3552 USD por hora,,0.4802 USD por hora,0.4852 USD por hora
+m6g.4xlarge,16,16,2.5,64,-,10 Gigabit,0.7104 USD por hora,,0.8354 USD por hora,0.8404 USD por hora
+m6g.8xlarge,32,32,2.5,128,-,12 Gigabit,1.4208 USD por hora,,1.5458 USD por hora,1.5508 USD por hora
+m6g.12xlarge,48,48,2.5,192,-,20 Gigabit,2.1312 USD por hora,,2.2562 USD por hora,2.2612 USD por hora
+m6g.16xlarge,64,64,2.5,256,-,25 Gigabit,2.8416 USD por hora,,2.9666 USD por hora,2.9716 USD por hora
+m6g.metal,64,64,2.5,256,-,25 Gigabit,2.8416 USD por hora,,2.9666 USD por hora,2.9716 USD por hora
+m6gd.medium,1,1,2.5,4,59,10 Gigabit,0.0524 USD por hora,,0.0834 USD por hora,0.1124 USD por hora
+m6gd.large,2,2,2.5,8,118,10 Gigabit,0.1048 USD por hora,,0.1611 USD por hora,0.1648 USD por hora
+m6gd.xlarge,4,4,2.5,16,237,10 Gigabit,0.2096 USD por hora,,0.2659 USD por hora,0.2696 USD por hora
+m6gd.2xlarge,8,8,2.5,32,474,10 Gigabit,0.4192 USD por hora,,0.5442 USD por hora,0.5492 USD por hora
+m6gd.4xlarge,16,16,2.5,64,950,10 Gigabit,0.8384 USD por hora,,0.9634 USD por hora,0.9684 USD por hora
+m6gd.8xlarge,32,32,2.5,128,1900,12 Gigabit,1.6768 USD por hora,,1.8018 USD por hora,1.8068 USD por hora
+m6gd.12xlarge,48,48,2.5,192,2850,20 Gigabit,2.5152 USD por hora,,2.6402 USD por hora,2.6452 USD por hora
+m6gd.16xlarge,64,64,2.5,256,3800,25 Gigabit,3.3536 USD por hora,,3.4786 USD por hora,3.4836 USD por hora
+m6gd.metal,64,64,2.5,256,3800,25 Gigabit,3.3536 USD por hora,,3.4786 USD por hora,3.4836 USD por hora
+m6i.large,2,1,3.5,8,-,12.5 Gigabit,0.111 USD por hora,0.203 USD por hora,0.1673 USD por hora,0.171 USD por hora
+m6i.xlarge,4,2,3.5,16,-,12.5 Gigabit,0.222 USD por hora,0.406 USD por hora,0.2783 USD por hora,0.282 USD por hora
+m6i.2xlarge,8,4,3.5,32,-,12.5 Gigabit,0.444 USD por hora,0.812 USD por hora,0.569 USD por hora,0.574 USD por hora
+m6i.4xlarge,16,8,3.5,64,-,12.5 Gigabit,0.888 USD por hora,1.624 USD por hora,1.013 USD por hora,1.018 USD por hora
+m6i.8xlarge,32,16,3.5,128,-,12.5 Gigabit,1.776 USD por hora,3.248 USD por hora,1.901 USD por hora,1.906 USD por hora
+m6i.12xlarge,48,24,3.5,192,-,18.75 Gigabit,2.664 USD por hora,4.872 USD por hora,2.789 USD por hora,2.794 USD por hora
+m6i.16xlarge,64,32,3.5,256,-,25 Gigabit,3.552 USD por hora,6.496 USD por hora,3.677 USD por hora,3.682 USD por hora
+m6i.24xlarge,96,48,3.5,384,-,37.5 Gigabit,5.328 USD por hora,9.744 USD por hora,5.453 USD por hora,5.458 USD por hora
+m6i.32xlarge,128,64,3.5,512,-,50 Gigabit,7.104 USD por hora,12.992 USD por hora,7.229 USD por hora,7.234 USD por hora
+m6i.metal,128,64,3.5,512,-,50 Gigabit,7.104 USD por hora,12.992 USD por hora,7.229 USD por hora,7.234 USD por hora
+m7g.medium,1,1,2.6,4,-,12.5 Gigabit,0.0472 USD por hora,,0.1035 USD por hora,0.1072 USD por hora
+m7g.large,2,2,2.6,8,-,12.5 Gigabit,0.0944 USD por hora,,0.1507 USD por hora,0.1544 USD por hora
+m7g.xlarge,4,4,2.6,16,-,12.5 Gigabit,0.1887 USD por hora,,0.245 USD por hora,0.2487 USD por hora
+m7g.2xlarge,8,8,2.6,32,-,15 Gigabit,0.3774 USD por hora,,0.5024 USD por hora,0.5074 USD por hora
+m7g.4xlarge,16,16,2.6,64,-,15 Gigabit,0.7549 USD por hora,,0.8799 USD por hora,0.8849 USD por hora
+m7g.8xlarge,32,32,2.6,128,-,15 Gigabit,1.5098 USD por hora,,1.6348 USD por hora,1.6398 USD por hora
+m7g.12xlarge,48,48,2.6,192,-,22.5 Gigabit,2.2646 USD por hora,,2.3896 USD por hora,2.3946 USD por hora
+m7g.16xlarge,64,64,2.6,256,-,30 Gigabit,3.0195 USD por hora,,3.1445 USD por hora,3.1495 USD por hora
+m7g.metal,64,64,2.6,256,-,30 Gigabit,3.0195 USD por hora,,3.1445 USD por hora,3.1495 USD por hora
+m7i.large,2,1,3.2,8,-,12.5 Gigabit,0.11655 USD por hora,0.20855 USD por hora,0.17285 USD por hora,0.17655 USD por hora
+m7i.xlarge,4,2,3.2,16,-,12.5 Gigabit,0.2331 USD por hora,0.4171 USD por hora,0.2894 USD por hora,0.2931 USD por hora
+m7i.2xlarge,8,4,3.2,32,-,12.5 Gigabit,0.4662 USD por hora,0.8342 USD por hora,0.5912 USD por hora,0.5962 USD por hora
+m7i.4xlarge,16,8,3.2,64,-,12.5 Gigabit,0.9324 USD por hora,1.6684 USD por hora,1.0574 USD por hora,1.0624 USD por hora
+m7i.8xlarge,32,16,3.2,128,-,12.5 Gigabit,1.8648 USD por hora,3.3368 USD por hora,1.9898 USD por hora,1.9948 USD por hora
+m7i.12xlarge,48,24,3.2,192,-,18.75 Gigabit,2.7972 USD por hora,5.0052 USD por hora,2.9222 USD por hora,2.9272 USD por hora
+m7i.16xlarge,64,32,3.2,256,-,25 Gigabit,3.7296 USD por hora,6.6736 USD por hora,3.8546 USD por hora,3.8596 USD por hora
+m7i.24xlarge,96,48,3.2,384,-,37.5 Gigabit,5.5944 USD por hora,10.0104 USD por hora,5.7194 USD por hora,5.7244 USD por hora
+m7i.48xlarge,192,96,3.2,768,-,50 Gigabit,11.1888 USD por hora,20.0208 USD por hora,11.3138 USD por hora,11.3188 USD por hora
+m7i.metal-24xl,96,48,3.2,384,-,37.5 Gigabit,5.5944 USD por hora,10.0104 USD por hora,5.7194 USD por hora,5.7244 USD por hora
+m7i.metal-48xl,192,96,3.2,768,-,50 Gigabit,11.1888 USD por hora,20.0208 USD por hora,11.3138 USD por hora,11.3188 USD por hora
+m7i-flex.large,2,1,3.2,8,-,12.5 Gigabit,0.11072 USD por hora,0.19812 USD por hora,0.16702 USD por hora,0.17072 USD por hora
+m7i-flex.xlarge,4,2,3.2,16,-,12.5 Gigabit,0.22144 USD por hora,0.39624 USD por hora,0.27774 USD por hora,0.28144 USD por hora
+m7i-flex.2xlarge,8,4,3.2,32,-,12.5 Gigabit,0.44288 USD por hora,0.79248 USD por hora,0.56788 USD por hora,0.57288 USD por hora
+m7i-flex.4xlarge,16,8,3.2,64,-,12.5 Gigabit,0.88576 USD por hora,1.58496 USD por hora,1.01076 USD por hora,1.01576 USD por hora
+m7i-flex.8xlarge,32,16,3.2,128,-,12.5 Gigabit,1.77152 USD por hora,3.16992 USD por hora,1.89652 USD por hora,1.90152 USD por hora
+mac1.metal,12,6,3.2,32,-,25 Gigabit,,,,
+p3.2xlarge,8,4,2.7,61,-,10 Gigabit,3.589 USD por hora,3.957 USD por hora,3.689 USD por hora,3.719 USD por hora
+p3.8xlarge,32,16,2.7,244,-,10 Gigabit,14.356 USD por hora,15.828 USD por hora,14.456 USD por hora,14.486 USD por hora
+p3.16xlarge,64,32,2.7,488,-,25 Gigabit,28.712 USD por hora,31.656 USD por hora,28.812 USD por hora,28.842 USD por hora
+r4.large,2,1,2.3,15.3,-,10 Gigabit,0.156 USD por hora,0.248 USD por hora,0.256 USD por hora,0.216 USD por hora
+r4.xlarge,4,2,2.3,30.5,-,10 Gigabit,0.312 USD por hora,0.496 USD por hora,0.412 USD por hora,0.372 USD por hora
+r4.2xlarge,8,4,2.3,61,-,10 Gigabit,0.624 USD por hora,0.992 USD por hora,0.724 USD por hora,0.754 USD por hora
+r4.4xlarge,16,8,2.3,122,-,10 Gigabit,1.248 USD por hora,1.984 USD por hora,1.348 USD por hora,1.378 USD por hora
+r4.8xlarge,32,16,2.3,244,-,10 Gigabit,2.496 USD por hora,3.968 USD por hora,2.596 USD por hora,2.626 USD por hora
+r4.16xlarge,64,32,2.3,488,-,25 Gigabit,4.992 USD por hora,7.936 USD por hora,5.092 USD por hora,5.122 USD por hora
+r5.large,2,1,3.1,16,-,10 Gigabit,0.148 USD por hora,0.24 USD por hora,0.204 USD por hora,0.208 USD por hora
+r5.xlarge,4,2,3.1,32,-,10 Gigabit,0.296 USD por hora,0.48 USD por hora,0.352 USD por hora,0.356 USD por hora
+r5.2xlarge,8,4,3.1,64,-,10 Gigabit,0.592 USD por hora,0.96 USD por hora,0.717 USD por hora,0.722 USD por hora
+r5.4xlarge,16,8,3.1,128,-,10 Gigabit,1.184 USD por hora,1.92 USD por hora,1.309 USD por hora,1.314 USD por hora
+r5.8xlarge,32,16,3.1,256,-,10 Gigabit,2.368 USD por hora,3.84 USD por hora,2.493 USD por hora,2.498 USD por hora
+r5.12xlarge,48,24,3.1,384,-,12 Gigabit,3.552 USD por hora,5.76 USD por hora,3.677 USD por hora,3.682 USD por hora
+r5.16xlarge,64,32,3.1,512,-,20 Gigabit,4.736 USD por hora,7.68 USD por hora,4.861 USD por hora,4.866 USD por hora
+r5.24xlarge,96,48,3.1,768,-,25 Gigabit,7.104 USD por hora,11.52 USD por hora,7.229 USD por hora,7.234 USD por hora
+r5.metal,96,48,3.1,768,-,25 Gigabit,7.104 USD por hora,11.52 USD por hora,7.229 USD por hora,7.234 USD por hora
+r5a.large,2,1,2.5,16,-,10 Gigabit,0.133 USD por hora,0.225 USD por hora,0.189 USD por hora,0.193 USD por hora
+r5a.xlarge,4,2,2.5,32,-,10 Gigabit,0.266 USD por hora,0.45 USD por hora,0.322 USD por hora,0.326 USD por hora
+r5a.2xlarge,8,4,2.5,64,-,10 Gigabit,0.532 USD por hora,0.9 USD por hora,0.657 USD por hora,0.662 USD por hora
+r5a.4xlarge,16,8,2.5,128,-,10 Gigabit,1.064 USD por hora,1.8 USD por hora,1.189 USD por hora,1.194 USD por hora
+r5a.8xlarge,32,16,2.5,256,-,10 Gigabit,2.128 USD por hora,3.6 USD por hora,2.253 USD por hora,2.258 USD por hora
+r5a.12xlarge,48,24,2.5,384,-,10 Gigabit,3.192 USD por hora,5.4 USD por hora,3.317 USD por hora,3.322 USD por hora
+r5a.16xlarge,64,32,2.5,512,-,12 Gigabit,4.256 USD por hora,7.2 USD por hora,4.381 USD por hora,4.386 USD por hora
+r5a.24xlarge,96,48,2.5,768,-,20 Gigabit,6.384 USD por hora,10.8 USD por hora,6.509 USD por hora,6.514 USD por hora
+r5ad.large,2,1,2.2,16,75,10 Gigabit,0.154 USD por hora,0.246 USD por hora,0.21 USD por hora,0.214 USD por hora
+r5ad.xlarge,4,2,2.2,32,150,10 Gigabit,0.308 USD por hora,0.492 USD por hora,0.364 USD por hora,0.368 USD por hora
+r5ad.2xlarge,8,4,2.2,64,300,10 Gigabit,0.616 USD por hora,0.984 USD por hora,0.741 USD por hora,0.746 USD por hora
+r5ad.4xlarge,16,8,2.2,128,600,10 Gigabit,1.232 USD por hora,1.968 USD por hora,1.357 USD por hora,1.362 USD por hora
+r5ad.8xlarge,32,16,2.5,256,1200,10 Gigabit,2.464 USD por hora,3.936 USD por hora,2.589 USD por hora,2.594 USD por hora
+r5ad.12xlarge,48,24,2.2,384,1800,10 Gigabit,3.696 USD por hora,5.904 USD por hora,3.821 USD por hora,3.826 USD por hora
+r5ad.16xlarge,64,32,2.5,512,2400,12 Gigabit,4.928 USD por hora,7.872 USD por hora,5.053 USD por hora,5.058 USD por hora
+r5ad.24xlarge,96,48,2.2,768,3600,20 Gigabit,7.392 USD por hora,11.808 USD por hora,7.517 USD por hora,7.522 USD por hora
+r5b.large,2,1,3.1,16,-,10 Gigabit,0.175 USD por hora,0.267 USD por hora,0.2313 USD por hora,0.235 USD por hora
+r5b.xlarge,4,2,3.1,32,-,10 Gigabit,0.35 USD por hora,0.534 USD por hora,0.4063 USD por hora,0.41 USD por hora
+r5b.2xlarge,8,4,3.1,64,-,10 Gigabit,0.7 USD por hora,1.068 USD por hora,0.825 USD por hora,0.83 USD por hora
+r5b.4xlarge,16,8,3.1,128,-,10 Gigabit,1.4 USD por hora,2.136 USD por hora,1.525 USD por hora,1.53 USD por hora
+r5b.8xlarge,32,16,3.1,256,-,10 Gigabit,2.8 USD por hora,4.272 USD por hora,2.925 USD por hora,2.93 USD por hora
+r5b.12xlarge,48,24,3.1,384,-,12 Gigabit,4.2 USD por hora,6.408 USD por hora,4.325 USD por hora,4.33 USD por hora
+r5b.16xlarge,64,32,3.1,512,-,20 Gigabit,5.6 USD por hora,8.544 USD por hora,5.725 USD por hora,5.73 USD por hora
+r5b.24xlarge,96,48,3.1,768,-,25 Gigabit,8.4 USD por hora,12.816 USD por hora,8.525 USD por hora,8.53 USD por hora
+r5b.metal,96,48,3.1,768,-,25 Gigabit,8.4 USD por hora,12.816 USD por hora,8.525 USD por hora,8.53 USD por hora
+r5d.large,2,1,3.1,16,75,10 Gigabit,0.169 USD por hora,0.261 USD por hora,0.225 USD por hora,0.229 USD por hora
+r5d.xlarge,4,2,3.1,32,150,10 Gigabit,0.338 USD por hora,0.522 USD por hora,0.394 USD por hora,0.398 USD por hora
+r5d.2xlarge,8,4,3.1,64,300,10 Gigabit,0.676 USD por hora,1.044 USD por hora,0.801 USD por hora,0.806 USD por hora
+r5d.4xlarge,16,8,3.1,128,600,10 Gigabit,1.352 USD por hora,2.088 USD por hora,1.477 USD por hora,1.482 USD por hora
+r5d.8xlarge,32,16,3.1,256,1200,10 Gigabit,2.704 USD por hora,4.176 USD por hora,2.829 USD por hora,2.834 USD por hora
+r5d.12xlarge,48,24,3.1,384,1800,12 Gigabit,4.056 USD por hora,6.264 USD por hora,4.181 USD por hora,4.186 USD por hora
+r5d.16xlarge,64,32,3.1,512,2400,20 Gigabit,5.408 USD por hora,8.352 USD por hora,5.533 USD por hora,5.538 USD por hora
+r5d.24xlarge,96,48,3.1,768,3600,25 Gigabit,8.112 USD por hora,12.528 USD por hora,8.237 USD por hora,8.242 USD por hora
+r5d.metal,96,48,3.1,768,3600,25 Gigabit,8.112 USD por hora,12.528 USD por hora,8.237 USD por hora,8.242 USD por hora
+r5n.large,2,1,3.1,16,-,25 Gigabit,0.175 USD por hora,0.267 USD por hora,0.231 USD por hora,0.235 USD por hora
+r5n.xlarge,4,2,3.1,32,-,25 Gigabit,0.35 USD por hora,0.534 USD por hora,0.406 USD por hora,0.41 USD por hora
+r5n.2xlarge,8,4,3.1,64,-,25 Gigabit,0.7 USD por hora,1.068 USD por hora,0.825 USD por hora,0.83 USD por hora
+r5n.4xlarge,16,8,3.1,128,-,25 Gigabit,1.4 USD por hora,2.136 USD por hora,1.525 USD por hora,1.53 USD por hora
+r5n.8xlarge,32,16,3.1,256,-,25 Gigabit,2.8 USD por hora,4.272 USD por hora,2.925 USD por hora,2.93 USD por hora
+r5n.12xlarge,48,24,3.1,384,-,50 Gigabit,4.2 USD por hora,6.408 USD por hora,4.325 USD por hora,4.33 USD por hora
+r5n.16xlarge,64,32,3.1,512,-,75 Gigabit,5.6 USD por hora,8.544 USD por hora,5.725 USD por hora,5.73 USD por hora
+r5n.24xlarge,96,48,3.1,768,-,100 Gigabit,8.4 USD por hora,12.816 USD por hora,8.525 USD por hora,8.53 USD por hora
+r5n.metal,96,48,3.1,768,-,100 Gigabit,8.4 USD por hora,12.816 USD por hora,8.525 USD por hora,8.53 USD por hora
+r6g.medium,1,1,2.5,8,-,10 Gigabit,0.0592 USD por hora,,0.0902 USD por hora,0.1192 USD por hora
+r6g.large,2,2,2.5,16,-,10 Gigabit,0.1184 USD por hora,,0.1747 USD por hora,0.1784 USD por hora
+r6g.xlarge,4,4,2.5,32,-,10 Gigabit,0.2368 USD por hora,,0.2931 USD por hora,0.2968 USD por hora
+r6g.2xlarge,8,8,2.5,64,-,10 Gigabit,0.4736 USD por hora,,0.5986 USD por hora,0.6036 USD por hora
+r6g.4xlarge,16,16,2.5,128,-,10 Gigabit,0.9472 USD por hora,,1.0722 USD por hora,1.0772 USD por hora
+r6g.8xlarge,32,32,2.5,256,-,12 Gigabit,1.8944 USD por hora,,2.0194 USD por hora,2.0244 USD por hora
+r6g.12xlarge,48,48,2.5,384,-,20 Gigabit,2.8416 USD por hora,,2.9666 USD por hora,2.9716 USD por hora
+r6g.16xlarge,64,64,2.5,512,-,25 Gigabit,3.7888 USD por hora,,3.9138 USD por hora,3.9188 USD por hora
+r6g.metal,64,64,2.5,512,-,25 Gigabit,3.7888 USD por hora,,3.9138 USD por hora,3.9188 USD por hora
+r6gd.medium,1,1,2.5,8,59,10 Gigabit,0.0676 USD por hora,,0.1239 USD por hora,0.1276 USD por hora
+r6gd.large,2,2,2.5,16,118,10 Gigabit,0.1352 USD por hora,,0.1915 USD por hora,0.1952 USD por hora
+r6gd.xlarge,4,4,2.5,32,237,10 Gigabit,0.2704 USD por hora,,0.3267 USD por hora,0.3304 USD por hora
+r6gd.2xlarge,8,8,2.5,64,474,10 Gigabit,0.5408 USD por hora,,0.6658 USD por hora,0.6708 USD por hora
+r6gd.4xlarge,16,16,2.5,128,950,10 Gigabit,1.0816 USD por hora,,1.2066 USD por hora,1.2116 USD por hora
+r6gd.8xlarge,32,32,2.5,256,1900,12 Gigabit,2.1632 USD por hora,,2.2882 USD por hora,2.2932 USD por hora
+r6gd.12xlarge,48,48,2.5,384,2850,20 Gigabit,3.2448 USD por hora,,3.3698 USD por hora,3.3748 USD por hora
+r6gd.16xlarge,64,64,2.5,512,3800,25 Gigabit,4.3264 USD por hora,,4.4514 USD por hora,4.4564 USD por hora
+r6gd.metal,64,64,2.5,512,3800,25 Gigabit,4.3264 USD por hora,,4.4514 USD por hora,4.4564 USD por hora
+r6i.large,2,1,3.5,16,-,12.5 Gigabit,0.148 USD por hora,0.24 USD por hora,0.2043 USD por hora,0.208 USD por hora
+r6i.xlarge,4,2,3.5,32,-,12.5 Gigabit,0.296 USD por hora,0.48 USD por hora,0.3523 USD por hora,0.356 USD por hora
+r6i.2xlarge,8,4,3.5,64,-,12.5 Gigabit,0.592 USD por hora,0.96 USD por hora,0.717 USD por hora,0.722 USD por hora
+r6i.4xlarge,16,8,3.5,128,-,12.5 Gigabit,1.184 USD por hora,1.92 USD por hora,1.309 USD por hora,1.314 USD por hora
+r6i.8xlarge,32,16,3.5,256,-,12.5 Gigabit,2.368 USD por hora,3.84 USD por hora,2.493 USD por hora,2.498 USD por hora
+r6i.12xlarge,48,24,3.5,384,-,18.75 Gigabit,3.552 USD por hora,5.76 USD por hora,3.677 USD por hora,3.682 USD por hora
+r6i.16xlarge,64,32,3.5,512,-,25 Gigabit,4.736 USD por hora,7.68 USD por hora,4.861 USD por hora,4.866 USD por hora
+r6i.24xlarge,96,48,3.5,768,-,37.5 Gigabit,7.104 USD por hora,11.52 USD por hora,7.229 USD por hora,7.234 USD por hora
+r6i.32xlarge,128,64,3.5,1024,-,50 Gigabit,9.472 USD por hora,15.36 USD por hora,9.597 USD por hora,9.602 USD por hora
+r6i.metal,128,64,3.5,1024,-,50 Gigabit,9.472 USD por hora,15.36 USD por hora,9.597 USD por hora,9.602 USD por hora
+r6id.large,2,1,3.5,16,118,12.5 Gigabit,0.17745 USD por hora,0.26945 USD por hora,0.23375 USD por hora,0.23745 USD por hora
+r6id.xlarge,4,2,3.5,32,237,12.5 Gigabit,0.3549 USD por hora,0.5389 USD por hora,0.4112 USD por hora,0.4149 USD por hora
+r6id.2xlarge,8,4,3.5,64,474,12.5 Gigabit,0.7098 USD por hora,1.0778 USD por hora,0.8348 USD por hora,0.8398 USD por hora
+r6id.4xlarge,16,8,3.5,128,950,12.5 Gigabit,1.4196 USD por hora,2.1556 USD por hora,1.5446 USD por hora,1.5496 USD por hora
+r6id.8xlarge,32,16,3.5,256,1900,12.5 Gigabit,2.8392 USD por hora,4.3112 USD por hora,2.9642 USD por hora,2.9692 USD por hora
+r6id.12xlarge,48,24,3.5,384,2850,18.75 Gigabit,4.2588 USD por hora,6.4668 USD por hora,4.3838 USD por hora,4.3888 USD por hora
+r6id.16xlarge,64,32,3.5,512,3800,25 Gigabit,5.6784 USD por hora,8.6224 USD por hora,5.8034 USD por hora,5.8084 USD por hora
+r6id.24xlarge,96,48,3.5,768,5700,37.5 Gigabit,8.5176 USD por hora,12.9336 USD por hora,8.6426 USD por hora,8.6476 USD por hora
+r6id.32xlarge,128,64,3.5,1024,7600,50 Gigabit,11.3568 USD por hora,17.2448 USD por hora,11.4818 USD por hora,11.4868 USD por hora
+r6id.metal,128,64,3.5,1024,7600,50 Gigabit,11.3568 USD por hora,17.2448 USD por hora,11.4818 USD por hora,11.4868 USD por hora
+r7g.medium,1,1,2.6,8,-,12.5 Gigabit,0.0629 USD por hora,,0.1192 USD por hora,0.1229 USD por hora
+r7g.large,2,2,2.6,16,-,12.5 Gigabit,0.1258 USD por hora,,0.1821 USD por hora,0.1858 USD por hora
+r7g.xlarge,4,4,2.6,32,-,12.5 Gigabit,0.2516 USD por hora,,0.3079 USD por hora,0.3116 USD por hora
+r7g.2xlarge,8,8,2.6,64,-,15 Gigabit,0.5032 USD por hora,,0.6282 USD por hora,0.6332 USD por hora
+r7g.4xlarge,16,16,2.6,128,-,15 Gigabit,1.0064 USD por hora,,1.1314 USD por hora,1.1364 USD por hora
+r7g.8xlarge,32,32,2.6,256,-,15 Gigabit,2.0128 USD por hora,,2.1378 USD por hora,2.1428 USD por hora
+r7g.12xlarge,48,48,2.6,384,-,22.5 Gigabit,3.0192 USD por hora,,3.1442 USD por hora,3.1492 USD por hora
+r7g.16xlarge,64,64,2.6,512,-,30 Gigabit,4.0256 USD por hora,,4.1506 USD por hora,4.1556 USD por hora
+r7g.metal,64,64,2.6,512,-,30 Gigabit,4.0256 USD por hora,,4.1506 USD por hora,4.1556 USD por hora
+r7i.large,2,1,3.2,16,-,12.5 Gigabit,0.1554 USD por hora,0.2474 USD por hora,0.2117 USD por hora,0.2154 USD por hora
+r7i.xlarge,4,2,3.2,32,-,12.5 Gigabit,0.3108 USD por hora,0.4948 USD por hora,0.3671 USD por hora,0.3708 USD por hora
+r7i.2xlarge,8,4,3.2,64,-,12.5 Gigabit,0.6216 USD por hora,0.9896 USD por hora,0.7466 USD por hora,0.7516 USD por hora
+r7i.4xlarge,16,8,3.2,128,-,12.5 Gigabit,1.2432 USD por hora,1.9792 USD por hora,1.3682 USD por hora,1.3732 USD por hora
+r7i.8xlarge,32,16,3.2,256,-,12.5 Gigabit,2.4864 USD por hora,3.9584 USD por hora,2.6114 USD por hora,2.6164 USD por hora
+r7i.12xlarge,48,24,3.2,384,-,18.75 Gigabit,3.7296 USD por hora,5.9376 USD por hora,3.8546 USD por hora,3.8596 USD por hora
+r7i.16xlarge,64,32,3.2,512,-,25 Gigabit,4.9728 USD por hora,7.9168 USD por hora,5.0978 USD por hora,5.1028 USD por hora
+r7i.24xlarge,96,48,3.2,768,-,37.5 Gigabit,7.4592 USD por hora,11.8752 USD por hora,7.5842 USD por hora,7.5892 USD por hora
+r7i.48xlarge,192,96,3.2,1536,-,50 Gigabit,14.9184 USD por hora,23.7504 USD por hora,15.0434 USD por hora,15.0484 USD por hora
+r7i.metal-24xl,96,48,3.2,768,-,37.5 Gigabit,7.4592 USD por hora,11.8752 USD por hora,7.5842 USD por hora,7.5892 USD por hora
+r7i.metal-48xl,192,96,3.2,1536,-,50 Gigabit,14.9184 USD por hora,23.7504 USD por hora,15.0434 USD por hora,15.0484 USD por hora
+t3a.nano,2,1,2.2,0.5,-,5 Gigabit,0.0053 USD por hora,0.0099 USD por hora,0.0053 USD por hora,
+t3a.micro,2,1,2.2,1,-,5 Gigabit,0.0106 USD por hora,0.0198 USD por hora,0.0106 USD por hora,0.0706 USD por hora
+t3a.small,2,1,2.2,2,-,5 Gigabit,0.0212 USD por hora,0.0396 USD por hora,0.0522 USD por hora,0.0812 USD por hora
+t3a.medium,2,1,2.2,4,-,5 Gigabit,0.0425 USD por hora,0.0609 USD por hora,0.0988 USD por hora,0.1025 USD por hora
+t3a.large,2,1,2.2,8,-,5 Gigabit,0.085 USD por hora,0.1126 USD por hora,0.1413 USD por hora,0.145 USD por hora
+t3a.xlarge,4,2,2.2,16,-,5 Gigabit,0.1699 USD por hora,0.2435 USD por hora,0.2262 USD por hora,0.2299 USD por hora
+t3a.2xlarge,8,4,2.2,32,-,5 Gigabit,0.3398 USD por hora,0.487 USD por hora,0.4648 USD por hora,0.4698 USD por hora
+t4g.nano,2,2,2.5,0.5,-,5 Gigabit,0.0047 USD por hora,,0.0047 USD por hora,
+t4g.micro,2,2,2.5,1,-,5 Gigabit,0.0094 USD por hora,,0.0094 USD por hora,0.0694 USD por hora
+t4g.small,2,2,2.5,2,-,5 Gigabit,0.0188 USD por hora,,0.0501 USD por hora,0.0788 USD por hora
+t4g.medium,2,2,2.5,4,-,5 Gigabit,0.0376 USD por hora,,0.0939 USD por hora,0.0976 USD por hora
+t4g.large,2,2,2.5,8,-,5 Gigabit,0.0752 USD por hora,,0.1315 USD por hora,0.1352 USD por hora
+t4g.xlarge,4,4,2.5,16,-,5 Gigabit,0.1504 USD por hora,,0.2067 USD por hora,0.2104 USD por hora
+t4g.2xlarge,8,8,2.5,32,-,5 Gigabit,0.3008 USD por hora,,0.4258 USD por hora,0.4308 USD por hora
+u-6tb1.56xlarge,224,224,2.1,6144,-,100 Gigabit,54.50589 USD por hora,64.80989 USD por hora,54.63089 USD por hora,54.63589 USD por hora
+u-6tb1.112xlarge,448,224,2.1,6144,-,100 Gigabit,64.133 USD por hora,84.741 USD por hora,64.258 USD por hora,64.263 USD por hora
+u-9tb1.112xlarge,448,224,2.1,9216,-,100 Gigabit,96.2 USD por hora,116.808 USD por hora,96.325 USD por hora,96.33 USD por hora
+x1.16xlarge,64,32,2.3,976,1920,10 Gigabit,8.403 USD por hora,11.347 USD por hora,8.503 USD por hora,8.533 USD por hora
+x1.32xlarge,128,64,2.3,1952,3840,25 Gigabit,16.806 USD por hora,22.694 USD por hora,16.906 USD por hora,16.936 USD por hora
+x2idn.16xlarge,64,32,3.5,1024,1900,50 Gigabit,8.403 USD por hora,11.347 USD por hora,8.528 USD por hora,8.533 USD por hora
+x2idn.24xlarge,96,48,3.5,1536,2850,75 Gigabit,12.6045 USD por hora,17.0205 USD por hora,12.7295 USD por hora,12.7345 USD por hora
+x2idn.32xlarge,128,64,3.5,2048,3800,100 Gigabit,16.806 USD por hora,22.694 USD por hora,16.931 USD por hora,16.936 USD por hora
+x2idn.metal,128,64,3.5,2048,3800,100 Gigabit,16.806 USD por hora,22.694 USD por hora,16.931 USD por hora,16.936 USD por hora
+x2iedn.xlarge,4,2,3.5,128,118,25 Gigabit,1.05038 USD por hora,1.23438 USD por hora,1.10668 USD por hora,1.11038 USD por hora
+x2iedn.2xlarge,8,4,3.5,256,237,25 Gigabit,2.10075 USD por hora,2.46875 USD por hora,2.22575 USD por hora,2.23075 USD por hora
+x2iedn.4xlarge,16,8,3.5,512,475,25 Gigabit,4.2015 USD por hora,4.9375 USD por hora,4.3265 USD por hora,4.3315 USD por hora
+x2iedn.8xlarge,32,16,3.5,1024,950,25 Gigabit,8.403 USD por hora,9.875 USD por hora,8.528 USD por hora,8.533 USD por hora
+x2iedn.16xlarge,64,32,3.5,2048,1900,50 Gigabit,16.806 USD por hora,19.75 USD por hora,16.931 USD por hora,16.936 USD por hora
+x2iedn.24xlarge,96,48,3.5,3072,2850,75 Gigabit,25.209 USD por hora,29.625 USD por hora,25.334 USD por hora,25.339 USD por hora
+x2iedn.32xlarge,128,64,3.5,4096,3800,100 Gigabit,33.612 USD por hora,39.5 USD por hora,33.737 USD por hora,33.742 USD por hora
+x2iedn.metal,128,64,3.5,4096,3800,100 Gigabit,33.612 USD por hora,39.5 USD por hora,33.737 USD por hora,33.742 USD por hora
+z1d.large,2,1,4,16,75,10 Gigabit,0.22 USD por hora,0.312 USD por hora,0.276 USD por hora,0.28 USD por hora
+z1d.xlarge,4,2,4,32,150,10 Gigabit,0.439 USD por hora,0.623 USD por hora,0.496 USD por hora,0.499 USD por hora
+z1d.2xlarge,8,4,4,64,300,10 Gigabit,0.879 USD por hora,1.247 USD por hora,1.004 USD por hora,1.009 USD por hora
+z1d.3xlarge,12,6,4,96,450,10 Gigabit,1.318 USD por hora,1.87 USD por hora,1.443 USD por hora,1.448 USD por hora
+z1d.6xlarge,24,12,4,192,900,12 Gigabit,2.636 USD por hora,3.74 USD por hora,2.761 USD por hora,2.766 USD por hora
+z1d.12xlarge,48,24,4,384,1800,25 Gigabit,5.273 USD por hora,7.481 USD por hora,5.398 USD por hora,5.403 USD por hora
+z1d.metal,48,24,4,384,1800,25 Gigabit,5.273 USD por hora,7.481 USD por hora,5.398 USD por hora,5.403 USD por hora

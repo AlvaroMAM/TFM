@@ -34,9 +34,14 @@ behaviour:
   type: object
   description: "Holds the values of behavioural requirements"
   requests:
-    type: integer
-    format: int64
-    description: "Number of requests per minute"
+    number_request:
+      type: integer
+      format: int64
+      description: "Number of requests per minute"
+    maximum_size:
+      type: integer
+      format: int64
+      description: "Maximum size of a request"
   execution_time:
     type: integer
     format: int64
