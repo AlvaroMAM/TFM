@@ -46,7 +46,7 @@ paths:
   /reset:
     get:
       summary: Reset array of temperature.
-      description: Function to empty the array of temperatures
+      description: Function to empty the array of temperatures.
       responses:
         "200":
           description: "OK" 
@@ -70,3 +70,30 @@ paths:
                     type: string
                     description: |
                       An error occured while the reset of the temperature.
+  /sendData:
+    get:
+      summary: Request to send the temperature array.
+      description: Request from aggregator for recieving the temperature array of this service.
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    description: |
+                      Array of temperature.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while sending the temperatures.
