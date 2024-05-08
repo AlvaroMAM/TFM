@@ -2,11 +2,14 @@ spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
   id: quantum-result-processing
   api: ../OAS/quantum_processing.yml
-  mode: classic
+  mode: CPU
   author: SPILab
 minimum_hw_req:
   cpu: 5000
   ram: 6
 behaviour:
-  requests: 5
+  requests:
+    number_request: 5
+    maximum_request_size: 1500
   execution_time: 100
+  availability: 24
