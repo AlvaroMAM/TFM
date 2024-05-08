@@ -25,10 +25,8 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    print("PETITION")
     logging.debug("REQUEST /upload --> STARTS")
     if 'file' not in request.files:
-        print("NOT FILE")
         logging.debug("REQUEST /upload --> NO FILE SELECTED")
         return 'No se ha seleccionado ningún archivo', 400
 
@@ -42,12 +40,8 @@ def upload_file():
     
     if file and file.filename.endswith('.zip'):
         # Guarda el archivo en el servidor temporalmente
-        print("LLEGA ARCHIGO")
         filename = file.filename
-        print(filename)
-        print("LLEGA ARCHIGO")
         file.save(os.getcwd()+"/temp/"+filename)
-        print("GUARDADO")
 
         # Envía el archivo al microservicio
         try:
