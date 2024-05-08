@@ -4,7 +4,6 @@ Tutores: Javier Cámara y Jose Garcia-Alonso
 Máster Universitario en Ingeniería Informátcia
 Universidad de Málaga
 Descripcion:
-
 - Cliente Web --> Proporciona una interfaz gráfica donde subir las especificaciones.
 """
 
