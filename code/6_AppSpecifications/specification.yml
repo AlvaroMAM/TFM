@@ -14,7 +14,6 @@ context:
   author:
     type: string
     description: "Optional field to indicate the creator of the file"
-
 minimum-hw-req:
   type: object
   description: "Holds the minimum hardware requirements needed for a good performance of the microservice"
@@ -38,7 +37,7 @@ behaviour:
       type: integer
       format: int64
       description: "Number of requests per minute"
-    maximum_size:
+    maximum_request_size:
       type: integer
       format: int64
       description: "Maximum size in bytes of a request"
@@ -46,6 +45,10 @@ behaviour:
     type: integer
     format: int64
     description: "Maximun execution time of the classic microservice task"
+  availability:
+    type: integer
+    format: int64
+    description: "Number of online hours per day of the classic microservice"
   shots:
     type: integer
     format: int64
