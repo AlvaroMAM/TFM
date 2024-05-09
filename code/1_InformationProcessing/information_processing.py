@@ -10,7 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request, Response
 from zipfile import ZipFile
 from kafka import KafkaProducer
-from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU
+from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU
 import logging
 import os
 import yaml
@@ -33,7 +33,6 @@ def index():
 # Function to start the process of evaluating the hybrid application. It will produce a message for each consumer (QPU and CPU modules)
 def start_processing():
     logging.debug("REQUEST RECIEVED --> /start")
-    print("REQUEST RECIEVED --> /start")
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
@@ -56,36 +55,35 @@ def start_processing():
             with ZipFile(app_zip_file_path, 'r') as zip: # EXTRACTING FILES FROM RECIEVED ZIP
                 zip.extractall(absolute_path)
                 logging.debug("ZIP FILE UNZIPPED")
-            
             #app_oas_file_directory = extract_path_app+OPEN_API_SPECIFICATION_PATH # DIRECTORY OF OPEN API SPECIFICATIONS FILES
             #app_req_file_directory = app_zip_file_path + "/"+uploaded_file.name + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             app_req_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
+            app_model_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_MODEL_PATH 
             #app_oas_files = os.listdir(app_oas_file_directory)
-            print("LECTURA DIRECTORIO")
             app_req_files = os.listdir(app_req_file_directory)
-            print("DIRECTORIO LEIDO")
-            print(app_req_files)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES
-                print("REQUIREMENTS FILE PROCESSING")
                 logging.debug("REQUEST /start --> OAS FILE PROCESSING INITIALIZED")
                 req_file = os.path.join(app_req_file_directory, req_file_name)
                 if os.path.isfile(req_file):
                     with open(req_file, 'r') as yaml_file: # PROCESSING YAML FILE
-                        print("READING REQ FILE")
                         req_content = yaml.safe_load(yaml_file)
-                        print(req_content)
                         microservice_dict = dict()
                         microservice_dict["id"] = app_req_files.index(req_file_name) # CREATING ID FOR THE MICROSERVICE JSON 
                         if req_content["context"]["mode"]: # READING MICROSERVICE MODE
                             microservice_dict["mode"] = req_content["context"]["mode"]
                         logging.debug("REQUEST /start --> LOADING CLASSICAL REQUIREMENTS OF THE MICROSERVICE")
                         if req_content["behaviour"]["requests"]: # READING REQUIREMENTS ATTRIBUTE
-                            microservice_dict["requests"] = req_content["behaviour"]["requests"]
-                            logging.debug("REQUEST /start --> REQUESTS LOADED")
+                            microservice_dict["number_request"] = req_content["behaviour"]["requests"]["number_request"]
+                            logging.debug("REQUEST /start --> NUMBER OF REQUESTS LOADED")
+                            microservice_dict["maximum_request_size"] = req_content["behaviour"]["requests"]["maximum_request_size"]
+                            logging.debug("REQUEST /start --> SIZE OF REQUESTS LOADED")
                         if req_content["behaviour"]["execution_time"]: # READING EXECUTION TIME ATTRIBUTE
                             microservice_dict["execution_time"] = req_content["behaviour"]["execution_time"]
-                            logging.debug("REQUEST /start --> EXECUTION_TIME LOADED") 
+                            logging.debug("REQUEST /start --> EXECUTION_TIME LOADED")
+                        if req_content["behaviour"]["availability"]: # READING EXECUTION TIME ATTRIBUTE
+                            microservice_dict["availability"] = req_content["behaviour"]["availability"]
+                            logging.debug("REQUEST /start --> AVAILABILITY LOADED")  
                         if req_content["minimum_hw_req"]["cpu"]: # READING CPU ATTRIBUTE
                             microservice_dict["cpu"] = req_content["minimum_hw_req"]["cpu"]
                             logging.debug("REQUEST /start --> CPU LOADED") 
@@ -107,14 +105,16 @@ def start_processing():
                             #ADDING MICROSERVICES TO QUANTUM_JSON
                             qpu_services[req_file_name] = quantum_microservice
                             logging.debug("REQUEST /start --> QPU SERVICES UPDATED")
-            producer.send(TOPIC_QPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
-            print("SENDIGN QUANTUM SERVICES JSON")
+            print("SENDING QUANTUM SERVICES JSON")
             print(qpu_services)
+            producer.send(TOPIC_QPU, qpu_services) # SENDIGN QUANTUM SERVICES JSON
             logging.debug("REQUEST /start --> QUANTUM SERVICES JSON SEND")
-            producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
-            print("SENDIGN CLASSICAL SERVICES JSON")
+            print("SENDING CLASSICAL SERVICES JSON")
             print(cpu_services)
-            logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")         
+            producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
+            logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
+            # SENDING MODEL FILE TO COMBINATIONS GENERATOR
+            # app_model_files = os.listdir(app_model_file_directory)        
             return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
     else:
         logging.debug("REQUEST /start --> FILES NOT RECIEVED")
