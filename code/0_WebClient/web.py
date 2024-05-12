@@ -61,5 +61,5 @@ def upload_file():
 
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/web.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
-    app.run(host="127.0.0.1", port=8585,debug=True)
-
+    #app.run(host="127.0.0.1", port=8585,debug=True)
+    app.run(host="0.0.0.0", port=8585,debug=True)

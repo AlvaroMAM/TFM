@@ -142,5 +142,6 @@ def start_processing():
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/information-processing.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8'))
-    app.run(host="127.0.0.1", port=8586,debug=True)
+    #app.run(host="127.0.0.1", port=8586,debug=True)
+    app.run(host="0.0.0.0", port=8586,debug=True)
     
