@@ -74,7 +74,7 @@ def start_processing():
                             microservice_dict["mode"] = req_content["context"]["mode"]
                         logging.debug("REQUEST /start --> LOADING CLASSICAL REQUIREMENTS OF THE MICROSERVICE")
                         if req_content["behaviour"]["requests"]: # READING REQUIREMENTS ATTRIBUTE
-                            microservice_dict["number_request"] = req_content["behaviour"]["requests"]["number_request"]
+                            microservice_dict["number_requests"] = req_content["behaviour"]["requests"]["number_request"]
                             logging.debug("REQUEST /start --> NUMBER OF REQUESTS LOADED")
                             microservice_dict["maximum_request_size"] = req_content["behaviour"]["requests"]["maximum_request_size"]
                             logging.debug("REQUEST /start --> SIZE OF REQUESTS LOADED")

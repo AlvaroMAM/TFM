@@ -1,0 +1,128 @@
+{
+    "t2.nano" : {
+        "type": "cpu",
+        "virtual_cpu":1,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.4,
+        "ram" : 0.5,
+        "bandwidth" : 1,
+        "prize": 0.0066
+    },
+    "t2.micro" : {
+        "type": "cpu",
+        "virtual_cpu":1,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 0.5,
+        "bandwidth" : 1,
+        "prize": 0.0132
+    },
+    "t2.small" : {
+        "type": "cpu",
+        "virtual_cpu":1,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 0.5,
+        "bandwidth" : 1,
+        "prize": 0.026
+    },
+    "t2.medium" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":2,
+        "ghz_cpu" : 2.3,
+        "ram" : 0.5,
+        "bandwidth" : 1,
+        "prize": 0.052
+    },
+    "t2.large" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":2,
+        "ghz_cpu" : 2.3,
+        "ram" : 16,
+        "bandwidth" : 1,
+        "prize": 0.1056
+    },
+    "t2.xlarge" : {
+        "type": "cpu",
+        "virtual_cpu":4,
+        "cores_cpu":4,
+        "ghz_cpu" : 2.3,
+        "ram" : 32,
+        "bandwidth" : 1,
+        "prize": 0.2112
+    },
+    "t2.2xlarge" : {
+        "type": "cpu",
+        "virtual_cpu":8,
+        "cores_cpu":8,
+        "ghz_cpu" : 2.4,
+        "ram" : 0.5,
+        "bandwidth" : 1,
+        "prize": 0.4224
+    },
+    "t3.nano" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 0.5,
+        "bandwidth" : 5000,
+        "prize": 0.0059
+    },
+    "t3.micro" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 1,
+        "bandwidth" : 5000,
+        "prize": 0.0118
+    },
+    "t3.small" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 2,
+        "bandwidth" : 5000,
+        "prize": 0.0236
+    },
+    "t3.medium" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 4,
+        "bandwidth" : 5000,
+        "prize": 0.0472
+    },
+    "t3.large" : {
+        "type": "cpu",
+        "virtual_cpu":2,
+        "cores_cpu":1,
+        "ghz_cpu" : 2.5,
+        "ram" : 8,
+        "bandwidth" : 5000,
+        "prize": 0.0944
+    },
+    "t3.xlarge" : {
+        "type": "cpu",
+        "virtual_cpu":4,
+        "cores_cpu":2,
+        "ghz_cpu" : 2.5,
+        "ram" : 16,
+        "bandwidth" : 5000,
+        "prize": 0.1888
+    },
+    "t3.2xlarge" : {
+        "type": "cpu",
+        "virtual_cpu":8,
+        "cores_cpu":4,
+        "ghz_cpu" : 2.5,
+        "ram" : 32,
+        "bandwidth" : 5000,
+        "prize": 0.3776
+    }
+}

@@ -37,9 +37,27 @@ app : {
         }
     }
 """
-def is_candidate(machine_information,ms_requests, ms_execution_time, ms_cpu, ms_ram):
-    return machine_information['requests']>= ms_requests and machine_information['ram'] >= ms_execution_time and machine_information['cpu'] >= ms_cpu and machine_information['ram'] >= ms_ram
-def select_cpu (requests, execution_time, cpu, ram):
+# Number of request = Request por minute
+# Maximun request size = Bytes
+# Hacer transformación ms_cpu --> GHz
+def is_candidate(machine_information, ms_logical_performance_cpu, ms_ram, ms_bandwidth):
+    return (float(machine_information['virtual_cpu'])*float(machine_information['cores_cpu'])*float(machine_information['ghz_cpu']))>= ms_logical_performance_cpu \
+            and float(machine_information['ram']) >= float(ms_ram) \
+            and int(machine_information['bandwidth']) >= ms_bandwidth
+
+# Availability = number of hours
+def estimator(machine_information, ms_logical_performance_cpu, ms_ram, ms_bandwidth, execution_time, availability):
+    # Tiempo ejecución anterior * variable de hw minimo / variable hw actual
+    estimated_cost = int(machine_information['cost_per_hour']) * availability
+    # Consideramos que las tres variables afectan por igual al cálculo del tiempo de ejecución
+    estimated_execution_time = (float(execution_time * ms_logical_performance_cpu)/(float(machine_information['virtual_cpu'])*float(machine_information['cores_cpu'])*float(machine_information['ghz_cpu'])) \
+                                + float(execution_time * ms_ram)/float(machine_information['ram']) \
+                                + execution_time * ms_bandwidth/int(machine_information['bandwidth']))/3 
+    
+    return estimated_execution_time, estimated_cost
+
+
+def select_cpu (cpu, ram, number_requests, maximum_request_size, execution_time, availability):
     """
     # Leer archivo con características de las máquinas
     # Iterar por cada máquina, en cada iteración comprobar características si es compatible/candidata
@@ -49,11 +67,15 @@ def select_cpu (requests, execution_time, cpu, ram):
         machine_1 : {
         characteristic_1 : value,
         characteristic_2 : value,
+        execution_time: value,
+        cost : value
         ...
         },
         machine_2 : {
         characteristic_1 : value,
         characteristic_2 : value,
+        execution_time: value,
+        cost : value
         ...
         }
         ...
@@ -72,7 +94,13 @@ def select_cpu (requests, execution_time, cpu, ram):
                 cpu_machines = json.load(f)
             for cpu_machine, data in cpu_machines.items():
                 logging.debug("CPU-SELECTOR : CPU MACHINE" + cpu_machine + "PROCESSING")
-                if is_candidate(data, requests, execution_time, cpu, ram):
+                # Transformation of cpu variable and calculation of bandwidth
+                logical_performance_cpu = cpu / 1_000_000_000 # From Cycles per second to GHz * 1 Core * 1 Virtual CPUs
+                bandwidth = (number_requests * 60 * maximum_request_size * 8 ) / 1_000_000 # From request per minute and max size of request to Mbps
+                if is_candidate(data, logical_performance_cpu, ram, bandwidth):
+                    ms_execution_time, ms_cost =  estimator(data, logical_performance_cpu, ram, bandwidth, execution_time, availability)
+                    data['ms_execution_time'] = ms_execution_time
+                    data['ms_cost'] = ms_cost
                     selected_cpus.append((cpu_machine,data))
                     logging.debug("CPU-SELECTOR : CPU MACHINE" + cpu_machine + "IS CANDIDATE")
             continue
@@ -92,6 +120,6 @@ if __name__ == '__main__':
 
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
-            app_cpu_machines[microservice_name] = select_cpu(requirements['requests'], requirements['execution_time'], requirements['cpu'], requirements['ram']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            app_cpu_machines[microservice_name] = select_cpu( requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         """
