@@ -48,7 +48,7 @@ def is_candidate(machine_information, ms_logical_performance_cpu, ms_ram, ms_ban
 # Availability = number of hours
 def estimator(machine_information, ms_logical_performance_cpu, ms_ram, ms_bandwidth, execution_time, availability):
     # Tiempo ejecución anterior * variable de hw minimo / variable hw actual
-    estimated_cost = int(machine_information['cost_per_hour']) * availability
+    estimated_cost = int(machine_information['prize']) * availability
     # Consideramos que las tres variables afectan por igual al cálculo del tiempo de ejecución
     estimated_execution_time = (float(execution_time * ms_logical_performance_cpu)/(float(machine_information['virtual_cpu'])*float(machine_information['cores_cpu'])*float(machine_information['ghz_cpu'])) \
                                 + float(execution_time * ms_ram)/float(machine_information['ram']) \
