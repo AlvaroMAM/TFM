@@ -122,6 +122,7 @@ if __name__ == '__main__':
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
             print_variable = select_cpu( requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            print(print_variable)
             app_cpu_machines[microservice_name] = print_variable
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         
