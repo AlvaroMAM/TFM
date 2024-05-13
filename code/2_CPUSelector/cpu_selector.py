@@ -118,9 +118,10 @@ if __name__ == '__main__':
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         print(microservices)
-        """
+        
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
-            app_cpu_machines[microservice_name] = select_cpu( requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            print_variable = select_cpu( requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            app_cpu_machines[microservice_name] = print_variable
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
-        """
+        
