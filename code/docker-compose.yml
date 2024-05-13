@@ -16,22 +16,3 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-
-
-  web-client:
-    image: web-client-img:latest
-    container_name: web-client
-    ports:
-      - "8585:8585"
-
-  information-processing:
-    image: information-processing-img:latest
-    container_name: information-processing
-    ports:
-      - "8586:8586"
-    depends_on:
-      - kafka
-
-networks:
-  default:
-    name: sed_env
