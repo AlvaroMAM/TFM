@@ -6,6 +6,9 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+    networks:
+      - sed_network
+
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
@@ -14,3 +17,27 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - sed_network
+
+  web-client:
+    image: web-client-img:latest
+    container_name: web-client
+    ports:
+      - "8585:8585"
+    networks:
+      - sed_network
+
+  information-processing:
+    image: information-processing-img:latest
+    container_name: information-processing
+    ports:
+      - "8586:8586"
+    networks:
+      - sed_network
+    depends_on:
+      - kafka
+
+networks:
+  sed_network:
+    driver: bridge
