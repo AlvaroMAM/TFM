@@ -102,7 +102,7 @@ def select_cpu (cpu, ram, number_requests, maximum_request_size, execution_time,
                     cpu_machine_estimation = dict()
                     cpu_machine_estimation['ms_execution_time'] = ms_execution_time
                     cpu_machine_estimation['ms_cost'] = ms_cost
-                    selected_cpus.append((cpu_machine,data))
+                    selected_cpus.append((cpu_machine,cpu_machine_estimation))
                     logging.debug("CPU-SELECTOR : CPU MACHINE" + cpu_machine + "IS CANDIDATE")
             continue
     return selected_cpus
@@ -119,12 +119,10 @@ if __name__ == '__main__':
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         print(microservices)
-        
+        print("")
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
-            print_variable = select_cpu(requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
-            #print(print_variable)
-            app_cpu_machines[microservice_name] = print_variable
+            app_cpu_machines[microservice_name] = select_cpu(requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         print(app_cpu_machines)
         
