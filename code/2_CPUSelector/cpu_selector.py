@@ -61,7 +61,7 @@ def select_cpu (cpu, ram, number_requests, maximum_request_size, execution_time,
     """
     # Leer archivo con características de las máquinas
     # Iterar por cada máquina, en cada iteración comprobar características si es compatible/candidata
-    # Si lo es, añadir diccionario a lista
+    # Si lo es, calcular estimación de costo y rendimiento y añadir diccionario a lista
     RETURN FORMAT 
     selected_cpus = [
         machine_1 : {
