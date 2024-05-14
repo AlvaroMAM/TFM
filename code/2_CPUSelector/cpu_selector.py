@@ -48,7 +48,7 @@ def is_candidate(machine_information, ms_logical_performance_cpu, ms_ram, ms_ban
 # Availability = number of hours
 def estimator(machine_information, ms_logical_performance_cpu, ms_ram, ms_bandwidth, execution_time, availability):
     # Tiempo ejecución anterior * variable de hw minimo / variable hw actual
-    estimated_cost = int(machine_information['prize']) * availability
+    estimated_cost = float(machine_information['prize']) * availability
     # Consideramos que las tres variables afectan por igual al cálculo del tiempo de ejecución
     estimated_execution_time = (float(execution_time * ms_logical_performance_cpu)/(float(machine_information['virtual_cpu'])*float(machine_information['cores_cpu'])*float(machine_information['ghz_cpu'])) \
                                 + float(execution_time * ms_ram)/float(machine_information['ram']) \
@@ -99,8 +99,9 @@ def select_cpu (cpu, ram, number_requests, maximum_request_size, execution_time,
                 bandwidth = (number_requests * 60 * maximum_request_size * 8 ) / 1_000_000 # From request per minute and max size of request to Mbps
                 if is_candidate(data, logical_performance_cpu, ram, bandwidth):
                     ms_execution_time, ms_cost =  estimator(data, logical_performance_cpu, ram, bandwidth, execution_time, availability)
-                    data['ms_execution_time'] = ms_execution_time
-                    data['ms_cost'] = ms_cost
+                    cpu_machine_estimation = dict()
+                    cpu_machine_estimation['ms_execution_time'] = ms_execution_time
+                    cpu_machine_estimation['ms_cost'] = ms_cost
                     selected_cpus.append((cpu_machine,data))
                     logging.debug("CPU-SELECTOR : CPU MACHINE" + cpu_machine + "IS CANDIDATE")
             continue
@@ -121,8 +122,9 @@ if __name__ == '__main__':
         
         for microservice_name, requirements in microservices.items():
             logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
-            print_variable = select_cpu( requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
-            print(print_variable)
+            print_variable = select_cpu(requirements['cpu'], requirements['ram'], requirements['number_requests'], requirements['maximum_request_size'], requirements['execution_time'], requirements['availability']) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            #print(print_variable)
             app_cpu_machines[microservice_name] = print_variable
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
+        print(app_cpu_machines)
         
