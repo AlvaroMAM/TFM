@@ -33,6 +33,9 @@ def is_candidate(machine_information, ms_qubits, ms_shots):
     machine_information['shots_range']['minimum'] <= ms_shots and \
     machine_information['shots_range']['maximum'] >= ms_shots
 
+def estimator(machine_information, ms_shots):
+    return float(machine_information['device_cost']['price']) * ms_shots
+
 def select_qpu(qubits, shots):
     """
     RETURN FORMAT 
@@ -64,6 +67,9 @@ def select_qpu(qubits, shots):
             for qpu_machine, data in qpu_machines.items():
                 logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "PROCESSING")
                 if is_candidate(data, qubits, shots):
+                    ms_cost = estimator(data, shots)
+                    qpu_machine_estimation = dict()
+                    qpu_machine_estimation['ms_cost'] = ms_cost
                     selected_qpus.append((qpu_machine,data))
                     logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "IS CANDIDATE")
     return selected_qpus
