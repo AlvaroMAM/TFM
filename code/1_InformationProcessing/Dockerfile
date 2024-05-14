@@ -11,6 +11,8 @@ WORKDIR /app
 
 COPY . .
 
+RUN mkdir temp
+
 RUN pip3 install -r requirements.txt
 
 
