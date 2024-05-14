@@ -28,8 +28,10 @@ app : {
 
 """
 
-def is_candidate(machine_information, ms_qubits, ms_shots):
-    return machine_information['qubits']>= ms_qubits and machine_information['shots'] >= ms_shots
+def is_candidate(machine_information, ms_qubits, ms_shots): 
+    return machine_information['qubits']>= ms_qubits and \
+    machine_information['shots_range']['minimum'] <= ms_shots and \
+    machine_information['shots_range']['maximum'] >= ms_shots
 
 def select_qpu(qubits, shots):
     """
