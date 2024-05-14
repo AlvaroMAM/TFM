@@ -33,11 +33,11 @@ services:
     depends_on:
       - kafka
   cpu_selector:
-    image: cpu-selector:latest
+    image: cpuselector-img:latest
     depends_on:
       - kafka
   qpu_selector:
-    image: qpu-selector:latest
+    image: qpuselector-img:latest
     depends_on:
     - kafka
 
