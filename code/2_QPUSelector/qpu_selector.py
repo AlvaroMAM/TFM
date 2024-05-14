@@ -74,11 +74,11 @@ if __name__ == '__main__':
     print("QPU INIT")
     for message in consumer:
         print("QPU RECIEVED")
-        """logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
+        logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
 
         for microservice_name, requirements in microservices.items():
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE" + microservice_name)
             app_qpu_machines[microservice_name] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
             logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
-        """
+        print(app_qpu_machines)
