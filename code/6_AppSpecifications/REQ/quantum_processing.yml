@@ -5,11 +5,11 @@ context:
   mode: CPU
   author: SPILab
 minimum_hw_req:
-  cpu: 5000
+  cpu: 10000
   ram: 6
 behaviour:
   requests:
     number_request: 5
-    maximum_request_size: 1500
+    maximum_request_size: 25000
   execution_time: 100
   availability: 24

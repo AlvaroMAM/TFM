@@ -10,6 +10,6 @@ minimum_hw_req:
 behaviour:
   requests:
     number_request: 50
-    maximum_request_size: 1500
+    maximum_request_size: 10000
   execution_time: 1
   availability: 24

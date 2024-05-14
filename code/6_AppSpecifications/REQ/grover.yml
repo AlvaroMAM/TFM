@@ -11,7 +11,7 @@ minimum_hw_req:
 behaviour:
   requests:
     number_request: 5
-    maximum_request_size: 1500
+    maximum_request_size: 25000
   execution_time: 10 # Tomar como referencia el tiempo que tarda desde que recibe la petición hasta que 
   availability: 24 # 24 horas porque el servicio clásico estará disponible las 24 horas e irá encolando las tareas en el computador cuántico
   shots: 1000
