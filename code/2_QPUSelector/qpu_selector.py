@@ -70,7 +70,7 @@ def select_qpu(qubits, shots):
                     ms_cost = estimator(data, shots)
                     qpu_machine_estimation = dict()
                     qpu_machine_estimation['ms_cost'] = ms_cost
-                    selected_qpus.append((qpu_machine,data))
+                    selected_qpus.append((qpu_machine,qpu_machine_estimation))
                     logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "IS CANDIDATE")
     return selected_qpus
 
@@ -79,9 +79,9 @@ if __name__ == '__main__':
     consumer = KafkaConsumer(TOPIC_QPU, bootstrap_servers=[KAFKA_SERVER_URL]) # CREATING KAFKA CONSUMER
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
-    print("QPU INIT")
+    print("QPU SELECTOR STARTED")
     for message in consumer:
-        print("QPU RECIEVED")
+        print("MICROSERVICES RECIEVED")
         logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
 

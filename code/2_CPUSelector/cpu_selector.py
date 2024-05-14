@@ -112,10 +112,9 @@ if __name__ == '__main__':
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
     logging.basicConfig(filename='cpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_cpu_machines = dict()
-    print("CPU INIT")
+    print("CPU SELECTOR STARTED")
     for message in consumer:
-        print("CPU RECIEVED")
-        
+        print("MICROSERVICES RECIEVED")
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         print(microservices)
