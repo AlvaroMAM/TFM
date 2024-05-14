@@ -11,7 +11,7 @@ from flask import Flask, render_template, request
 import requests
 import os
 import logging
-
+from config.config import INFORMATION_PROCESSING_URL
 
 
 app = Flask(__name__)
@@ -45,7 +45,7 @@ def upload_file():
 
         # Envía el archivo al microservicio
         try:
-            url = 'http://127.0.0.1:8586/start'
+            url = INFORMATION_PROCESSING_URL
             files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
             response = requests.post(url, files=files)
             if response.status_code == 200:
