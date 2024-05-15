@@ -15,15 +15,12 @@ Local
 }
 
 sig QPU_Machine {
-	computing_mode: one QPU
+	computing_mode: one QPU,
 	instance: one QPU_Types
 }
 
 // Defining CPUs
-sig CPU_Machine {
-	computing_mode: one CPU
-	instance: one CPU_Types
-}
+sig CPU{}
 enum CPU_Types {
 T2_nano,
 T2_micro, 
@@ -38,9 +35,12 @@ T3_small,
 T3_medium, 
 T3_large,
 T3_xlarge,
-T3_2xlarge,
+T3_2xlarge
 }
-
+sig CPU_Machine {
+	computing_mode: one CPU,
+	instance: one CPU_Types
+}
 
 // Defining Services Types
 sig Classical_Service {
@@ -78,8 +78,6 @@ fact {
 // Para todo despliegue se debe cumplir que el número de instancias de máquinas CPU debe ser igual a la suma de la totalidad de servicios que componen el despliegue 
 //all d: Deployment | (#d.processing_service + #d.grover + #d.aggregator + #d.sensor_services) = 
 
-
-
 // Restricciones documento
 // Servicios Clásicos no pueden Relacionarse con Servicios Cuánticos
 // Un servicio clásico, no puede estar alojado en una misma instancia de máquina clásica que otro servicio clásico (No co-alojados)
@@ -103,8 +101,12 @@ all d: Hybrid_Deployment | one d.processing_service and one d.grover and one d.a
 
 }
 
-pred show {
+pred show {}
 
-}
+//pred Hybrid_Deployment_Pred {#Sensor_Service > 3 and #Aggregator_Service > 1 and #Grover >1 and #Quantum_Processing_Service > 1}
 
-run show for 6 but 1 CPU, 1 QPU, 1 Hybrid_Deployment
+//pred Classical_Deployment_Pred {#Sensor_Service=3 and #Aggregator_Service=1 and #Grover = 1 and #Quantum_Processing_Service = 1}
+
+//run Hybrid_Deployment_Pred for 5
+run show for 5
+
