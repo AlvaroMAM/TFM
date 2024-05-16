@@ -1,42 +1,44 @@
-enum QPU_Types {
-Aquila,
-Aria_1,
-Aria_2, 
-Aspen_m_3, 
-Forte_1,
-Harmony, 
-Lucy,
-Dm1,
-Sv1,
-Tn1,
-Local
-}
-
-sig QPU_Machine {
-	instance: one QPU_Types
-}
-
+abstract sig PU {services : set Service}
+// Las máquinas deben de estar relacionadas con servicios 
+abstract sig QPU extends PU {}
+abstract sig CPU extends PU {}
 /*
-// Defining CPUs
-sig CPU_Machine {
-	computing_mode: CPU
-}
-sig T2_nano extends CPU_Machine{}
-sig T2_micro extends CPU_Machine{}
-sig T2_small extends CPU_Machine{}
-sig T2_medium extends CPU_Machine{}
-sig T2_large extends CPU_Machine{}
-sig T2_xlarge extends CPU_Machine{}
-sig T2_2xlarge extends CPU_Machine{}
-sig T3_nano extends CPU_Machine{}
-sig T3_micro extends CPU_Machine{}
-sig T3_small extends CPU_Machine{}
-sig T3_medium extends CPU_Machine{}
-sig T3_large extends CPU_Machine{}
-sig T3_xlarge extends CPU_Machine{}
-sig T3_2xlarge extends CPU_Machine{}
+lone abstract sig Aquila extends QPU {}
+lone abstract sig Aria_1 extends QPU {}
+lone abstract sig Aria_2 extends QPU {}
+lone abstract sig Aspen_m_3 extends QPU {}
+lone abstract sig Forte_1 extends QPU {}
+lone abstract sig Harmony extends QPU {}
 */
+lone abstract sig Lucy extends QPU {}
+lone abstract sig Dm1 extends QPU {}
+lone abstract sig Sv1 extends QPU {}
+lone abstract sig Tn1 extends QPU {}
+lone abstract sig Local extends QPU {}
+
+lone abstract sig T2_nano extends CPU {}
+lone abstract sig T2_micro extends CPU {}
+lone abstract sig T2_small extends CPU {}
+lone abstract sig T2_medium extends CPU {}
+lone abstract sig T2_large extends CPU {}
+lone abstract sig T2_xlarge extends CPU {}
+lone abstract sig T2_2xlarge extends CPU {}
+lone abstract sig T3_nano extends CPU {}
+lone abstract sig T3_micro extends CPU {}
+lone abstract sig T3_small extends CPU {}
+lone abstract sig T3_medium extends CPU {}
+lone abstract sig T3_large extends CPU {}
+lone abstract sig T3_xlarge extends CPU {}
+lone abstract sig T3_2xlarge extends CPU {}
+abstract sig Service {machines : some PU}
 
 pred show {}
 
-run show for  25
+run show for 2
+
+
+
+
+
+
+
