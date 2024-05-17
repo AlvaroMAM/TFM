@@ -122,7 +122,7 @@ all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.servic
 // Design Restrictions
 
 // Todo despliegue debe de estar compuesto por un procesamiento, un grover, un aggregador y 3 servicios de sensores (No se si es redundante con la de arriba)
-//all d: Hybrid_Deployment | #d.processing_service = 1 and  #d.grover = 1 and #d.aggregator=1 and #d.sensor_services = 3 
+//all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.services & Quantum_Service) = 1  
  
 
 // Los servicios de datos de sensores solo están conectados con el servicio agregador.
