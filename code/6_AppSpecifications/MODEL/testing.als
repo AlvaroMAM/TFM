@@ -1,41 +1,26 @@
-abstract sig PU {services : set Service}
-// Las máquinas deben de estar relacionadas con servicios 
-abstract sig QPU extends PU {}
-abstract sig CPU extends PU {}
+
+sig Sensor_Service extends Classical_Service{ deployment: one Deployment}
+sig Aggregator_Service extends Classical_Service{}
+sig Grover_Service extends Hybrid_Service {}
+sig Binary_Search_Service  extends Classical_Service{}
+sig Processing_Service extends Classical_Service {}
+
+
+//Defining Deployments for Study Case
+/*sig Hybrid_Deployment {
+	sensor_services : some Sensor_Service,
+	aggregator : one Aggregator_Service,
+	grover : one Grover,
+	processing_service: one Processing_Service
+}
 /*
-lone abstract sig Aquila extends QPU {}
-lone abstract sig Aria_1 extends QPU {}
-lone abstract sig Aria_2 extends QPU {}
-lone abstract sig Aspen_m_3 extends QPU {}
-lone abstract sig Forte_1 extends QPU {}
-lone abstract sig Harmony extends QPU {}
+sig Classical_Deployment {
+	sensor_services : some Sensor_Service,
+	aggregator : one Aggregator_Service,
+	binary_search : one Binary_Search_Service,
+	processing_service: one Processing_Service
+}
 */
-lone abstract sig Lucy extends QPU {}
-lone abstract sig Dm1 extends QPU {}
-lone abstract sig Sv1 extends QPU {}
-lone abstract sig Tn1 extends QPU {}
-lone abstract sig Local extends QPU {}
-
-lone abstract sig T2_nano extends CPU {}
-lone abstract sig T2_micro extends CPU {}
-lone abstract sig T2_small extends CPU {}
-lone abstract sig T2_medium extends CPU {}
-lone abstract sig T2_large extends CPU {}
-lone abstract sig T2_xlarge extends CPU {}
-lone abstract sig T2_2xlarge extends CPU {}
-lone abstract sig T3_nano extends CPU {}
-lone abstract sig T3_micro extends CPU {}
-lone abstract sig T3_small extends CPU {}
-lone abstract sig T3_medium extends CPU {}
-lone abstract sig T3_large extends CPU {}
-lone abstract sig T3_xlarge extends CPU {}
-lone abstract sig T3_2xlarge extends CPU {}
-abstract sig Service {machines : some PU}
-
-pred show {}
-
-run show for 2
-
 
 
 
