@@ -14,10 +14,10 @@ lone abstract sig Forte_1 extends QPU {}
 lone abstract sig Harmony extends QPU {}
 lone abstract sig Lucy extends QPU {}
 */
-lone abstract sig Dm1 extends QPU {}
-lone abstract sig Sv1 extends QPU {}
-lone abstract sig Tn1 extends QPU {}
-lone abstract sig Local extends QPU {}
+//sig Dm1 extends QPU {}
+//sig Sv1 extends QPU {}
+sig Tn1 extends QPU {}
+sig Local extends QPU {}
 
 /* Definition of CPU Machines */
 /*
@@ -32,10 +32,10 @@ lone abstract sig T3_nano extends CPU {}
 lone abstract sig T3_micro extends CPU {}
 lone abstract sig T3_small extends CPU {}
 */
-lone abstract sig T3_medium extends CPU {}
-lone abstract sig T3_large extends CPU {}
-lone abstract sig T3_xlarge extends CPU {}
-lone abstract sig T3_2xlarge extends CPU {}
+//lone abstract sig T3_medium extends CPU {}
+//lone abstract sig T3_large extends CPU {}
+sig T3_xlarge extends CPU {}
+sig T3_2xlarge extends CPU {}
 
 /* Definition of Services */
 abstract sig Service {
@@ -86,6 +86,8 @@ all qs: Quantum_Service | #qs.machines > 0
 //all qs: Quantum_Service | #(qs.deployment & Classical_Deployment) = 0
 // Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
 all q: QPU | #(q.services & Classical_Service) = 0
+// Toda máquina cuántica debe tener un servicio asociado
+all qs: Quantum_Service, q: QPU | qs.machines = q implies qs in q.services
 // Todo servicio cuántico debe tener un servicio clásico asociado
 all qs: Quantum_Service | #(qs.hybrid_service) = 1  and #(qs.hybrid_service & Quantum_Service) = 0
 
@@ -121,8 +123,7 @@ all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.servic
 //all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
 // Design Restrictions
 
-// Todo despliegue debe de estar compuesto por un procesamiento, un grover, un aggregador y 3 servicios de sensores (No se si es redundante con la de arriba)
-//all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.services & Quantum_Service) = 1  
+
  
 
 // Los servicios de datos de sensores solo están conectados con el servicio agregador.
@@ -132,9 +133,12 @@ all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.servic
 }
 
 pred show {
+// Todo despliegue híbrido debe de contar con 6 servicios clásicos y 1 servicio cuántico
+all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.services & Quantum_Service) = 1  
+// Todo despliegue debe de estar compuesto por un procesamiento, un grover, un aggregador y 3 servicios de sensores (No se si es redundante con la de arriba)
 //all d: Hybrid_Deployment |  #d.sensor_services = 3 and #d.grover = 1  and #d.processing_service = 1 and #d.aggregator = 1
 }
-run show for 25 but exactly 1 Hybrid_Deployment
+run show for 25
 
 
 
