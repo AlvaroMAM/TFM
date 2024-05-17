@@ -138,4 +138,4 @@ all cd: Classical_Deployment | #cd.hybrid_services = 0
 pred show {
 //all d: Hybrid_Deployment |  #d.sensor_services = 3 and #d.grover = 1  and #d.processing_service = 1 and #d.aggregator = 1
 }
-run show for 5 but 1 Hybrid_Deployment, 7 Service
+run show for 25 but 1 Hybrid_Deployment, 7 Service
