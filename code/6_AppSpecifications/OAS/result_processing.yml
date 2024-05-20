@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: Quantum processing microservice
+  title: Result processing microservice
   description: |
-    This is a description of a service that is in charge of recieving the results of Grover algorithim.
+    This is a description of a service that is in charge of recieving the results of Grover or Binary search algorithim.
   # Extension for requirements
   x-req:
-    $ref: ../REQ/quantum_processing.yml
+    $ref: ../REQ/result_processing.yml
   version: 1.0.0
 servers:
 - url:
@@ -39,7 +39,7 @@ paths:
                       type: string
                       description: |
                         An error ocurred.
-  /processing/{result}:
+  /groverprocessing/{result}:
     get:
       summary: Processing quantum result
       description: Process the quantum result of Grover algorithim.
@@ -70,6 +70,46 @@ paths:
     - name: result
       in: paths
       description: Result of the quantum algorithm.
+      required: true
+      schema:
+        type: object
+        properties:
+          state:
+            type: string
+          percentage:
+            type: integer
+      style: simple    
+  /binaryprocessing/{result}:
+    get:
+      summary: Processing binary search result
+      description: Process the result of Binary Search algorithim.
+      responses:
+        "200":
+          description: "OK" 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      Process completed.
+        default:
+          description: error produced.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: |
+                      An error occured while launching the analysis.
+    parameters:
+    - name: result
+      in: paths
+      description: Result of the binary search algorithm.
       required: true
       schema:
         type: object

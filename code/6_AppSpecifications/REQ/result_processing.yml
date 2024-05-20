@@ -1,7 +1,7 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: quantum-result-processing
-  api: ../OAS/quantum_processing.yml
+  id: result-processing
+  api: ../OAS/result_processing.yml
   mode: CPU
   author: SPILab
 minimum_hw_req:
