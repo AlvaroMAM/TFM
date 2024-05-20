@@ -69,7 +69,10 @@ def start_processing():
                     with open(req_file, 'r') as yaml_file: # PROCESSING YAML FILE
                         req_content = yaml.safe_load(yaml_file)
                         microservice_dict = dict()
-                        microservice_dict["id"] = app_req_files.index(req_file_name) # CREATING ID FOR THE MICROSERVICE JSON 
+                        microservice_dict["id"] = app_req_files.index(req_file_name) # CREATING ID FOR THE MICROSERVICE JSON
+                        if req_content["context"]["mode"]: # READING MICROSERVICE ID
+                            microservice_name = req_content["context"]["id"]
+                        logging.debug("REQUEST /start --> LOADING CLASSICAL REQUIREMENTS OF THE MICROSERVICE")
                         if req_content["context"]["mode"]: # READING MICROSERVICE MODE
                             microservice_dict["mode"] = req_content["context"]["mode"]
                         logging.debug("REQUEST /start --> LOADING CLASSICAL REQUIREMENTS OF THE MICROSERVICE")
@@ -90,7 +93,7 @@ def start_processing():
                         if req_content["minimum_hw_req"]["ram"]: # READING RAM ATTRIBUTE
                             microservice_dict["ram"] = req_content["minimum_hw_req"]["ram"]
                             logging.debug("REQUEST /start --> RAM LOADED")
-                        cpu_services[req_file_name] = microservice_dict
+                        cpu_services[microservice_name] = microservice_dict
                         logging.debug("REQUEST /start --> CPU SERVICES UPDATED") 
                         if microservice_dict["mode"] == MICROSERVICE_QUANTUM_MODE: # LOADING QUANTUM REQUIREMENTS OF THE MICROSERVICE
                             logging.debug("REQUEST /start --> LOADING QUANTUM REQUIREMENTS OF THE MICROSERVICE")
@@ -103,7 +106,7 @@ def start_processing():
                                 quantum_microservice["shots"] = req_content["behaviour"]["shots"]
                                 logging.debug("REQUEST /start --> SHOTS LOADED")
                             #ADDING MICROSERVICES TO QUANTUM_JSON
-                            qpu_services[req_file_name] = quantum_microservice
+                            qpu_services[microservice_name] = quantum_microservice
                             logging.debug("REQUEST /start --> QPU SERVICES UPDATED")
             print("SENDING QUANTUM SERVICES JSON")
             print(qpu_services)
