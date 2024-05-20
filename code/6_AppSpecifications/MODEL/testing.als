@@ -136,7 +136,20 @@ pred show {
 }
 run show for 25
 
+// Un servicio híbrido, no puede estar alojado en la misma instancia de máquina clásica que un servicio híbrido
+//all  s1, s2: Service | s1 != s2 implies #(s1.hybrid_service.machines & s2.hybrid_service.machines) = 0
+// Un servicio híbrido sí puede compartir instancia de máquina cuántica con otro servicio. (Ya se cumple, no se tiene que poner)
+// Un servicio híbrido, tiene que tener una instancia de máquina clásica y máquina cuántica asociadas. (Se cumple por el one en los atributos de la signatura)
+// Para todo despliegue que tenga servicio grover, debe de tener asociado 1 máquina cuántica y una máquina clásica (Se cumple por el one de los atributos de la signatura)
+// Creo que al definir lo de one en servicios híbridos, ya se cumple
+// Un servicio híbrido no puede estar relacionado con más de una máquina cuántica.
+//all hs: Hybrid_Service | #hs.quantum_service.machines < 2
+//Todo servicio híbrido tiene que estar asociado a un servicio cuántico
+//all s: Service | #(s.hybrid_service) = 1 implies s in Quantum_Service.hybrid_service
 
+// Para 2 servicios híbridos diferentes, sus servicios cuánticos, deben de ser diferentes
+//all qs1, qs2: Quantum_Service | qs1 != qs2 and #(qs1.hybrid_service) = 1 and #(qs2.hybrid_service) = 1 implies #(qs1.hybrid_service & qs2.hybrid_service) = 0
+//all hs1, hs2: Hybrid_Service | hs1 != hs2 implies #(hs1.quantum_service & hs2.quantum_service) = 0 and #(hs1.classical_service & hs2.classical_service) = 0
 
 
 

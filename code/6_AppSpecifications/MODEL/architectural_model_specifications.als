@@ -1,5 +1,13 @@
-abstract sig PU {services : some Service}
+/*
+	Alumno: Álvaro Manuel Aparicio Morales
+	Tutores: Javier Cámara y Jose Garcia-Alonso
+	Máster Universitario en Ingeniería Informática
+	Universidad de Málaga
+	Descripcion:
+	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
+*/
 // Las máquinas deben de estar relacionadas con servicios 
+abstract sig PU {services : some Service}
 abstract sig QPU extends PU {}
 abstract sig CPU extends PU {}
 
@@ -42,30 +50,40 @@ abstract sig Service {
 	machines : some PU,
 	deployment : one Deployment,
 	hybrid_service: set Service, // Simular el concepto de hybrid_service
-//	link: some Service
+//	link: some Service // Comunicación entre servicios del caso de uso
 }
 abstract sig Classical_Service extends Service {}
 abstract sig Quantum_Service extends Service {}
+/*Definition of Deployment*/
 abstract sig Deployment {services: some Service}
 sig Hybrid_Deployment extends Deployment {}
 //abstract sig Classical_Deployment extends Deployment {}
 
-
 fact {
 /*-------------------------------------------- Architectural-Restrictions ------------------------------------------------------*/
-all pu: PU | #pu.services > 0
-all pu: PU, s: Service | s in pu.services implies s.machines = pu
-//all pu: PU, s: Service | (s in pu.services) and (pu in s.machines)
-// Servicios Clásicos no pueden Relacionarse con Servicios Cuánticos (Creo que ya se cumple)
 
+/*-------------------------------------------- Machines- Restrictions------------------------------------------------------*/
+// Toda máquina debe estar asociada a algún servicio
+all pu: PU | #pu.services > 0
+// Si un servicio está desplegado en una máquina, entonces esa máquina solo puede estar relacionada con ese servicio
+all pu: PU, s: Service | s in pu.services implies s.machines = pu
+// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
+all c: CPU | #(c.services & Quantum_Service) = 0
+// Todos los servicios deben de estar asociados a un despliege
+// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
+all q: QPU | #(q.services & Classical_Service) = 0
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------- Services- Restrictions------------------------------------------------------*/
 //all s: Service | #(s.deployment) = 1 // Ya se cumple
 all s: Service | #(s.deployment & Hybrid_Deployment) = 0 implies #(s.hybrid_service) = 0
+// Todo servicio tiene que estar asociado a un despliegue. Aquí se define para ambos lados, desde servicios y desde despliegue
 all s: Service, d: Deployment | (s in d.services implies d in s.deployment) and (s.deployment = d implies s in d.services)
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
 /*------------------------------------------- Classical-Restrictions-------------------------------------------------- */
 // Un servicio clásico, no puede relacionarse con una máquina cuántica
 all cs: Classical_Service | #(cs.machines & QPU) = 0
-// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
-all c: CPU | #(c.services & Quantum_Service) = 0
 // Un servicio clásico, no puede estar alojado en una misma instancia de máquina clásica que otro servicio clásico (No co-alojados)
 all cs1, cs2 : Classical_Service | cs1 != cs2 implies #(cs1.machines & cs2.machines) = 0
 // Un servicio clásico, no puede estar alojado en la misma instancia de máquina clásica que un servicio híbrido (Se cumple con la anterior)
@@ -84,8 +102,6 @@ all qs: Quantum_Service | #qs.machines < 2
 all qs: Quantum_Service | #qs.machines > 0
 // Un servicio cuántico, no puede estar en un despliegue clásico
 //all qs: Quantum_Service | #(qs.deployment & Classical_Deployment) = 0
-// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
-all q: QPU | #(q.services & Classical_Service) = 0
 // Toda máquina cuántica debe tener un servicio asociado
 all qs: Quantum_Service, q: QPU | qs.machines = q implies qs in q.services
 // Todo servicio cuántico debe tener un servicio clásico asociado
@@ -94,42 +110,29 @@ all qs: Quantum_Service | #(qs.hybrid_service) = 1  and #(qs.hybrid_service & Qu
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------Hybrid-Services-Restrictions----------------------------------------------------------*/
-// Un servicio híbrido, no puede estar alojado en la misma instancia de máquina clásica que un servicio híbrido
-//all  s1, s2: Service | s1 != s2 implies #(s1.hybrid_service.machines & s2.hybrid_service.machines) = 0
-// Un servicio híbrido sí puede compartir instancia de máquina cuántica con otro servicio. (Ya se cumple, no se tiene que poner)
-// Un servicio híbrido, tiene que tener una instancia de máquina clásica y máquina cuántica asociadas. (Se cumple por el one en los atributos de la signatura)
-// Para todo despliegue que tenga servicio grover, debe de tener asociado 1 máquina cuántica y una máquina clásica (Se cumple por el one de los atributos de la signatura)
-// Creo que al definir lo de one en servicios híbridos, ya se cumple
-// Un servicio híbrido no puede estar relacionado con más de una máquina cuántica.
-//all hs: Hybrid_Service | #hs.quantum_service.machines < 2
-//Todo servicio híbrido tiene que estar asociado a un servicio cuántico
-//all s: Service | #(s.hybrid_service) = 1 implies s in Quantum_Service.hybrid_service
-// Todo servicio híbrido tiene que estar asociado a un servicio clásico 
+// Todo servicio cuántico tiene que estar asociado a un servicio clásico 
 all qs: Quantum_Service | qs in Classical_Service.hybrid_service
-// Para todos los servicios híbridos, el despliegue de los servicios clásico y cuantico debe ser el mismo
+// Para todos los servicios clásicos y cuánticos que conforman un servicio híbrido, deben pertenecer al mismo despliegue
 all s1, s2: Service | s1 !=s2 and s1 in s2.hybrid_service and s2 in s1.hybrid_service implies s1.deployment = s2.deployment
+// Un servicio cuántico no puede compartir el servicio clásico con el que está asociado
 all qs1, qs2: Quantum_Service | qs1 != qs2 and #(qs1.hybrid_service) = 1 and #(qs2.hybrid_service) = 1 implies #(qs1.hybrid_service & qs2.hybrid_service) = 0
-// Para 2 servicios híbridos diferentes, sus servicios cuánticos, deben de ser diferentes
-all qs1, qs2: Quantum_Service | qs1 != qs2 and #(qs1.hybrid_service) = 1 and #(qs2.hybrid_service) = 1 implies #(qs1.hybrid_service & qs2.hybrid_service) = 0
-//all hs1, hs2: Hybrid_Service | hs1 != hs2 implies #(hs1.quantum_service & hs2.quantum_service) = 0 and #(hs1.classical_service & hs2.classical_service) = 0
+// El servicio cuántico y clásico que conformen un servicio híbrido, solo pueden estar relacionado entre ellos
+all qs:Quantum_Service, cs: Classical_Service | (cs in qs.hybrid_service implies qs in cs.hybrid_service) and (qs in cs.hybrid_service implies cs in qs.hybrid_service)
+// Dos servicios clásicos no pueden formar un servicio híbrido. Un servicio consigo mismo tampoco puede formar un servicio híbrido
+all cs1, cs2: Classical_Service, hd: Hybrid_Deployment | (cs1 in hd.services and cs2 in hd.services) implies not (cs1 in cs2.hybrid_service) and not ( cs2 in cs2.hybrid_service)
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------Deployment-Restrictions-------------------------------------------------*/
 // Todos los servicios deben de pertenecer a un despliegue (Se cumple con el one en Deployment)
-all qs:Quantum_Service, cs: Classical_Service | (cs in qs.hybrid_service implies qs in cs.hybrid_service) and (qs in cs.hybrid_service implies cs in qs.hybrid_service)
-all cs1, cs2: Classical_Service, hd: Hybrid_Deployment | (cs1 in hd.services and cs2 in hd.services) implies not (cs1 in cs2.hybrid_service) and not ( cs2 in cs2.hybrid_service)
 all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.services & Classical_Service) > 0
 //all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
-// Design Restrictions
-
-
+/*---------------------------------------------------------------------------------------------------------------------------*/
  
-
+/*--------------------------------------------------Use-Case----------------------------------------------------------------*/
 // Los servicios de datos de sensores solo están conectados con el servicio agregador.
 // El servicio agregador solo puede estar conectado al servicio híbrido Grover y a los servicios de Datos de Sensores.
 // El servicio híbrido solo puede estar conectado con el agregador y servicio de procesamiento de resultado
-
+/*---------------------------------------------------------------------------------------------------------------------------*/
 }
 
 pred show {

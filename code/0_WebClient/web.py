@@ -1,7 +1,7 @@
 """
 Alumno: Álvaro Manuel Aparicio Morales
 Tutores: Javier Cámara y Jose Garcia-Alonso
-Máster Universitario en Ingeniería Informátcia
+Máster Universitario en Ingeniería Informática
 Universidad de Málaga
 Descripcion:
 - Cliente Web --> Proporciona una interfaz gráfica donde subir las especificaciones.
