@@ -1,0 +1,145 @@
+// ----------------------------------------------------------------------------
+// Alumno: Álvaro Manuel Aparicio Morales
+// Tutores: Javier Cámara y Jose Garcia-Alonso
+// Máster Universitario en Ingeniería Informátcia
+// Universidad de Málaga
+// Descripcion:
+// Behavioral and Architectural Model of Hybrid Application
+// ----------------------------------------------------------------------------
+
+ModelType: dtmc;
+
+const MAX_TIMEOUTS;
+//const TIMEOUT_MULT_FACTOR;
+
+// Definition of alloy Signature for DeploymentWorkFlow
+
+</
+enum status_analysis:{initial, dataCollection, dataPreparation, groverCall,buildingCircuit, launched, executed, result_processing, done};
+enum processing_result_satus:{none, dataCollectionOK, aggregationOK, launchedOK, error};
+
+var current_status:[status_analysis] init initial;
+var processing_result:[processing_result_satus] init none;
+
+var DataService1Invoked : bool init false;
+var DataService2Invoked : bool init false;
+var DataService3Invoked : bool init false;
+var AggregatorServiceInvoked : bool init false;
+var GroverClassicalServiceInvoked : bool init false;
+var GroverQuantumServiceInvoked : bool init false;
+var ResultProcessingServiceInvoked : bool init false;
+var wokflowOK : bool init false;
+var workflowDone : bool init false;
+
+var timeouts:[0..MAX_TIMEOUTS] init MAX_TIMEOUTS;
+
+[launch] (current_status=initial) -> 0.9: (current_status'=dataCollection) + 0.1: (current_status'=done);
+
+//1. Result Error
+[] (current_status=done) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (processing_result'=error);
+
+// 2. Data Adquisition
+[Aggregator:recoverdata] (current_status=dataCollection) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true);
+//Tengo dudas a cerca de como establecer la transicion y como definir esas funciones
+[Aggregation:recoverDataService1] (AggregatorServiceInvoked) -> ¿?
+[Aggregation:recoverDataService2] (AggregatorServiceInvoked) -> ¿?
+[Aggregation:recoverDataService3] (AggregatorServiceInvoked) -> (current_status'=dataPreparation) & (processing_result=dataCollectionOK)
+[Aggregation:timeout] (timeouts>0) & (AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=false) & (timeouts=timeouts-1);
+[Aggregation:timeout] (timeouts=0) & (AggregatorServiceInvoked) -> (workflowDone'=true); // Si no quedan timeouts el flujo se daría por concluido
+
+// 3. Data Aggregation
+// Nueva activacion de aggregación
+[Aggregation:activationCall] (current_status=dataPreparation) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true);
+[Aggregation:quantumTransformation] (AggregatorServiceInvoked) -> (current_status'=groverCall);  // Lo he puesto así porque es una nueva invocación al servicio y he dado por hecho que con :timeout, se ha puesto a falso la invocación
+[Aggregation:grover] (AggregatorServiceInvoked) -> (current_status'=buildingCircuit);
+[Aggregation:timeout] (timeouts>0) & (AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=false) & (timeouts=timeouts-1);
+[Aggregation:timeout] (timeouts=0) & (AggregatorServiceInvoked) -> (workflowDone'=true); // Si no quedan timeouts el flujo se daría por concluido
+
+// 4. Grover
+[ClassicalGrover:activationCall] (current_status'=buildingCircuit) & (!GroverClassicalServiceInvoked) -> (GroverClassicalServiceInvoked'=true);
+[ClassicalGrover:circuitBuild]
+[ClassicalGrover:circuitLaunch]
+//[QuantumGrover:activationCall] Aunque creo que esta activation call la debe de hacer el servicio que llama a ese determinado servicio ya que este es llamado por el classical grover
+
+
+// 5. Processing
+/>
+
+// Service Signature
+</
+    formula response_time;
+    formula cost;
+/>
+
+// PREGUNTA: ¿por qué se definen la formula response_time, cost en los servicios que heredan de service provider?
+// Aggregator signature extends ClassicalService 
+</
+    formula response_time;
+    formula cost;
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var groverLaunch : bool init false
+
+    [DeploymentWorkFlow:activationCall] (ready) -> 0.9: (serviceOK'=true) & (ready'=false) + 0.1 (serviceOK'= false) & (ready'=false);
+
+    //--------------------------------SOLICITUD DE DATOS-----------------------------------------
+    // Ahora tengo que hacer 3 llamadas a la funcion de service data, de la misma forma que se llama a aggregator desde workflow, llamar a la funcion de inicializacion
+    // DataService 1 inicia
+    // DataService 1 datos
+    // DataService 2 inicia
+    // DataService 2 datos
+    // DataService 3 inicia
+    // DataService 3 datos
+    
+    //--------------------------------SOLICITUD DE DATOS-----------------------------------------
+
+    // Building Circuit, debe anteriormente haber terminado y estar listo para otra peticion
+    [DeploymentWorkFlow:quantumTransformation] (!ready) ->  
+    [DeploymentWorkFlow:launchGrover] (!ready) -> 0.9(groverLaunch'=true) + 0.1(groverLaunch'=false)
+    //Debe de llamarse a Grover
+    []
+
+    //-------------------------------TIME OUT FUNCTION-----------------------------------------
+    [DeploymentWorkFlow:timeout] (!ready) & (!serviceOK) -> (ready'=true);
+/>
+//ClassicalGrover
+
+</
+    formula response_time;
+    formula cost;
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var groverLaunch : bool init false
+
+
+/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// DataService1 signature
+</
+
+/>
+
+// DataService2 signature
+</
+
+/>
+
+// DataService3 signature
+</
+
+/>
