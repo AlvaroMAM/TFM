@@ -1,0 +1,26 @@
+// workflow 
+
+//Tengo dudas a cerca de como establecer la transicion y como definir esas funciones esas 3 se deben de definir en aggregator?
+[Aggregator:recoverDataService1] (AggregatorServiceInvoked) -> ¿?
+[Aggregator:recoverDataService2] (AggregatorServiceInvoked) -> ¿?
+[Aggregator:recoverDataService3] (AggregatorServiceInvoked) -> (current_status'=dataPreparation) & (processing_result=dataCollectionOK)
+
+[Aggregator:timeout] (timeouts>0) & (AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=false) & (timeouts=timeouts-1);
+[Aggregator:timeout] (timeouts=0) & (AggregatorServiceInvoked) -> (workflowDone'=true); // Si no quedan timeouts el flujo se daría por concluido
+
+// 3. Data Aggregation
+// Nueva activacion de aggregación
+[Aggregator:activationCall] (current_status=dataPreparation) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true);
+[Aggregator:quantumTransformation] (AggregatorServiceInvoked) -> (current_status'=groverCall);  // Lo he puesto así porque es una nueva invocación al servicio y he dado por hecho que con :timeout, se ha puesto a falso la invocación
+[Aggregator:grover] (AggregatorServiceInvoked) -> (current_status'=buildingCircuit);
+[Aggregator:timeout] (timeouts>0) & (AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=false) & (timeouts=timeouts-1);
+[Aggregator:timeout] (timeouts=0) & (AggregatorServiceInvoked) -> (workflowDone'=true); // Si no quedan timeouts el flujo se daría por concluido
+
+// 4. Grover
+[ClassicalGrover:activationCall] (current_status=buildingCircuit) & (!GroverClassicalServiceInvoked) -> (GroverClassicalServiceInvoked'=true);
+[ClassicalGrover:circuitBuild]
+[ClassicalGrover:circuitLaunch]
+//[QuantumGrover:activationCall] Aunque creo que esta activation call la debe de hacer el servicio que llama a ese determinado servicio ya que este es llamado por el classical grover
+
+
+// 5. Processing
