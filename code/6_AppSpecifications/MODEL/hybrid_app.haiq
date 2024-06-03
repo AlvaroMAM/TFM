@@ -9,9 +9,6 @@
 
 ModelType: dtmc;
 
-const MAX_TIMEOUTS;
-//const TIMEOUT_MULT_FACTOR;
-
 // Las máquinas deben de estar relacionadas con servicios 
 abstract sig PU {services : some Service}
 abstract sig QPU extends PU {}
@@ -20,23 +17,27 @@ abstract sig CPU extends PU {}
 // Signaturas dependientes del Caso de Estudio
 /* Defintion of QPU Machines */
 /*
-lone abstract sig Aquila extends QPU {}
-lone abstract sig Aria_1 extends QPU {}
-lone abstract sig Aria_2 extends QPU {}
-lone abstract sig Aspen_m_3 extends QPU {}
-lone abstract sig Forte_1 extends QPU {}
-lone abstract sig Harmony extends QPU {}
-lone abstract sig Lucy extends QPU {}
+one sig Aquila extends QPU {}
+one sig Aria_1 extends QPU {}
+one sig Aria_2 extends QPU {}
+one sig Aspen_m_3 extends QPU {}
+one sig Forte_1 extends QPU {}
+one sig Harmony extends QPU {}
+one sig Lucy extends QPU {}
 */
 //sig Dm1 extends QPU {}
 //sig Sv1 extends QPU {}
 sig Tn1 extends QPU {}
+</
+    formula machineCost; // Tengo que completar por cada QPU que vaya a usar
+    formula machinePerformance;
+    [services:qpair] true -> true;    
+/>
 sig Local extends QPU {}
 </
-    formula machineCost;
+    formula machineCost; // Tengo que completar por cada QPU que vaya a usar
     formula machinePerformance;
-    [services:pair] true -> true;
-    
+    [services:qpair] true -> true;    
 />
 
 /* Definition of CPU Machines */
@@ -55,7 +56,17 @@ lone abstract sig T3_small extends CPU {}
 //lone abstract sig T3_medium extends CPU {}
 //lone abstract sig T3_large extends CPU {}
 sig T3_xlarge extends CPU {}
+</
+    formula machineCost; // Tengo que completar por cada QPU que vaya a usar
+    formula machinePerformance;
+    [services:cpair] true -> true; // cpair --> For classical pair   
+/>
 sig T3_2xlarge extends CPU {}
+</
+    formula machineCost; // Tengo que completar por cada QPU que vaya a usar
+    formula machinePerformance;
+    [services:cpair] true -> true;  // Para todos los servicios que tengo conectado  
+/>
 
 /* Definition of Services */
 abstract sig Service {
@@ -64,6 +75,10 @@ abstract sig Service {
 	hybrid_service: set Service, // Simular el concepto de hybrid_service
 //	link: some Service // Comunicación entre servicios del caso de uso
 }
+</
+    formula performance;
+    formula cost;
+/>
 abstract sig Classical_Service extends Service {}
 abstract sig Quantum_Service extends Service {}
 /*Definition of Deployment*/
@@ -72,22 +87,17 @@ abstract sig Hybrid_Deployment extends Deployment {}
 one sig UseCase extends Hybrid_Deployment {}
 </
     enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
-    //enum processing_result_satus:{none, dataCollectionOK, aggregationOK, launchedOK, error};
+    enum processing_result_satus:{none, error};
 
     var current_status:[status_analysis] init none;
-    //var processing_result:[processing_result_satus] init none;
+    var processing_result:[processing_result_satus] init none;
     var AggregatorServiceInvoked : bool init false;
     var wokflowOK : bool init false;
     var workflowDone : bool init false;
     var machineCost:[0..500] init 0;
-    var timeouts:[0..MAX_TIMEOUTS] init MAX_TIMEOUTS;
     
-    [launch] (current_status=initial) -> 0.9: (current_status'=launchAnalysis) + 0.1: (current_status'=done);
-
-    //1. Result Error
-    [] (current_status=done) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (processing_result'=error);
-
-    // 2. Launching Analysis
+    [launch] (current_status=initial) -> (current_status'=launchAnalysis);
+    // 1. Launching Analysis
     [Aggregator:activationCall] (current_status=launchAnalysis) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (current_status'=waitingResults); // Se sincroniza con aggregator
     [ResultProcessor:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done)
 />
@@ -98,17 +108,18 @@ one sig UseCase extends Hybrid_Deployment {}
 abstract sig Aggregator signature extends ClassicalService {}
 </
     
-    formula response_time;
+    formula performance;
     formula cost;
-    enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done};
+    enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
     var serviceOK: bool init false;
     var ready : bool init true;
     var DataServiceInvoked : bool init false;
     var GroverClassicalServiceInvoked : bool init false;
-    var current_status:[status_aggregator] init initial;
+    var current_status:[status_aggregator] init none;
+
     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:pair] (current_status=none) -> (cost'=machines.machineCost) & //poner rendimiento & (current_status'=initial);
-    [DeploymentWorkFlow:activationCall] (ready) -> 0.9: (serviceOK'=true) & (ready'=false) + 0.1 (serviceOK'= false) & (ready'=false);
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [DeploymentWorkFlow:activationCall] (ready) -> (serviceOK'=true) & (ready'=false);
     [DataService:requestDataCall] (!ready) & (serviceOK) & (!DataService1Invoked) & (current_status=init) -> (DataServiceInvoked'=true) & (current_status'=dataCollection);
     [DataService:requestData] (!ready) & (serviceOK) & (DataServiceInvoked) & (current_status=dataCollection) -> (current_status'=transformingData);
     // ¿La llamada a si mismo para transformar la información se haría así?
@@ -123,27 +134,30 @@ abstract sig Aggregator signature extends ClassicalService {}
 
 abstract sig DataService extends ClassicalService{}
 </
-    formula response_time;
+    enum status_dataservice:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
+    formula performance;
     formula cost;
     var serviceOK: bool init false;
     var ready : bool init true;
-
-    [Aggregator:requestDataCall] (ready) -> 0.9: (serviceOK'=true) & (ready'=false) + 0.1 (serviceOK'= false) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
+    var current_status:[status_dataservice] init none;
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [Aggregator:requestDataCall] (ready) -> (serviceOK'=true) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
     [Aggregator:requestData] (!ready) & (serviceOK) -> (ready='true) & (serviceOK='false);
 />
 
 abstract sig ClassicalGrover extends ClassicalService {}
 </ // Debe tener transiciones síncronas con quantum grover y processing_result services
-    formula response_time;
+    formula performance;
     formula cost;
     var serviceOK: bool init false;
     var ready : bool init true;
-    enum status_classical_grover:{initial, circuitBuilding, groverLaunch, resultRecovery, launchProcessingResult, done};
-    var current_status:[status_classical_grover] init initial
+    enum status_classical_grover:{initial, circuitBuilding, groverLaunch, resultRecovery, launchProcessingResult, done, none};
+    var current_status:[status_classical_grover] init none;
     var GroverQuantumServiceInvoked : bool init false;
     var ResultProcessingServiceInvoked : bool init false;
 
-    [Aggregator:launchGroverCall] (ready) -> 0.9: (serviceOK'=true) & (ready'=false) + 0.1 (serviceOK'= false) & (ready'=false);
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [Aggregator:launchGroverCall] (ready) -> (serviceOK'=true) & (ready'=false);
     [Aggregator:launchGrover] (!ready) & (serviceOK) -> (current_status='circuitBuilding);
     [] (!ready) & (serviceOK) & (current_status=circuitBuilding) -> (current_status='groverLaunch);
     [QuantumGrover:launchGroverCall] (!ready) & (serviceOK) & (current_status=groverLaunch) & (!GroverQuantumServiceInvoked) -> (GroverQuantumServiceInvoked'=true);
@@ -155,30 +169,35 @@ abstract sig ClassicalGrover extends ClassicalService {}
 
 one sig QuantumGrover extends QuantumService{}
 </
-    formula response_time;
+    formula performance;
     formula cost;
+    enum status_quantum_grover:{initial, enqueue, executing, done, none};
     var serviceOK: bool init false;
     var ready : bool init true;
-
-
-
+    var current_status:[status_quantum_grover] init none;
+    [machines:qpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [ClassicalGrover:launchGroverCall] (current_status=initial) & (ready) -> (serviceOK'=true) & (ready'=false);
+    [ClassicalGrover:launchGrover] (current_status=initial) & (!ready) & (serviceOK) -> (current_status'=enqueue);
+    [] (current_status=enqueue) & (!ready) & (serviceOK) -> 0.5: (current_status'=enqueue) + 0.5 (current_status'=executing); // Simulating A Queue with probabilistic execution
+    [] (current_status=executing) & (!ready) & (serviceOK) -> (current_status'=done); // Simulating A Queue with probabilistic execution
+    [ClassicalGrover:results] (current_status'=done) & (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
 />
 
 
 abstract sig ResultProcessor extends ClassicalService {}
 </
-    formula response_time;
+    formula performance;
     formula cost;
-    enum status_processor:{init, recievingResult, processingResult, resultsReady, done};
+    enum status_processor:{init, recievingResult, processingResult, resultsReady, done, none};
     var serviceOK: bool init false;
     var ready : bool init true;
-    var current_status:[status_processor] init initial;
-
-    [ClassicalGrover:resultsRecievedCall] (ready) -> 0.9: (serviceOK'=true) & (ready'=false) + 0.1 (serviceOK'= false) & (ready'=false); 
+    var current_status:[status_processor] init none;
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [ClassicalGrover:resultsRecievedCall] (ready) -> (serviceOK'=true) & (ready'=false); 
     [ClassicalGrover:resultsRecieved] (!ready) & (serviceOK) -> (current_status'=recievingResult);
     [] (!ready) & (serviceOK) & (current_status=recievingResult) ->  (current_status'=processingResult);
     [] (!ready) & (serviceOK) & (current_status=processingResult) ->  (current_status'=resultsReady);
-    [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false)
+    [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
 
 />
 
@@ -270,36 +289,36 @@ run show for 25
 // Definition of instances
 one sig DS1 extends DataService {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig DS2 extends DataService {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig DS3 extends DataService {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig A1 extends Aggregator {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig CG1 extends ClassicalGrover {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig QG1  extends QuantumGrover{}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
 one sig RP1 extends ResultProcessor {}
 </
-    formula response_time = x;
+    formula performance = x;
     formula cost = y;
 />
