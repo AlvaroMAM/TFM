@@ -120,6 +120,10 @@ abstract sig Aggregator signature extends ClassicalService {}
     [] (DataServiceInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
     [ClassicalGrover:launchGroverCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked='true);
     [ClassicalGrover:launchGrover] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ClassicalGrover:launchGrover] true : performance;
+    reward costRew [ClassicalGrover:launchGrover] true : cost;
 />
 
 abstract sig DataService extends ClassicalService{}
@@ -133,6 +137,10 @@ abstract sig DataService extends ClassicalService{}
     [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
     [Aggregator:requestDataCall] (ready) -> (serviceOK'=true) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
     [Aggregator:requestData] (!ready) & (serviceOK) -> (ready='true) & (serviceOK='false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [Aggregator:requestData] true : performance;
+    reward costRew [Aggregator:requestData] true : cost; 
 />
 
 abstract sig ClassicalGrover extends ClassicalService {}
@@ -154,7 +162,11 @@ abstract sig ClassicalGrover extends ClassicalService {}
     [QuantumGrover:launchGrover] (!ready) & (serviceOK) & (current_status=groverLaunch) & (GroverQuantumServiceInvoked) -> (current_status='resultRecovery);
     [QuantumGrover:results] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) -> (current_status='launchProcessingResult);
     [ResultProcessor:resultsRecievedCall] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
-    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=launchProcessingResult) & (ResultProcessingServiceInvoked) -> (current_status='done) & (ready'=true) & (serviceOK'=false); // Termina el proceso Clásico de grover 
+    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=launchProcessingResult) & (ResultProcessingServiceInvoked) -> (current_status='done) & (ready'=true) & (serviceOK'=false); // Termina el proceso Clásico de grover
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ResultProcessor:resultsRecieved] true : performance;
+    reward costRew [ResultProcessor:resultsRecieved] true : cost; 
 />
 
 one sig QuantumGrover extends QuantumService{}
@@ -170,6 +182,10 @@ one sig QuantumGrover extends QuantumService{}
     [] (current_status=enqueue) & (!ready) & (serviceOK) -> 0.5: (current_status'=enqueue) + 0.5 (current_status'=executing); // Simulating A Queue with probabilistic execution
     [] (current_status=executing) & (!ready) & (serviceOK) -> (current_status'=done); // Simulating A Queue with probabilistic execution
     [ClassicalGrover:results] (current_status'=done) & (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ClassicalGrover:results] true : performance;
+    reward costRew [ClassicalGrover:results] true : cost;
 />
 
 
@@ -187,6 +203,11 @@ abstract sig ResultProcessor extends ClassicalService {}
     [] (!ready) & (serviceOK) & (current_status=recievingResult) ->  (current_status'=processingResult);
     [] (!ready) & (serviceOK) & (current_status=processingResult) ->  (current_status'=resultsReady);
     [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [DeploymentWorkFlow:showQuantumResults] true : performance;
+    reward costRew [DeploymentWorkFlow:showQuantumResults] true : cost;
+
 />
 
 fact {
@@ -281,7 +302,7 @@ property SminR{performanceRew} [F done]
 property SminR{costRew} [F done]
 
 
-// Definition of instances
+// Definition of instances (Generated in module)
 one sig DS1 extends DataService {}
 </
     formula performance = x;
