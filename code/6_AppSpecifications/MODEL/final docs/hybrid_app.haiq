@@ -100,7 +100,7 @@ one sig UseCase extends Hybrid_Deployment {}
 //abstract sig Classical_Deployment extends Deployment {}
 // por definir
 
-abstract sig Aggregator signature extends ClassicalService {}
+abstract sig Aggregator signature extends Classical_Service {}
 </
     formula performance;
     formula cost;
@@ -126,7 +126,7 @@ abstract sig Aggregator signature extends ClassicalService {}
     reward costRew [ClassicalGrover:launchGrover] true : cost;
 />
 
-abstract sig DataService extends ClassicalService{}
+abstract sig DataService extends Classical_Service{}
 </
     enum status_dataservice:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
     formula performance;
@@ -143,7 +143,7 @@ abstract sig DataService extends ClassicalService{}
     reward costRew [Aggregator:requestData] true : cost; 
 />
 
-abstract sig ClassicalGrover extends ClassicalService {}
+abstract sig ClassicalGrover extends Classical_Service {}
 </ // Debe tener transiciones síncronas con quantum grover y processing_result services
     formula performance;
     formula cost;
@@ -169,7 +169,7 @@ abstract sig ClassicalGrover extends ClassicalService {}
     reward costRew [ResultProcessor:resultsRecieved] true : cost; 
 />
 
-one sig QuantumGrover extends QuantumService{}
+one sig QuantumGrover extends Quantum_Service{}
 </
     formula cost;
     enum status_quantum_grover:{initial, enqueue, executing, done, none};
@@ -189,7 +189,7 @@ one sig QuantumGrover extends QuantumService{}
 />
 
 
-abstract sig ResultProcessor extends ClassicalService {}
+abstract sig ResultProcessor extends Classical_Service {}
 </
     formula performance;
     formula cost;

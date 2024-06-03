@@ -50,14 +50,36 @@ abstract sig Service {
 	machines : some PU,
 	deployment : one Deployment,
 	hybrid_service: set Service, // Simular el concepto de hybrid_service
-//	link: some Service // Comunicación entre servicios del caso de uso
+	link: some Service // Comunicación entre servicios del caso de uso
 }
 abstract sig Classical_Service extends Service {}
 abstract sig Quantum_Service extends Service {}
 /*Definition of Deployment*/
 abstract sig Deployment {services: some Service}
-sig Hybrid_Deployment extends Deployment {}
-//abstract sig Classical_Deployment extends Deployment {}
+abstract sig Hybrid_Deployment extends Deployment {}
+abstract sig Classical_Deployment extends Deployment {}
+
+
+/* Definition of Use Case Services */
+lone sig HybridUseCase extends Hybrid_Deployment {}
+lone sig ClassicalUseCase extends Classical_Deployment {}
+abstract sig Aggregator extends Classical_Service {}
+abstract sig DataService extends Classical_Service {}
+abstract sig ClassicalGrover extends Classical_Service {}
+abstract sig QuantumGrover extends Quantum_Service{}
+abstract sig ResultProcessor extends Classical_Service {}
+abstract sig BinarySearch extends Classical_Service {}
+/* Instances definition */
+one sig DS1 extends DataService {}
+one sig DS2 extends DataService {}
+one sig DS3 extends DataService {}
+one sig A1 extends Aggregator {}
+// lone para que la generación pueda ser clásica o cuántica
+lone sig CG1 extends ClassicalGrover {}
+lone sig QG1  extends QuantumGrover {}
+lone sig BS1 extends BinarySearch {}
+one sig RP1 extends ResultProcessor {}
+
 
 fact {
 /*-------------------------------------------- Architectural-Restrictions ------------------------------------------------------*/
@@ -79,6 +101,8 @@ all q: QPU | #(q.services & Classical_Service) = 0
 all s: Service | #(s.deployment & Hybrid_Deployment) = 0 implies #(s.hybrid_service) = 0
 // Todo servicio tiene que estar asociado a un despliegue. Aquí se define para ambos lados, desde servicios y desde despliegue
 all s: Service, d: Deployment | (s in d.services implies d in s.deployment) and (s.deployment = d implies s in d.services)
+// Ningún servicio puede estar relacionado consigo mismo
+all s: Service | s not in s.link
 /*-------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------- Classical-Restrictions-------------------------------------------------- */
@@ -120,26 +144,44 @@ all qs1, qs2: Quantum_Service | qs1 != qs2 and #(qs1.hybrid_service) = 1 and #(q
 all qs:Quantum_Service, cs: Classical_Service | (cs in qs.hybrid_service implies qs in cs.hybrid_service) and (qs in cs.hybrid_service implies cs in qs.hybrid_service)
 // Dos servicios clásicos no pueden formar un servicio híbrido. Un servicio consigo mismo tampoco puede formar un servicio híbrido
 all cs1, cs2: Classical_Service, hd: Hybrid_Deployment | (cs1 in hd.services and cs2 in hd.services) implies not (cs1 in cs2.hybrid_service) and not ( cs2 in cs2.hybrid_service)
+// Dos servicios forman un servicio híbrido, entonces esos dos están relacionados a través de link
+all s1, s2: Service | s1 !=s2 and s1 in s2.hybrid_service and s2 in s1.hybrid_service implies (s2 in s1.link and s1 in s2.link)
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------Deployment-Restrictions-------------------------------------------------*/
+// Para todo despliegue si la interseccion con Hybrido entonces no clasico y viceversa
+//all d: Deployment | #(d & Hybrid_Deployment) > 0 implies  #(d & Classical_Deployment) = 0 
+//all d: Deployment | #(d & Classical_Deployment) > 0 implies  #(d & Hybrid_Deployment) = 0 
 // Todos los servicios deben de pertenecer a un despliegue (Se cumple con el one en Deployment)
 all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.services & Classical_Service) > 0
 //all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
 /*---------------------------------------------------------------------------------------------------------------------------*/
  
 /*--------------------------------------------------Use-Case----------------------------------------------------------------*/
-// Los servicios de datos de sensores solo están conectados con el servicio agregador.
-// El servicio agregador solo puede estar conectado al servicio híbrido Grover y a los servicios de Datos de Sensores.
-// El servicio híbrido solo puede estar conectado con el agregador y servicio de procesamiento de resultado
+// Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
+all ds: DataService,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in ClassicalGrover.link and ds not in ResultProcessor.link 
+// Los servicios no pueden conectarse (link) con ellos mismos
+// Aggregator solo se conecta con cg
+all cg: ClassicalGrover, ag: Aggregator | cg in ag.link and ag in cg.link and ag not in cg.hybrid_service.link
+// Aggregator solo se conecta con Binary Search
+all bs: BinarySearch, ag: Aggregator | bs in ag.link and ag in bs.link
+// El servicio híbrido está formado por QuantumGrover y ClassicalGrover
+all qg: QuantumGrover, cg: ClassicalGrover | qg in cg.hybrid_service and cg in qg.hybrid_service
+// El servicio de procesamiento de resultado, solo está conectado con el servicio Clasico de grover
+all rp: ResultProcessor,  cg: ClassicalGrover | #(rp.link) = 1 and #(rp.link & ClassicalGrover) > 0 and rp in cg.link and rp not in QuantumGrover.link and rp not in Aggregator.link and rp not in DataService.link 
+// El servicio de procesamiento de resultado, solo está conectado con el servicio de Búsqueda Binaria
+all rp: ResultProcessor,  bs: BinarySearch | #(rp.link) = 1 and #(rp.link & BinarySearch) > 0 and rp in bs.link
+// Para todo despliegue híbrido debe haber un grover clásico y un grover cuántico y ningún búsqueda binaria
+all hd: Hybrid_Deployment | #(hd.services & QuantumGrover) = 1 and #(hd.services & ClassicalGrover) = 1  and #(hd.services & BinarySearch) = 0
+// Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
+all cd: Classical_Deployment | #(cd.services & QuantumGrover) = 0 and #(cd.services & ClassicalGrover) = 0  and #(cd.services & BinarySearch) = 1
 /*---------------------------------------------------------------------------------------------------------------------------*/
 }
 
 pred show {
 // Todo despliegue híbrido debe de contar con 6 servicios clásicos y 1 servicio cuántico
-all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.services & Quantum_Service) = 1  
+//all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.services & Quantum_Service) = 1  
 // Todo despliegue debe de estar compuesto por un procesamiento, un grover, un aggregador y 3 servicios de sensores (No se si es redundante con la de arriba)
-//all d: Hybrid_Deployment |  #d.sensor_services = 3 and #d.grover = 1  and #d.processing_service = 1 and #d.aggregator = 1
 }
 run show for 25
 
