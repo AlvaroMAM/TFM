@@ -87,19 +87,14 @@ abstract sig Hybrid_Deployment extends Deployment {}
 one sig UseCase extends Hybrid_Deployment {}
 </
     enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
-    enum processing_result_satus:{none, error};
-
     var current_status:[status_analysis] init none;
-    var processing_result:[processing_result_satus] init none;
     var AggregatorServiceInvoked : bool init false;
-    var wokflowOK : bool init false;
-    var workflowDone : bool init false;
     var machineCost:[0..500] init 0;
-    
+    var workflowDone: bool init false;
     [launch] (current_status=initial) -> (current_status'=launchAnalysis);
     // 1. Launching Analysis
     [Aggregator:activationCall] (current_status=launchAnalysis) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (current_status'=waitingResults); // Se sincroniza con aggregator
-    [ResultProcessor:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done)
+    [ResultProcessor:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done) & (workflowDone'=true);
 />
 
 //abstract sig Classical_Deployment extends Deployment {}
@@ -107,7 +102,6 @@ one sig UseCase extends Hybrid_Deployment {}
 
 abstract sig Aggregator signature extends ClassicalService {}
 </
-    
     formula performance;
     formula cost;
     enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
@@ -126,10 +120,6 @@ abstract sig Aggregator signature extends ClassicalService {}
     [] (DataServiceInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
     [ClassicalGrover:launchGroverCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked='true);
     [ClassicalGrover:launchGrover] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
-    
-    
-    // Creo que me falta controlar el tema del tiempo
-    [DeploymentWorkFlow:timeout] (!ready) & (!serviceOK) -> (ready'=true);
 />
 
 abstract sig DataService extends ClassicalService{}
@@ -169,13 +159,12 @@ abstract sig ClassicalGrover extends ClassicalService {}
 
 one sig QuantumGrover extends QuantumService{}
 </
-    formula performance;
     formula cost;
     enum status_quantum_grover:{initial, enqueue, executing, done, none};
     var serviceOK: bool init false;
     var ready : bool init true;
     var current_status:[status_quantum_grover] init none;
-    [machines:qpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (performance'=machines.machinePerformance*performance) & (current_status'=initial);
+    [machines:qpair] (current_status=none) -> (cost'=machines.machineCost*cost) & (current_status'=initial);
     [ClassicalGrover:launchGroverCall] (current_status=initial) & (ready) -> (serviceOK'=true) & (ready'=false);
     [ClassicalGrover:launchGrover] (current_status=initial) & (!ready) & (serviceOK) -> (current_status'=enqueue);
     [] (current_status=enqueue) & (!ready) & (serviceOK) -> 0.5: (current_status'=enqueue) + 0.5 (current_status'=executing); // Simulating A Queue with probabilistic execution
@@ -198,7 +187,6 @@ abstract sig ResultProcessor extends ClassicalService {}
     [] (!ready) & (serviceOK) & (current_status=recievingResult) ->  (current_status'=processingResult);
     [] (!ready) & (serviceOK) & (current_status=processingResult) ->  (current_status'=resultsReady);
     [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
-
 />
 
 fact {
@@ -284,6 +272,13 @@ all d: Hybrid_Deployment | #(d.services & Classical_Service) = 6 and  #(d.servic
 //all d: Hybrid_Deployment |  #d.sensor_services = 3 and #d.grover = 1  and #d.processing_service = 1 and #d.aggregator = 1
 }
 run show for 25
+
+label done [some UseCase:workflowDone=true]
+
+property rangeR{performanceRew} [F done] totalPerformance;
+property rangeR{costRew} [F done] as totalCost;
+property SminR{performanceRew} [F done]
+property SminR{costRew} [F done]
 
 
 // Definition of instances
