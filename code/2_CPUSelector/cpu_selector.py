@@ -119,7 +119,7 @@ if __name__ == '__main__':
         print(microservices)
         print("")
         for microservice_name, requirements in microservices.items():
-            logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE:" + microservice_name)
+            logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE: " + microservice_name)
             # Transformation of cpu variable and calculation of bandwidth
             logical_performance_cpu = requirements['cpu'] / 1_000_000_000 # From Cycles per second to GHz * 1 Core * 1 Virtual CPUs
             bandwidth = (requirements['number_requests'] * 60 * requirements['maximum_request_size'] * 8 ) / 1_000_000 # From request per minute and max size of request to Mbps
