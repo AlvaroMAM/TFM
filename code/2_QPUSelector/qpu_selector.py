@@ -88,6 +88,6 @@ if __name__ == '__main__':
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE: " + microservice_name)
             app_qpu_machines[microservice_name] = {} # initializing json of microservice
             app_qpu_machines[microservice_name]['selected_qpu'] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
-            app_qpu_machines[microservice_name].update({'shots' : requirements['shots']})
+            app_qpu_machines[microservice_name]['shots'] = requirements['shots']
             logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
         print(app_qpu_machines)
