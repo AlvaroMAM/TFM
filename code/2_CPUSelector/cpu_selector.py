@@ -123,12 +123,13 @@ if __name__ == '__main__':
             # Transformation of cpu variable and calculation of bandwidth
             logical_performance_cpu = requirements['cpu'] / 1_000_000_000 # From Cycles per second to GHz * 1 Core * 1 Virtual CPUs
             bandwidth = (requirements['number_requests'] * 60 * requirements['maximum_request_size'] * 8 ) / 1_000_000 # From request per minute and max size of request to Mbps
+            app_cpu_machines[microservice_name] = {} # initializing json of microservice
             app_cpu_machines[microservice_name]['cpu_logical_performance_factor'] = logical_performance_cpu
             app_cpu_machines[microservice_name]['ms_ram'] = requirements['ram']
             app_cpu_machines[microservice_name]['ms_bandwidth'] = bandwidth
             app_cpu_machines[microservice_name]['ms_execution_time'] = requirements['execution_time']
             app_cpu_machines[microservice_name]['ms_availability'] = requirements['availability']
-            app_cpu_machines[microservice_name] = select_cpu(logical_performance_cpu, requirements['ram'], bandwidth) # Returns an Array<Dict> of the suitable CPUs machines from AWS
+            app_cpu_machines[microservice_name]['selected_cpus'] = select_cpu(logical_performance_cpu, requirements['ram'], bandwidth) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         print(app_cpu_machines)
         
