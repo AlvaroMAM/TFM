@@ -64,12 +64,12 @@ def select_qpu(qubits, shots):
             with open(cloud_provider_file, 'r') as f:
                 logging.debug("QPU-SELECTOR : QUANTUM MACHINES READING")
                 qpu_machines = json.load(f)
-            for qpu_machine, data in qpu_machines.items():
+            for qpu_machine, machine_information in qpu_machines.items():
                 logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "PROCESSING")
-                if is_candidate(data, qubits, shots):
-                    ms_cost = estimator(data, shots)
+                if is_candidate(machine_information, qubits, shots):
+                    #ms_cost = estimator(data, shots)
                     qpu_machine_estimation = dict()
-                    qpu_machine_estimation['ms_cost'] = ms_cost
+                    qpu_machine_estimation['qpu_prize'] = machine_information['device_cost']['price'] # Price per Shot
                     selected_qpus.append((qpu_machine,qpu_machine_estimation))
                     logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "IS CANDIDATE")
     return selected_qpus
@@ -87,6 +87,7 @@ if __name__ == '__main__':
 
         for microservice_name, requirements in microservices.items():
             logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE" + microservice_name)
+            app_qpu_machines[microservice_name]['shots'] = requirements['shots']
             app_qpu_machines[microservice_name] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
             logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
         print(app_qpu_machines)
