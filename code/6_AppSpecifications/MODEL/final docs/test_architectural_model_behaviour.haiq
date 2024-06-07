@@ -1,0 +1,324 @@
+/*
+	Alumno: Álvaro Manuel Aparicio Morales
+	Tutores: Javier Cámara y Jose Garcia-Alonso
+	Máster Universitario en Ingeniería Informática
+	Universidad de Málaga
+	Descripcion:
+	ARCHIVO DE TEST PARA LA Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
+    NO SE TIENE EN CUENTA DESPLIEGUE CON ALTERNATIVA CLÁSICA.
+*/
+// Las máquinas deben de estar relacionadas con servicios 
+abstract sig PU {services : some Service}
+abstract sig QPU extends PU {}
+abstract sig CPU extends PU {}
+
+// Signaturas dependientes del Caso de Estudio
+sig Tn1 extends QPU {}
+</
+    formula machineCost = 45; // Tengo que completar por cada QPU que vaya a usar
+    [services:qpair] true -> true;    
+/>
+/* Definition of CPU Machines */
+
+sig T3_medium extends CPU {}
+</
+    formula machineCost = 0.3; // Tengo que completar por cada QPU que vaya a usar
+    formula machinePerformancefactor = 0.3;
+    formula machineram = 4;
+    formula machinebandwidth = 1;
+    [services:qpair] true -> true;    
+/>
+
+/* Definition of Services */
+abstract sig Service {
+	machines : some PU,
+	deployment : one Deployment,
+	hybrid_service: set Service, // Simular el concepto de hybrid_service
+	link: some Service // Comunicación entre servicios del caso de uso
+}
+abstract sig Classical_Service extends Service {}
+abstract sig Quantum_Service extends Service {}
+
+/*Definition of Deployment*/
+abstract sig Deployment {services: some Service}
+abstract sig Hybrid_Deployment extends Deployment {}
+abstract sig Classical_Deployment extends Deployment {}
+one sig UseCase extends Hybrid_Deployment {}
+</
+    enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
+    var current_status:[status_analysis] init none;
+    var AggregatorServiceInvoked : bool init false;
+    var machineCost:[0..500] init 0;
+    var workflowDone: bool init false;
+    [launch] (current_status=initial) -> (current_status'=launchAnalysis);
+    // 1. Launching Analysis
+    [Aggregator:activationCall] (current_status=launchAnalysis) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (current_status'=waitingResults); // Se sincroniza con aggregator
+    [ResultProcessor:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done) & (workflowDone'=true);
+/>
+
+/* Definition of Use Case Services (Generic) */
+lone sig HybridUseCase extends Hybrid_Deployment {}
+/*APPLICATION SPECIFIC CASE*/
+abstract sig Aggregator extends Classical_Service {}
+</
+    formula performance;
+    formula availability;
+    formula cost;
+    enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var DataServiceInvoked : bool init false;
+    var GroverClassicalServiceInvoked : bool init false;
+    var current_status:[status_aggregator] init none;
+
+    //Calcular coste y rendimiento según la máquina con la que esté relacionada
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=4) & (current_status'=initial);
+    [DeploymentWorkFlow:activationCall] (ready) -> (serviceOK'=true) & (ready'=false);
+    [DataService:requestDataCall] (!ready) & (serviceOK) & (!DataService1Invoked) & (current_status=init) -> (DataServiceInvoked'=true) & (current_status'=dataCollection);
+    [DataService:requestData] (!ready) & (serviceOK) & (DataServiceInvoked) & (current_status=dataCollection) -> (current_status'=transformingData);
+    [] (DataServiceInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
+    [ClassicalGrover:launchGroverCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked'=true);
+    [ClassicalGrover:launchGrover] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ClassicalGrover:launchGrover] true : performance;
+    reward costRew [ClassicalGrover:launchGrover] true : cost;
+/>
+
+abstract sig DataService extends Classical_Service {}
+</
+    enum status_dataservice:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
+    formula performance;
+    formula availability;
+    formula cost;
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var current_status:[status_dataservice] init none;
+    //[nombrerelacion:nombrefuncion]
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=1) & (current_status'=initial);
+    [Aggregator:requestDataCall] (ready) -> (serviceOK'=true) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
+    [Aggregator:requestData] (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [Aggregator:requestData] true : performance;
+    reward costRew [Aggregator:requestData] true : cost; 
+/>
+abstract sig ClassicalGrover extends Classical_Service {}
+</ // Debe tener transiciones síncronas con quantum grover y processing_result services
+    formula performance;
+    formula availability;
+    formula cost;
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    enum status_classical_grover:{initial, circuitBuilding, groverLaunch, resultRecovery, launchProcessingResult, done, none};
+    var current_status:[status_classical_grover] init none;
+    var GroverQuantumServiceInvoked : bool init false;
+    var ResultProcessingServiceInvoked : bool init false;
+
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=1) & (current_status'=initial);
+    [Aggregator:launchGroverCall] (ready) -> (serviceOK'=true) & (ready'=false);
+    [Aggregator:launchGrover] (!ready) & (serviceOK) -> (current_status'=circuitBuilding);
+    [] (!ready) & (serviceOK) & (current_status=circuitBuilding) -> (current_status'=groverLaunch);
+    [QuantumGrover:launchGroverCall] (!ready) & (serviceOK) & (current_status=groverLaunch) & (!GroverQuantumServiceInvoked) -> (GroverQuantumServiceInvoked'=true);
+    [QuantumGrover:launchGrover] (!ready) & (serviceOK) & (current_status=groverLaunch) & (GroverQuantumServiceInvoked) -> (current_status'=resultRecovery);
+    [QuantumGrover:results] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) -> (current_status'=launchProcessingResult);
+    [ResultProcessor:resultsRecievedCall] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
+    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=launchProcessingResult) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false); // Termina el proceso Clásico de grover
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ResultProcessor:resultsRecieved] true : performance;
+    reward costRew [ResultProcessor:resultsRecieved] true : cost; 
+/>
+
+abstract sig QuantumGrover extends Quantum_Service{}
+</
+    formula cost;
+    formula shots;
+    enum status_quantum_grover:{initial, enqueue, executing, done, none};
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var current_status:[status_quantum_grover] init none;
+    [machines:qpair] (current_status=none) -> (cost'=machines.machineCost*shots) & (current_status'=initial);
+    [ClassicalGrover:launchGroverCall] (current_status=initial) & (ready) -> (serviceOK'=true) & (ready'=false);
+    [ClassicalGrover:launchGrover] (current_status=initial) & (!ready) & (serviceOK) -> (current_status'=enqueue);
+    [] (current_status=enqueue) & (!ready) & (serviceOK) -> 0.5: (current_status'=enqueue) + 0.5 (current_status'=executing); // Simulating A Queue with probabilistic execution
+    [] (current_status=executing) & (!ready) & (serviceOK) -> (current_status'=done); // Simulating A Queue with probabilistic execution
+    [ClassicalGrover:results] (current_status'=done) & (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ClassicalGrover:results] true : performance;
+    reward costRew [ClassicalGrover:results] true : cost;
+/>
+abstract sig ResultProcessor extends Classical_Service {}
+</
+    formula performance;
+    formula availability;
+    formula cost;
+    enum status_processor:{init, recievingResult, processingResult, resultsReady, done, none};
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    var current_status:[status_processor] init none;
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=1) & (current_status'=initial);
+    [ClassicalGrover:resultsRecievedCall] (ready) -> (serviceOK'=true) & (ready'=false); 
+    [ClassicalGrover:resultsRecieved] (!ready) & (serviceOK) -> (current_status'=recievingResult);
+    [] (!ready) & (serviceOK) & (current_status=recievingResult) ->  (current_status'=processingResult);
+    [] (!ready) & (serviceOK) & (current_status=processingResult) ->  (current_status'=resultsReady);
+    [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [DeploymentWorkFlow:showQuantumResults] true : performance;
+    reward costRew [DeploymentWorkFlow:showQuantumResults] true : cost;
+
+/>
+
+
+
+/*-------------------------------------------- Architectural-Restrictions ------------------------------------------------------*/
+
+/*-------------------------------------------- Machines- Restrictions------------------------------------------------------*/
+// Toda máquina debe estar asociada a algún servicio
+all pu: PU | #pu.services > 0
+// Si un servicio está desplegado en una máquina, entonces esa máquina solo puede estar relacionada con ese servicio
+all pu: PU, s: Service | s in pu.services implies s.machines = pu
+// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
+all c: CPU | #(c.services & Quantum_Service) = 0
+// Todos los servicios deben de estar asociados a un despliege
+// Para todas las máquinas clásicas, su conjunto de servicios no pueden ser cuánticos
+all q: QPU | #(q.services & Classical_Service) = 0
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------- Services- Restrictions------------------------------------------------------*/
+//all s: Service | #(s.deployment) = 1 // Ya se cumple
+all s: Service | #(s.deployment & Hybrid_Deployment) = 0 implies #(s.hybrid_service) = 0
+// Todo servicio tiene que estar asociado a un despliegue. Aquí se define para ambos lados, desde servicios y desde despliegue
+all s: Service, d: Deployment | (s in d.services implies d in s.deployment) and (s.deployment = d implies s in d.services)
+// Ningún servicio puede estar relacionado consigo mismo
+all s: Service | s not in s.link
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------- Classical-Restrictions-------------------------------------------------- */
+// Un servicio clásico, no puede relacionarse con una máquina cuántica
+all cs: Classical_Service | #(cs.machines & QPU) = 0
+// Un servicio clásico, no puede estar alojado en una misma instancia de máquina clásica que otro servicio clásico (No co-alojados)
+all cs1, cs2 : Classical_Service | cs1 != cs2 implies #(cs1.machines & cs2.machines) = 0
+// Un servicio clásico, no puede estar alojado en la misma instancia de máquina clásica que un servicio híbrido (Se cumple con la anterior)
+// Un servicio clásico, no puede estar relacionado con más de una instancia de máquina clásica.
+all sc: Classical_Service | #sc.machines < 2
+// Un servicio clásico, tiene que tener una instancia de máquina clásica asociada.
+all sc: Classical_Service | #sc.machines > 0
+/*----------------------------------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------- Quantum-Restrictions-------------------------------------------------*/
+// Un servicio cuántico, no puede estar alojado en una máquina clásica
+all qs: Quantum_Service | #(qs.machines & CPU) = 0
+// Un servicio cuántico, no puede estar alojado en más de una máquina cuántica
+all qs: Quantum_Service | #qs.machines < 2
+//Un servicio cuántico, tiene que tener una instancia de máquina cuántica asociada.
+all qs: Quantum_Service | #qs.machines > 0
+// Un servicio cuántico, no puede estar en un despliegue clásico
+
+// Toda máquina cuántica debe tener un servicio asociado
+all qs: Quantum_Service, q: QPU | qs.machines = q implies qs in q.services
+// Todo servicio cuántico debe tener un servicio clásico asociado
+all qs: Quantum_Service | #(qs.hybrid_service) = 1  and #(qs.hybrid_service & Quantum_Service) = 0
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------Hybrid-Services-Restrictions----------------------------------------------------------*/
+// Todo servicio cuántico tiene que estar asociado a un servicio clásico 
+all qs: Quantum_Service | qs in Classical_Service.hybrid_service
+// Para todos los servicios clásicos y cuánticos que conforman un servicio híbrido, deben pertenecer al mismo despliegue
+all s1, s2: Service | s1 !=s2 and s1 in s2.hybrid_service and s2 in s1.hybrid_service implies s1.deployment = s2.deployment
+// Un servicio cuántico no puede compartir el servicio clásico con el que está asociado
+all qs1, qs2: Quantum_Service | qs1 != qs2 and #(qs1.hybrid_service) = 1 and #(qs2.hybrid_service) = 1 implies #(qs1.hybrid_service & qs2.hybrid_service) = 0
+// El servicio cuántico y clásico que conformen un servicio híbrido, solo pueden estar relacionado entre ellos
+all qs:Quantum_Service, cs: Classical_Service | (cs in qs.hybrid_service implies qs in cs.hybrid_service) and (qs in cs.hybrid_service implies cs in qs.hybrid_service)
+// Dos servicios clásicos no pueden formar un servicio híbrido. Un servicio consigo mismo tampoco puede formar un servicio híbrido
+all cs1, cs2: Classical_Service, hd: Hybrid_Deployment | (cs1 in hd.services and cs2 in hd.services) implies not (cs1 in cs2.hybrid_service) and not ( cs2 in cs2.hybrid_service)
+// Dos servicios forman un servicio híbrido, entonces esos dos están relacionados a través de link
+all s1, s2: Service | s1 !=s2 and s1 in s2.hybrid_service and s2 in s1.hybrid_service implies (s2 in s1.link and s1 in s2.link)
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------Deployment-Restrictions-------------------------------------------------*/
+// Para todo despliegue si la interseccion con Hybrido entonces no clasico y viceversa
+
+// Todos los servicios deben de pertenecer a un despliegue (Se cumple con el one en Deployment)
+all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.services & Classical_Service) > 0
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+ 
+/*--------------------------------------------------Use-Case----------------------------------------------------------------*/
+// Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
+all ds: DataService,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in ClassicalGrover.link and ds not in ResultProcessor.link and ds not in QuantumGrover.link
+// Aggregator solo se conecta con ClassicalGrover o con Binary Search
+all ag: Aggregator | #(ag.link & QuantumGrover) = 0 and #(ag.link & ResultProcessor) = 0 
+all cg: ClassicalGrover, ag: Aggregator | cg in ag.link and ag in cg.link and ag not in cg.hybrid_service.link
+// Aggregator solo se conecta con Binary Search
+
+// El servicio híbrido está formado por QuantumGrover y ClassicalGrover
+all qg: QuantumGrover, cg: ClassicalGrover | qg in cg.hybrid_service and cg in qg.hybrid_service
+// Para todo Quantum Grover, solo puede estar conectado a servicio ClassicalGrover
+// El servicio de procesamiento de resultado, solo está conectado con el servicio Clasico de grover
+all rp: ResultProcessor,  cg: ClassicalGrover | #(rp.link) = 1 and #(rp.link & ClassicalGrover) > 0 and rp in cg.link and rp not in QuantumGrover.link and rp not in Aggregator.link and rp not in DataService.link 
+// El servicio de procesamiento de resultado, solo está conectado con el servicio de Búsqueda Binaria
+
+// Para todo despliegue híbrido debe haber un grover clásico y un grover cuántico y ningún búsqueda binaria
+// Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+
+pred show {}
+run show for 25
+
+label done [some UseCase:workflowDone=true]
+
+property rangeR{performanceRew} [F done] totalPerformance;
+property rangeR{costRew} [F done] as totalCost;
+property SminR{performanceRew} [F done]
+property SminR{costRew} [F done]
+
+// MACHINES
+
+
+// SERVICES 
+one sig DS1 extends DataService {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig DS2 extends DataService {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig DS3 extends DataService {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig A1 extends Aggregator {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig CG1 extends ClassicalGrover {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig QG1  extends QuantumGrover{}
+</
+    formula shots = 1000;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>
+one sig RP1 extends ResultProcessor {}
+</
+    formula availability = 3;
+    formula performance = 0;
+    formula cost = 0; // Las variables calculadas se inicializan a 0
+/>

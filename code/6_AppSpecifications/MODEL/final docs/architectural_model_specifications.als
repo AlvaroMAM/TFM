@@ -40,10 +40,10 @@ lone abstract sig T3_nano extends CPU {}
 lone abstract sig T3_micro extends CPU {}
 lone abstract sig T3_small extends CPU {}
 */
-//lone abstract sig T3_medium extends CPU {}
+sig T3_medium extends CPU {}
 //lone abstract sig T3_large extends CPU {}
 sig T3_xlarge extends CPU {}
-sig T3_2xlarge extends CPU {}
+//sig T3_2xlarge extends CPU {}
 
 /* Definition of Services */
 abstract sig Service {
@@ -60,9 +60,10 @@ abstract sig Hybrid_Deployment extends Deployment {}
 abstract sig Classical_Deployment extends Deployment {}
 
 
-/* Definition of Use Case Services */
+/* Definition of Use Case Services (Generic) */
 lone sig HybridUseCase extends Hybrid_Deployment {}
 lone sig ClassicalUseCase extends Classical_Deployment {}
+/*APPLICATION SPECIFIC CASE*/
 abstract sig Aggregator extends Classical_Service {}
 abstract sig DataService extends Classical_Service {}
 abstract sig ClassicalGrover extends Classical_Service {}
@@ -154,19 +155,20 @@ all s1, s2: Service | s1 !=s2 and s1 in s2.hybrid_service and s2 in s1.hybrid_se
 //all d: Deployment | #(d & Classical_Deployment) > 0 implies  #(d & Hybrid_Deployment) = 0 
 // Todos los servicios deben de pertenecer a un despliegue (Se cumple con el one en Deployment)
 all hd: Hybrid_Deployment | #(hd.services & Quantum_Service) > 0 and #(hd.services & Classical_Service) > 0
-//all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
+all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
 /*---------------------------------------------------------------------------------------------------------------------------*/
  
 /*--------------------------------------------------Use-Case----------------------------------------------------------------*/
 // Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
-all ds: DataService,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in ClassicalGrover.link and ds not in ResultProcessor.link 
-// Los servicios no pueden conectarse (link) con ellos mismos
-// Aggregator solo se conecta con cg
+all ds: DataService,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in ClassicalGrover.link and ds not in ResultProcessor.link and ds not in QuantumGrover.link and ds not in BinarySearch.link
+// Aggregator solo se conecta con ClassicalGrover o con Binary Search
+all ag: Aggregator | #(ag.link & QuantumGrover) = 0 and #(ag.link & ResultProcessor) = 0 
 all cg: ClassicalGrover, ag: Aggregator | cg in ag.link and ag in cg.link and ag not in cg.hybrid_service.link
 // Aggregator solo se conecta con Binary Search
 all bs: BinarySearch, ag: Aggregator | bs in ag.link and ag in bs.link
 // El servicio híbrido está formado por QuantumGrover y ClassicalGrover
 all qg: QuantumGrover, cg: ClassicalGrover | qg in cg.hybrid_service and cg in qg.hybrid_service
+// Para todo Quantum Grover, solo puede estar conectado a servicio ClassicalGrover
 // El servicio de procesamiento de resultado, solo está conectado con el servicio Clasico de grover
 all rp: ResultProcessor,  cg: ClassicalGrover | #(rp.link) = 1 and #(rp.link & ClassicalGrover) > 0 and rp in cg.link and rp not in QuantumGrover.link and rp not in Aggregator.link and rp not in DataService.link 
 // El servicio de procesamiento de resultado, solo está conectado con el servicio de Búsqueda Binaria
@@ -176,6 +178,9 @@ all hd: Hybrid_Deployment | #(hd.services & QuantumGrover) = 1 and #(hd.services
 // Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
 all cd: Classical_Deployment | #(cd.services & QuantumGrover) = 0 and #(cd.services & ClassicalGrover) = 0  and #(cd.services & BinarySearch) = 1
 /*---------------------------------------------------------------------------------------------------------------------------*/
+/*TO BE COMPLETED WITH SERVICES MACHINES RESTRICTIONS HAIQ*/
+// Creo que solo es necesario indicarlo por parte del punto de vista del servicio porque desde el punto de vista de la máquina se debe cumplir all pu: PU, s: Service | s in pu.services implies s.machines = pu
+all rp: ResultProcessor | #(rp.machines & T3_xlarge) = 0 // Ejemplo
 }
 
 pred show {
