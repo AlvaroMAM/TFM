@@ -3,6 +3,7 @@ TOPIC_QPU = 'information-qpu'
 TOPIC_QPU_CANDIDATES = 'qpu-candidates'
 TOPIC_CPU = 'information-cpu'
 TOPIC_CPU_CANDIDATES = 'cpu-candidates'
+TOPIC_BEHAVIOURAL = 'behavioural-file'
 TOPIC_RESET_PHASES = 'reset-phases'
 #KAFKA_SERVER_URL='192.168.18.78:29092' # Non - Local
 KAFKA_SERVER_URL='127.0.0.1:29092' # Local
