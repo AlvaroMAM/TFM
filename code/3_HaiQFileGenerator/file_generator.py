@@ -4,12 +4,12 @@ import json
 import logging
 import os
 
-behavioural = None
+behavioural_restrictions = None
 cpu_candidates = None
 qpu_candidates = None
 
 def processing_topics():
-    global behavioural, cpu_candidates, qpu_candidates
+    global behavioural_restrictions, cpu_candidates, qpu_candidates
     # Procesar mensajes de los topics
     logging.debug("FILE-GENERATOR : WAITING FOR MESSAGES")
     for message in consumer:
@@ -18,9 +18,13 @@ def processing_topics():
         if topic == TOPIC_BEHAVIOURAL:
             # Procesando Behavioural File
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
-            file_message = message.value
-            with open('received_file', 'w') as f:
-                f.write(file_message)
+            behavioural_restrictions = message.value.decode('utf-8')
+            behavioural = behavioural_restrictions['behavioural'] # POSIBLE ERROR PORQUE VENDRAN CON 2 ATTRIBUTOS BEHAVIOURAL Y RESTRICTIONS
+            restrictions = behavioural_restrictions['restrictions']
+            with open('./temp/behavioural.txt', 'w') as f:
+                f.write(behavioural)
+            with open('./temp/restrictions.txt', 'w') as f:
+                f.write(restrictions)
             print(f"Procesado mensaje de archivo desde topic3 y guardado como received_file")
         elif topic == TOPIC_CPU_CANDIDATES:
             # Procesando CPUs
@@ -32,17 +36,22 @@ def processing_topics():
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC QPU CANDIDATES")
             json2 = message.value
             print(f"Procesado mensaje JSON 2 desde topic2: {json2}")
-        if behavioural != None and cpu_candidates != None and qpu_candidates!=None:
-            # Una vez leidas las 3, me salgo
+        if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
+            # Una vez leidas las 3,salgo
             break
+    consumer.close()
 
 
 def classical_generator_string(candidates):
     services = ""
     machines = ""
+    cloud_provider_cpu_machines = [] # Debe contener solo los nombres de las máquinas
+    machine_services_restrictions = []
     processed_machines = []
     logging.debug("FILE-GENERATOR : CLASSICAL GENERATOR STRING")
+    # Inicializar cloud provider machines
     for service_name, attributes in candidates.items():
+        not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia 
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
         service_formulas = "</"
@@ -63,6 +72,8 @@ def classical_generator_string(candidates):
         if attributes["selected_cpu"]:
             for machine_pair in attributes["selected_cpu"]:
                 machine_name, machine_characteristics = machine_pair
+                # Elimino la máquina de la copia 
+                machine_services_restrictions.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
                     machine_instance = "sig "+machine_name+" extends CPU {}\n"
@@ -73,12 +84,18 @@ def classical_generator_string(candidates):
                     machine_formulas = machine_formulas+"\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
-                    machines = machines + machine_instance+"\n" 
-    return machines, services
+                    machines = machines + machine_instance+"\n"
+            # Coleccionar cada máquina del servicio
+            # recorrer las máquinas disponibles del proveedor
+            # si no está creo restricción
+            machine_services_restrictions.append(service_name,not_used_machines) # Conjunto de pares servicio con máquinas no usadas \ 
+            #para especificar las 
+    return machines, services, machine_services_restrictions
 
 def quantum_generator_string(candidates):
     services = ""
     machines = ""
+    machine_services_restrictions = []
     processed_machines = []
     for service_name, attributes in candidates.items():
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
@@ -104,19 +121,42 @@ def quantum_generator_string(candidates):
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
                     machines = machines + machine_instance+"\n" 
-    return machines, services
+    return machines, services, machine_services_restrictions
 
+def machine_restriction(l):
+    result = ""
+    for pair in l:
+        service_name, machine_list = pair
+        result = ' and '.join([f'"#({service_name} & {item}) = 0"' for item in machine_list])
+        result = "all s:"+service_name+" | " + result
+        restriction = restriction + "\n"+ result
 
-def generating_haiq_file():
-    global behavioural, cpu_candidates, qpu_candidates
-    qpu_machines, qpu_services = quantum_generator_string(qpu_candidates)
-    cpu_machines, cpu_services = classical_generator_string(cpu_candidates)
+def predicate_and_properties(use_case_restrictions, quantum, classical):
+    properties = "run show for 25\n\
+        label done [some UseCase:workflowDone=true]\n\
+        property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
+        property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
+        property SminR{" + 'performanceRew' + "}[F done]\n\
+        property SminR{" + 'costRew' + "}[F done]"
+    quantum_machine_restriction = machine_restriction(quantum)
+    classical_machine_restriction = machine_restriction(classical)
+    predicate = "pred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
+    return (predicate + properties)
+
+def haiq_file_generator():
+    global cpu_candidates, qpu_candidates
+    qpu_machines, qpu_services, quantum = quantum_generator_string(qpu_candidates)
+    cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
     # Concatenar todo
     architectural_style_string = ""
     with open("./architectural_model/hybrid_app", 'r') as architectural_model_file:
         architectural_style_string = architectural_model_file.read()
+    with open("./temp/behavioural.txt", 'r') as architectural_model_file:
+        behavioural_string = architectural_model_file.read()
+    with open("./temp/restrictions.txt", 'r') as architectural_model_file:
+        restrictions_string = architectural_model_file.read()
     # String (behavioural) DEBE VENIR YA COMO STRING CUANDO SE LEE DE KAFKA
-    file_string = architectural_style_string + behavioural + qpu_machines + cpu_machines + qpu_services + cpu_services
+    file_string = architectural_style_string + behavioural_string + predicate_and_properties(restrictions_string,quantum,classical) + qpu_machines + cpu_machines + qpu_services + cpu_services
     # Guardar string como archivo .haiq en carpeta ./temp
     with open("./temp/hybrid-iot.haiq","w") as haiq_file:
         haiq_file.write(file_string)
@@ -130,4 +170,4 @@ if __name__=='__main__':
     )
     logging.debug("FILE-GENERATOR : INITIALIZED")
     processing_topics()
-    generating_haiq_file()
+    haiq_file_generator()
