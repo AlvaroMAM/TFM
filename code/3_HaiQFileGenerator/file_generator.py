@@ -87,6 +87,7 @@ def classical_generator_string(candidates):
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
                 # Elimino la máquina de la copia
+                print("VOY POR "+machine_name)
                 print(not_used_machines) 
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
