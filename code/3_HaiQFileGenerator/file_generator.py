@@ -18,6 +18,7 @@ def processing_topics():
         topic = message.topic
         if topic == TOPIC_BEHAVIOURAL:
             print("LLEGO")
+            print(message)
             # Procesando Behavioural File
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
             #behavioural_restrictions = message.value.decode('utf-8')
