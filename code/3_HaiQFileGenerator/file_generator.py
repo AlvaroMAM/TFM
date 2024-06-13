@@ -72,7 +72,7 @@ def classical_generator_string(candidates):
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
         if attributes["selected_cpu"]:
-            for machine_pair in attributes["selected_cpu"]:
+            for machine_pair in attributes["selected_cpus"]:
                 machine_name, machine_characteristics = machine_pair
                 # Elimino la máquina de la copia 
                 machine_services_restrictions.remove(machine_name)
@@ -110,7 +110,7 @@ def quantum_generator_string(candidates):
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
         if attributes["selected_qpu"]:
-            for machine_pair in attributes["selected_qpu"]:
+            for machine_pair in attributes["selected_qpus"]:
                 machine_name, machine_characteristics = machine_pair
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
