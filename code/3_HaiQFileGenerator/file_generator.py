@@ -161,14 +161,12 @@ def machine_restriction(l):
     restriction = ""
     for pair in l:
         service_name, machine_list = pair
-        print("LISTA DE MÁQUINAS")
-        print(machine_list)
-        result = ' and '.join([f'"#({service_name} & {item}) = 0"' for item in machine_list])
-        print(result)
+        result = ' and '.join([f'#({service_name} & {item}) = 0' for item in machine_list])
         result = "all s:"+service_name+" | " + result
         print("RESULT FINAL")
         print(result)
         restriction = restriction + result + "\n"
+    return restriction
 
 def predicate_and_properties(use_case_restrictions, quantum, classical):
     print("PREDICATE")
