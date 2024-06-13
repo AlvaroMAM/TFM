@@ -128,7 +128,7 @@ def start_processing():
             producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
             logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
             # SENDING MODEL FILE TO COMBINATIONS GENERATOR
-            # app_model_files = os.listdir(app_model_file_directory)        
+            producer.send(TOPIC_BEHAVIOURAL, behavioural_restrictions_dict)       
             return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
     else:
         logging.debug("REQUEST /start --> FILES NOT RECIEVED")
