@@ -138,6 +138,8 @@ def quantum_generator_string(candidates):
             for machine_array in attributes["selected_qpus"]:
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
+                print("ELIMINO")
+                print(not_used_machines)
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
@@ -172,6 +174,7 @@ def predicate_and_properties(use_case_restrictions, quantum, classical):
         property SminR{" + 'performanceRew' + "}[F done]\n\
         property SminR{" + 'costRew' + "}[F done]"
     quantum_machine_restriction = machine_restriction(quantum)
+    print("QUANTUM" + quantum_machine_restriction)
     classical_machine_restriction = machine_restriction(classical)
     predicate = "pred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
     return (predicate + properties)
