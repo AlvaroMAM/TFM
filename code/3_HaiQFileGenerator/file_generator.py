@@ -52,6 +52,17 @@ def classical_generator_string(candidates):
     processed_machines = []
     logging.debug("FILE-GENERATOR : CLASSICAL GENERATOR STRING")
     # Inicializar cloud provider machines
+    cloud_providers_path = "./cpu-cloud-providers"
+    cloud_providers_list = os.listdir(cloud_providers_path)
+    for cloud_provider in cloud_providers_list:
+        cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
+        if os.path.isfile(cloud_provider_file):
+            cpu_machines = None
+            with open(cloud_provider_file, 'r') as f:
+                logging.debug("CPU-SELECTOR : CPU MACHINES READING")
+                cpu_machines = json.load(f)
+            for cpu_machine, machine_information in cpu_machines.items():
+                cloud_provider_cpu_machines.append(cpu_machine)
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_cpu_machines # Por cada servicio me creo una copia 
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
