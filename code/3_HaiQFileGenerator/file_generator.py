@@ -17,8 +17,6 @@ def processing_topics():
         logging.debug("FILE-GENERATOR : MESSAGE RECIEVED")
         topic = message.topic
         if topic == TOPIC_BEHAVIOURAL:
-            print("LLEGO")
-            print(message)
             # Procesando Behavioural File
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
             behavioural_restrictions = message.value
@@ -32,13 +30,13 @@ def processing_topics():
         elif topic == TOPIC_CPU_CANDIDATES:
             # Procesando CPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC CPU CANDIDATES")
-            json1 = message.value
-            print(f"Procesado mensaje JSON 1 desde topic1: {json1}")
+            cpu_candidates = message.value
+            print(f"Procesado mensaje JSON 1 desde topic1: {cpu_candidates}")
         elif topic == TOPIC_QPU_CANDIDATES:
             # Procesando QPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC QPU CANDIDATES")
-            json2 = message.value
-            print(f"Procesado mensaje JSON 2 desde topic2: {json2}")
+            qpu_candidates = message.value
+            print(f"Procesado mensaje JSON 2 desde topic2: {qpu_candidates}")
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
             print("3 topics recieved")
@@ -128,6 +126,7 @@ def quantum_generator_string(candidates):
     return machines, services, machine_services_restrictions
 
 def machine_restriction(l):
+    print("MACHINE RESTRICTION")
     result = ""
     for pair in l:
         service_name, machine_list = pair
@@ -136,6 +135,7 @@ def machine_restriction(l):
         restriction = restriction + "\n"+ result
 
 def predicate_and_properties(use_case_restrictions, quantum, classical):
+    print("PREDICATE")
     properties = "run show for 25\n\
         label done [some UseCase:workflowDone=true]\n\
         property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
@@ -153,7 +153,8 @@ def haiq_file_generator():
     cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
     # Concatenar todo
     architectural_style_string = ""
-    with open("./architectural_model/hybrid_app", 'r') as architectural_model_file:
+    print("HAIQ GENERATOR")
+    with open("./architectural_specification/quantum-classical-app.als", 'r') as architectural_model_file:
         architectural_style_string = architectural_model_file.read()
     with open("./temp/behavioural.txt", 'r') as architectural_model_file:
         behavioural_string = architectural_model_file.read()
