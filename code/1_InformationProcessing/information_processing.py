@@ -60,14 +60,14 @@ def start_processing():
             #app_req_file_directory = app_zip_file_path + "/"+uploaded_file.name + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             #app_req_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             #app_model_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_MODEL_PATH 
-            app_req_file_directory = absolute_path + '/' + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
-            app_model_file_directory = absolute_path + '/' + MICROSERVICES_MODEL_PATH 
+            app_req_file_directory = absolute_path + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
+            app_model_file_directory = absolute_path + MICROSERVICES_MODEL_PATH 
             #app_oas_files = os.listdir(app_oas_file_directory)
             model_files = os.listdir(app_model_file_directory)
             behavioural_restrictions_dict = dict()
             for f in model_files:
                 print("OPENED FILE: "+ f)
-                with open(app_model_file_directory+f, 'r') as architectural_model_file:
+                with open(app_model_file_directory+"/"+f, 'r') as architectural_model_file:
                     behavioural_restrictions_dict[f] = architectural_model_file.read()
             print("ARCHITECTURAL FILES LOADED")
             print(behavioural_restrictions_dict)
