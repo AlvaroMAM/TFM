@@ -20,7 +20,7 @@ def processing_topics():
             print("LLEGO")
             # Procesando Behavioural File
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
-            behavioural_restrictions = message.value.decode('utf-8')
+            #behavioural_restrictions = message.value.decode('utf-8')
             behavioural = behavioural_restrictions['behavioural'] # POSIBLE ERROR PORQUE VENDRAN CON 2 ATTRIBUTOS BEHAVIOURAL Y RESTRICTIONS
             restrictions = behavioural_restrictions['restrictions']
             with open('./temp/behavioural.txt', 'w') as f:
