@@ -82,6 +82,7 @@ def classical_generator_string(candidates):
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
+                        print("CARACTERÍSTICAS")
                         print(characteristic)
                         machine_formulas=machine_formulas+"\nformula "+characteristic+" = "+machine_characteristics[characteristic]+";"
                     machine_formulas = machine_formulas+"\n/>"

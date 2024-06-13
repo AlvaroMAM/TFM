@@ -70,7 +70,7 @@ def select_qpu(qubits, shots):
                     #ms_cost = estimator(data, shots)
                     qpu_machine_estimation = dict()
                     qpu_machine_estimation['qpu_prize'] = machine_information['device_cost']['price'] # Price per Shot
-                    selected_qpus.append((qpu_machine,qpu_machine_estimation))
+                    selected_qpus.append(tuple((qpu_machine,qpu_machine_estimation)))
                     logging.debug("QPU-SELECTOR : QUANTUM MACHINE" + qpu_machine + "IS CANDIDATE")
     return selected_qpus
 
