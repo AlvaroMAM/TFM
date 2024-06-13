@@ -152,7 +152,9 @@ def quantum_generator_string(candidates):
                     machine_instance = machine_instance + machine_formulas
                     machines = machines + machine_instance+"\n"
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE COMPLETED")
-            machine_services_restrictions.append(tuple((service_name,not_used_machines))) 
+            machine_services_restrictions.append(tuple((service_name,not_used_machines)))
+            print("MACHIEN SERVICES")
+            print(machine_services_restrictions) 
     return machines, services, machine_services_restrictions
 
 def machine_restriction(l):
