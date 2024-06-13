@@ -65,7 +65,7 @@ def classical_generator_string(candidates):
                 cloud_provider_cpu_machines.append(cpu_machine)
     for service_name, attributes in candidates.items():
         print("comienzo")
-        not_used_machines = cloud_provider_cpu_machines # Por cada servicio me creo una copia 
+        not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia 
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
         service_formulas = "</"
