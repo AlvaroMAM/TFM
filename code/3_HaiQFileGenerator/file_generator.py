@@ -64,6 +64,7 @@ def classical_generator_string(candidates):
             for cpu_machine, machine_information in cpu_machines.items():
                 cloud_provider_cpu_machines.append(cpu_machine)
     for service_name, attributes in candidates.items():
+        print("comienzo")
         not_used_machines = cloud_provider_cpu_machines # Por cada servicio me creo una copia 
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
@@ -104,6 +105,7 @@ def classical_generator_string(candidates):
             # Coleccionar cada máquina del servicio
             # recorrer las máquinas disponibles del proveedor
             # si no está creo restricción
+            print("TERMINO DE PROCESAR MÁQUINAS DE SERVICIO")
             machine_services_restrictions.append(tuple((service_name,not_used_machines))) # Conjunto de pares servicio con máquinas no usadas \ 
             #para especificar las 
     return machines, services, machine_services_restrictions
