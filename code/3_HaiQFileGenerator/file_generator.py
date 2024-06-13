@@ -103,7 +103,7 @@ def classical_generator_string(candidates):
             # Coleccionar cada máquina del servicio
             # recorrer las máquinas disponibles del proveedor
             # si no está creo restricción
-            machine_services_restrictions.append(service_name,not_used_machines) # Conjunto de pares servicio con máquinas no usadas \ 
+            machine_services_restrictions.append(tuple((service_name,not_used_machines))) # Conjunto de pares servicio con máquinas no usadas \ 
             #para especificar las 
     return machines, services, machine_services_restrictions
 
