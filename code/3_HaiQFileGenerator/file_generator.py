@@ -64,7 +64,6 @@ def classical_generator_string(candidates):
             for cpu_machine, machine_information in cpu_machines.items():
                 cloud_provider_cpu_machines.append(cpu_machine)
     for service_name, attributes in candidates.items():
-        print("comienzo")
         not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia 
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
@@ -88,8 +87,6 @@ def classical_generator_string(candidates):
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
                 # Elimino la máquina de la copia
-                print("VOY POR "+machine_name)
-                print(not_used_machines) 
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
@@ -105,7 +102,6 @@ def classical_generator_string(candidates):
             # Coleccionar cada máquina del servicio
             # recorrer las máquinas disponibles del proveedor
             # si no está creo restricción
-            print("TERMINO DE PROCESAR MÁQUINAS DE SERVICIO")
             machine_services_restrictions.append(tuple((service_name,not_used_machines))) # Conjunto de pares servicio con máquinas no usadas \ 
             #para especificar las 
     return machines, services, machine_services_restrictions
@@ -147,11 +143,12 @@ def quantum_generator_string(candidates):
 def machine_restriction(l):
     print("MACHINE RESTRICTION")
     result = ""
+    restriction = ""
     for pair in l:
         service_name, machine_list = pair
         result = ' and '.join([f'"#({service_name} & {item}) = 0"' for item in machine_list])
         result = "all s:"+service_name+" | " + result
-        restriction = restriction + "\n"+ result
+        restriction = restriction + result + "\n"
 
 def predicate_and_properties(use_case_restrictions, quantum, classical):
     print("PREDICATE")
