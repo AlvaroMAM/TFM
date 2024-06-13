@@ -71,6 +71,8 @@ def start_processing():
                     behavioural_restrictions_dict[f] = architectural_model_file.read()
             print("ARCHITECTURAL FILES LOADED")
             print(behavioural_restrictions_dict)
+            producer.send(TOPIC_BEHAVIOURAL, behavioural_restrictions_dict)  
+            logging.debug("REQUEST /start --> BEHAVIOURAL JSON SEND")
             app_req_files = os.listdir(app_req_file_directory)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES
@@ -128,7 +130,7 @@ def start_processing():
             producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
             logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
             # SENDING MODEL FILE TO COMBINATIONS GENERATOR
-            producer.send(TOPIC_BEHAVIOURAL, behavioural_restrictions_dict)       
+                 
             return Response("EVALUATION PROCESS LAUNCHED", status=200, mimetype='text/plain')
     else:
         logging.debug("REQUEST /start --> FILES NOT RECIEVED")

@@ -168,7 +168,7 @@ if __name__=='__main__':
     print("FILE GENERATOR ON")
     logging.basicConfig(filename='file-generator.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     consumer = KafkaConsumer(
-    TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES,
+    [TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES],
     bootstrap_servers=[KAFKA_SERVER_URL],
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
     )
