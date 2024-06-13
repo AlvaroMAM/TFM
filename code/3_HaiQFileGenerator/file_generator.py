@@ -75,16 +75,15 @@ def classical_generator_string(candidates):
             for machine_array in attributes["selected_cpus"]:
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
-                # Elimino la máquina de la copia 
-                machine_services_restrictions.remove(machine_name)
+                # Elimino la máquina de la copia
+                print(not_used_machines) 
+                not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
                     machine_instance = "sig "+machine_name+" extends CPU {}\n"
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
-                        print("CARACTERÍSTICAS")
-                        print(characteristic)
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
                     machine_formulas = machine_formulas+"\n/>"
                     machine_instance = machine_instance + machine_formulas
