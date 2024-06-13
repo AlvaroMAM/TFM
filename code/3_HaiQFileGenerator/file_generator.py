@@ -59,7 +59,7 @@ def classical_generator_string(candidates):
         if os.path.isfile(cloud_provider_file):
             cpu_machines = None
             with open(cloud_provider_file, 'r') as f:
-                logging.debug("CPU-SELECTOR : CPU MACHINES READING")
+                logging.debug(" CPU MACHINES READING")
                 cpu_machines = json.load(f)
             for cpu_machine, machine_information in cpu_machines.items():
                 cloud_provider_cpu_machines.append(cpu_machine)
@@ -109,35 +109,48 @@ def classical_generator_string(candidates):
 def quantum_generator_string(candidates):
     services = ""
     machines = ""
+    cloud_provider_qpu_machines = []
     machine_services_restrictions = []
     processed_machines = []
+    cloud_providers_path = "./qpu-cloud-providers"
+    cloud_providers_list = os.listdir(cloud_providers_path)
+    for cloud_provider in cloud_providers_list:
+        cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
+        if os.path.isfile(cloud_provider_file):
+            cpu_machines = None
+            with open(cloud_provider_file, 'r') as f:
+                logging.debug("QPU MACHINES READING")
+                cpu_machines = json.load(f)
+            for cpu_machine, machine_information in cpu_machines.items():
+                cloud_provider_qpu_machines.append(cpu_machine)
     for service_name, attributes in candidates.items():
+        not_used_machines = cloud_provider_qpu_machines.copy()
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
-        logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
+        logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["shots"]:
             service_formulas="\nformula shots = "+str(attributes["shots"])+";"
         service_formulas="\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
-        logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE COMPLETED")
+        logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
         if attributes["selected_qpus"]:
             for machine_array in attributes["selected_qpus"]:
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
+                not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
                     machine_instance = "sig "+machine_name+" extends QPU {}\n"
-                    logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE CREATED")
+                    logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
-                        print("CARACTERISTICS")
-                        print(characteristic)
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
                     machine_formulas = machine_formulas+"\n/>"
                     machine_instance = machine_instance + machine_formulas
-                    logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
-                    machines = machines + machine_instance+"\n" 
+                    machines = machines + machine_instance+"\n"
+                    logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE COMPLETED")
+            machine_services_restrictions.append(tuple((service_name,not_used_machines))) 
     return machines, services, machine_services_restrictions
 
 def machine_restriction(l):
