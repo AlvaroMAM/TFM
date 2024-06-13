@@ -95,7 +95,7 @@ def classical_generator_string(candidates):
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
-                    machine_formulas = machine_formulas+"\n/>"
+                    machine_formulas = machine_formulas+"\n[services:cpair] true -> true;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
                     machines = machines + machine_instance+"\n"
@@ -117,12 +117,12 @@ def quantum_generator_string(candidates):
     for cloud_provider in cloud_providers_list:
         cloud_provider_file = os.path.join(cloud_providers_path+"/"+cloud_provider)
         if os.path.isfile(cloud_provider_file):
-            cpu_machines = None
+            qpu_machines = None
             with open(cloud_provider_file, 'r') as f:
                 logging.debug("QPU MACHINES READING")
-                cpu_machines = json.load(f)
-            for cpu_machine, machine_information in cpu_machines.items():
-                cloud_provider_qpu_machines.append(cpu_machine)
+                qpu_machines = json.load(f)
+            for qpu_machine, machine_information in qpu_machines.items():
+                cloud_provider_qpu_machines.append(qpu_machine)
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_qpu_machines.copy()
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
@@ -148,7 +148,7 @@ def quantum_generator_string(candidates):
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
-                    machine_formulas = machine_formulas+"\n/>"
+                    machine_formulas = machine_formulas+"\n[services:qpair] true -> true;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     machines = machines + machine_instance+"\n"
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE COMPLETED")
@@ -175,9 +175,8 @@ def predicate_and_properties(use_case_restrictions, quantum, classical):
         property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
         property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
         property SminR{" + 'performanceRew' + "}[F done]\n\
-        property SminR{" + 'costRew' + "}[F done]"
+        property SminR{" + 'costRew' + "}[F done]\n"
     quantum_machine_restriction = machine_restriction(quantum)
-    print("QUANTUM" + quantum_machine_restriction)
     classical_machine_restriction = machine_restriction(classical)
     predicate = "pred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
     return (predicate + properties)
