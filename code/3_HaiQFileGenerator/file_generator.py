@@ -85,7 +85,7 @@ def classical_generator_string(candidates):
                     for characteristic in machine_characteristics.items():
                         print("CARACTERÍSTICAS")
                         print(characteristic)
-                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+characteristic[1]+";"
+                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
                     machine_formulas = machine_formulas+"\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
@@ -124,7 +124,7 @@ def quantum_generator_string(candidates):
                     for characteristic in machine_characteristics.items():
                         print("CARACTERISTICS")
                         print(characteristic)
-                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+characteristic[1]+";"
+                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
                     machine_formulas = machine_formulas+"\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
