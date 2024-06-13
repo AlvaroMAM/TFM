@@ -67,7 +67,7 @@ def start_processing():
             behavioural_restrictions_dict = dict()
             for f in model_files:
                 print("OPENED FILE: "+ f)
-                with open(f, 'r') as architectural_model_file:
+                with open(app_model_file_directory+f, 'r') as architectural_model_file:
                     behavioural_restrictions_dict[f] = architectural_model_file.read()
             print("ARCHITECTURAL FILES LOADED")
             print(behavioural_restrictions_dict)
