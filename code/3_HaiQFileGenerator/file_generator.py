@@ -69,7 +69,7 @@ def classical_generator_string(candidates):
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["ms_logical_performance_factor"]:
-            service_formulas="\nformula ms_logical_performance_factor = "+str(attributes["ms_logical_performance_factor"])+";"
+            service_formulas= service_formulas + "\nformula ms_logical_performance_factor = "+str(attributes["ms_logical_performance_factor"])+";"
         if attributes["ms_ram"]:
             service_formulas="\nformula ms_ram = "+str(attributes["ms_ram"])+";"
         if attributes["ms_bandwidth"]:
@@ -129,7 +129,7 @@ def quantum_generator_string(candidates):
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["shots"]:
-            service_formulas="\nformula shots = "+str(attributes["shots"])+";"
+            service_formulas= service_formulas + "\nformula shots = "+str(attributes["shots"])+";"
         service_formulas="\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE COMPLETED")
@@ -169,16 +169,15 @@ def machine_restriction(l):
     return restriction
 
 def predicate_and_properties(use_case_restrictions, quantum, classical):
-    print("PREDICATE")
     properties = "run show for 25\n\
-        label done [some UseCase:workflowDone=true]\n\
-        property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
-        property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
-        property SminR{" + 'performanceRew' + "}[F done]\n\
-        property SminR{" + 'costRew' + "}[F done]\n"
+label done [some UseCase:workflowDone=true]\n\
+property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
+property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
+property SminR{" + 'performanceRew' + "}[F done]\n\
+property SminR{" + 'costRew' + "}[F done]\n"
     quantum_machine_restriction = machine_restriction(quantum)
     classical_machine_restriction = machine_restriction(classical)
-    predicate = "pred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
+    predicate = "\npred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
     return (predicate + properties)
 
 def haiq_file_generator():
