@@ -49,6 +49,7 @@ def start_processing():
             if not os.path.exists(absolute_path):
                 os.makedirs(absolute_path)
             app_zip_file_path = os.path.join(absolute_path, name)
+            print("ZIP FILE PATH"+ app_zip_file_path)
             zipfile[0].save(app_zip_file_path)
             logging.debug("REQUEST /start --> ZIP SAVED")
             logging.debug("REQUEST /start --> PROCESSING ZIP FILE")
