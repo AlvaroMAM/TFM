@@ -1,4 +1,4 @@
-one sig UseCase extends Hybrid_Deployment {}
+one sig HybridUseCase extends Hybrid_Deployment {}
 </
     enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
     var current_status:[status_analysis] init none;
@@ -29,8 +29,8 @@ abstract sig Aggregator extends Classical_Service {}
     [DataService:requestDataCall] (!ready) & (serviceOK) & (!DataService1Invoked) & (current_status=init) -> (DataServiceInvoked'=true) & (current_status'=dataCollection);
     [DataService:requestData] (!ready) & (serviceOK) & (DataServiceInvoked) & (current_status=dataCollection) -> (current_status'=transformingData);
     [] (DataServiceInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
-    [ClassicalGrover:launchGroverCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked'=true);
-    [ClassicalGrover:launchGrover] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
+    [launchSearchCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked'=true);
+    [launchSearch] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
 
     // Sumar solo las propiedades cuando se ejecuta
     reward performanceRew [ClassicalGrover:launchGrover] true : performance;
@@ -69,8 +69,8 @@ abstract sig ClassicalGrover extends Classical_Service {}
     var ResultProcessingServiceInvoked : bool init false;
 
     [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=1) & (current_status'=initial);
-    [Aggregator:launchGroverCall] (ready) -> (serviceOK'=true) & (ready'=false);
-    [Aggregator:launchGrover] (!ready) & (serviceOK) -> (current_status'=circuitBuilding);
+    [launchSearchCall] (ready) -> (serviceOK'=true) & (ready'=false);
+    [launchSearch] (!ready) & (serviceOK) -> (current_status'=circuitBuilding);
     [] (!ready) & (serviceOK) & (current_status=circuitBuilding) -> (current_status'=groverLaunch);
     [QuantumGrover:launchGroverCall] (!ready) & (serviceOK) & (current_status=groverLaunch) & (!GroverQuantumServiceInvoked) -> (GroverQuantumServiceInvoked'=true);
     [QuantumGrover:launchGrover] (!ready) & (serviceOK) & (current_status=groverLaunch) & (GroverQuantumServiceInvoked) -> (current_status'=resultRecovery);
@@ -102,6 +102,28 @@ abstract sig QuantumGrover extends Quantum_Service{}
     reward performanceRew [ClassicalGrover:results] true : performance;
     reward costRew [ClassicalGrover:results] true : cost;
 />
+abstract sig BinarySearch extends Classical_Service {}
+</ // Debe tener transiciones síncronas con quantum grover y processing_result services
+    formula performance;
+    formula availability;
+    formula cost;
+    var serviceOK: bool init false;
+    var ready : bool init true;
+    enum status_classical_grover:{initial, processing, resultReady, launchProcessingResult, done, none};
+    var current_status:[status_classical_grover] init none;
+    var ResultProcessingServiceInvoked : bool init false;
+
+    [machines:cpair] (current_status=none) -> (cost'=machines.machineCost*availability) & (performance'=1) & (current_status'=initial);
+    [launchSearchCall] (ready) -> (serviceOK'=true) & (ready'=false);
+    [launchSearch] (!ready) & (serviceOK) -> (current_status'=processing);
+    [] (!ready) & (serviceOK) & (current_status=processing) -> (current_status'=resultReady);
+    [ResultProcessor:resultsRecievedCall] (!ready) & (serviceOK) & (current_status=resultReady) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
+    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (current_status=resultReady) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [ResultProcessor:resultsRecieved] true : performance;
+    reward costRew [ResultProcessor:resultsRecieved] true : cost; 
+/>
+
 
 abstract sig ResultProcessor extends Classical_Service {}
 </

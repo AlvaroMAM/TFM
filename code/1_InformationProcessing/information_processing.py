@@ -10,7 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request, Response
 from zipfile import ZipFile
 from kafka import KafkaProducer
-from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU
+from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU, TOPIC_BEHAVIOURAL
 import logging
 import os
 import yaml
@@ -60,6 +60,14 @@ def start_processing():
             app_req_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             app_model_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_MODEL_PATH 
             #app_oas_files = os.listdir(app_oas_file_directory)
+            model_files = os.listdir(app_model_file_directory)
+            behavioural_restrictions_dict = dict()
+            for f in model_files:
+                print("OPENED FILE: "+ f)
+                with open("./"+f, 'r') as architectural_model_file:
+                    behavioural_restrictions_dict[f] = architectural_model_file.read()
+            print("ARCHITECTURAL FILES LOADED")
+            print(behavioural_restrictions_dict)
             app_req_files = os.listdir(app_req_file_directory)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES

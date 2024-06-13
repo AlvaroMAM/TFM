@@ -6,46 +6,10 @@
 	Descripcion:
 	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
 */
-// Las máquinas deben de estar relacionadas con servicios 
+
 abstract sig PU {services : some Service}
 abstract sig QPU extends PU {}
 abstract sig CPU extends PU {}
-
-// Signaturas dependientes del Caso de Estudio
-/* Defintion of QPU Machines */
-/*
-lone abstract sig Aquila extends QPU {}
-lone abstract sig Aria_1 extends QPU {}
-lone abstract sig Aria_2 extends QPU {}
-lone abstract sig Aspen_m_3 extends QPU {}
-lone abstract sig Forte_1 extends QPU {}
-lone abstract sig Harmony extends QPU {}
-lone abstract sig Lucy extends QPU {}
-*/
-//sig Dm1 extends QPU {}
-//sig Sv1 extends QPU {}
-sig Tn1 extends QPU {}
-sig Local extends QPU {}
-
-/* Definition of CPU Machines */
-/*
-lone abstract sig T2_nano extends CPU {}
-lone abstract sig T2_micro extends CPU {}
-lone abstract sig T2_small extends CPU {}
-lone abstract sig T2_medium extends CPU {}
-lone abstract sig T2_large extends CPU {}
-lone abstract sig T2_xlarge extends CPU {}
-lone abstract sig T2_2xlarge extends CPU {}
-lone abstract sig T3_nano extends CPU {}
-lone abstract sig T3_micro extends CPU {}
-lone abstract sig T3_small extends CPU {}
-*/
-sig T3_medium extends CPU {}
-//lone abstract sig T3_large extends CPU {}
-sig T3_xlarge extends CPU {}
-//sig T3_2xlarge extends CPU {}
-
-/* Definition of Services */
 abstract sig Service {
 	machines : some PU,
 	deployment : one Deployment,
@@ -54,33 +18,11 @@ abstract sig Service {
 }
 abstract sig Classical_Service extends Service {}
 abstract sig Quantum_Service extends Service {}
-/*Definition of Deployment*/
 abstract sig Deployment {services: some Service}
 abstract sig Hybrid_Deployment extends Deployment {}
 abstract sig Classical_Deployment extends Deployment {}
-
-
-/* Definition of Use Case Services (Generic) */
 lone sig HybridUseCase extends Hybrid_Deployment {}
 lone sig ClassicalUseCase extends Classical_Deployment {}
-/*APPLICATION SPECIFIC CASE*/
-abstract sig Aggregator extends Classical_Service {}
-abstract sig DataService extends Classical_Service {}
-abstract sig ClassicalGrover extends Classical_Service {}
-abstract sig QuantumGrover extends Quantum_Service{}
-abstract sig ResultProcessor extends Classical_Service {}
-abstract sig BinarySearch extends Classical_Service {}
-/* Instances definition */
-one sig DS1 extends DataService {}
-one sig DS2 extends DataService {}
-one sig DS3 extends DataService {}
-one sig A1 extends Aggregator {}
-// lone para que la generación pueda ser clásica o cuántica
-lone sig CG1 extends ClassicalGrover {}
-lone sig QG1  extends QuantumGrover {}
-lone sig BS1 extends BinarySearch {}
-one sig RP1 extends ResultProcessor {}
-
 
 fact {
 /*-------------------------------------------- Architectural-Restrictions ------------------------------------------------------*/

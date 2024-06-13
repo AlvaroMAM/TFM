@@ -9,6 +9,7 @@ cpu_candidates = None
 qpu_candidates = None
 
 def processing_topics():
+    print("Waiting for topics")
     global behavioural_restrictions, cpu_candidates, qpu_candidates
     # Procesar mensajes de los topics
     logging.debug("FILE-GENERATOR : WAITING FOR MESSAGES")
@@ -38,6 +39,7 @@ def processing_topics():
             print(f"Procesado mensaje JSON 2 desde topic2: {json2}")
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
+            print("3 topics recieved")
             break
     consumer.close()
 
@@ -162,6 +164,7 @@ def haiq_file_generator():
         haiq_file.write(file_string)
             
 if __name__=='__main__':
+    print("FILE GENERATOR ON")
     logging.basicConfig(filename='file-generator.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     consumer = KafkaConsumer(
     TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES,
@@ -169,5 +172,6 @@ if __name__=='__main__':
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
     )
     logging.debug("FILE-GENERATOR : INITIALIZED")
+    # Faltaría un while true para que vaya iterando
     processing_topics()
     haiq_file_generator()
