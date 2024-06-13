@@ -8,7 +8,7 @@ Servicio encargado de seleccionar un conjunto de máquinas de CPU compatibles
 para la ejecución de los microservicios que conforman la aplicación híbrida (cuántico-clásica)
 """
 from kafka import KafkaConsumer, KafkaProducer
-from config.config import KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_CPU_CANDIDATES
+from config.config import KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL
 import json
 import logging
 import os
@@ -132,4 +132,5 @@ if __name__ == '__main__':
             app_cpu_machines[microservice_name]['selected_cpus'] = select_cpu(logical_performance_ms, requirements['ram'], bandwidth_ms) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         print(app_cpu_machines)
+        producer.send(TOPIC_CPU_CANDIDATES, app_cpu_machines)
         

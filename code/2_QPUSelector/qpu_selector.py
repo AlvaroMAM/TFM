@@ -91,3 +91,4 @@ if __name__ == '__main__':
             app_qpu_machines[microservice_name]['selected_qpus'] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
             logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
         print(app_qpu_machines)
+        producer.send(TOPIC_QPU_CANDIDATES, app_qpu_machines)
