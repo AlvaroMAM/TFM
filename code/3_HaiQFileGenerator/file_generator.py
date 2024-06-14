@@ -31,12 +31,12 @@ def processing_topics():
             # Procesando CPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC CPU CANDIDATES")
             cpu_candidates = message.value
-            print(f"Procesado mensaje JSON 1 desde topic1: {cpu_candidates}")
+            print(f"Procesado mensaje desde topic: {topic}")
         elif topic == TOPIC_QPU_CANDIDATES:
             # Procesando QPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC QPU CANDIDATES")
             qpu_candidates = message.value
-            print(f"Procesado mensaje JSON 2 desde topic2: {qpu_candidates}")
+            print(f"Procesado mensaje desde topic: {topic}")
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
             print("3 topics recieved")
@@ -131,10 +131,13 @@ def quantum_generator_string(candidates):
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         print("ATTRIBUTES")
-        print(attributes)
+        print(attributes["shots"])
         if attributes["shots"]:
             #NO ENTRA
+
             service_formulas= service_formulas + "\nformula shots = "+str(attributes["shots"])+";"
+        else:
+            print("NO ENTRO")
         service_formulas="\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE COMPLETED")
@@ -143,8 +146,6 @@ def quantum_generator_string(candidates):
             for machine_array in attributes["selected_qpus"]:
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
-                print("ELIMINO")
-                print(not_used_machines)
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
@@ -161,15 +162,12 @@ def quantum_generator_string(candidates):
     return machines, services, machine_services_restrictions
 
 def machine_restriction(l):
-    print("MACHINE RESTRICTION")
     result = ""
     restriction = ""
     for pair in l:
         service_name, machine_list = pair
         result = ' and '.join([f'#({service_name} & {item}) = 0' for item in machine_list])
         result = "all s:"+service_name+" | " + result
-        print("RESULT FINAL")
-        print(result)
         restriction = restriction + result + "\n"
     return restriction
 
@@ -187,11 +185,11 @@ property SminR{" + 'costRew' + "}[F done]\n"
 
 def haiq_file_generator():
     global cpu_candidates, qpu_candidates
+    print("HAIQ GENERATOR")
     qpu_machines, qpu_services, quantum = quantum_generator_string(qpu_candidates)
     cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
     # Concatenar todo
     architectural_style_string = ""
-    print("HAIQ GENERATOR")
     with open("./architectural_specification/quantum-classical-app.als", 'r') as architectural_model_file:
         architectural_style_string = architectural_model_file.read()
     with open("./temp/behavioural.txt", 'r') as architectural_model_file:
