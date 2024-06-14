@@ -69,18 +69,17 @@ def classical_generator_string(candidates):
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
         service_formulas = "</"
         #NO ENTRA EN LOS IFS
-        
         if attributes["ms_logical_performance_factor"]:
             service_formulas= service_formulas + "\nformula ms_logical_performance_factor = "+str(attributes["ms_logical_performance_factor"])+";"
         if attributes["ms_ram"]:
-            service_formulas="\nformula ms_ram = "+str(attributes["ms_ram"])+";"
+            service_formulas=service_formulas + "\nformula ms_ram = "+str(attributes["ms_ram"])+";"
         if attributes["ms_bandwidth"]:
-            service_formulas="\nformula ms_bandwidth = "+str(attributes["ms_bandwidth"])+";"
+            service_formulas=service_formulas +"\nformula ms_bandwidth = "+str(attributes["ms_bandwidth"])+";"
         if attributes["ms_execution_time"]:
-            service_formulas="\nformula ms_execution_time = "+str(attributes["ms_execution_time"])+";"
+            service_formulas=service_formulas +"\nformula ms_execution_time = "+str(attributes["ms_execution_time"])+";"
         if attributes["ms_availability"]:
-            service_formulas="\nformula ms_availability = "+str(attributes["ms_availability"])+";"
-        service_formulas="\nformula cost = 0;\nformula performance = 0;\n/>" # En microservicio clásico sería cost y performance
+            service_formulas=service_formulas +"\nformula ms_availability = "+str(attributes["ms_availability"])+";"
+        service_formulas=service_formulas +"\nformula cost = 0;\nformula performance = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
         logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
@@ -130,15 +129,9 @@ def quantum_generator_string(candidates):
         service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
-        print("ATTRIBUTES")
-        print(attributes["shots"])
         if attributes["shots"]:
-            #NO ENTRA
-            print("ENTRO EN QUANTUM")
             service_formulas= service_formulas + "\nformula shots = "+str(attributes["shots"])+";"
-        else:
-            print("NO ENTRO")
-        service_formulas="\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
+        service_formulas= service_formulas + "\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
