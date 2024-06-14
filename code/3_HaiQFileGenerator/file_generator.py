@@ -126,7 +126,7 @@ def quantum_generator_string(candidates):
                 cloud_provider_qpu_machines.append(qpu_machine)
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_qpu_machines.copy()
-        service_instance = "one "+service_name+" extends "+service_name.capitalize()+" {}\n"
+        service_instance = "one "+service_name+" extends "+"Quantum"+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["shots"]:
