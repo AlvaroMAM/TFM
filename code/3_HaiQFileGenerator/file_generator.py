@@ -194,6 +194,8 @@ def haiq_file_generator():
     # Guardar string como archivo .haiq en carpeta ./temp
     with open("./temp/hybrid-iot.haiq","w") as haiq_file:
         haiq_file.write(file_string)
+    print("HAIQ FILE GENERATED")
+    logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")
             
 if __name__=='__main__':
     print("FILE GENERATOR ON")
@@ -205,5 +207,6 @@ if __name__=='__main__':
     logging.debug("FILE-GENERATOR : INITIALIZED")
     # Faltaría un while true para que vaya iterando
     consumer.subscribe([TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES])
-    processing_topics()
-    haiq_file_generator()
+    while True:
+        processing_topics()
+        haiq_file_generator()
