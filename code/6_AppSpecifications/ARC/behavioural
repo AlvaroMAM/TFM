@@ -115,9 +115,13 @@ abstract sig QuantumGrover extends Quantum_Service{}
     reward costRew [ClassicalGrover:results] true : cost;
 />
 abstract sig BinarySearch extends Classical_Service {}
-</ // Debe tener transiciones síncronas con quantum grover y processing_result services
+</
+    formula ms_logical_performance_factor;
+    formula ms_ram;
+    formula ms_bandwidth;
+    formula ms_execution_time;
+    formula ms_availability;
     formula performance;
-    formula availability;
     formula cost;
     var serviceOK: bool init false;
     var ready : bool init true;
