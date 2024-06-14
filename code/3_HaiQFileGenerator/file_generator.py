@@ -134,7 +134,7 @@ def quantum_generator_string(candidates):
         print(attributes["shots"])
         if attributes["shots"]:
             #NO ENTRA
-
+            print("ENTRO EN QUANTUM")
             service_formulas= service_formulas + "\nformula shots = "+str(attributes["shots"])+";"
         else:
             print("NO ENTRO")
