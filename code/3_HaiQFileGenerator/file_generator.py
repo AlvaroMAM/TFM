@@ -40,8 +40,10 @@ def processing_topics():
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
             print("3 topics recieved")
-            break
-    consumer.close()
+            behavioural_restrictions = None
+            cpu_candidates = None
+            qpu_candidates = None
+            haiq_file_generator()
 
 
 def classical_generator_string(candidates):
@@ -177,7 +179,7 @@ property SminR{" + 'costRew' + "}[F done]\n"
     return (predicate + properties)
 
 def haiq_file_generator():
-    global cpu_candidates, qpu_candidates
+    global cpu_candidates, qpu_candidates, behavioural_restrictions
     print("HAIQ GENERATOR")
     qpu_machines, qpu_services, quantum = quantum_generator_string(qpu_candidates)
     cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
@@ -196,6 +198,11 @@ def haiq_file_generator():
         haiq_file.write(file_string)
     print("HAIQ FILE GENERATED")
     logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")
+    behavioural_restrictions = None
+    cpu_candidates = None
+    qpu_candidates = None
+    logging.debug("FILE-GENERATOR : RESET VARs")
+
             
 if __name__=='__main__':
     print("FILE GENERATOR ON")
@@ -207,6 +214,6 @@ if __name__=='__main__':
     logging.debug("FILE-GENERATOR : INITIALIZED")
     # Faltaría un while true para que vaya iterando
     consumer.subscribe([TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES])
-    while True:
-        processing_topics()
-        haiq_file_generator()
+   
+    processing_topics()
+    
