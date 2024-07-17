@@ -1,6 +1,6 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: aggregator
+  id: binary_search
   api: ../OAS/binary_search.yml
   mode: CPU
   author: SPILab

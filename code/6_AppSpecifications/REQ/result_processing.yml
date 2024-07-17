@@ -1,6 +1,6 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: result-processing
+  id: result_processing
   api: ../OAS/result_processing.yml
   mode: CPU
   author: SPILab

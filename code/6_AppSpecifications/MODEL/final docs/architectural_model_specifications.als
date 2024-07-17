@@ -65,21 +65,21 @@ lone sig HybridUseCase extends Hybrid_Deployment {}
 lone sig ClassicalUseCase extends Classical_Deployment {}
 /*APPLICATION SPECIFIC CASE*/
 abstract sig Aggregator extends Classical_Service {}
-abstract sig DataService extends Classical_Service {}
-abstract sig ClassicalGrover extends Classical_Service {}
-abstract sig QuantumGrover extends Quantum_Service{}
-abstract sig ResultProcessor extends Classical_Service {}
-abstract sig BinarySearch extends Classical_Service {}
+abstract sig Sensor extends Classical_Service {}
+abstract sig Grover_alg extends Classical_Service {}
+abstract sig QuantumGrover_alg extends Quantum_Service{}
+abstract sig Result_processing extends Classical_Service {}
+abstract sig Binary_search extends Classical_Service {}
 /* Instances definition */
-one sig DS1 extends DataService {}
-one sig DS2 extends DataService {}
-one sig DS3 extends DataService {}
+one sig S1 extends Sensor {}
+one sig S2 extends Sensor {}
+one sig S3 extends Sensor {}
 one sig A1 extends Aggregator {}
 // lone para que la generación pueda ser clásica o cuántica
-lone sig CG1 extends ClassicalGrover {}
-lone sig QG1  extends QuantumGrover {}
-lone sig BS1 extends BinarySearch {}
-one sig RP1 extends ResultProcessor {}
+lone sig CG1 extends Grover_alg {}
+lone sig QG1  extends QuantumGrover_alg {}
+lone sig BS1 extends Binary_search {}
+one sig RP1 extends Result_processing {}
 
 
 fact {
@@ -160,27 +160,27 @@ all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
  
 /*--------------------------------------------------Use-Case----------------------------------------------------------------*/
 // Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
-all ds: DataService,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in ClassicalGrover.link and ds not in ResultProcessor.link and ds not in QuantumGrover.link and ds not in BinarySearch.link
+all ds: Sensor,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in Grover_alg.link and ds not in Result_processing.link and ds not in QuantumGrover_alg.link and ds not in Binary_search.link
 // Aggregator solo se conecta con ClassicalGrover o con Binary Search
-all ag: Aggregator | #(ag.link & QuantumGrover) = 0 and #(ag.link & ResultProcessor) = 0 
-all cg: ClassicalGrover, ag: Aggregator | cg in ag.link and ag in cg.link and ag not in cg.hybrid_service.link
+all ag: Aggregator | #(ag.link & QuantumGrover_alg) = 0 and #(ag.link & Result_processing) = 0 
+all cg: Grover_alg, ag: Aggregator | cg in ag.link and ag in cg.link and ag not in cg.hybrid_service.link
 // Aggregator solo se conecta con Binary Search
-all bs: BinarySearch, ag: Aggregator | bs in ag.link and ag in bs.link
+all bs: Binary_search, ag: Aggregator | bs in ag.link and ag in bs.link
 // El servicio híbrido está formado por QuantumGrover y ClassicalGrover
-all qg: QuantumGrover, cg: ClassicalGrover | qg in cg.hybrid_service and cg in qg.hybrid_service
+all qg: QuantumGrover_alg, cg: Grover_alg | qg in cg.hybrid_service and cg in qg.hybrid_service
 // Para todo Quantum Grover, solo puede estar conectado a servicio ClassicalGrover
 // El servicio de procesamiento de resultado, solo está conectado con el servicio Clasico de grover
-all rp: ResultProcessor,  cg: ClassicalGrover | #(rp.link) = 1 and #(rp.link & ClassicalGrover) > 0 and rp in cg.link and rp not in QuantumGrover.link and rp not in Aggregator.link and rp not in DataService.link 
+all rp: Result_processing,  cg: Grover_alg | #(rp.link) = 1 and #(rp.link & Grover_alg) > 0 and rp in cg.link and rp not in QuantumGrover_alg.link and rp not in Aggregator.link and rp not in Sensor.link 
 // El servicio de procesamiento de resultado, solo está conectado con el servicio de Búsqueda Binaria
-all rp: ResultProcessor,  bs: BinarySearch | #(rp.link) = 1 and #(rp.link & BinarySearch) > 0 and rp in bs.link
+all rp: Result_processing,  bs: Binary_search | #(rp.link) = 1 and #(rp.link & Binary_search) > 0 and rp in bs.link
 // Para todo despliegue híbrido debe haber un grover clásico y un grover cuántico y ningún búsqueda binaria
-all hd: Hybrid_Deployment | #(hd.services & QuantumGrover) = 1 and #(hd.services & ClassicalGrover) = 1  and #(hd.services & BinarySearch) = 0
+all hd: Hybrid_Deployment | #(hd.services & QuantumGrover_alg) = 1 and #(hd.services & Grover_alg) = 1  and #(hd.services & Binary_search) = 0
 // Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
-all cd: Classical_Deployment | #(cd.services & QuantumGrover) = 0 and #(cd.services & ClassicalGrover) = 0  and #(cd.services & BinarySearch) = 1
+all cd: Classical_Deployment | #(cd.services & QuantumGrover_alg) = 0 and #(cd.services & Grover_alg) = 0  and #(cd.services & Binary_search) = 1
 /*---------------------------------------------------------------------------------------------------------------------------*/
 /*TO BE COMPLETED WITH SERVICES MACHINES RESTRICTIONS HAIQ*/
 // Creo que solo es necesario indicarlo por parte del punto de vista del servicio porque desde el punto de vista de la máquina se debe cumplir all pu: PU, s: Service | s in pu.services implies s.machines = pu
-all rp: ResultProcessor | #(rp.machines & T3_xlarge) = 0 // Ejemplo
+all rp: Result_processing | #(rp.machines & T3_xlarge) = 0 // Ejemplo
 }
 
 pred show {

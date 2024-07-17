@@ -7,8 +7,8 @@ one sig HybridUseCase extends Hybrid_Deployment {}
     var workflowDone: bool init false;
     [launch] (current_status=initial) -> (current_status'=launchAnalysis);
     // 1. Launching Analysis
-    [services:activationCall] (current_status=launchAnalysis) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (current_status'=waitingResults); // Se sincroniza con aggregator
-    [services:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done) & (workflowDone'=true);
+    [Aggregator:activationCall] (current_status=launchAnalysis) & (!AggregatorServiceInvoked) -> (AggregatorServiceInvoked'=true) & (current_status'=waitingResults); // Se sincroniza con aggregator
+    [ResultProcessor:showQuantumResults] (current_status=waitingResults) & (AggregatorServiceInvoked) -> (current_status'=done) & (workflowDone'=true);
 />
 
 abstract sig Aggregator extends Classical_Service {}
@@ -23,27 +23,27 @@ abstract sig Aggregator extends Classical_Service {}
     enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
     var serviceOK: bool init false;
     var ready : bool init true;
-    var SensorInvoked : bool init false;
+    var DataServiceInvoked : bool init false;
     var GroverClassicalServiceInvoked : bool init false;
     var current_status:[status_aggregator] init none;
 
     //Calcular coste y rendimiento según la máquina con la que esté relacionada
     [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (ready) -> (serviceOK'=true) & (ready'=false);
-    [link:requestDataCall] (!ready) & (serviceOK) & (!SensorInvoked) & (current_status=init) -> (SensorInvoked'=true) & (current_status'=dataCollection);
-    [link:requestData] (!ready) & (serviceOK) & (SensorInvoked) & (current_status=dataCollection) -> (current_status'=transformingData);
-    [] (SensorInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
+    [DeploymentWorkFlow:activationCall] (ready) -> (serviceOK'=true) & (ready'=false);
+    [DataService:requestDataCall] (!ready) & (serviceOK) & (!DataService1Invoked) & (current_status=init) -> (DataServiceInvoked'=true) & (current_status'=dataCollection);
+    [DataService:requestData] (!ready) & (serviceOK) & (DataServiceInvoked) & (current_status=dataCollection) -> (current_status'=transformingData);
+    [] (DataServiceInvoked) & (current_status=transformingData) -> (current_status'=groverCall);
     [launchSearchCall] (current_status=groverCall) & (!GroverClassicalServiceInvoked)-> (current_status'=launchGrover) & (GroverClassicalServiceInvoked'=true);
     [launchSearch] (GroverClassicalServiceInvoked) & (current_status=launchGrover) -> (current_status'=done) & (ready'=false) & (serviceOK'=false); // Aquí terminaria
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [launchSearch] true : performance;
-    reward costRew [launchSearch] true : cost;
+    reward performanceRew [ClassicalGrover:launchGrover] true : performance;
+    reward costRew [ClassicalGrover:launchGrover] true : cost;
 />
 
-abstract sig Sensor extends Classical_Service {}
+abstract sig DataService extends Classical_Service {}
 </
-    enum status_sensor:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
+    enum status_dataservice:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
     formula ms_logical_performance_factor;
     formula ms_ram;
     formula ms_bandwidth;
@@ -53,18 +53,18 @@ abstract sig Sensor extends Classical_Service {}
     formula cost;
     var serviceOK: bool init false;
     var ready : bool init true;
-    var current_status:[status_sensor] init none;
+    var current_status:[status_dataservice] init none;
     //[nombrerelacion:nombrefuncion]
     [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:requestDataCall] (ready) -> (serviceOK'=true) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
-    [link:requestData] (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
+    [Aggregator:requestDataCall] (ready) -> (serviceOK'=true) & (ready'=false); // Creo que esta linea no es necesaria en este caso de estudio porque no se está teniendo en cuenta el éxito en las llamadas
+    [Aggregator:requestData] (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:requestData] true : performance;
-    reward costRew [link:requestData] true : cost; 
+    reward performanceRew [Aggregator:requestData] true : performance;
+    reward costRew [Aggregator:requestData] true : cost; 
 />
 
-abstract sig Grover_alg extends Classical_Service {}
+abstract sig ClassicalGrover extends Classical_Service {}
 </ // Debe tener transiciones síncronas con quantum grover y processing_result services
     formula ms_logical_performance_factor;
     formula ms_ram;
@@ -84,18 +84,18 @@ abstract sig Grover_alg extends Classical_Service {}
     [launchSearchCall] (ready) -> (serviceOK'=true) & (ready'=false);
     [launchSearch] (!ready) & (serviceOK) -> (current_status'=circuitBuilding);
     [] (!ready) & (serviceOK) & (current_status=circuitBuilding) -> (current_status'=groverLaunch);
-    [link:launchGroverCall] (!ready) & (serviceOK) & (current_status=groverLaunch) & (!GroverQuantumServiceInvoked) -> (GroverQuantumServiceInvoked'=true);
-    [link:launchGrover] (!ready) & (serviceOK) & (current_status=groverLaunch) & (GroverQuantumServiceInvoked) -> (current_status'=resultRecovery);
-    [link:results] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) -> (current_status'=launchProcessingResult);
-    [link:resultsRecievedCall] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
-    [link:resultsRecieved] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=launchProcessingResult) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false); // Termina el proceso Clásico de grover
+    [QuantumGrover:launchGroverCall] (!ready) & (serviceOK) & (current_status=groverLaunch) & (!GroverQuantumServiceInvoked) -> (GroverQuantumServiceInvoked'=true);
+    [QuantumGrover:launchGrover] (!ready) & (serviceOK) & (current_status=groverLaunch) & (GroverQuantumServiceInvoked) -> (current_status'=resultRecovery);
+    [QuantumGrover:results] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) -> (current_status'=launchProcessingResult);
+    [ResultProcessor:resultsRecievedCall] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=resultRecovery) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
+    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (GroverQuantumServiceInvoked) & (current_status=launchProcessingResult) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false); // Termina el proceso Clásico de grover
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:resultsRecieved] true : performance;
-    reward costRew [deployment:resultsRecieved] true : cost; 
+    reward performanceRew [ResultProcessor:resultsRecieved] true : performance;
+    reward costRew [ResultProcessor:resultsRecieved] true : cost; 
 />
 
-abstract sig QuantumGrover_alg extends Quantum_Service{}
+abstract sig QuantumGrover extends Quantum_Service{}
 </
     formula shots;
     formula cost;
@@ -104,17 +104,17 @@ abstract sig QuantumGrover_alg extends Quantum_Service{}
     var ready : bool init true;
     var current_status:[status_quantum_grover] init none;
     [machines:qpair] (current_status=none) -> (cost'=machines.qpu_prize*shots) & (current_status'=initial);
-    [link:launchGroverCall] (current_status=initial) & (ready) -> (serviceOK'=true) & (ready'=false);
-    [link:launchGrover] (current_status=initial) & (!ready) & (serviceOK) -> (current_status'=enqueue);
+    [ClassicalGrover:launchGroverCall] (current_status=initial) & (ready) -> (serviceOK'=true) & (ready'=false);
+    [ClassicalGrover:launchGrover] (current_status=initial) & (!ready) & (serviceOK) -> (current_status'=enqueue);
     [] (current_status=enqueue) & (!ready) & (serviceOK) -> 0.5: (current_status'=enqueue) + 0.5 (current_status'=executing); // Simulating A Queue with probabilistic execution
     [] (current_status=executing) & (!ready) & (serviceOK) -> (current_status'=done); // Simulating A Queue with probabilistic execution
-    [link:results] (current_status'=done) & (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
+    [ClassicalGrover:results] (current_status'=done) & (!ready) & (serviceOK) -> (ready'=true) & (serviceOK'=false);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:results] true : performance;
-    reward costRew [deployment:results] true : cost;
+    reward performanceRew [ClassicalGrover:results] true : performance;
+    reward costRew [ClassicalGrover:results] true : cost;
 />
-abstract sig Binary_search extends Classical_Service {}
+abstract sig BinarySearch extends Classical_Service {}
 </
     formula ms_logical_performance_factor;
     formula ms_ram;
@@ -133,15 +133,15 @@ abstract sig Binary_search extends Classical_Service {}
     [launchSearchCall] (ready) -> (serviceOK'=true) & (ready'=false);
     [launchSearch] (!ready) & (serviceOK) -> (current_status'=processing);
     [] (!ready) & (serviceOK) & (current_status=processing) -> (current_status'=resultReady);
-    [link:resultsRecievedCall] (!ready) & (serviceOK) & (current_status=resultReady) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
-    [link:resultsRecieved] (!ready) & (serviceOK) & (current_status=resultReady) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
+    [ResultProcessor:resultsRecievedCall] (!ready) & (serviceOK) & (current_status=resultReady) & (!ResultProcessingServiceInvoked)-> (ResultProcessingServiceInvoked'=true);
+    [ResultProcessor:resultsRecieved] (!ready) & (serviceOK) & (current_status=resultReady) & (ResultProcessingServiceInvoked) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:resultsRecieved] true : performance;
-    reward costRew [link:resultsRecieved] true : cost; 
+    reward performanceRew [ResultProcessor:resultsRecieved] true : performance;
+    reward costRew [ResultProcessor:resultsRecieved] true : cost; 
 />
 
 
-abstract sig Result_processing extends Classical_Service {}
+abstract sig ResultProcessor extends Classical_Service {}
 </
     formula ms_logical_performance_factor;
     formula ms_ram;
@@ -155,14 +155,14 @@ abstract sig Result_processing extends Classical_Service {}
     var ready : bool init true;
     var current_status:[status_processor] init none;
     [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:resultsRecievedCall] (ready) -> (serviceOK'=true) & (ready'=false); 
-    [link:resultsRecieved] (!ready) & (serviceOK) -> (current_status'=recievingResult);
+    [ClassicalGrover:resultsRecievedCall] (ready) -> (serviceOK'=true) & (ready'=false); 
+    [ClassicalGrover:resultsRecieved] (!ready) & (serviceOK) -> (current_status'=recievingResult);
     [] (!ready) & (serviceOK) & (current_status=recievingResult) ->  (current_status'=processingResult);
     [] (!ready) & (serviceOK) & (current_status=processingResult) ->  (current_status'=resultsReady);
-    [link:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
+    [DeploymentWorkFlow:showQuantumResults] (current_status=resultReady) & (!ready) & (serviceOK) -> (current_status'=done) & (ready'=true) & (serviceOK'=false);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:showQuantumResults] true : performance;
-    reward costRew [link:showQuantumResults] true : cost;
+    reward performanceRew [DeploymentWorkFlow:showQuantumResults] true : performance;
+    reward costRew [DeploymentWorkFlow:showQuantumResults] true : cost;
 
 />

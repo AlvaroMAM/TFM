@@ -1,6 +1,6 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: sensor-1
+  id: sensor_1
   api: ../OAS/sensor_1.yml
   mode: CPU
   author: SPILab
