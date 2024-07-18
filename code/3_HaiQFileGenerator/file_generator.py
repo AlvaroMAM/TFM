@@ -160,8 +160,8 @@ def machine_restriction(l):
     restriction = ""
     for pair in l:
         service_name, machine_list = pair
-        result = ' and '.join([f'#({service_name} & {item}) = 0' for item in machine_list])
-        result = "all s:"+service_name+" | " + result
+        result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list])
+        result = "all s:"+service_name.capitalize()+" | " + result
         restriction = restriction + result + "\n"
     return restriction
 
