@@ -101,7 +101,7 @@ def select_cpu (logical_performance_cpu, ram, bandwidth):
                     cpu_machine_estimation['cpu_ram'] = float(machine_information['ram'])
                     cpu_machine_estimation['cpu_bandwidth'] = int(machine_information['bandwidth'])
                     cpu_machine_estimation['cpu_cost_factor'] = machine_information['prize']
-                    selected_cpus.append((cpu_machine,cpu_machine_estimation))
+                    selected_cpus.append((cpu_machine.replace(".","_"),cpu_machine_estimation))
                     logging.debug("CPU-SELECTOR : CPU MACHINE" + cpu_machine + "IS CANDIDATE")
             continue
     return selected_cpus
