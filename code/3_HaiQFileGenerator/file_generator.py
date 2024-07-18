@@ -61,7 +61,7 @@ def classical_generator_string(candidates):
                 logging.debug(" CPU MACHINES READING")
                 cpu_machines = json.load(f)
             for cpu_machine, machine_information in cpu_machines.items():
-                cloud_provider_cpu_machines.append(cpu_machine)
+                cloud_provider_cpu_machines.append(cpu_machine.replace(".","_"))
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia
         for instance_number in range(int(attributes["ms_instances"])): 
@@ -123,7 +123,7 @@ def quantum_generator_string(candidates):
                 logging.debug("QPU MACHINES READING")
                 qpu_machines = json.load(f)
             for qpu_machine, machine_information in qpu_machines.items():
-                cloud_provider_qpu_machines.append(qpu_machine)
+                cloud_provider_qpu_machines.append(qpu_machine.replace(".","_"))
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_qpu_machines.copy()
         #Para los cuánticos, su instancia es única
