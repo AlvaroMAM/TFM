@@ -49,6 +49,10 @@ behaviour:
     type: integer
     format: int64
     description: "Number of online hours per day of the classic microservice"
+  instances:
+    type: integer
+    format: int64
+    description: "Number of instances of the microservice"  
   shots:
     type: integer
     format: int64

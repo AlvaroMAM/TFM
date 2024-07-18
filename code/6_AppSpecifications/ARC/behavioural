@@ -95,7 +95,7 @@ abstract sig Grover_alg extends Classical_Service {}
     reward costRew [deployment:resultsRecieved] true : cost; 
 />
 
-abstract sig QuantumGrover_alg extends Quantum_Service{}
+abstract sig Quantum_Grover_alg extends Quantum_Service{}
 </
     formula shots;
     formula cost;

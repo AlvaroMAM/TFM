@@ -129,6 +129,7 @@ if __name__ == '__main__':
             app_cpu_machines[microservice_name]['ms_bandwidth'] = bandwidth_ms
             app_cpu_machines[microservice_name]['ms_execution_time'] = requirements['execution_time']
             app_cpu_machines[microservice_name]['ms_availability'] = requirements['availability']
+            app_cpu_machines[microservice_name]['ms_instances'] = requirements['instances']
             app_cpu_machines[microservice_name]['selected_cpus'] = select_cpu(logical_performance_ms, requirements['ram'], bandwidth_ms) # Returns an Array<Dict> of the suitable CPUs machines from AWS
             logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
         print(app_cpu_machines)

@@ -97,9 +97,12 @@ def start_processing():
                         if req_content["behaviour"]["execution_time"]: # READING EXECUTION TIME ATTRIBUTE
                             microservice_dict["execution_time"] = req_content["behaviour"]["execution_time"]
                             logging.debug("REQUEST /start --> EXECUTION_TIME LOADED")
-                        if req_content["behaviour"]["availability"]: # READING EXECUTION TIME ATTRIBUTE
+                        if req_content["behaviour"]["availability"]: # READING EXECUTION AVAILABILITY
                             microservice_dict["availability"] = req_content["behaviour"]["availability"]
-                            logging.debug("REQUEST /start --> AVAILABILITY LOADED")  
+                            logging.debug("REQUEST /start --> AVAILABILITY LOADED")
+                        if req_content["behaviour"]["instances"]: # READING EXECUTION AVAILABILITY
+                            microservice_dict["instances"] = req_content["behaviour"]["instances"]
+                            logging.debug("REQUEST /start --> AVAILABILITY LOADED")   
                         if req_content["minimum_hw_req"]["cpu"]: # READING CPU ATTRIBUTE
                             microservice_dict["cpu"] = req_content["minimum_hw_req"]["cpu"]
                             logging.debug("REQUEST /start --> CPU LOADED") 

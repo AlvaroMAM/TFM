@@ -13,3 +13,4 @@ behaviour:
     maximum_request_size: 1500
   execution_time: 1
   availability: 24
+  instances: 1

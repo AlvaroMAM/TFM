@@ -1,16 +1,16 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: aggregator
-  api: ../OAS/aggregator.yml
+  id: sensor
+  api: ../OAS/sensor.yml
   mode: CPU
   author: SPILab
 minimum_hw_req:
-  cpu: 4000
-  ram: 4
+  cpu: 3000
+  ram: 2
 behaviour:
   requests:
-    number_request: 50
-    maximum_request_size: 10000
+    number_request: 100
+    maximum_request_size: 1500
   execution_time: 1
   availability: 24
-  instances: 1
+  instances: 3
