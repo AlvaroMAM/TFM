@@ -70,12 +70,12 @@ def start_processing():
                 with open(app_model_file_directory+"/"+f, 'r') as architectural_model_file:
                     behavioural_restrictions_dict[f] = architectural_model_file.read()
             print("ARCHITECTURAL FILES LOADED")
-            print(behavioural_restrictions_dict)
             producer.send(TOPIC_BEHAVIOURAL, behavioural_restrictions_dict)  
             logging.debug("REQUEST /start --> BEHAVIOURAL JSON SEND")
             app_req_files = os.listdir(app_req_file_directory)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES
+                print("PROCESSING FILE:"+req_file_name)
                 logging.debug("REQUEST /start --> OAS FILE PROCESSING INITIALIZED")
                 req_file = os.path.join(app_req_file_directory, req_file_name)
                 if os.path.isfile(req_file):
