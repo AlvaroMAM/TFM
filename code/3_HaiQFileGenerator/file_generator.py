@@ -26,7 +26,7 @@ def processing_topics():
                 f.write(behavioural)
             with open('./temp/restrictions.txt', 'w') as f:
                 f.write(restrictions)
-            print(f"Procesado mensaje de archivo desde topic3 y guardado como received_file")
+            logging.debug("FILE-GENERATOR : BEHAVIORAL AND RESTRICTIONS SAVED SUCCESSFULLY")
         elif topic == TOPIC_CPU_CANDIDATES:
             # Procesando CPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC CPU CANDIDATES")

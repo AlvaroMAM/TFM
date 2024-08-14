@@ -1,14 +1,18 @@
 from kafka import KafkaConsumer
-from config.config import KAFKA_SERVER_URL, TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RESULT
+from config.config import KAFKA_SERVER_URL, TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RESULT, WEB_CLIENT_DEVELOPMENT_URL
 import json
 import logging
-import bisect
+import requests
 import os
 
 HAIQ_RESULTS = None
 
-def save_haiq_result():
-    return None
+def read_haiq_result():
+    results_readed = None
+    haiq_result_file = "./temp/results.json"
+    with open(haiq_result_file, 'r') as f:
+                results_readed = json.load(f)
+    return results_readed
 
 
 def isEmpty(l):
@@ -30,7 +34,10 @@ def insert_sorted_tuple_list(l,t):
         #Insert new element
         if position_to_insert >= 0:
             l.insert(position_to_insert,t)
-            return l[:-1]
+            if len(l)>3:
+                return l[:-1]
+            else:
+                return l
         else:
             return l
 
@@ -41,7 +48,7 @@ def utility_calculation(utility_values):
     utility_tuple_sorted_list = []
     cost_weight = float(utility_values[0])
     performance_weight = float(utility_values[1])
-
+    haiq_results = read_haiq_result()
     for elem in haiq_results:
         for sol, metrics in elem.items():
             utility_tuple = None
@@ -58,10 +65,20 @@ def utility_calculation(utility_values):
         utility_tuple_sorted_list = insert_sorted_tuple_list(utility_tuple_sorted_list,utility_tuple) # Comprobar que se modifica la lista correctamente
         print("DESPUÉS DE INSERTAR", utility_tuple_sorted_list)
     top3_values = utility_tuple_sorted_list[:3]
-
-    #Hacer petición a web.py con los valores
-    
-
+    print("PREPARANDO ENVÍO")
+    logging.debug("UTILITY-CALCULATOR : PREPARING FOR SEND NEW RANKING")  
+    data = json.dumps(top3_values)
+    header = {
+        "Content-Type": "application/json"
+        }
+    response = requests.post(WEB_CLIENT_DEVELOPMENT_URL+'/refresh',headers=header, data=data)
+    if response.status_code == 200:
+        print("PETICIÓN PROCESADA CORRECTAMENTE")
+        logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY RECIEVED")
+    else:
+        print("SOMETHING WAS WRONG :(")
+        logging.debug("UTILITY-CALCULATOR : REQUEST WAS NOT PROCESSED")
+        print(response)
 
 def processing_topics():
     print("Waiting for topics")
@@ -79,10 +96,10 @@ def processing_topics():
                 f.write(HAIQ_RESULTS)
             logging.debug("UTILITY-CALCULATOR : HAIQ_RESULTS SAVED")
         elif topic == TOPIC_UTILITY_VALUES:
-            # RECIEVING UTILITY VALUES
+            # RECIEVING UTILITY VALUES (DUPLE) (x,y) (cost, performance)
             logging.debug("UTILITY-CALCULATOR : UTILITY VALUES RECIEVED")
             print(f"Procesado mensaje desde topic: {topic}")
-            # the values must be a tuple
+            # the values must be a Duple
             utility_values = message.value
             utility_calculation(utility_values)
             logging.debug("UTILITY-CALCULATOR : NEW RANKING GENERATED")   
@@ -96,8 +113,6 @@ if __name__=='__main__':
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
     )
     logging.debug("FILE-GENERATOR : INITIALIZED")
-    # Faltaría un while true para que vaya iterando
     consumer.subscribe([TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RESULT])
-   
     processing_topics()
     

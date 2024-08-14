@@ -1,4 +1,4 @@
-one sig HybridUseCase extends Hybrid_Deployment {}
+one sig HybridUseCase extends Hybrid_Deployment {} // Si yo pongo Deployment, 
 </
     enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
     var current_status:[status_analysis] init none;
