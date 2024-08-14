@@ -1,8 +1,9 @@
 from kafka import KafkaConsumer
-from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL
+from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL, HAIQ_LAUNCHER_URL
 import json
 import logging
 import os
+import requests
 
 behavioural_restrictions = None
 cpu_candidates = None
@@ -197,10 +198,20 @@ def haiq_file_generator():
         haiq_file.write(file_string)
     print("HAIQ FILE GENERATED")
     logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")
-    behavioural_restrictions = None
-    cpu_candidates = None
-    qpu_candidates = None
-    logging.debug("FILE-GENERATOR : RESET VARs")
+    # Enviar archivo a HaiqLauncher
+    url = HAIQ_LAUNCHER_URL
+    files = {"haiq-result": open(os.getcwd()+"/temp/"+"hybrid-iot.haiq", 'rb')}
+    response = requests.post(url, files=files)
+    if response.status_code == 200:
+        print("HAIQ RESULT SUCCESSFULLY SENT")
+        logging.debug("FILE-GENERATOR : HAIQ RESULT SUCCESSFULLY SENT")
+        behavioural_restrictions = None
+        cpu_candidates = None
+        qpu_candidates = None
+        logging.debug("FILE-GENERATOR : RESET VARs")
+    else:
+        print("Something was wrong while sending the haiq file to HAIQ LAUNCHER")
+        logging.debug("FILE-GENERATOR : HAIQ RESULT SENT ERROR")
 
             
 if __name__=='__main__':

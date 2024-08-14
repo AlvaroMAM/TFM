@@ -10,7 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request, Response
 from zipfile import ZipFile
 from kafka import KafkaProducer
-from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU, TOPIC_BEHAVIOURAL
+from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU, TOPIC_BEHAVIOURAL, TOPIC_HAIQ_RESULT, TOPIC_UTILITY_VALUES
 import logging
 import os
 import yaml
@@ -19,6 +19,8 @@ import json
 
 FOLDER_NAME = "deployment_app_folder"
 
+COST_WEIGHT = None
+PERFORMANCE_WEIGHT = None
 app = Flask(__name__)
 
 
@@ -27,6 +29,34 @@ app = Flask(__name__)
 def index():
     logging.debug("REQUEST / --> STATUS ONLINE")
     return "ONLINE"
+
+@app.route('/haiq-result', methods=['POST'])
+def haiq_result():
+    # Lectura de archivo de resultado de haiq
+    logging.debug("REQUEST RECIEVED --> /start")
+    data_recieved = None
+    if request.files:
+        data_recieved = request.files
+        haiq_result = data_recieved['file']
+        print("HAIQ RESULT SUCESSFULLY READ")
+        logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY READ")
+        # Envío por kafka a calculadora de utilidad
+        if haiq_result:
+            producer.send(TOPIC_HAIQ_RESULT, haiq_result)
+            logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY SENT")
+            # Envío por kafka de peso del coste y rendimiento a calculadora de utilidad
+            json_utility = json.dumps(COST_WEIGHT, PERFORMANCE_WEIGHT)
+            producer.send(TOPIC_UTILITY_VALUES,json_utility)
+            logging.debug("REQUEST /haiq-result --> HAIQ WEIGHTS SUCESSFULLY SENT")
+            return Response("Calculating utility", status=200, mimetype='text/plain')
+        else:
+            print("Something was wrong :(")
+            logging.debug("REQUEST /haiq-result --> HAIQ RESULT READING WAS WRONG")
+            return Response("Something was wrong during reading haiq_result", status=500, mimetype='text/plain')
+    else:
+        print("Something was wrong while reading request:(")
+        logging.debug("REQUEST /haiq-result --> HAIQ RESULT READING WAS WRONG")
+        return Response("Something was wrong during reading request", status=500, mimetype='text/plain')
 
 
 @app.route('/start', methods=['POST'])

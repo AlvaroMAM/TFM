@@ -45,7 +45,7 @@ def upload_file():
 
         # Envía el archivo al microservicio
         try:
-            url = INFORMATION_PROCESSING_URL
+            url = INFORMATION_PROCESSING_URL+"/start"
             files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
             response = requests.post(url, files=files)
             if response.status_code == 200:

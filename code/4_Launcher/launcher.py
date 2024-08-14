@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import subprocess
 import os
 import logging
+import requests
 from config.config import INFORMATION_PROCESSING_URL
 
 
@@ -41,39 +42,45 @@ def launch_haiq():
             recieved_file.save(path_to_save) #Tomar la ruta de donde los ejemplos
             #Lanzar run.sh
             script_path = os.path.join(path_to_save,'run.sh')
-
             try:
                 result = subprocess.run(['bash', script_path], cwd=path_to_save, check=True, capture_output=True, text=True)
                 output = result.stdout 
                 #Añadir al script una salida (Tipo 200 si okey)
+                if int(output) == 200:
+                    print("SCRIPT EJECUTADO CORRECTAMENTE")
+                    logging.debug("HAIQ LAUNCHER --> HAIQ FINISHED CORRECTLY")
+                else:
+                    print("SE HA PRODUCIDO UN ERROR AL EJECUTAR EL SCRIPT")
+                    logging.debug("HAIQ LAUNCHER --> HAIQ FINISHED WRONG")
             except subprocess.CalledProcessError as e:
                 print("SE HA PRODUCIDO UNA EXCEPCIÓN AL EJECUTAR EL SCRIPT")
+                logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE HAIQ RUN")
                 print(e)
-
             haiq_result_path = '' #To Complete
-            haiq_result = None
             if os.path.exists(haiq_result_path):
-                with open(haiq_result_path, 'r') as resultado_file:
-                    haiq_result = resultado_file.read()
-                if haiq_result != None:
-                    print("HAIQ RESULT READED")
+                try:
                     # Mandar resultado a INFO PROCESSING
-                else:
+                    url = INFORMATION_PROCESSING_URL+"/haiq-result"
+                    files = {"haiq-result": open(os.getcwd()+haiq_result_path, 'rb')}
+                    response = requests.post(url, files=files)
+                    if response.status_code == 200:
+                        print("HAIQ RESULT SUCESSFULLY SENT")
+                        logging.debug("HAIQ LAUNCHER --> HAIQ RESULT SUCESSFULLY SENT")
+                    else:
+                        print("SENDING HAIQ RESULT WAS WRONG")
+                        logging.debug("HAIQ LAUNCHER --> SENDING HAIQ RESULT WAS WRONG")
+                except Exception as e:
                     print("ERROR AL LEER RESULTADO DE HAIQ")
+                    logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE HAIQ RUN")
+                    print(e)
             else:
                 print("RESULTADO DE HAIQ NO ENCONTRADO")
-
-
         else:
             print("RECIBIDO PERO NO LEIDO CORRECTAMENTE")
             logging.debug("HAIQ LAUNCHER --> File didn't read correctly")
-
     else:
         logging.debug("HAIQ LAUNCHER --> Something was wrong :(")
         print("NO SE HA RECIBIDO ARCHIVO HAIQ")
-
-
-
 
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/launcher.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
