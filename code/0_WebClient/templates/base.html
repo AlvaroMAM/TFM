@@ -4,27 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sistema Evaluador de Despliegues{% endblock %}</title>
-    <!-- Agrega aquí tus enlaces a hojas de estilo CSS o librerías de JavaScript -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+    .navbar-inverse {
+    border-top: none; /* Elimina el borde superior */
+    border-radius: 0; /* Elimina cualquier redondeado */
+}
+</style>
 <body>
     <header>
-        <h1>S.E.D.</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Inicio</a></li>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">S.E.D.</a>
+                </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Inicio</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- El bloque 'contenido' se llenará con el contenido específico de cada página -->
+       
         {% block content %}
         {% endblock %}
     </main>
-
-    <footer>
-        <!-- Aquí puedes incluir el pie de página -->
-        <p>&copy; 2024 TFM - AMAM. Todos los derechos reservados.
+    <br>
+    <br>
+    <footer class="footer text-center py-3">
+        <p>&copy; 2024 Trabajo Fin de Máster - &Aacute;lvaro Manuel Aparicio Morales.</p>
+        <p>Máster Universitario en Ingeniería y Ciencia de Datos, Universidad de Málaga.</p>
+        <p>Todos los derechos reservados.
             <a href="https://alvaromam.github.io/personal-page/">https://alvaromam.github.io/personal-page/</a>
         </p>
     </footer>

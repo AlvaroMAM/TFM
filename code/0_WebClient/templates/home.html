@@ -2,9 +2,19 @@
 
 
 {% block content %}
-<h1>Subir Archivo .zip</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".zip" required>
+    <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label id="cost_label" name="cost_label" for="cost_input">Cost</label>
+            <input type="text" id="cost_input" name="cost" required>
+        </div>
+        <div class="form-group">
+            <label id="performance_label" name="performance_label" for="performance_input">Performance</label>
+            <input type="text" id="performance_input" name="performance" required>
+        </div>
+        <div class="form-group">
+            <label id="file_label" id="app_specification_input" name="file_label">App Specification</label>
+            <input type="file" id="app_specification_input" name="file" accept=".zip" required>
+        </div>
         <button type="submit">Enviar</button>
     </form>
 {% endblock %}

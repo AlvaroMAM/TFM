@@ -21,6 +21,8 @@ configurations_list = None
 @app.route('/')
 def index():
     logging.debug("REQUEST / --> RENDERING TEMPLATE")
+    global configurations_list
+    configurations_list = None
     return render_template('home.html')
 
 @app.route('/refresh', methods=['POST'])
@@ -40,10 +42,7 @@ def upload_file():
     if 'file' not in request.files:
         logging.debug("REQUEST /upload --> NO FILE SELECTED")
         return 'No se ha seleccionado ningún archivo', 400
-
     file = request.files['file']
-
-   
     if file.filename == '':
         logging.debug("REQUEST /upload --> NO FILE SELECTED")
         return 'No se ha seleccionado ningún archivo', 400
