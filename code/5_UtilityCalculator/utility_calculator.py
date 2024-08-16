@@ -6,6 +6,7 @@ import requests
 import os
 
 HAIQ_RESULTS = None
+UTILITY_VALUES_RECIEVED = None
 
 def read_haiq_result():
     results_readed = None
@@ -102,6 +103,7 @@ def processing_topics():
             # the values must be a Duple
             utility_values = message.value
             utility_calculation(utility_values)
+            HAIQ_RESULTS = None
             logging.debug("UTILITY-CALCULATOR : NEW RANKING GENERATED")   
 
 

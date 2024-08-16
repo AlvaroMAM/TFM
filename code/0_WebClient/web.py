@@ -16,11 +16,22 @@ from config.config import INFORMATION_PROCESSING_URL
 
 app = Flask(__name__)
 
+configurations_list = None
 
 @app.route('/')
 def index():
     logging.debug("REQUEST / --> RENDERING TEMPLATE")
     return render_template('home.html')
+
+@app.route('/refresh', methods=['POST'])
+def refresh():
+    global configurations_list
+    data = request.get_json()
+
+    if data:
+        configurations_list = data
+    return jsonify({"status": "success", "message": "Data received"}), 200
+
 
 
 @app.route('/upload', methods=['POST'])
