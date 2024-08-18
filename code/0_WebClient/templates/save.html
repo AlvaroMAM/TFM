@@ -1,0 +1,18 @@
+<form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label" id="cost_label" name="cost_label" for="cost_input">Cost</label>
+        <input type="text" id="cost_input" name="cost" required>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label class="form-label" id="performance_label" name="performance_label" for="performance_input">Performance</label>
+        <input type="text" id="performance_input" name="performance" required>
+    </div>
+    <br>
+    <div class="input-group mb-3 ">
+        <label id="file_label" id="app_specification_input" name="file_label" for="app_specification_input">App Specification</label>
+        <input class="form-control" type="file" id="app_specification_input" name="file" accept=".zip" required>
+    </div>
+    <br>
+    <button type="submit">Enviar</button>
+</form>

@@ -9,37 +9,61 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-    .navbar-inverse {
+    .navbar {
     border-top: none; /* Elimina el borde superior */
     border-radius: 0; /* Elimina cualquier redondeado */
-}
+    }
+    body {
+            background:  #000000; 
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        /* Aseguramos que el card tenga un tamaño relativo a la pantalla */
+        .card {
+            background-color: white; /* Fondo blanco para el card */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra gris/blanca para el card */
+            overflow: hidden; /* Asegura que los bordes redondeados se apliquen a la imagen también */
+        }
+
+        .card-img-top {
+            object-fit: cover; /* Asegura que la imagen cubra el área del card */
+        }
+
+        .card-body {
+            padding: 20px; /* Espaciado interno */
+        }
+
+        .full-height {
+            height: 100vh; /* Ocupar toda la altura de la ventana */
+        }
+        .my-img-bg-container {
+            display: flex;
+            align-items: center; /* Centra el contenido verticalmente */
+            justify-content: center; /* Opcional: centra el contenido horizontalmente */
+        }
+        .my-img-bg-container img {
+            max-width: 100%; /* Asegura que la imagen no se desborde horizontalmente */
+            height: auto; /* Mantiene la relación de aspecto */
+        }
+        
 </style>
 <body>
     <header>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar">
             <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">S.E.D.</a>
-                </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/">Inicio</a></li>
-            </ul>
+            
+            </div>
         </nav>
     </header>
-
     <main>
-       
         {% block content %}
         {% endblock %}
     </main>
     <br>
     <br>
-    <footer class="footer text-center py-3">
-        <p>&copy; 2024 Trabajo Fin de Máster - &Aacute;lvaro Manuel Aparicio Morales.</p>
-        <p>Máster Universitario en Ingeniería y Ciencia de Datos, Universidad de Málaga.</p>
-        <p>Todos los derechos reservados.
-            <a href="https://alvaromam.github.io/personal-page/">https://alvaromam.github.io/personal-page/</a>
-        </p>
-    </footer>
+    <br>
 </body>
 </html>

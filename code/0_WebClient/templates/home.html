@@ -1,20 +1,72 @@
 {% extends "base.html" %}
-
-
 {% block content %}
-    <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label id="cost_label" name="cost_label" for="cost_input">Cost</label>
-            <input type="text" id="cost_input" name="cost" required>
+
+<div class="row">
+    <div class="col-md-5 full-height my-img-bg-container">
+        <img src="{{ url_for('static', filename='img/background.jpg') }}" alt="Imagen" style="width: 100%; height: auto;">
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <img src="https://via.placeholder.com/600x200" class="card-img-top" alt="Imagen de ejemplo">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"> 
+                        <a href="https://www.uma.es/"><img src="{{ url_for('static', filename='img/uma.png') }}" alt="Logo" style="height: 50px;"></a>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3 d-flex justify-content-md-start">
+                        <a href="https://www.uma.es/etsi-informatica/"><img src="{{ url_for('static', filename='img/etsii.png') }}" alt="Logo" style="height: 50px;"></a>
+                        
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <br>
+                <h4 class="card-title text-center"><strong><p>Sistema de Evaluación de Coste para Aplicaciones Híbridas</p> <p>(Cuánticas-Clásicas)</p></strong></h4>
+                <br>
+                <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="form-group text-center">
+                        <!-- Primera fila: Cost y Performance -->
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <input type="text" id="cost_input" name="cost" placeholder="Cost" required>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <input type="text" id="performance_input" name="performance" placeholder="Performance" required>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <label id="file_label" for="app_specification_input">App Specification</label>
+                                <input class="form-control" type="file" id="app_specification_input" name="file" accept=".zip" required>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <br>
+                        <!-- Botón de envío -->
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <footer class="footer text-center py-3"><strong>
+                    <p>&copy; 2024 Trabajo Fin de Máster - &Aacute;lvaro Manuel Aparicio Morales.</p>
+                    <p><strong> Tutorizado por</strong>: Jose Garcia-Alonso y <a href="https://javier-camara.github.io/">Javier C&aacute;mara</a></p>
+                    <p>Máster Universitario en Ingeniería y Ciencia de Datos, Universidad de Málaga.</p>
+                    <p>Todos los derechos reservados.
+                        <a href="https://alvaromam.github.io/personal-page/">https://alvaromam.github.io/personal-page/</a>
+                    </p>
+            
+                </strong></footer>
+            </div>
         </div>
-        <div class="form-group">
-            <label id="performance_label" name="performance_label" for="performance_input">Performance</label>
-            <input type="text" id="performance_input" name="performance" required>
-        </div>
-        <div class="form-group">
-            <label id="file_label" id="app_specification_input" name="file_label">App Specification</label>
-            <input type="file" id="app_specification_input" name="file" accept=".zip" required>
-        </div>
-        <button type="submit">Enviar</button>
-    </form>
+    </div>
+</div>
 {% endblock %}
