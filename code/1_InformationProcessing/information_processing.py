@@ -45,7 +45,7 @@ def haiq_result():
         # Envío por kafka a calculadora de utilidad
         if haiq_result:
             haiq_result_content = haiq_result.read()
-            haiq_result_b64 = base64.b64encode(haiq_result_content).decode('utf-8)')
+            haiq_result_b64 = base64.b64encode(haiq_result_content).decode('utf-8')
             producer.send(TOPIC_HAIQ_RESULT, haiq_result_b64)
             logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY SENT")
             # Envío por kafka de peso del coste y rendimiento a calculadora de utilidad
