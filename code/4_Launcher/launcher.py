@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 #import requests
 import subprocess
 import os
@@ -22,8 +22,10 @@ def launch_haiq():
     Save the file in the corresponding path
     Launch the program
     """
+    # Se guarda 
     recieved_file = None
-    path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/"
+    #path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/" El bueno
+    path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/tas/"
     logging.debug("HAIQ LAUNCHER --> /launch-haiq")
     if request.files:
         logging.debug("HAIQ LAUNCHER --> File recieved")
@@ -48,12 +50,14 @@ def launch_haiq():
             recieved_file.save(os.path.join(path_to_save, file_name)) #Tomar la ruta de donde los ejemplos
             print("ARCHIVO GUARDADO")
             logging.debug("HAIQ LAUNCHER --> File saved correctly")
-            """
             #Lanzar run.sh
             script_path = os.path.join(path_to_save,'run.sh')
             try:
                 result = subprocess.run(['bash', script_path], cwd=path_to_save, check=True, capture_output=True, text=True)
-                output = result.stdout 
+                output = result.stdout
+                print("SE HA EJECUTADO")
+                print(output)
+                 
                 #Añadir al script una salida (Tipo 200 si okey)
                 if int(output) == 200:
                     print("SCRIPT EJECUTADO CORRECTAMENTE")
@@ -61,10 +65,13 @@ def launch_haiq():
                 else:
                     print("SE HA PRODUCIDO UN ERROR AL EJECUTAR EL SCRIPT")
                     logging.debug("HAIQ LAUNCHER --> HAIQ FINISHED WRONG")
+                return Response("EXCEPTION", status=500, mimetype='text/plain')
             except subprocess.CalledProcessError as e:
                 print("SE HA PRODUCIDO UNA EXCEPCIÓN AL EJECUTAR EL SCRIPT")
                 logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE HAIQ RUN")
                 print(e)
+                return Response("EXCEPTION", status=500, mimetype='text/plain')
+            """
             haiq_result_path = '' #To Complete
             if os.path.exists(haiq_result_path):
                 try:
