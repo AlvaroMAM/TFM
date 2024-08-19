@@ -50,6 +50,7 @@ def upload_file():
     
     if file and file.filename.endswith('.zip') and request.form['cost'] and request.form['performance']:
         # Guarda el archivo en el servidor temporalmente
+        print("TODO EN ORDEN")
         filename = file.filename
         file.save(os.getcwd()+"/temp/"+filename)
         cost_weight = float(request.form['cost'])
@@ -58,6 +59,7 @@ def upload_file():
         # Envía el archivo al microservicio
         try:
             url = INFORMATION_PROCESSING_URL+"/start"
+            print(cost_and_performance)
             files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
             response = requests.post(url, files=files, json=cost_and_performance)
             if response.status_code == 200:
