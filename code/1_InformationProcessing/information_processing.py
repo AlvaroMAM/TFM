@@ -33,7 +33,7 @@ def index():
 @app.route('/haiq-result', methods=['POST'])
 def haiq_result():
     # Lectura de archivo de resultado de haiq
-    logging.debug("REQUEST RECIEVED --> /start")
+    logging.debug("REQUEST RECIEVED --> /haiq-result")
     data_recieved = None
     global COST_WEIGHT, PERFORMANCE_WEIGHT
     if request.files:
@@ -75,7 +75,9 @@ def start_processing():
     print(request)
     recieved_utility_attributes = None
     recieved_utility_attributes = request.get_json()
+    print(recieved_utility_attributes)
     if recieved_utility_attributes != None:
+        print("NO EMPTY")
         COST_WEIGHT = recieved_utility_attributes.get('cost_weight')
         PERFORMANCE_WEIGHT = recieved_utility_attributes.get('performance_weight')
     else:
