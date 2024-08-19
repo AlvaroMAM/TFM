@@ -95,7 +95,7 @@ def processing_topics():
             logging.debug("UTILITY-CALCULATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
             haiq_b64 = message.value
             HAIQ_RESULTS = base64.b64decode(haiq_b64)
-            with open('./temp/results.json', 'w') as f:
+            with open('./temp/results.json', 'wb') as f:
                 f.write(HAIQ_RESULTS)
             logging.debug("UTILITY-CALCULATOR : HAIQ_RESULTS SAVED")
         elif topic == TOPIC_UTILITY_VALUES:
