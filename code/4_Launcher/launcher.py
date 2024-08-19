@@ -4,7 +4,7 @@ import subprocess
 import os
 import logging
 import requests
-from config.config import INFORMATION_PROCESSING_URL
+from config.config import INFORMATION_PROCESSING_URL_OUT
 
 
 app = Flask(__name__)

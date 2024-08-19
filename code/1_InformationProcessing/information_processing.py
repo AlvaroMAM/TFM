@@ -66,6 +66,7 @@ def start_processing():
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
+    print(request)
     if request.files:
         logging.debug("REQUEST /start --> FILES RECIEVED")
         name, zipfile = next(iter(request.files.to_dict(flat=False).items())) # READING ZIP FILE FROM REQUEST ( ImmutableMultiDict[str, FileStorage])
