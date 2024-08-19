@@ -40,7 +40,8 @@ def launch_haiq():
                     #Create the run.sh
                     print("QUANTUMCLASSICAL APP FOLDER CREATED FROM SCRATCH") 
                 except Exception as e:
-                    return f"Error al crear la carpeta: {e}", 500
+                    print("Excepcion")
+                    print(e)
             #Saving file
             file_name = "model.haiq"
             print("PROCEDO A GUARDAR")
