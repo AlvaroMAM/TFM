@@ -61,7 +61,7 @@ def upload_file():
             url = INFORMATION_PROCESSING_URL+"/start"
             print(cost_and_performance)
             files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
-            response = requests.post(url, files=files, json=cost_and_performance)
+            response = requests.post(url, files=files, data=cost_and_performance)
             if response.status_code == 200:
                 # Eliminar archivo temporal
                 return 'El archivo se ha enviado correctamente al microservicio'

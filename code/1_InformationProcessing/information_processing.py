@@ -73,14 +73,10 @@ def start_processing():
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
     print(request.form)
-    recieved_utility_attributes = None
-    print("PREVIO A LECTURA")
-    recieved_utility_attributes = request.get_json()
-    print(recieved_utility_attributes)
-    if recieved_utility_attributes != None:
+    if request.form != None:
         print("NO EMPTY")
-        COST_WEIGHT = recieved_utility_attributes.get('cost_weight')
-        PERFORMANCE_WEIGHT = recieved_utility_attributes.get('performance_weight')
+        COST_WEIGHT = request.form.get('cost_weight')
+        PERFORMANCE_WEIGHT = request.form.get('performance_weight')
     else:
         return Response("SOMETHING WAS WRONG :(", status=500, mimetype='text/plain')
     if request.files:
