@@ -61,7 +61,7 @@ def launch_haiq():
                 print(last_line)
                 
                 #Añadir al script una salida (Tipo 200 si okey)
-                if int(output) == 200:
+                if int(last_line) == 200:
                     print("SCRIPT EJECUTADO CORRECTAMENTE")
                     logging.debug("HAIQ LAUNCHER --> HAIQ FINISHED CORRECTLY")
                 else:
