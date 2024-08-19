@@ -82,7 +82,7 @@ def launch_haiq():
                     print("Ruta GENERADA")
                     print(result_file)
                     url = INFORMATION_PROCESSING_URL_OUT+"/haiq-result"
-                    files = {"haiq-result": open(os.getcwd()+result_file, 'rb')}
+                    files = {"haiq-result": open(result_file, 'rb')}
                     response = requests.post(url, files=files)
                     if response.status_code == 200:
                         print("HAIQ RESULT SUCESSFULLY SENT")
