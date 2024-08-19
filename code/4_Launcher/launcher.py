@@ -33,7 +33,9 @@ def launch_haiq():
             print("ARCHIVO RECIBIDO Y LEIDO CORRECTAMENTE")
             logging.debug("HAIQ LAUNCHER --> File read correctly")
             if not os.path.exists(path_to_save):
+                print("PATH NO EXISTE")
                 try:
+                    print("PATH A CREAR")
                     os.makedirs(path_to_save)
                     #Create the run.sh
                     print("QUANTUMCLASSICAL APP FOLDER CREATED FROM SCRATCH") 
@@ -41,6 +43,7 @@ def launch_haiq():
                     return f"Error al crear la carpeta: {e}", 500
             #Saving file
             file_name = "model.haiq"
+            print("PROCEDO A GUARDAR")
             recieved_file.save(os.path.join(path_to_save, file_name)) #Tomar la ruta de donde los ejemplos
             print("ARCHIVO GUARDADO")
             logging.debug("HAIQ LAUNCHER --> File saved correctly")
