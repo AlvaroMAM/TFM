@@ -38,7 +38,8 @@ def haiq_result():
     global COST_WEIGHT, PERFORMANCE_WEIGHT
     if request.files:
         data_recieved = request.files
-        haiq_result = data_recieved['file']
+        print(data_recieved)
+        haiq_result = data_recieved['files']
         print("HAIQ RESULT SUCESSFULLY READ")
         logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY READ")
         # Envío por kafka a calculadora de utilidad
