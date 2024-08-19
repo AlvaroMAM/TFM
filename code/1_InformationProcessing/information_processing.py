@@ -72,8 +72,9 @@ def start_processing():
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
-    print(request)
+    print(request.form)
     recieved_utility_attributes = None
+    print("PREVIO A LECTURA")
     recieved_utility_attributes = request.get_json()
     print(recieved_utility_attributes)
     if recieved_utility_attributes != None:
