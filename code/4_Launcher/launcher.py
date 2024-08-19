@@ -53,10 +53,12 @@ def launch_haiq():
             #Lanzar run.sh
             script_path = os.path.join(path_to_save,'run.sh')
             try:
+                print("ARCHIVO GUARDADO")
                 result = subprocess.run(['bash', script_path], cwd=path_to_save, check=True, capture_output=True, text=True)
                 output = result.stdout
+                last_line = output.strip().splitlines()[-1]
                 print("SE HA EJECUTADO")
-                print(output)
+                print(last_line)
                  
                 #Añadir al script una salida (Tipo 200 si okey)
                 if int(output) == 200:
@@ -65,7 +67,7 @@ def launch_haiq():
                 else:
                     print("SE HA PRODUCIDO UN ERROR AL EJECUTAR EL SCRIPT")
                     logging.debug("HAIQ LAUNCHER --> HAIQ FINISHED WRONG")
-                return Response("EXCEPTION", status=500, mimetype='text/plain')
+                return Response("ITS OKAY", status=200, mimetype='text/plain')
             except subprocess.CalledProcessError as e:
                 print("SE HA PRODUCIDO UNA EXCEPCIÓN AL EJECUTAR EL SCRIPT")
                 logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE HAIQ RUN")
