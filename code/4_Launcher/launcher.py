@@ -23,7 +23,7 @@ def launch_haiq():
     Launch the program
     """
     recieved_file = None
-    path_to_save = "/home .../QuantumClassicalApp/model.haiq" # To be completed
+    path_to_save = "/MacOS/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/"
     logging.debug("HAIQ LAUNCHER --> /launch-haiq")
     if request.files:
         logging.debug("HAIQ LAUNCHER --> File recieved")
@@ -35,11 +35,16 @@ def launch_haiq():
             if not os.path.exists(path_to_save):
                 try:
                     os.makedirs(path_to_save)
-                    #Create the run.sh 
+                    #Create the run.sh
+                    print("QUANTUMCLASSICAL APP FOLDER CREATED FROM SCRATCH") 
                 except Exception as e:
                     return f"Error al crear la carpeta: {e}", 500
             #Saving file
-            recieved_file.save(path_to_save) #Tomar la ruta de donde los ejemplos
+            file_name = "model.haiq"
+            recieved_file.save(os.path.join(path_to_save, file_name)) #Tomar la ruta de donde los ejemplos
+            print("ARCHIVO GUARDADO")
+            logging.debug("HAIQ LAUNCHER --> File saved correctly")
+            """
             #Lanzar run.sh
             script_path = os.path.join(path_to_save,'run.sh')
             try:
@@ -75,6 +80,7 @@ def launch_haiq():
                     print(e)
             else:
                 print("RESULTADO DE HAIQ NO ENCONTRADO")
+            """
         else:
             print("RECIBIDO PERO NO LEIDO CORRECTAMENTE")
             logging.debug("HAIQ LAUNCHER --> File didn't read correctly")
