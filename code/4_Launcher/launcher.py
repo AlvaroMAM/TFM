@@ -79,6 +79,8 @@ def launch_haiq():
                 try:
                     # Mandar resultado a INFO PROCESSING
                     result_file = os.path.join(haiq_result_path,'tasdata.json')
+                    print("Ruta GENERADA")
+                    print(result_file)
                     url = INFORMATION_PROCESSING_URL_OUT+"/haiq-result"
                     files = {"haiq-result": open(os.getcwd()+result_file, 'rb')}
                     response = requests.post(url, files=files)
