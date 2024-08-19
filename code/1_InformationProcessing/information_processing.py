@@ -49,7 +49,7 @@ def haiq_result():
             producer.send(TOPIC_HAIQ_RESULT, haiq_result_b64)
             logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY SENT")
             # Envío por kafka de peso del coste y rendimiento a calculadora de utilidad
-            json_utility = json.dumps(COST_WEIGHT, PERFORMANCE_WEIGHT)
+            json_utility = json.dumps((COST_WEIGHT, PERFORMANCE_WEIGHT))
             producer.send(TOPIC_UTILITY_VALUES,json_utility)
             logging.debug("REQUEST /haiq-result --> HAIQ WEIGHTS SUCESSFULLY SENT")
             # Reset variables: 
