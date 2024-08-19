@@ -3,6 +3,7 @@ from config.config import KAFKA_SERVER_URL, TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RES
 import json
 import logging
 import requests
+import base64
 import os
 
 HAIQ_RESULTS = None
@@ -92,7 +93,8 @@ def processing_topics():
         if topic == TOPIC_HAIQ_RESULT:
             # RECIEVING HAIQ RESULT
             logging.debug("UTILITY-CALCULATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
-            HAIQ_RESULTS = message.value
+            haiq_b64 = message.value
+            HAIQ_RESULTS = base64.b64decode(haiq_b64)
             with open('./temp/results.json', 'w') as f:
                 f.write(HAIQ_RESULTS)
             logging.debug("UTILITY-CALCULATOR : HAIQ_RESULTS SAVED")
