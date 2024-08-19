@@ -23,7 +23,7 @@ def launch_haiq():
     Launch the program
     """
     recieved_file = None
-    path_to_save = "/MacOS/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/"
+    path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/"
     logging.debug("HAIQ LAUNCHER --> /launch-haiq")
     if request.files:
         logging.debug("HAIQ LAUNCHER --> File recieved")
