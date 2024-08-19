@@ -35,6 +35,7 @@ def haiq_result():
     # Lectura de archivo de resultado de haiq
     logging.debug("REQUEST RECIEVED --> /start")
     data_recieved = None
+    global COST_WEIGHT, PERFORMANCE_WEIGHT
     if request.files:
         data_recieved = request.files
         haiq_result = data_recieved['file']
@@ -48,6 +49,9 @@ def haiq_result():
             json_utility = json.dumps(COST_WEIGHT, PERFORMANCE_WEIGHT)
             producer.send(TOPIC_UTILITY_VALUES,json_utility)
             logging.debug("REQUEST /haiq-result --> HAIQ WEIGHTS SUCESSFULLY SENT")
+            # Reset variables: 
+            COST_WEIGHT = None
+            PERFORMANCE_WEIGHT = None
             return Response("Calculating utility", status=200, mimetype='text/plain')
         else:
             print("Something was wrong :(")
@@ -63,10 +67,18 @@ def haiq_result():
 # Function to start the process of evaluating the hybrid application. It will produce a message for each consumer (QPU and CPU modules)
 def start_processing():
     logging.debug("REQUEST RECIEVED --> /start")
+    global COST_WEIGHT, PERFORMANCE_WEIGHT
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
     print(request)
+    recieved_utility_attributes = None
+    recieved_utility_attributes = request.get_json()
+    if recieved_utility_attributes != None:
+        COST_WEIGHT = recieved_utility_attributes.get('cost_weight')
+        PERFORMANCE_WEIGHT = recieved_utility_attributes.get('performance_weight')
+    else:
+        return Response("SOMETHING WAS WRONG :(", status=500, mimetype='text/plain')
     if request.files:
         logging.debug("REQUEST /start --> FILES RECIEVED")
         name, zipfile = next(iter(request.files.to_dict(flat=False).items())) # READING ZIP FILE FROM REQUEST ( ImmutableMultiDict[str, FileStorage])

@@ -48,16 +48,18 @@ def upload_file():
         return 'No se ha seleccionado ningún archivo', 400
 
     
-    if file and file.filename.endswith('.zip'):
+    if file and file.filename.endswith('.zip') and request.form['cost'] and request.form['performance']:
         # Guarda el archivo en el servidor temporalmente
         filename = file.filename
         file.save(os.getcwd()+"/temp/"+filename)
-
+        cost_weight = float(request.form['cost'])
+        performance_weight = float(request.form['performance'])
+        cost_and_performance = {'cost_weight': cost_weight, 'performance_weight' : performance_weight}
         # Envía el archivo al microservicio
         try:
             url = INFORMATION_PROCESSING_URL+"/start"
             files = {filename: open(os.getcwd()+"/temp/"+filename, 'rb')}
-            response = requests.post(url, files=files)
+            response = requests.post(url, files=files, json=cost_and_performance)
             if response.status_code == 200:
                 # Eliminar archivo temporal
                 return 'El archivo se ha enviado correctamente al microservicio'

@@ -101,8 +101,9 @@ def processing_topics():
             logging.debug("UTILITY-CALCULATOR : UTILITY VALUES RECIEVED")
             print(f"Procesado mensaje desde topic: {topic}")
             # the values must be a Duple
-            utility_values = message.value
-            utility_calculation(utility_values)
+            UTILITY_VALUES_RECIEVED = message.value
+            print(UTILITY_VALUES_RECIEVED)
+            #utility_calculation(UTILITY_VALUES_RECIEVED)
             HAIQ_RESULTS = None
             logging.debug("UTILITY-CALCULATOR : NEW RANKING GENERATED")   
 
