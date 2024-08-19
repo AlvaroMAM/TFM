@@ -39,7 +39,7 @@ def haiq_result():
     if request.files:
         data_recieved = request.files
         print(data_recieved)
-        haiq_result = data_recieved['files']
+        haiq_result = data_recieved['haiq-result']
         print("HAIQ RESULT SUCESSFULLY READ")
         logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY READ")
         # Envío por kafka a calculadora de utilidad
