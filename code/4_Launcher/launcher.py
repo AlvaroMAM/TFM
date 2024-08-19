@@ -59,7 +59,7 @@ def launch_haiq():
                 last_line = output.strip().splitlines()[-1]
                 print("SE HA EJECUTADO")
                 print(last_line)
-                 
+                
                 #Añadir al script una salida (Tipo 200 si okey)
                 if int(output) == 200:
                     print("SCRIPT EJECUTADO CORRECTAMENTE")
