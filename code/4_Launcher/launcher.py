@@ -73,7 +73,7 @@ def launch_haiq():
                 print(e)
                 return Response("EXCEPTION", status=500, mimetype='text/plain')
             
-            haiq_result_path = '/Users/iquantum/Desktop/HaiQ-project/results/' #To Complete
+            haiq_result_path = "/Users/iquantum/Desktop/HaiQ-project/results/" #To Complete
             #haiq_result_path = '' #To Complete 
             if os.path.exists(haiq_result_path):
                 try:
