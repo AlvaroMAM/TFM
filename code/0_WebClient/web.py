@@ -11,7 +11,7 @@ from flask import Flask, render_template, request, jsonify
 import requests
 import os
 import logging
-from config.config import INFORMATION_PROCESSING_URL
+from config.config import INFORMATION_PROCESSING_URL, HAIQ_MANAGER_URL
 
 
 app = Flask(__name__)
@@ -35,7 +35,7 @@ def showResults():
     if request.method == 'GET':
         # If get load html with the list in table
         global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
-        return render_template('showResults.html', configurations=configurations_list, cost_weight=str(COST_WEIGHT), performance_weight=str(PERFORMANCE_WEIGHT))
+        return render_template('showResults.html', configurations=configurations_list, cost_weight=str(COST_WEIGHT), performance_weight=str(PERFORMANCE_WEIGHT), haiq_url=HAIQ_MANAGER_URL)
     elif request.method == 'POST':
         # If post, update configuration list
         if request.is_json:

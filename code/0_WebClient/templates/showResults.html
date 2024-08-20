@@ -52,9 +52,11 @@
                     <thead>
                         <tr>
                             <th>Solution Number</th>
+                            <th>Utility Value</th>
                             <th>Cost</th>
                             <th>Performance</th>
-                            <!--<th></th>-->
+                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -62,30 +64,9 @@
                         <tr>
                             <td>{{ sol[0] }}</td>
                             <td>{{ sol[1] }}</td>
-                            <td>{{ sol[2] }}</td>
-                            <!--<td>
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal{{ loop.index }}">
-                                    Show solution
-                                </button>
-                                <div class="modal fade" id="modal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="solutionModal" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Content of Solution : {{ loop.index }}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                {{ sol[3] }}
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td> -->
+                            <td>{{ sol[2][0] }}</td>
+                            <td>{{ sol[2][0] }}</td>
+                            <td><a href="{{ haiq_url }}?value={{ sol[0] }}" class="btn btn-primary">Download Distribution</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
