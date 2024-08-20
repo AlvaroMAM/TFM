@@ -10,7 +10,7 @@ y distribuirla a los servicios (QPU_Selector o CPU_Selector) según corresponda.
 from flask import Flask, request, Response
 from zipfile import ZipFile
 from kafka import KafkaProducer
-from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU, TOPIC_BEHAVIOURAL, TOPIC_HAIQ_RESULT, TOPIC_UTILITY_VALUES
+from config.config import OPEN_API_SPECIFICATION_PATH, MICROSERVICES_REQUIREMENTS_PATH, MICROSERVICES_MODEL_PATH, MICROSERVICE_QUANTUM_MODE, KAFKA_SERVER_URL, TOPIC_CPU, TOPIC_QPU, TOPIC_BEHAVIOURAL, TOPIC_HAIQ_RESULT, TOPIC_UTILITY_VALUES, TOPIC_WEB
 import logging
 import os
 import yaml
@@ -69,6 +69,8 @@ def haiq_result():
 # Function to start the process of evaluating the hybrid application. It will produce a message for each consumer (QPU and CPU modules)
 def start_processing():
     logging.debug("REQUEST RECIEVED --> /start")
+    producer.send(TOPIC_WEB, "INFORMATION_PROCESSING")
+    producer.flush()
     global COST_WEIGHT, PERFORMANCE_WEIGHT
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
@@ -173,6 +175,7 @@ def start_processing():
             print("SENDING CLASSICAL SERVICES JSON")
             print(cpu_services)
             producer.send(TOPIC_CPU, cpu_services) # SENDING CLASSICAL SERVICES JSON
+            producer.flush()
             logging.debug("REQUEST /start --> CLASSICAL SERVICES JSON SEND")
             # SENDING MODEL FILE TO COMBINATIONS GENERATOR
                  
