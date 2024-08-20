@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, send_from_directory, abort
 #import requests
 import subprocess
 import os
@@ -16,6 +16,30 @@ app = Flask(__name__)
 def index():
     logging.debug("REQUEST / --> RENDERING TEMPLATE")
     return render_template('home.html')
+
+@app.route('/downloadsol', methods=['GET'])
+def downloadsol():
+    print("DOWNLOAD REQUEST ACHIEVED")
+    logging.debug("HAIQ LAUNCHER --> DOWNLOAD REQUEST ACHIEVED")
+    solution_name = request.args.get('value')  # El valor enviado en la solicitud GET
+    solutions_path = "/Users/iquantum/Desktop/HaiQ-project/results/tasconfigs/" #ACTUALIZAR CUANDO SEPA RUTA REAL
+    if not solution_name:
+        print("SOLUTION NAME NOT PROVIDED")
+        logging.debug("HAIQ LAUNCHER --> SOLUTION NAME NOT PROVIDED")
+        abort(400, description="VALUE PARAMETER NOT PROVIDED")
+    else:
+        print("SOLUTION NAME PROVIDED")
+        logging.debug("HAIQ LAUNCHER --> SOLUTION NAME PROVIDED")
+        sol_path = os.path.join(solutions_path, f"{solution_name}.json")
+        if not os.path.isfile(sol_path):
+            print("FILE NOT FOUND")
+            logging.debug("HAIQ LAUNCHER --> FILE NOT FOUND")
+            abort(404, description="FILE NOT FOUND")
+        else:
+            # Enviar el archivo para su descarga
+            print("FILE FOUND")
+            logging.debug("HAIQ LAUNCHER --> FILE FOUND")
+            return send_from_directory(solutions_path, f"{solution_name}.json", as_attachment=True)
 
 @app.route('/launch-haiq', methods=['POST'])
 def launch_haiq():

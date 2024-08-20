@@ -1,0 +1,1 @@
+{"id":"sol_18","graph":[{"TASWorkflow0":[{"MSBindings":"MS50"},{"ServiceBindings":"MS50"},{"ServiceBindings":"DS10"},{"ABindings":"AS20"},{"ServiceBindings":"AS20"},{"DBindings":"DS10"}]},{"AS20":[{"WorkflowBinding":"TASWorkflow0"}]},{"MS50":[{"WorkflowBinding":"TASWorkflow0"}]},{"DS10":[{"WorkflowBinding":"TASWorkflow0"}]}]}
