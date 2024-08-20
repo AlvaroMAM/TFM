@@ -77,12 +77,16 @@ def utility_calculation(utility_values):
         }
     response = requests.post(WEB_CLIENT_DEVELOPMENT_URL+'/showResults',headers=header, data=data)
     if response.status_code == 200:
+        utility_tuple_sorted_list = []
         print("REQUEST PROCESSED CORRECTLY")
         logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY PROCESSED")
+        
     else:
+        utility_tuple_sorted_list = []
         print("REQUEST WAS NOT PROCESSED")
         logging.debug("UTILITY-CALCULATOR : REQUEST WAS NOT PROCESSED")
         print(response)
+        
 
 def processing_topics():
     print("WAITING FOR TOPICS")
@@ -108,7 +112,7 @@ def processing_topics():
             UTILITY_VALUES_RECIEVED = message.value
             print("UTILITY VALUES RECIEVED")
             print(UTILITY_VALUES_RECIEVED)
-            #utility_calculation(UTILITY_VALUES_RECIEVED)
+            utility_calculation(UTILITY_VALUES_RECIEVED)
             HAIQ_RESULTS = None
             logging.debug("UTILITY-CALCULATOR : NEW RANKING GENERATED")   
 
