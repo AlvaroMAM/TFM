@@ -52,7 +52,7 @@ def upload_file():
     
     if file and file.filename.endswith('.zip') and request.form['cost'] and request.form['performance']:
         # Guarda el archivo en el servidor temporalmente
-        print("TODO EN ORDEN")
+        print("INFORMATION FROM FORM RECIEVED CORRECTLY")
         filename = file.filename
         file.save(os.getcwd()+"/temp/"+filename)
         cost_weight = float(request.form['cost'])

@@ -38,7 +38,6 @@ def haiq_result():
     global COST_WEIGHT, PERFORMANCE_WEIGHT
     if request.files:
         data_recieved = request.files
-        print(data_recieved)
         haiq_result = data_recieved['haiq-result']
         print("HAIQ RESULT SUCESSFULLY READ")
         logging.debug("REQUEST /haiq-result --> HAIQ RESULT SUCESSFULLY READ")
@@ -57,11 +56,11 @@ def haiq_result():
             PERFORMANCE_WEIGHT = None
             return Response("Calculating utility", status=200, mimetype='text/plain')
         else:
-            print("Something was wrong :(")
+            print("SOMETHING WAS WRONG DURING READING HAIQ_RESULT")
             logging.debug("REQUEST /haiq-result --> HAIQ RESULT READING WAS WRONG")
             return Response("Something was wrong during reading haiq_result", status=500, mimetype='text/plain')
     else:
-        print("Something was wrong while reading request:(")
+        print("SOMETHING WAS WRONG DURING READING REQUEST")
         logging.debug("REQUEST /haiq-result --> HAIQ RESULT READING WAS WRONG")
         return Response("Something was wrong during reading request", status=500, mimetype='text/plain')
 
@@ -74,33 +73,31 @@ def start_processing():
     extract_path_app = "./app"
     qpu_services = dict() # CREATING DICTIONARY FOR QUANTUM SERVICES
     cpu_services = dict() # CREATING DICTIONARY FOR CLASSIC SERVICES
-    print(request.form)
     if request.form != None:
-        print("NO EMPTY")
+        print("COST WEIGHT AND PERFORMANCE WEIGHT RECIEVED CORRECTLY")
         COST_WEIGHT = request.form.get('cost_weight')
         PERFORMANCE_WEIGHT = request.form.get('performance_weight')
     else:
-        return Response("SOMETHING WAS WRONG :(", status=500, mimetype='text/plain')
+        return Response("ERROR IN RECIEVING COST WEIGHT AND PERFORMANCE WEIGHT", status=500, mimetype='text/plain')
     if request.files:
         logging.debug("REQUEST /start --> FILES RECIEVED")
         name, zipfile = next(iter(request.files.to_dict(flat=False).items())) # READING ZIP FILE FROM REQUEST ( ImmutableMultiDict[str, FileStorage])
         # name is a string, zipfile is a list of FileStorage [FileStorage]
         if name == '':
             logging.debug("REQUEST /start --> FILES NOT RECIEVED")
-            return Response("SOMETHING WAS WRONG :(", status=500, mimetype='text/plain')
+            return Response("ERROR IN RECIEVING APP SPECIFICATION", status=500, mimetype='text/plain')
         else:
             current_directory = os.getcwd()
             absolute_path = os.path.join(current_directory, "temp")
             if not os.path.exists(absolute_path):
                 os.makedirs(absolute_path)
             app_zip_file_path = os.path.join(absolute_path, name)
-            print("ZIP FILE PATH"+ app_zip_file_path)
             zipfile[0].save(app_zip_file_path)
             logging.debug("REQUEST /start --> ZIP SAVED")
             logging.debug("REQUEST /start --> PROCESSING ZIP FILE")
             with ZipFile(app_zip_file_path, 'r') as zip: # EXTRACTING FILES FROM RECIEVED ZIP
                 zip.extractall(absolute_path)
-                logging.debug("ZIP FILE UNZIPPED")
+                logging.debug("REQUEST /start --> ZIP FILE UNZIPPED")
             #app_oas_file_directory = extract_path_app+OPEN_API_SPECIFICATION_PATH # DIRECTORY OF OPEN API SPECIFICATIONS FILES
             #app_req_file_directory = app_zip_file_path + "/"+uploaded_file.name + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
             #app_req_file_directory = absolute_path + '/' + name.replace('.zip',"") + MICROSERVICES_REQUIREMENTS_PATH # DIRECTORY OF MICROSERVICES REQUIREMENTS FILES
@@ -120,7 +117,7 @@ def start_processing():
             app_req_files = os.listdir(app_req_file_directory)
             logging.debug("REQUEST /start --> OAS DIRECTORY ACHIEVED")
             for req_file_name in app_req_files: # ITERATING OVER OPEN API SPECIFICATIONS FILES
-                print("PROCESSING FILE:"+req_file_name)
+                print("PROCESSING FILE: "+req_file_name)
                 logging.debug("REQUEST /start --> OAS FILE PROCESSING INITIALIZED")
                 req_file = os.path.join(app_req_file_directory, req_file_name)
                 if os.path.isfile(req_file):

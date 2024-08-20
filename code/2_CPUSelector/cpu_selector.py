@@ -46,7 +46,7 @@ def is_candidate(machine_information, ms_logical_performance_cpu, ms_ram, ms_ban
             and int(machine_information['bandwidth']) >= ms_bandwidth
 
 """
-NOT NECESSARY
+NOT NECESSARY IS CALCULATED IN HAIQ
 # Availability = number of hours
 def estimator(machine_information, ms_logical_performance_cpu, ms_ram, ms_bandwidth):
     # Consideramos que las tres variables afectan por igual al cálculo del tiempo de ejecución
@@ -116,10 +116,9 @@ if __name__ == '__main__':
         print("MICROSERVICES RECIEVED")
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
-        print(microservices)
-        print("")
+        print("CLASSICAL MICROSERVICES READED CORRECTLY")
         for microservice_name, requirements in microservices.items():
-            logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE: " + microservice_name)
+            logging.debug("CPU-SELECTOR : PROCESSING MICROSERVICE --> " + microservice_name)
             # Transformation of cpu variable and calculation of bandwidth
             logical_performance_ms = requirements['cpu'] / 1_000_000_000 # From Cycles per second to GHz * 1 Core * 1 Virtual CPUs
             bandwidth_ms = (requirements['number_requests'] * 60 * requirements['maximum_request_size'] * 8 ) / 1_000_000 # From request per minute and max size of request to Mbps
@@ -131,7 +130,8 @@ if __name__ == '__main__':
             app_cpu_machines[microservice_name]['ms_availability'] = requirements['availability']
             app_cpu_machines[microservice_name]['ms_instances'] = requirements['instances']
             app_cpu_machines[microservice_name]['selected_cpus'] = select_cpu(logical_performance_ms, requirements['ram'], bandwidth_ms) # Returns an Array<Dict> of the suitable CPUs machines from AWS
-            logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED:" + microservice_name)
+            logging.debug("CPU-SELECTOR : MICROSERVICE PROCESSED --> " + microservice_name)
+        print("CPU SELECTOR RESULT: ")
         print(app_cpu_machines)
         producer.send(TOPIC_CPU_CANDIDATES, app_cpu_machines)
         

@@ -81,14 +81,15 @@ if __name__ == '__main__':
     app_qpu_machines = dict()
     print("QPU SELECTOR STARTED")
     for message in consumer:
-        print("MICROSERVICES RECIEVED")
+        print("QUANTUM MICROSERVICES RECIEVED")
         logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         for microservice_name, requirements in microservices.items():
-            logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE: " + microservice_name)
+            logging.debug("QPU-SELECTOR : PROCESSING MICROSERVICE --> " + microservice_name)
             app_qpu_machines[microservice_name] = {} # initializing json of microservice
             app_qpu_machines[microservice_name]['shots'] = requirements['shots']
             app_qpu_machines[microservice_name]['selected_qpus'] = select_qpu(requirements['qubits'], requirements['shots']) # Returns an Array<Dict> of the suitable CPUs machines from AWs
-            logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED" + microservice_name)
+            logging.debug("QPU-SELECTOR : MICROSERVICE PROCESSED --> " + microservice_name)
+        print("QPU SELECTOR RESULT: ")
         print(app_qpu_machines)
         producer.send(TOPIC_QPU_CANDIDATES, app_qpu_machines)

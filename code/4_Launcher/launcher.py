@@ -77,34 +77,33 @@ def launch_haiq():
             #haiq_result_path = '' #To Complete 
             if os.path.exists(haiq_result_path):
                 try:
-                    # Mandar resultado a INFO PROCESSING
-                    result_file = os.path.join(haiq_result_path,'tasdata.json')
-                    print("Ruta GENERADA")
-                    print(result_file)
+                    # Mandar resultado a INFO PROCESSING 
+                    # MODIFICAR POR NOMBRE DE ARCHIVO REAL
+                    result_file = os.path.join(haiq_result_path,'tasdata.json') 
                     url = INFORMATION_PROCESSING_URL_OUT+"/haiq-result"
                     files = {"haiq-result": open(result_file, 'rb')}
                     response = requests.post(url, files=files)
                     if response.status_code == 200:
                         print("HAIQ RESULT SUCESSFULLY SENT")
                         logging.debug("HAIQ LAUNCHER --> HAIQ RESULT SUCESSFULLY SENT")
-                        return Response("ITS OKAY", status=200, mimetype='text/plain')
+                        return Response("HAIQ RESULT SUCESSFULLY SENT", status=200, mimetype='text/plain')
                     else:
-                        print("SENDING HAIQ RESULT WAS WRONG")
-                        logging.debug("HAIQ LAUNCHER --> SENDING HAIQ RESULT WAS WRONG")
-                        return Response("ERROR", status=500, mimetype='text/plain')
+                        print("ERROR WHILE SENDING HAIQ RESULT")
+                        logging.debug("HAIQ LAUNCHER --> ERROR WHILE SENDING HAIQ RESULT")
+                        return Response("ERROR WHILE SENDING HAIQ RESULT", status=500, mimetype='text/plain')
                 except Exception as e:
-                    print("ERROR AL LEER RESULTADO DE HAIQ")
-                    logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE HAIQ RUN")
+                    print("EXCEPTION WHILE READING HAIQ RESULT FILE")
+                    logging.debug("HAIQ LAUNCHER --> EXCEPTION WHILE READING HAIQ RESULT FILE")
                     print(e)
-                    return Response("EXCEPTION", status=500, mimetype='text/plain')
+                    return Response("EXCEPTION WHILE READING HAIQ RESULT FILE", status=500, mimetype='text/plain')
             else:
-                print("RESULTADO DE HAIQ NO ENCONTRADO")
+                print("HAIQ RESULT FILE NOT FOUND")
         else:
-            print("RECIBIDO PERO NO LEIDO CORRECTAMENTE")
-            logging.debug("HAIQ LAUNCHER --> File didn't read correctly")
+            print("HAIQ FILE RECIEVED BUT NOT READ")
+            logging.debug("HAIQ LAUNCHER --> HAIQ FILE RECIEVED BUT NOT READ")
     else:
-        logging.debug("HAIQ LAUNCHER --> Something was wrong :(")
-        print("NO SE HA RECIBIDO ARCHIVO HAIQ")
+        logging.debug("HAIQ LAUNCHER --> HAIQ FILE MISSING")
+        print("HAIQ FILE MISSING")
 
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/launcher.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION

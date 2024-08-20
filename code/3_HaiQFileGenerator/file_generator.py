@@ -10,7 +10,7 @@ cpu_candidates = None
 qpu_candidates = None
 
 def processing_topics():
-    print("Waiting for topics")
+    print("WAITING FOR TOPICS")
     global behavioural_restrictions, cpu_candidates, qpu_candidates
     # Procesar mensajes de los topics
     logging.debug("FILE-GENERATOR : WAITING FOR MESSAGES")
@@ -20,6 +20,7 @@ def processing_topics():
         if topic == TOPIC_BEHAVIOURAL:
             # Procesando Behavioural File
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC BEHAVIOURAL")
+            print(f"PROCESSED MESSAGE FROM TOPIC: {topic}")
             behavioural_restrictions = message.value
             behavioural = behavioural_restrictions['behavioural'] # POSIBLE ERROR PORQUE VENDRAN CON 2 ATTRIBUTOS BEHAVIOURAL Y RESTRICTIONS
             restrictions = behavioural_restrictions['restrictions']
@@ -32,15 +33,15 @@ def processing_topics():
             # Procesando CPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC CPU CANDIDATES")
             cpu_candidates = message.value
-            print(f"Procesado mensaje desde topic: {topic}")
+            print(f"PROCESSED MESSAGE FROM TOPIC: {topic}")
         elif topic == TOPIC_QPU_CANDIDATES:
             # Procesando QPUs
             logging.debug("FILE-GENERATOR : MESSAGE FROM TOPIC QPU CANDIDATES")
             qpu_candidates = message.value
-            print(f"Procesado mensaje desde topic: {topic}")
+            print(f"PROCESSED MESSAGE FROM TOPIC: {topic}")
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
-            print("3 topics recieved")
+            print("MESSAGES RECIEVED, STARTING FILE GENERATOR")
             haiq_file_generator()
 
 
@@ -180,7 +181,7 @@ property SminR{" + 'costRew' + "}[F done]\n"
 
 def haiq_file_generator():
     global cpu_candidates, qpu_candidates, behavioural_restrictions
-    print("HAIQ GENERATOR")
+    print("HAIQ GENERATOR STARTED")
     qpu_machines, qpu_services, quantum = quantum_generator_string(qpu_candidates)
     cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
     # Concatenar todo
@@ -203,14 +204,14 @@ def haiq_file_generator():
     files = {"haiqFile": open(os.getcwd()+"/temp/"+"hybrid-iot.haiq", 'rb')}
     response = requests.post(url, files=files)
     if response.status_code == 200:
-        print("HAIQ RESULT SUCCESSFULLY SENT")
+        print("HAIQ RESULT SUCCESSFULLY SENT TO HAIQ LAUNCHER")
         logging.debug("FILE-GENERATOR : HAIQ RESULT SUCCESSFULLY SENT")
         behavioural_restrictions = None
         cpu_candidates = None
         qpu_candidates = None
         logging.debug("FILE-GENERATOR : RESET VARs")
     else:
-        print("Something was wrong while sending the haiq file to HAIQ LAUNCHER")
+        print("SOMETHING WAS WRONG WHILE SENDING HAIQ FILE TO HAIQ LAUNCHER")
         logging.debug("FILE-GENERATOR : HAIQ RESULT SENT ERROR")
 
             

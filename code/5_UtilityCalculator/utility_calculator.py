@@ -45,6 +45,8 @@ def insert_sorted_tuple_list(l,t):
 
 def utility_calculation(utility_values):
     #Select the top 3 solutions that have the biggest value after applying the utility theory
+    print("UTILITY CALCULATION STARTED")
+    print("UTILITY VALUES and TYPE")
     print(utility_values)
     print(type(utility_values))
     utility_tuple_sorted_list = []
@@ -63,11 +65,11 @@ def utility_calculation(utility_values):
                     key_utility_value = performance_weight*float(v)
                 sol_utility_value = sol_utility_value + key_utility_value
             utility_tuple = (sol, sol_utility_value, metrics)
-        print("ANTES DE INSERTAR",utility_tuple_sorted_list)
+        print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
         utility_tuple_sorted_list = insert_sorted_tuple_list(utility_tuple_sorted_list,utility_tuple) # Comprobar que se modifica la lista correctamente
-        print("DESPUÉS DE INSERTAR", utility_tuple_sorted_list)
+        print("AFTER INSERT INTO SORTED TUPLE LIST", utility_tuple_sorted_list)
     top3_values = utility_tuple_sorted_list[:3]
-    print("PREPARANDO ENVÍO")
+    print("PREPARING REQUEST")
     logging.debug("UTILITY-CALCULATOR : PREPARING FOR SEND NEW RANKING")  
     data = json.dumps(top3_values)
     header = {
@@ -75,15 +77,15 @@ def utility_calculation(utility_values):
         }
     response = requests.post(WEB_CLIENT_DEVELOPMENT_URL+'/refresh',headers=header, data=data)
     if response.status_code == 200:
-        print("PETICIÓN PROCESADA CORRECTAMENTE")
-        logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY RECIEVED")
+        print("REQUEST PROCESSED CORRECTLY")
+        logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY PROCESSED")
     else:
-        print("SOMETHING WAS WRONG :(")
+        print("REQUEST WAS NOT PROCESSED")
         logging.debug("UTILITY-CALCULATOR : REQUEST WAS NOT PROCESSED")
         print(response)
 
 def processing_topics():
-    print("Waiting for topics")
+    print("WAITING FOR TOPICS")
     global HAIQ_RESULTS, UTILITY_VALUES_RECIEVED
     # Procesar mensajes de los topics
     logging.debug("UTILITY-CALCULATOR : WAITING FOR MESSAGES")
@@ -101,9 +103,10 @@ def processing_topics():
         elif topic == TOPIC_UTILITY_VALUES:
             # RECIEVING UTILITY VALUES (DUPLE) (x,y) (cost, performance)
             logging.debug("UTILITY-CALCULATOR : UTILITY VALUES RECIEVED")
-            print(f"Procesado mensaje desde topic: {topic}")
+            print(f"PROCESSING MESSAGE FROM TOPIC: {topic}")
             # the values must be a Duple
             UTILITY_VALUES_RECIEVED = message.value
+            print("UTILITY VALUES RECIEVED")
             print(UTILITY_VALUES_RECIEVED)
             #utility_calculation(UTILITY_VALUES_RECIEVED)
             HAIQ_RESULTS = None
