@@ -5,7 +5,6 @@ import os
 import logging
 import requests
 import json
-from kafka import KafkaProducer
 from config.config import INFORMATION_PROCESSING_URL_OUT, KAFKA_SERVER_URL_OUT, TOPIC_WEB
 
 
@@ -133,8 +132,5 @@ def launch_haiq():
 
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/launcher.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
-    producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL_OUT], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
-    producer.send(TOPIC_WEB, "HAIQ_ANALYSIS")
-    producer.flush()
     #app.run(host="127.0.0.1", port=8585,debug=True)
     app.run(host="0.0.0.0", port=8888,debug=True)

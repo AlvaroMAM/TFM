@@ -206,6 +206,8 @@ def haiq_file_generator():
     if response.status_code == 200:
         print("HAIQ RESULT SUCCESSFULLY SENT TO HAIQ LAUNCHER")
         logging.debug("FILE-GENERATOR : HAIQ RESULT SUCCESSFULLY SENT")
+        producer.send(TOPIC_WEB, "HAIQ_ANALYSIS")
+        producer.flush()
         behavioural_restrictions = None
         cpu_candidates = None
         qpu_candidates = None
