@@ -17,12 +17,16 @@ from config.config import INFORMATION_PROCESSING_URL
 app = Flask(__name__)
 
 configurations_list = None
+COST_WEIGHT = None
+PERFORMANCE_WEIGHT = None
 
 @app.route('/')
 def index():
     logging.debug("REQUEST / --> RENDERING TEMPLATE")
-    global configurations_list
+    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
     configurations_list = None
+    COST_WEIGHT = None
+    PERFORMANCE_WEIGHT = None
     return render_template('home.html')
 
 
@@ -30,13 +34,15 @@ def index():
 def showResults():
     if request.method == 'GET':
         # If get load html with the list in table
-        global configurations_list
-        return render_template('showResults.html', configurations=configurations_list)
+        global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
+        return render_template('showResults.html', configurations=configurations_list, cost_weight=str(COST_WEIGHT), performance_weight=str(PERFORMANCE_WEIGHT))
     elif request.method == 'POST':
         # If post, update configuration list
         if request.is_json:
             global configurations_list
             configurations_list =  request.get_json()
+            print(configurations_list)
+            print(type(configurations_list))
             return jsonify({"message": "Data recieved correctly"}), 200
         else:
             print("SOLUTION LIST IS EMPTY")
@@ -79,11 +85,12 @@ def upload_file():
     if file and file.filename.endswith('.zip') and request.form['cost'] and request.form['performance']:
         # Guarda el archivo en el servidor temporalmente
         print("INFORMATION FROM FORM RECIEVED CORRECTLY")
+        global COST_WEIGHT, PERFORMANCE_WEIGHT
         filename = file.filename
         file.save(os.getcwd()+"/temp/"+filename)
-        cost_weight = float(request.form['cost'])
-        performance_weight = float(request.form['performance'])
-        cost_and_performance = {'cost_weight': cost_weight, 'performance_weight' : performance_weight}
+        COST_WEIGHT = float(request.form['cost'])
+        PERFORMANCE_WEIGHT = float(request.form['performance'])
+        cost_and_performance = {'cost_weight': COST_WEIGHT, 'performance_weight' : PERFORMANCE_WEIGHT}
         # Envía el archivo al microservicio
         try:
             url = INFORMATION_PROCESSING_URL+"/start"

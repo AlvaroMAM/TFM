@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"> 
+                        <a href="https://www.uma.es/"><img src="{{ url_for('static', filename='img/uma.png') }}" alt="Logo" style="height: 50px;"></a>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3 d-flex justify-content-md-start">
+                        <a href="https://www.uma.es/etsi-informatica/"><img src="{{ url_for('static', filename='img/etsii.png') }}" alt="Logo" style="height: 50px;"></a>
+                        
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <br>
+                    <h4 class="card-title text-center"><strong><p>Sistema de Evaluación de Coste para Aplicaciones Híbridas</p> <p>(Cuánticas-Clásicas)</p></strong></h4>
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 d-flex justify-content-md-start">
+                        
+                        {% if cost_weight and performance_weight %}
+                        <div class="form-group">
+                            <label for="cost_input">Cost Weight</label>
+                            <input type="text" id="cost_input" name="cost" class="form-control" value="{{ cost_weight }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="performance_input">Performance Weight</label>
+                            <input type="text" id="performance_input" name="performance" class="form-control" value="{{ performance_weight }}" readonly>
+                        </div>
+                        {% endif %} 
+                    </div>                        
+                    <div class="col-md-3 d-flex justify-content-md-end">
+                        <a href="http://127.0.0.1:8585/" class="btn btn-primary">Home</a>
+                    </div>
+                </div>
+                {% if info_message %}
+                <div class="alert alert-info" role="alert">
+                    {{ info_message }}
+                </div>
+                <br>
+                <a href="http://127.0.0.1:8585/" class="btn btn-info"></a>
+                {% else %}
+                <!-- Flujo correcto -->
+               <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Solution Number</th>
+                            <th>Cost</th>
+                            <th>Performance</th>
+                            <!--<th></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sol in configurations %}
+                        <tr>
+                            <td>{{ sol[0] }}</td>
+                            <td>{{ sol[1] }}</td>
+                            <td>{{ sol[2] }}</td>
+                            <!--<td>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal{{ loop.index }}">
+                                    Show solution
+                                </button>
+                                <div class="modal fade" id="modal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="solutionModal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Content of Solution : {{ loop.index }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ sol[3] }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+               </div>
+                {% endif %}
+                <br>
+                <footer class="footer text-center py-3"><strong>
+                    <p>&copy; 2024 Trabajo Fin de Máster - <a href="https://alvaromam.github.io/personal-page/">&Aacute;lvaro M. Aparicio-Morales</a>.</p>
+                    <p><strong> Tutorizado por</strong>: Jose Garcia-Alonso y <a href="https://javier-camara.github.io/">Javier C&aacute;mara</a></p>
+                    <p>Máster Universitario en Ingeniería y Ciencia de Datos, Universidad de Málaga.</p>
+                    <p>Todos los derechos reservados.
+                        
+                    </p>
+            
+                </strong></footer>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
