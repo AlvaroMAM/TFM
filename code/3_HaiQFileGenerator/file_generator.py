@@ -200,7 +200,7 @@ def haiq_file_generator():
     print("HAIQ FILE GENERATED")
     logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")
     # Enviar archivo a HaiqLauncher
-    url = HAIQ_LAUNCHER_URL
+    url = HAIQ_LAUNCHER_URL+"/launch-haiq"
     files = {"haiqFile": open(os.getcwd()+"/temp/"+"hybrid-iot.haiq", 'rb')}
     response = requests.post(url, files=files)
     if response.status_code == 200:
