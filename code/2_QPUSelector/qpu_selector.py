@@ -8,7 +8,7 @@ Servicio encargado de seleccionar un conjunto de máquinas de QPU compatibles
 para la ejecución de los microservicios que conforman la aplicación híbrida (cuántico-clásica)
 """
 from kafka import KafkaConsumer, KafkaProducer
-from config.config import KAFKA_SERVER_URL, TOPIC_QPU, TOPIC_QPU_CANDIDATES
+from config.config import KAFKA_SERVER_URL, TOPIC_QPU, TOPIC_QPU_CANDIDATES, TOPIC_WEB
 import json
 import logging
 import os
@@ -80,6 +80,8 @@ if __name__ == '__main__':
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
     print("QPU SELECTOR STARTED")
+    producer.send(TOPIC_WEB, "QPU_SELECTOR")
+    producer.flush()
     for message in consumer:
         print("QUANTUM MICROSERVICES RECIEVED")
         logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
@@ -93,3 +95,4 @@ if __name__ == '__main__':
         print("QPU SELECTOR RESULT: ")
         print(app_qpu_machines)
         producer.send(TOPIC_QPU_CANDIDATES, app_qpu_machines)
+        producer.flush()
