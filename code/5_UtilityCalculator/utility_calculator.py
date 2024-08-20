@@ -75,7 +75,7 @@ def utility_calculation(utility_values):
     header = {
         "Content-Type": "application/json"
         }
-    response = requests.post(WEB_CLIENT_DEVELOPMENT_URL+'/refresh',headers=header, data=data)
+    response = requests.post(WEB_CLIENT_DEVELOPMENT_URL+'/showResults',headers=header, data=data)
     if response.status_code == 200:
         print("REQUEST PROCESSED CORRECTLY")
         logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY PROCESSED")

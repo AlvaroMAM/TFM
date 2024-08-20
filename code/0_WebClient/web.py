@@ -7,7 +7,7 @@ Descripcion:
 - Cliente Web --> Proporciona una interfaz gráfica donde subir las especificaciones.
 """
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import requests
 import os
 import logging
@@ -25,14 +25,40 @@ def index():
     configurations_list = None
     return render_template('home.html')
 
-@app.route('/refresh', methods=['POST'])
-def refresh():
-    global configurations_list
-    data = request.get_json()
 
-    if data:
-        configurations_list = data
-    return jsonify({"status": "success", "message": "Data received"}), 200
+@app.route('/showResults', methods=['GET', 'POST'])
+def showResults():
+    if request.method == 'GET':
+        # If get load html with the list in table
+        global configurations_list
+        return render_template('showResults.html', configurations=configurations_list)
+    elif request.method == 'POST':
+        # If post, update configuration list
+        if request.is_json:
+            global configurations_list
+            configurations_list =  request.get_json()
+            return jsonify({"message": "Data recieved correctly"}), 200
+        else:
+            print("SOLUTION LIST IS EMPTY")
+            return jsonify({"message": "Data recieved is empty"}), 500
+    else:
+        print("METHOD NOT SUPPORTED")
+        error_message = 'Method not supported. Please restart the process'
+        return render_template('error.html', error_message=error_message), 500
+   
+    
+
+
+@app.route('/refresh', methods=['POST'])
+def refresh():    
+    if request.form != None:
+        print("EVALUATION STAGE UPDATE RECIEVED")
+        evaluation_stage = request.form.get('evaluation_stage')
+        return render_template('progress.html', evaluation_stage=evaluation_stage), 200
+    else:
+        print("EVALUATION STAGE UPDATE NOT RECIEVED")
+        error_message = 'Evaluation stage update not recieved. Please restart the process'
+        return render_template('error.html', error_message=error_message), 500
 
 
 
@@ -77,7 +103,8 @@ def upload_file():
             
     else:
         logging.debug("REQUEST /upload --> NO ZIP FILE SELECTED")
-        return 'El archivo no es un archivo .zip válido', 400
+        error_message = 'The file is not a valiz .zip. Please, restart the process.'
+        return render_template('error.html', error_message=error_message), 500
 
 if __name__ == '__main__':
     logging.basicConfig(filename=os.getcwd()+'/web.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') #CREATING LOGGING CONFIGURATION
