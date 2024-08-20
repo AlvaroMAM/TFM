@@ -1,5 +1,5 @@
-from kafka import KafkaConsumer
-from config.config import KAFKA_SERVER_URL, TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RESULT, WEB_CLIENT_DEVELOPMENT_URL
+from kafka import KafkaConsumer, KafkaProducer
+from config.config import KAFKA_SERVER_URL, TOPIC_UTILITY_VALUES, TOPIC_HAIQ_RESULT, WEB_CLIENT_DEVELOPMENT_URL, TOPIC_WEB
 import json
 import logging
 import requests
@@ -116,6 +116,9 @@ def processing_topics():
 if __name__=='__main__':
     print("UTILITY CALCULATOR ON")
     logging.basicConfig(filename='utility-calculator.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
+    producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
+    producer.send(TOPIC_WEB, "UTILITY_CALCULATOR")
+    producer.flush()
     consumer = KafkaConsumer(
     bootstrap_servers=[KAFKA_SERVER_URL],
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
