@@ -1,5 +1,5 @@
-from kafka import KafkaConsumer
-from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL, HAIQ_LAUNCHER_URL
+from kafka import KafkaConsumer, KafkaProducer
+from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL, HAIQ_LAUNCHER_URL, TOPIC_WEB
 import json
 import logging
 import os
@@ -218,6 +218,7 @@ def haiq_file_generator():
 if __name__=='__main__':
     print("FILE GENERATOR ON")
     logging.basicConfig(filename='file-generator.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
+    producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
     consumer = KafkaConsumer(
     bootstrap_servers=[KAFKA_SERVER_URL],
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
@@ -225,6 +226,7 @@ if __name__=='__main__':
     logging.debug("FILE-GENERATOR : INITIALIZED")
     # Faltaría un while true para que vaya iterando
     consumer.subscribe([TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES])
-   
+    producer.send(TOPIC_WEB, "HAIQ_FILE_GENERATOR")
+    producer.flush()
     processing_topics()
     
