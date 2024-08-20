@@ -22,9 +22,16 @@
                 <br>
                 <h4 class="card-title text-center"><strong><p>Sistema de Evaluación de Coste para Aplicaciones Híbridas</p> <p>(Cuánticas-Clásicas)</p></strong></h4>
                 <br>
+                {% if info_message %}
+                <div class="alert alert-info" role="alert">
+                    {{ info_message }}
+                </div>
+                <br>
+                <a href="http://127.0.0.1:8585/" class="btn btn-info"></a>
+                {% else %}
+                <!-- Flujo correcto -->
                 <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
                     <div class="form-group text-center">
-                        <!-- Primera fila: Cost y Performance -->
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-3">
@@ -46,7 +53,7 @@
                             <div class="col-md-2"></div>
                         </div>
                         <br>
-                        <!-- Botón de envío -->
+                        
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
@@ -54,6 +61,8 @@
                         </div>
                     </div>
                 </form>
+                {% endif %}
+                
                 <br>
                 <footer class="footer text-center py-3"><strong>
                     <p>&copy; 2024 Trabajo Fin de Máster - <a href="https://alvaromam.github.io/personal-page/">&Aacute;lvaro M. Aparicio-Morales</a>.</p>

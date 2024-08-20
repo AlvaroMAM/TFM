@@ -41,11 +41,13 @@ def upload_file():
     logging.debug("REQUEST /upload --> STARTS")
     if 'file' not in request.files:
         logging.debug("REQUEST /upload --> NO FILE SELECTED")
-        return 'No se ha seleccionado ningún archivo', 400
+        info_message = 'No file has been selected. Please reload the page.'
+        return render_template('home.html', info_message=info_message), 400
     file = request.files['file']
     if file.filename == '':
         logging.debug("REQUEST /upload --> NO FILE SELECTED")
-        return 'No se ha seleccionado ningún archivo', 400
+        info_message = 'No file has been selected. Please reload the page.'
+        return render_template('home.html', info_message=info_message), 400
 
     
     if file and file.filename.endswith('.zip') and request.form['cost'] and request.form['performance']:
@@ -64,11 +66,15 @@ def upload_file():
             response = requests.post(url, files=files, data=cost_and_performance)
             if response.status_code == 200:
                 # Eliminar archivo temporal
-                return 'El archivo se ha enviado correctamente al microservicio'
+                info_message = "Information was correctly send. The process has started."
+                return render_template('progress.html', info_message=info_message), 500
             else:
-                return 'Ocurrió un error al enviar el archivo al microservicio', 500
+                error_message = 'An error processing the information happened. Please, restart the process.'
+                return render_template('error.html', error_message=error_message), 500
         except Exception as e:
-            return f'Ocurrió un error: {str(e)}', 500
+            error_message = 'An exception has been launched\n' + e
+            return render_template('error.html', error_message=error_message), 500
+            
     else:
         logging.debug("REQUEST /upload --> NO ZIP FILE SELECTED")
         return 'El archivo no es un archivo .zip válido', 400

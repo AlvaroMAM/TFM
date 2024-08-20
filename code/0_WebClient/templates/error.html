@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-5 full-height my-img-bg-container">
+        <img src="{{ url_for('static', filename='img/background.jpg') }}" alt="Imagen" style="width: 100%; height: auto;">
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"> 
+                        <a href="https://www.uma.es/"><img src="{{ url_for('static', filename='img/uma.png') }}" alt="Logo" style="height: 50px;"></a>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3 d-flex justify-content-md-start">
+                        <a href="https://www.uma.es/etsi-informatica/"><img src="{{ url_for('static', filename='img/etsii.png') }}" alt="Logo" style="height: 50px;"></a>
+                        
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <br>
+                <h4 class="card-title text-center"><strong><p>Sistema de Evaluación de Coste para Aplicaciones Híbridas</p> <p>(Cuánticas-Clásicas)</p></strong></h4>
+                <br>
+                <div class="alert alert-danger" role="alert">
+                    <h3>An error has ocurred :(</h3>
+                    <p>{{ error_message }}</p>
+                </div>
+                <br>
+                <footer class="footer text-center py-3"><strong>
+                    <p>&copy; 2024 Trabajo Fin de Máster - <a href="https://alvaromam.github.io/personal-page/">&Aacute;lvaro M. Aparicio-Morales</a>.</p>
+                    <p><strong> Tutorizado por</strong>: Jose Garcia-Alonso y <a href="https://javier-camara.github.io/">Javier C&aacute;mara</a></p>
+                    <p>Máster Universitario en Ingeniería y Ciencia de Datos, Universidad de Málaga.</p>
+                    <p>Todos los derechos reservados.
+                        
+                    </p>
+            
+                </strong></footer>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
