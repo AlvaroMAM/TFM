@@ -32,15 +32,14 @@ def index():
 
 @app.route('/showResults', methods=['GET', 'POST'])
 def showResults():
+    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
     if request.method == 'GET':
         # If get load html with the list in table
-        global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
         haiq_url = HAIQ_MANAGER_URL + "/downloadsol"
         return render_template('showResults.html', configurations=configurations_list, cost_weight=str(COST_WEIGHT), performance_weight=str(PERFORMANCE_WEIGHT), haiq_url=haiq_url)
     elif request.method == 'POST':
         # If post, update configuration list
         if request.is_json:
-            global configurations_list
             configurations_list =  request.get_json()
             print(configurations_list)
             print(type(configurations_list))
