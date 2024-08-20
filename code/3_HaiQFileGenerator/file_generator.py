@@ -1,5 +1,5 @@
 from kafka import KafkaConsumer, KafkaProducer
-from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL, HAIQ_LAUNCHER_URL, TOPIC_WEB
+from config.config import KAFKA_SERVER_URL, TOPIC_QPU_CANDIDATES, TOPIC_CPU_CANDIDATES, TOPIC_BEHAVIOURAL, HAIQ_MANAGER_URL, TOPIC_WEB
 import json
 import logging
 import os
@@ -200,7 +200,7 @@ def haiq_file_generator():
     print("HAIQ FILE GENERATED")
     logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")
     # Enviar archivo a HaiqLauncher
-    url = HAIQ_LAUNCHER_URL+"/launch-haiq"
+    url = HAIQ_MANAGER_URL+"/launch-haiq"
     files = {"haiqFile": open(os.getcwd()+"/temp/"+"hybrid-iot.haiq", 'rb')}
     response = requests.post(url, files=files)
     if response.status_code == 200:
