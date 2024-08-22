@@ -95,6 +95,8 @@ def processing_topics():
     logging.debug("UTILITY-CALCULATOR : WAITING FOR MESSAGES")
     for message in consumer:
         logging.debug("UTILITY-CALCULATOR : MESSAGE RECIEVED")
+        producer.send(TOPIC_WEB, "UTILITY_CALCULATOR")
+        producer.flush()
         topic = message.topic
         if topic == TOPIC_HAIQ_RESULT:
             # RECIEVING HAIQ RESULT
@@ -121,8 +123,6 @@ if __name__=='__main__':
     print("UTILITY CALCULATOR ON")
     logging.basicConfig(filename='utility-calculator.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     producer = KafkaProducer(bootstrap_servers=[KAFKA_SERVER_URL], value_serializer=lambda x: json.dumps(x).encode('utf-8')) # CREATING KAFKA PRODUCER
-    producer.send(TOPIC_WEB, "UTILITY_CALCULATOR")
-    producer.flush()
     consumer = KafkaConsumer(
     bootstrap_servers=[KAFKA_SERVER_URL],
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))

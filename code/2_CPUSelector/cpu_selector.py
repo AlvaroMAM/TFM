@@ -112,10 +112,10 @@ if __name__ == '__main__':
     logging.basicConfig(filename='cpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_cpu_machines = dict()
     print("CPU SELECTOR STARTED")
-    producer.send(TOPIC_WEB, "CPU_SELECTOR")
-    producer.flush()
     for message in consumer:
-        print("MICROSERVICES RECIEVED")
+        print("CLASSICAL MICROSERVICES RECIEVED")
+        producer.send(TOPIC_WEB, "CPU_SELECTOR")
+        producer.flush()
         logging.debug("CPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         print("CLASSICAL MICROSERVICES READED CORRECTLY")

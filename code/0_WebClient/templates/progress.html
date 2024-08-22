@@ -23,7 +23,7 @@
                 <h4 class="card-title text-center"><strong><p>Sistema de Evaluación de Coste para Aplicaciones Híbridas</p> <p>(Cuánticas-Clásicas)</p></strong></h4>
                 <br>
                 {% if info_message %}
-                    {% if info_message = "FINISHED" %}
+                    {% if info_message == "FINISHED" %}
                     <!-- Evaluation Finished-->
                         <ul class="list-group">
                             <li class="list-group-item disabled d-flex justify-content-between align-items-center">
@@ -82,7 +82,7 @@
                 <br>
                 {% else %}
                     {% if evaluation_stage %}
-                        {% if evaluation_stage = "INFORMATION_PROCESSING"%}
+                        {% if evaluation_stage == "INFORMATION_PROCESSING"%}
                             <ul class="list-group">
                                 <li class="list-group-item active d-flex justify-content-between align-items-center">
                                 STAGE: INFORMATION PROCESSING
@@ -104,7 +104,7 @@
                                 </li>
                             </ul>
                         {% endif %}
-                        {% if evaluation_stage = "QPU_SELECTOR"%}
+                        {% if evaluation_stage == "QPU_SELECTOR"%}
                             <ul class="list-group">
                                 <li class="list-group-item disabled d-flex justify-content-between align-items-center">
                                     STAGE: INFORMATION PROCESSING
@@ -127,7 +127,7 @@
                                 </li>
                             </ul>
                         {% endif %}
-                        {% if evaluation_stage = "CPU_SELECTOR"%}
+                        {% if evaluation_stage == "CPU_SELECTOR"%}
                             <ul class="list-group">
                                 <li class="list-group-item disabled d-flex justify-content-between align-items-center">
                                     STAGE: INFORMATION PROCESSING
@@ -151,7 +151,7 @@
                                 </li>
                             </ul>
                         {% endif %}
-                        {% if evaluation_stage = "HAIQ_FILE_GENERATOR"%}
+                        {% if evaluation_stage == "HAIQ_FILE_GENERATOR"%}
                             <ul class="list-group">
                                 <li class="list-group-item disabled d-flex justify-content-between align-items-center">
                                     STAGE: INFORMATION PROCESSING
@@ -176,7 +176,7 @@
                                 </li>
                             </ul>
                         {% endif %}
-                        {% if evaluation_stage = "HAIQ_ANALYSIS"%}
+                        {% if evaluation_stage == "HAIQ_ANALYSIS"%}
                             <ul class="list-group">
                                 <li class="list-group-item disabled d-flex justify-content-between align-items-center">
                                     STAGE: INFORMATION PROCESSING
@@ -202,7 +202,7 @@
                                 </li>
                             </ul>
                         {% endif %}
-                        {% if evaluation_stage = "UTILITY_CALCULATOR"%}
+                        {% if evaluation_stage == "UTILITY_CALCULATOR"%}
                             <ul class="list-group">
                                 <li class="list-group-item disabled d-flex justify-content-between align-items-center">
                                     STAGE: INFORMATION PROCESSING

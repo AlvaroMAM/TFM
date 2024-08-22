@@ -16,6 +16,8 @@ def processing_topics():
     logging.debug("FILE-GENERATOR : WAITING FOR MESSAGES")
     for message in consumer:
         logging.debug("FILE-GENERATOR : MESSAGE RECIEVED")
+        producer.send(TOPIC_WEB, "HAIQ_FILE_GENERATOR")
+        producer.flush()
         topic = message.topic
         if topic == TOPIC_BEHAVIOURAL:
             # Procesando Behavioural File
@@ -228,7 +230,5 @@ if __name__=='__main__':
     logging.debug("FILE-GENERATOR : INITIALIZED")
     # Faltaría un while true para que vaya iterando
     consumer.subscribe([TOPIC_BEHAVIOURAL, TOPIC_CPU_CANDIDATES, TOPIC_QPU_CANDIDATES])
-    producer.send(TOPIC_WEB, "HAIQ_FILE_GENERATOR")
-    producer.flush()
     processing_topics()
     

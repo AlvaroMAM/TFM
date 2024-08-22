@@ -80,10 +80,10 @@ if __name__ == '__main__':
     logging.basicConfig(filename='qpu-selector.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # CREATING LOGGING CONFIGURATION
     app_qpu_machines = dict()
     print("QPU SELECTOR STARTED")
-    producer.send(TOPIC_WEB, "QPU_SELECTOR")
-    producer.flush()
     for message in consumer:
         print("QUANTUM MICROSERVICES RECIEVED")
+        producer.send(TOPIC_WEB, "QPU_SELECTOR")
+        producer.flush()
         logging.debug("QPU-SELECTOR : MESSAGE RECIEVED")
         microservices = json.loads(message.value.decode('utf-8'))
         for microservice_name, requirements in microservices.items():
