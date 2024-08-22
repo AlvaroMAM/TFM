@@ -52,8 +52,12 @@ def utility_calculation(utility_values):
     utility_tuple_sorted_list = []
     cost_weight = float(utility_values[0])
     performance_weight = float(utility_values[1])
+    print(cost_weight)
+    print(performance_weight)
     haiq_results = read_haiq_result()
+    print(haiq_results)
     for elem in haiq_results:
+        print(elem)
         for sol, metrics in elem.items():
             utility_tuple = None
             sol_utility_value = 0
