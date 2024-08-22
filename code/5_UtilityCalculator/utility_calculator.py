@@ -33,15 +33,15 @@ def insert_sorted_tuple_list(l,t):
             if t[1] > l[i][1]:
                 position_to_insert = i
                 break
-        #Insert new element
-        if position_to_insert >= 0:
-            l.insert(position_to_insert,t)
-            if len(l)>3:
-                return l[:-1]
-            else:
-                return l
+    #Insert new element
+    if position_to_insert >= 0:
+        l.insert(position_to_insert,t)
+        if len(l)>3:
+            return l[:-1]
         else:
             return l
+    else:
+        return l
 
 def utility_calculation(utility_values):
     #Select the top 3 solutions that have the biggest value after applying the utility theory
