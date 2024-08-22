@@ -14,6 +14,7 @@ import logging
 import requests
 import json
 import os
+import time
 
 if __name__ == "__main__":
     logging.basicConfig(filename=os.getcwd()+'/update.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -32,8 +33,8 @@ if __name__ == "__main__":
         print(current_phase)
         if message.topic == TOPIC_WEB:
             logging.debug("PROCESSING TOPIC - " + message.topic)
-            r = requests.post(WEB_CLIENT_DEVELOPMENT_URL+"/refresh", data={'evaluation_stage' : current_phase})
-            logging.debug("RESPONSE FROM WEB - " + r.json())
+            requests.post(WEB_CLIENT_DEVELOPMENT_URL+"/refresh", data={'evaluation_stage' : current_phase})
             logging.debug("CURRENT PHASE : " + current_phase)
+            time.sleep(1)
 
     
