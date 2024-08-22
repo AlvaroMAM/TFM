@@ -60,6 +60,7 @@ def refresh():
     if request.form != None:
         print("EVALUATION STAGE UPDATE RECIEVED")
         evaluation_stage = request.form.get('evaluation_stage')
+        print(evaluation_stage)
         return render_template('progress.html', evaluation_stage=evaluation_stage), 200
     else:
         print("EVALUATION STAGE UPDATE NOT RECIEVED")
