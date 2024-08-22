@@ -2,20 +2,19 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3"> 
                         <a href="https://www.uma.es/"><img src="{{ url_for('static', filename='img/uma.png') }}" alt="Logo" style="height: 50px;"></a>
                     </div>
-                    <div class="col-md-5"></div>
+                    <div class="col-md-6"></div>
                     <div class="col-md-3 d-flex justify-content-md-start">
                         <a href="https://www.uma.es/etsi-informatica/"><img src="{{ url_for('static', filename='img/etsii.png') }}" alt="Logo" style="height: 50px;"></a>
                         
                     </div>
-                    <div class="col-md-1"></div>
                 </div>
                 <div class="row">
                     <br>
@@ -50,29 +49,33 @@
                 {% else %}
                 <!-- Flujo correcto -->
                <div class="row">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Solution Number</th>
-                            <th>Utility Value</th>
-                            <th>Cost</th>
-                            <th>Performance</th>
-                            <th></th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sol in configurations %}
-                        <tr>
-                            <td>{{ sol[0] }}</td>
-                            <td>{{ sol[1] }}</td>
-                            <td>{{ sol[2][0] }}</td>
-                            <td>{{ sol[2][0] }}</td>
-                            <td><a href="{{ haiq_url }}?value={{ sol[0] }}" class="btn btn-primary">Download Distribution</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Solution Number</th>
+                                <th>Utility Value</th>
+                                <th>Cost</th>
+                                <th>Performance</th>
+                                <th></th>
+    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sol in configurations %}
+                            <tr>
+                                <td>{{ sol[0] }}</td>
+                                <td>{{ sol[1] }}</td>
+                                <td>{{ sol[2][0] }}</td>
+                                <td>{{ sol[2][0] }}</td>
+                                <td><a href="{{ haiq_url }}?value={{ sol[0] }}" class="btn btn-primary">Download Distribution</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2"></div>
                </div>
                 {% endif %}
                 <br>
@@ -88,6 +91,6 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-2"></div>
 </div>
 {% endblock %}
