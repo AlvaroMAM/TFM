@@ -61,7 +61,10 @@ def showResults():
 def refresh():
     global EVALUATION_STAGE
     if request.method == 'GET':
-        return render_template('progress.html', evaluation_stage=EVALUATION_STAGE), 200
+        if EVALUATION_STAGE == "FINISHED":
+            return render_template('progress.html', evaluation_stage=EVALUATION_STAGE, info_message=EVALUATION_STAGE), 200
+        else:
+            return render_template('progress.html', evaluation_stage=EVALUATION_STAGE), 200
     elif request.method == 'POST':
         if request.form != None:
             print("EVALUATION STAGE UPDATE RECIEVED")
