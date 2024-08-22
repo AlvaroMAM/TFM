@@ -250,8 +250,13 @@
     setInterval(() => {
         
         location.reload();
-    }, 10000)
+    }, 30000)
     {% elif evaluation_stage == "HAIQ_FILE_GENERATOR" %}
+    setInterval(() => {
+        
+        location.reload();
+    }, 10000)
+    {% elif evaluation_stage == "UTILITY_CALCULATOR" %}
     setInterval(() => {
         
         location.reload();
@@ -260,7 +265,7 @@
     setInterval(() => {
         
         location.reload();
-    }, 3000)
+    }, 2000)
     {% endif %}
 </script>
 {% endblock %}
