@@ -11,7 +11,7 @@
                         <a href="https://www.uma.es/"><img src="{{ url_for('static', filename='img/uma.png') }}" alt="Logo" style="height: 50px;"></a>
                     </div>
                     <div class="col-md-6"></div>
-                    <div class="col-md-3 d-flex justify-content-md-start">
+                    <div class="col-md-3 d-flex justify-content-md-end">
                         <a href="https://www.uma.es/etsi-informatica/"><img src="{{ url_for('static', filename='img/etsii.png') }}" alt="Logo" style="height: 50px;"></a>
                         
                     </div>
@@ -24,7 +24,6 @@
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-5 d-flex justify-content-md-start">
-                        
                         {% if cost_weight and performance_weight %}
                         <div class="form-group">
                             <label for="cost_input">Cost Weight</label>
