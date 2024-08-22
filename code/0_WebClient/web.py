@@ -67,7 +67,7 @@ def refresh():
             print("EVALUATION STAGE UPDATE RECIEVED")
             EVALUATION_STAGE = request.form.get('evaluation_stage')
             print(EVALUATION_STAGE)
-            return redirect(url_for('refresh'))
+            return redirect(url_for('/refresh'))
         else:
             print("EVALUATION STAGE UPDATE NOT RECIEVED")
             error_message = 'Evaluation stage update not recieved. Please restart the process'
