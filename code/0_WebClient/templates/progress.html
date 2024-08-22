@@ -245,5 +245,22 @@
         </div>
     </div>
 </div>
-
+<script>
+    {% if evaluation_stage == "HAIQ_ANALYSIS" %}
+    setInterval(() => {
+        
+        location.reload();
+    }, 10000)
+    {% if evaluation_stage == "HAIQ_FILE_GENERATOR" %}
+    setInterval(() => {
+        
+        location.reload();
+    }, 5000)
+    {% else %}
+    setInterval(() => {
+        
+        location.reload();
+    }, 3000)
+    {% endif %}
+</script>
 {% endblock %}
