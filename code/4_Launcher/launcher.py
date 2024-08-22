@@ -30,6 +30,7 @@ def downloadsol():
         print("SOLUTION NAME PROVIDED")
         logging.debug("HAIQ LAUNCHER --> SOLUTION NAME PROVIDED")
         sol_path = os.path.join(solutions_path, f"{solution_name}.json")
+        print(sol_path)
         if not os.path.isfile(sol_path):
             print("FILE NOT FOUND")
             logging.debug("HAIQ LAUNCHER --> FILE NOT FOUND")

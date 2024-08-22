@@ -103,8 +103,6 @@ def processing_topics():
     logging.debug("UTILITY-CALCULATOR : WAITING FOR MESSAGES")
     for message in consumer:
         logging.debug("UTILITY-CALCULATOR : MESSAGE RECIEVED")
-        producer.send(TOPIC_WEB, "UTILITY_CALCULATOR")
-        producer.flush()
         topic = message.topic
         if topic == TOPIC_HAIQ_RESULT:
             # RECIEVING HAIQ RESULT
@@ -122,6 +120,8 @@ def processing_topics():
             UTILITY_VALUES_RECIEVED = json.loads(message.value)
             print("UTILITY VALUES RECIEVED")
             print(UTILITY_VALUES_RECIEVED)
+            producer.send(TOPIC_WEB, "UTILITY_CALCULATOR")
+            producer.flush()
             utility_calculation(UTILITY_VALUES_RECIEVED)
             HAIQ_RESULTS = None
             logging.debug("UTILITY-CALCULATOR : NEW RANKING GENERATED")   
