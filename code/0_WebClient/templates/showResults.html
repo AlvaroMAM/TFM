@@ -22,19 +22,21 @@
                     <br>
                 </div>
                 <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-5 d-flex justify-content-md-start">
-                        {% if cost_weight and performance_weight %}
+                    <div class="col-md-3"></div>
+                    {% if cost_weight and performance_weight %}
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="cost_input">Cost Weight</label>
                             <input type="text" id="cost_input" name="cost" class="form-control" value="{{ cost_weight }}" readonly>
                         </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="performance_input">Performance Weight</label>
                             <input type="text" id="performance_input" name="performance" class="form-control" value="{{ performance_weight }}" readonly>
                         </div>
-                        {% endif %} 
-                    </div>                        
+                    </div>
+                    {% endif %}                        
                     <div class="col-md-3 d-flex justify-content-md-end">
                         <a href="http://127.0.0.1:8585/" class="btn btn-primary">Home</a>
                     </div>
@@ -47,6 +49,7 @@
                 <a href="http://127.0.0.1:8585/" class="btn btn-info"></a>
                 {% else %}
                 <!-- Flujo correcto -->
+                <br>
                <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
