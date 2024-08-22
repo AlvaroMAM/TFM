@@ -35,5 +35,6 @@ if __name__ == "__main__":
             logging.debug("PROCESSING TOPIC - " + message.topic)
             requests.post(WEB_CLIENT_DEVELOPMENT_URL+"/refresh", data={'evaluation_stage' : current_phase})
             logging.debug("CURRENT PHASE : " + current_phase)
+            time.sleep(2)
 
     
