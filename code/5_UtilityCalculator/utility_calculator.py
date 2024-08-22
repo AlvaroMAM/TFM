@@ -113,7 +113,7 @@ def processing_topics():
             logging.debug("UTILITY-CALCULATOR : UTILITY VALUES RECIEVED")
             print(f"PROCESSING MESSAGE FROM TOPIC: {topic}")
             # the values must be a Duple
-            UTILITY_VALUES_RECIEVED = message.value
+            UTILITY_VALUES_RECIEVED = json.loads(message.value)
             print("UTILITY VALUES RECIEVED")
             print(UTILITY_VALUES_RECIEVED)
             utility_calculation(UTILITY_VALUES_RECIEVED)
