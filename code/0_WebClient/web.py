@@ -7,7 +7,7 @@ Descripcion:
 - Cliente Web --> Proporciona una interfaz gráfica donde subir las especificaciones.
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import requests
 import os
 import logging
@@ -19,14 +19,16 @@ app = Flask(__name__)
 configurations_list = None
 COST_WEIGHT = None
 PERFORMANCE_WEIGHT = None
+EVALUATION_STAGE = None
 
 @app.route('/')
 def index():
     logging.debug("REQUEST / --> RENDERING TEMPLATE")
-    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
+    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT, EVALUATION_STAGE
     configurations_list = None
     COST_WEIGHT = None
     PERFORMANCE_WEIGHT = None
+    EVALUATION_STAGE = None
     return render_template('home.html')
 
 
@@ -55,16 +57,23 @@ def showResults():
     
 
 
-@app.route('/refresh', methods=['POST'])
-def refresh():    
-    if request.form != None:
-        print("EVALUATION STAGE UPDATE RECIEVED")
-        evaluation_stage = request.form.get('evaluation_stage')
-        print(evaluation_stage)
-        return render_template('progress.html', evaluation_stage=evaluation_stage), 200
+@app.route('/refresh', methods=['GET','POST'])
+def refresh():
+    global EVALUATION_STAGE
+    if request.method == 'GET':
+        return render_template('progress.html', evaluation_stage=EVALUATION_STAGE), 200
+    elif request.method == 'POST':
+        if request.form != None:
+            print("EVALUATION STAGE UPDATE RECIEVED")
+            EVALUATION_STAGE = request.form.get('evaluation_stage')
+            print(EVALUATION_STAGE)
+            return redirect(url_for('refresh'))
+        else:
+            print("EVALUATION STAGE UPDATE NOT RECIEVED")
+            error_message = 'Evaluation stage update not recieved. Please restart the process'
+            return render_template('error.html', error_message=error_message), 500
     else:
-        print("EVALUATION STAGE UPDATE NOT RECIEVED")
-        error_message = 'Evaluation stage update not recieved. Please restart the process'
+        error_message = 'An error updating stage happened. Please, restart the process.'
         return render_template('error.html', error_message=error_message), 500
 
 
