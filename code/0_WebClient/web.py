@@ -110,7 +110,8 @@ def upload_file():
             if response.status_code == 200:
                 # Eliminar archivo temporal
                 info_message = "Information was correctly send. The process has started."
-                return render_template('progress.html', info_message=info_message), 500
+                #return render_template('progress.html', info_message=info_message), 200
+                return redirect(url_for('refresh'))
             else:
                 error_message = 'An error processing the information happened. Please, restart the process.'
                 return render_template('error.html', error_message=error_message), 500
