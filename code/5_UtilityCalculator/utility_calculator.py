@@ -79,6 +79,8 @@ def utility_calculation(utility_values):
     if response.status_code == 200:
         utility_tuple_sorted_list = []
         print("REQUEST PROCESSED CORRECTLY")
+        producer.send(TOPIC_WEB, "FINISHED")
+        producer.flush()
         logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY PROCESSED")
         
     else:
