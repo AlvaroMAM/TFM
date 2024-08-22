@@ -89,7 +89,6 @@ def utility_calculation(utility_values):
         producer.send(TOPIC_WEB, "FINISHED")
         producer.flush()
         logging.debug("UTILITY-CALCULATOR : REQUEST SUCCESSFULLY PROCESSED")
-        
     else:
         utility_tuple_sorted_list = []
         print("REQUEST WAS NOT PROCESSED")

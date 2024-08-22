@@ -34,7 +34,7 @@ def index():
 
 @app.route('/showResults', methods=['GET', 'POST'])
 def showResults():
-    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT
+    global configurations_list, COST_WEIGHT, PERFORMANCE_WEIGHT, EVALUATION_STAGE
     if request.method == 'GET':
         # If get load html with the list in table
         haiq_url = HAIQ_MANAGER_URL + "/downloadsol"
@@ -44,7 +44,7 @@ def showResults():
         if request.is_json:
             configurations_list =  request.get_json()
             print(configurations_list)
-            print(type(configurations_list))
+            EVALUATION_STAGE = "FINISHED"
             return jsonify({"message": "Data recieved correctly"}), 200
         else:
             print("SOLUTION LIST IS EMPTY")
