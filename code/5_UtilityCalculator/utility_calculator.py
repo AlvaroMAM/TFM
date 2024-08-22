@@ -61,12 +61,15 @@ def utility_calculation(utility_values):
         for sol, metrics in elem.items():
             utility_tuple = None
             sol_utility_value = 0
-            for k,v in metrics.items():
-                key_utility_value = None
-                if k == 'cost':
-                    key_utility_value = cost_weight*float(v)
-                elif k == 'performance':
-                    key_utility_value = performance_weight*float(v)
+            for metric in metrics:
+                for k,v in metric.items():
+                    key_utility_value = None
+                    if k == 'cost':
+                        key_utility_value = cost_weight*float(v)
+                    elif k == 'reliability': # Change for performance
+                        key_utility_value = performance_weight*float(v)
+                    else:
+                        key_utility_value = 0
                 sol_utility_value = sol_utility_value + key_utility_value
             utility_tuple = (sol, sol_utility_value, metrics)
         print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
