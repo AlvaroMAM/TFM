@@ -16,8 +16,6 @@ def processing_topics():
     logging.debug("FILE-GENERATOR : WAITING FOR MESSAGES")
     for message in consumer:
         logging.debug("FILE-GENERATOR : MESSAGE RECIEVED")
-        producer.send(TOPIC_WEB, "HAIQ_FILE_GENERATOR")
-        producer.flush()
         topic = message.topic
         if topic == TOPIC_BEHAVIOURAL:
             # Procesando Behavioural File
@@ -44,6 +42,8 @@ def processing_topics():
         if behavioural_restrictions != None and cpu_candidates != None and qpu_candidates!=None:
             # Una vez leidas las 3,salgo
             print("MESSAGES RECIEVED, STARTING FILE GENERATOR")
+            producer.send(TOPIC_WEB, "HAIQ_FILE_GENERATOR")
+            producer.flush()
             haiq_file_generator()
 
 
