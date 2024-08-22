@@ -29,7 +29,7 @@ def insert_sorted_tuple_list(l,t):
         position_to_insert = 0
     else:
         # Elements in list, must to calculate where to put the new tuple
-        for i in len(l):
+        for i in range(len(l)):
             if t[1] > l[i][1]:
                 position_to_insert = i
                 break
