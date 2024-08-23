@@ -107,6 +107,8 @@ abstract sig Aggregator extends Classical_Service {}
     formula cost;
     formula performance;
     var evaluated: bool init false;
+
+    [] (!evaluated) -> (evaluated'=true);
 />
 abstract sig Sensor extends Classical_Service {}
 
