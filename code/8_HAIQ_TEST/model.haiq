@@ -100,7 +100,6 @@ all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
 }
 lone sig HybridUseCase extends Hybrid_Deployment {}
 
-
 lone sig ClassicalUseCase extends Classical_Deployment {}
 
 abstract sig Aggregator extends Classical_Service {}
@@ -124,10 +123,10 @@ abstract sig Aggregator extends Classical_Service {}
    
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew true : performance;
-    reward costRew true : cost;
+    reward performanceRew [] true : performance;
+    reward costRew [] true : cost;
 />
-
+//-----------------------------------------------------------------------------
 abstract sig Sensor extends Classical_Service {}
 </
     enum status_sensor:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
