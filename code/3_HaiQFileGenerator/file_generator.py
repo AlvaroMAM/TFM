@@ -24,9 +24,9 @@ def processing_topics():
             behavioural_restrictions = message.value
             behavioural = behavioural_restrictions['behavioural'] # POSIBLE ERROR PORQUE VENDRAN CON 2 ATTRIBUTOS BEHAVIOURAL Y RESTRICTIONS
             restrictions = behavioural_restrictions['restrictions']
-            with open('./temp/behavioural.txt', 'w') as f:
+            with open('./temp/behavioural.txt', 'w', encoding='utf-8') as f:
                 f.write(behavioural)
-            with open('./temp/restrictions.txt', 'w') as f:
+            with open('./temp/restrictions.txt', 'w', encoding='utf-8') as f:
                 f.write(restrictions)
             logging.debug("FILE-GENERATOR : BEHAVIORAL AND RESTRICTIONS SAVED SUCCESSFULLY")
         elif topic == TOPIC_CPU_CANDIDATES:
@@ -188,16 +188,16 @@ def haiq_file_generator():
     cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
     # Concatenar todo
     architectural_style_string = ""
-    with open("./architectural_specification/quantum-classical-app.als", 'r') as architectural_model_file:
+    with open("./architectural_specification/quantum-classical-app.als", 'r', encoding='utf-8') as architectural_model_file:
         architectural_style_string = architectural_model_file.read()
-    with open("./temp/behavioural.txt", 'r') as architectural_model_file:
+    with open("./temp/behavioural.txt", 'r', encoding='utf-8') as architectural_model_file:
         behavioural_string = architectural_model_file.read()
-    with open("./temp/restrictions.txt", 'r') as architectural_model_file:
+    with open("./temp/restrictions.txt", 'r', encoding='utf-8') as architectural_model_file:
         restrictions_string = architectural_model_file.read()
     # String (behavioural) DEBE VENIR YA COMO STRING CUANDO SE LEE DE KAFKA
     file_string = architectural_style_string + behavioural_string + predicate_and_properties(restrictions_string,quantum,classical) + qpu_machines + cpu_machines + qpu_services + cpu_services
     # Guardar string como archivo .haiq en carpeta ./temp
-    with open("./temp/hybrid-iot.haiq","w") as haiq_file:
+    with open("./temp/hybrid-iot.haiq","w", encoding='utf-8') as haiq_file:
         haiq_file.write(file_string)
     print("HAIQ FILE GENERATED")
     logging.debug("FILE-GENERATOR : HAIQ FILE GENERATED")

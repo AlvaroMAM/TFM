@@ -1,5 +1,3 @@
-
-
 abstract sig PU {services : some Service}
 abstract sig QPU extends PU {}
 abstract sig CPU extends PU {}
@@ -13,7 +11,7 @@ abstract sig Classical_Service extends Service {}
 </
     formula cost;
     formula performance;
-\>
+/>
 abstract sig Quantum_Service extends Service {}
 abstract sig Deployment {services: some Service}
 abstract sig Hybrid_Deployment extends Deployment {}
@@ -106,7 +104,7 @@ abstract sig Aggregator extends Classical_Service {}
     var evaluated: bool init false;
 
     [] (!evaluated) -> (evaluated'=true);
-\>
+/>
 abstract sig Sensor extends Classical_Service {}
 
 abstract sig Grover_alg extends Classical_Service {}
