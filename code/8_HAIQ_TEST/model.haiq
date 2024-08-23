@@ -13,7 +13,7 @@ abstract sig Classical_Service extends Service {}
 </
     formula cost;
     formula performance;
-\>
+/>
 abstract sig Quantum_Service extends Service {}
 abstract sig Deployment {services: some Service}
 abstract sig Hybrid_Deployment extends Deployment {}
