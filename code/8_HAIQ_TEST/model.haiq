@@ -125,7 +125,6 @@ abstract sig Aggregator extends Classical_Service {}
     reward performanceRew [] true : performance;
     reward costRew        [] true : cost;
 />
-
 //-----------------------------------------------------------------------------
 abstract sig Sensor extends Classical_Service {}
 </
@@ -349,12 +348,12 @@ formula cpu_bandwidth = 5000;
 formula cpu_cost_factor = 0.0236;
 [services:cpair] true -> true;
 />
-one grover_alg extends Quantum_Grover_alg {}
+one sig grover_alg extends Quantum_Grover_alg {}
 </
 formula shots = 1500;
 formula cost = 0;
 />
-one result_processing_0 extends Result_processing {}
+one sig result_processing_0 extends Result_processing {}
 </
 formula ms_logical_performance_factor = 1e-05;
 formula ms_ram = 6;
@@ -364,7 +363,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one binary_search_0 extends Binary_search {}
+one sig binary_search_0 extends Binary_search {}
 </
 formula ms_logical_performance_factor = 2.4e-05;
 formula ms_ram = 8;
@@ -374,7 +373,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one aggregator_0 extends Aggregator {}
+one sig aggregator_0 extends Aggregator {}
 </
 formula ms_logical_performance_factor = 4e-06;
 formula ms_ram = 4;
@@ -384,7 +383,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one grover_alg_0 extends Grover_alg {}
+one sig grover_alg_0 extends Grover_alg {}
 </
 formula ms_logical_performance_factor = 4e-06;
 formula ms_ram = 4;
@@ -394,7 +393,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one sensor_0 extends Sensor {}
+one sig sensor_0 extends Sensor {}
 </
 formula ms_logical_performance_factor = 3e-06;
 formula ms_ram = 2;
@@ -404,7 +403,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one sensor_1 extends Sensor {}
+one sig sensor_1 extends Sensor {}
 </
 formula ms_logical_performance_factor = 3e-06;
 formula ms_ram = 2;
@@ -414,7 +413,7 @@ formula ms_availability = 24;
 formula cost = 0;
 formula performance = 0;
 />
-one sensor_2 extends Sensor {}
+one sig sensor_2 extends Sensor {}
 </
 formula ms_logical_performance_factor = 3e-06;
 formula ms_ram = 2;
