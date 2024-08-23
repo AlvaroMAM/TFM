@@ -103,8 +103,11 @@ lone sig HybridUseCase extends Hybrid_Deployment {}
 lone sig ClassicalUseCase extends Classical_Deployment {}
 
 abstract sig Aggregator extends Classical_Service {}
-
-//-----------------------------------------------------------------------------
+</
+    formula cost;
+    formula performance;
+    var evaluated: bool init false;
+/>
 abstract sig Sensor extends Classical_Service {}
 
 abstract sig Grover_alg extends Classical_Service {}
