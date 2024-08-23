@@ -103,132 +103,21 @@ lone sig HybridUseCase extends Hybrid_Deployment {}
 lone sig ClassicalUseCase extends Classical_Deployment {}
 
 abstract sig Aggregator extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    enum status_aggregator:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    var SensorInvoked : bool init false;
-    var GroverClassicalServiceInvoked : bool init false;
-    var current_status:[status_aggregator] init none;
 
-    //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> cost: machines.cpu_cost_factor*ms_availability & performance: ((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3 & current_status'=initial;
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [] true : performance;
-    reward costRew        [] true : cost;
-/>
 //-----------------------------------------------------------------------------
 abstract sig Sensor extends Classical_Service {}
-</
-    enum status_sensor:{initial, dataCollection, transformingData, groverCall, launchGrover, done, none};
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    var current_status:[status_sensor] init none;
-    //[nombrerelacion:nombrefuncion]
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-   
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew true : performance;
-    reward costRew true : cost; 
-/>
 
 abstract sig Grover_alg extends Classical_Service {}
-</ // Debe tener transiciones síncronas con quantum grover y processing_result services
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    enum status_classical_grover:{initial, circuitBuilding, groverLaunch, resultRecovery, launchProcessingResult, done, none};
-    var current_status:[status_classical_grover] init none;
-    var GroverQuantumServiceInvoked : bool init false;
-    var ResultProcessingServiceInvoked : bool init false;
 
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-   
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew true : performance;
-    reward costRew true : cost; 
-/>
 
 abstract sig Quantum_Grover_alg extends Quantum_Service{}
-</
-    formula shots;
-    formula cost;
-    enum status_quantum_grover:{initial, enqueue, executing, done, none};
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    var current_status:[status_quantum_grover] init none;
-    [machines:qpair] (current_status=none) -> (cost'=machines.qpu_prize*shots) & (current_status'=initial);
-    
 
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew true : performance;
-    reward costRew true : cost;
-/>
 abstract sig Binary_search extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    enum status_classical_grover:{initial, processing, resultReady, launchProcessingResult, done, none};
-    var current_status:[status_classical_grover] init none;
-    var ResultProcessingServiceInvoked : bool init false;
 
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    
-    reward performanceRew true : performance;
-    reward costRew true : cost; 
-/>
 
 
 abstract sig Result_processing extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    enum status_processor:{init, recievingResult, processingResult, resultsReady, done, none};
-    var serviceOK: bool init false;
-    var ready : bool init true;
-    var current_status:[status_processor] init none;
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=done);
-    
 
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew true : performance;
-    reward costRew true : cost;
-
-/>
 pred show {
 /*--------------------------------------------------Use-Case----------------------------------------------------------------*/
 // Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
@@ -269,157 +158,44 @@ property SminR{costRew}[F done]
 property SmaxP [F done]
 
 sig aria_1 extends QPU {}
-</
-formula qpu_prize = 0.03;
-[services:qpair] true -> true;
-/>
+
 sig aria_2 extends QPU {}
-</
-formula qpu_prize = 0.03;
-[services:qpair] true -> true;
-/>
+
 sig aspen_m_3 extends QPU {}
-</
-formula qpu_prize = 0.00035;
-[services:qpair] true -> true;
-/>
+
 sig harmony extends QPU {}
-</
-formula qpu_prize = 0.01;
-[services:qpair] true -> true;
-/>
+
 sig lucy extends QPU {}
-</
-formula qpu_prize = 0.00035;
-[services:qpair] true -> true;
-/>
+
 sig dm1 extends QPU {}
-</
-formula qpu_prize = 0.075;
-[services:qpair] true -> true;
-/>
+
 sig sv1 extends QPU {}
-</
-formula qpu_prize = 0.075;
-[services:qpair] true -> true;
-/>
+
 sig local extends QPU {}
-</
-formula qpu_prize = 0;
-[services:qpair] true -> true;
-/>
+
 sig t3_large extends CPU {}
-</
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 8.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0944;
-[services:cpair] true -> true;
-/>
+
 sig t3_xlarge extends CPU {}
-</
-formula cpu_logical_performance_factor = 20.0;
-formula cpu_ram = 16.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.1888;
-[services:cpair] true -> true;
-/>
+
 sig t3_2xlarge extends CPU {}
-</
-formula cpu_logical_performance_factor = 80.0;
-formula cpu_ram = 32.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.3776;
-[services:cpair] true -> true;
-/>
+
 sig t3_medium extends CPU {}
-</
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 4.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0472;
-[services:cpair] true -> true;
-/>
+
 sig t3_small extends CPU {}
-</
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 2.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0236;
-[services:cpair] true -> true;
-/>
+
 one sig grover_alg extends Quantum_Grover_alg {}
-</
-formula shots = 1500;
-formula cost = 0;
-/>
+
 one sig result_processing_0 extends Result_processing {}
-</
-formula ms_logical_performance_factor = 1e-05;
-formula ms_ram = 6;
-formula ms_bandwidth = 60.0;
-formula ms_execution_time = 100;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig binary_search_0 extends Binary_search {}
-</
-formula ms_logical_performance_factor = 2.4e-05;
-formula ms_ram = 8;
-formula ms_bandwidth = 3.6;
-formula ms_execution_time = 1;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig aggregator_0 extends Aggregator {}
-</
-formula ms_logical_performance_factor = 4e-06;
-formula ms_ram = 4;
-formula ms_bandwidth = 240.0;
-formula ms_execution_time = 1;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig grover_alg_0 extends Grover_alg {}
-</
-formula ms_logical_performance_factor = 4e-06;
-formula ms_ram = 4;
-formula ms_bandwidth = 60.0;
-formula ms_execution_time = 10;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig sensor_0 extends Sensor {}
-</
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig sensor_1 extends Sensor {}
-</
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
 one sig sensor_2 extends Sensor {}
-</
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
-formula ms_availability = 24;
-formula cost = 0;
-formula performance = 0;
-/>
+
