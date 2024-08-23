@@ -125,6 +125,7 @@ abstract sig Aggregator extends Classical_Service {}
     reward performanceRew [] true : performance;
     reward costRew        [] true : cost;
 />
+
 //-----------------------------------------------------------------------------
 abstract sig Sensor extends Classical_Service {}
 </
