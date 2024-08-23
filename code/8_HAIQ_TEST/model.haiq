@@ -99,23 +99,10 @@ all cd: Classical_Deployment | #(cd.services & Quantum_Service) = 0
  
 }
 lone sig HybridUseCase extends Hybrid_Deployment {}
-</
-    enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
-    var current_status:[status_analysis] init none;
-    var AggregatorServiceInvoked : bool init false;
-    //var machineCost:[0..500] init 0;
-    var workflowDone: bool init false;
-/>
+
 
 lone sig ClassicalUseCase extends Classical_Deployment {}
-</
-    enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
-    var current_status:[status_analysis] init none;
-    var AggregatorServiceInvoked : bool init false;
-    //var machineCost:[0..500] init 0;
-    var workflowDone: bool init false;
 
-/>
 abstract sig Aggregator extends Classical_Service {}
 </
     formula ms_logical_performance_factor;
