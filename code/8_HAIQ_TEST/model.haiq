@@ -120,11 +120,10 @@ abstract sig Aggregator extends Classical_Service {}
 
     //Calcular coste y rendimiento según la máquina con la que esté relacionada
     [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-   
 
     // Sumar solo las propiedades cuando se ejecuta
     reward performanceRew [] true : performance;
-    reward costRew [] true : cost;
+    reward costRew        [] true : cost;
 />
 //-----------------------------------------------------------------------------
 abstract sig Sensor extends Classical_Service {}
