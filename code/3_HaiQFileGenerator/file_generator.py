@@ -69,7 +69,7 @@ def classical_generator_string(candidates):
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia
         for instance_number in range(int(attributes["ms_instances"])): 
-            service_instance = "one "+service_name+"_"+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
+            service_instance = "one sig "+service_name+"_"+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
             logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
             service_formulas = "</"
             if attributes["ms_logical_performance_factor"]:
@@ -131,7 +131,7 @@ def quantum_generator_string(candidates):
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_qpu_machines.copy()
         #Para los cuánticos, su instancia es única
-        service_instance = "one "+service_name+" extends "+"Quantum_"+service_name.capitalize()+" {}\n"
+        service_instance = "one sig "+service_name+" extends "+"Quantum_"+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["shots"]:
