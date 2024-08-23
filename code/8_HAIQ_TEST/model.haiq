@@ -105,7 +105,6 @@ lone sig HybridUseCase extends Hybrid_Deployment {}
     var AggregatorServiceInvoked : bool init false;
     //var machineCost:[0..500] init 0;
     var workflowDone: bool init false;
-    [launch] (current_status=initial) -> (current_status'=done);
 />
 
 lone sig ClassicalUseCase extends Classical_Deployment {}
@@ -115,7 +114,7 @@ lone sig ClassicalUseCase extends Classical_Deployment {}
     var AggregatorServiceInvoked : bool init false;
     //var machineCost:[0..500] init 0;
     var workflowDone: bool init false;
-    [launch] (current_status=initial) -> (current_status'=done);
+
 />
 abstract sig Aggregator extends Classical_Service {}
 </
