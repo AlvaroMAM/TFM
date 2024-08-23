@@ -223,7 +223,7 @@ abstract sig Result_processing extends Classical_Service {}
     var serviceOK: bool init false;
     var ready : bool init true;
     var current_status:[status_processor] init none;
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
+    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=done);
     
 
     // Sumar solo las propiedades cuando se ejecuta
@@ -261,11 +261,15 @@ all s:Sensor | #(Sensor & t2_nano) = 0 and #(Sensor & t2_micro) = 0 and #(Sensor
 
 }
 run show for 25
-label done [some UseCase:workflowDone=true]
+
+label done [some Result_processing:current_status=done]
+
 property rangeR{performanceRew}[F done] totalPerformance;
 property rangeR{costRew}[F done] as totalCost;
 property SminR{performanceRew}[F done]
 property SminR{costRew}[F done]
+property SmaxP [F done]
+
 sig aria_1 extends QPU {}
 </
 formula qpu_prize = 0.03;
