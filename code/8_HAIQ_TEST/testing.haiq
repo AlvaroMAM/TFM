@@ -1,6 +1,15 @@
+/*
+	Alumno: Álvaro Manuel Aparicio Morales
+	Tutores: Javier Cámara y Jose Garcia-Alonso
+	Máster Universitario en Ingeniería Informática
+	Universidad de Málaga
+	Descripcion:
+	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
+*/
 abstract sig PU {services : some Service}
 </
     formula cost;
+    formula performance;
 />
 
 abstract sig QPU extends PU {}
