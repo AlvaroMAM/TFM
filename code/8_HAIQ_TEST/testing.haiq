@@ -1,0 +1,9 @@
+abstract sig PU {services : some Service}
+</
+    formula cost;
+/>
+
+abstract sig QPU extends PU {}
+</
+    formula cost;
+/<
