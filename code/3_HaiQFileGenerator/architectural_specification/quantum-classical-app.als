@@ -1,11 +1,11 @@
-/*
-	Alumno: Álvaro Manuel Aparicio Morales
-	Tutores: Javier Cámara y Jose Garcia-Alonso
-	Máster Universitario en Ingeniería Informática
-	Universidad de Málaga
-	Descripcion:
-	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
-*/
+
+//	Alumno: Álvaro Manuel Aparicio Morales
+//	Tutores: Javier Cámara y Jose Garcia-Alonso
+//	Máster Universitario en Ingeniería Informática
+//	Universidad de Málaga
+//	Descripcion:
+//	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
+
 
 abstract sig PU {services : some Service}
 abstract sig QPU extends PU {}
@@ -16,13 +16,52 @@ abstract sig Service {
 	hybrid_service: set Service, // Simular el concepto de hybrid_service
 	link: some Service // Comunicación entre servicios del caso de uso
 }
+</
+    formula ms_logical_performance_factor;
+    formula ms_ram;
+    formula ms_bandwidth;
+    formula ms_execution_time;
+    formula ms_availability;
+    formula performance;
+    formula shots;
+    formula cost;
+/>
 abstract sig Classical_Service extends Service {}
+</
+    formula ms_logical_performance_factor;
+    formula ms_ram;
+    formula ms_bandwidth;
+    formula ms_execution_time;
+    formula ms_availability;
+    formula performance;
+    formula cost;
+/>
 abstract sig Quantum_Service extends Service {}
+</
+    formula shots;
+    formula cost;
+/>
 abstract sig Deployment {services: some Service}
 abstract sig Hybrid_Deployment extends Deployment {}
 abstract sig Classical_Deployment extends Deployment {}
 lone sig HybridUseCase extends Hybrid_Deployment {}
+</
+    enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
+    var current_status:[status_analysis] init none;
+    var workflowDone: bool init false;
+    [launch] (current_status=none) -> (current_status'=launchAnalysis);
+    // 1. Launching Analysis
+    [services:activationCall] (current_status=launchAnalysis) & -> (workflowDone'=true) & (current_status'=done); // Se sincroniza con aggregator
+/>
 lone sig ClassicalUseCase extends Classical_Deployment {}
+</
+    enum status_analysis:{none, initial, launchAnalysis, waitingResults,done};
+    var current_status:[status_analysis] init none;
+    var workflowDone: bool init false;
+    [launch] (current_status=none) -> (current_status'=launchAnalysis);
+    // 1. Launching Analysis
+    [services:activationCall] (current_status=launchAnalysis) & -> (workflowDone'=true) & (current_status'=done); // Se sincroniza con aggregator
+/>
 
 fact {
 /*-------------------------------------------- Architectural-Restrictions ------------------------------------------------------*/
