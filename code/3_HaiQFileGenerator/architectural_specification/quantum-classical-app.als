@@ -8,8 +8,24 @@
 
 
 abstract sig PU {services : some Service}
+</
+formula cpu_logical_performance_factor;
+formula cpu_ram;
+formula cpu_bandwidth;
+formula cpu_cost_factor;
+formula qpu_prize;
+/>
 abstract sig QPU extends PU {}
+</
+formula qpu_prize;
+/>
 abstract sig CPU extends PU {}
+</
+formula cpu_logical_performance_factor;
+formula cpu_ram;
+formula cpu_bandwidth;
+formula cpu_cost_factor;
+/>
 abstract sig Service {
 	machines : some PU,
 	deployment : one Deployment,
