@@ -1,4 +1,4 @@
-/*--------------------------------------------------Use-Case----------------------------------------------------------------*/
+//--------------------------------------------------Use-Case----------------------------------------------------------------
 // Los servicios de datos de sensores solo están conectados con el servicio agregador y agregador debe estar conectado tambien con datos.
 all ds: Sensor,  ag: Aggregator | #(ds.link) = 1 and #(ds.link & Aggregator) > 0 and ds in ag.link and ds not in Grover_alg.link and ds not in Result_processing.link and ds not in Quantum_Grover_alg.link and ds not in Binary_search.link
 // Aggregator solo se conecta con ClassicalGrover o con Binary Search
@@ -17,4 +17,4 @@ all rp: Result_processing,  bs: Binary_search | #(rp.link) = 1 and #(rp.link & B
 all hd: Hybrid_Deployment | #(hd.services & Quantum_Grover_alg) = 1 and #(hd.services & Grover_alg) = 1  and #(hd.services & Binary_search) = 0
 // Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
 all cd: Classical_Deployment | #(cd.services & Quantum_Grover_alg) = 0 and #(cd.services & Grover_alg) = 0  and #(cd.services & Binary_search) = 1
-/*---------------------------------------------------------------------------------------------------------------------------*/
+//---------------------------------------------------------------------------------------------------------------------------
