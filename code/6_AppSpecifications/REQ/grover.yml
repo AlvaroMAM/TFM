@@ -16,3 +16,4 @@ behaviour:
   availability: 24 # 24 horas porque el servicio clásico estará disponible las 24 horas e irá encolando las tareas en el computador cuántico
   instances: 1
   shots: 1500
+  mandatory: false

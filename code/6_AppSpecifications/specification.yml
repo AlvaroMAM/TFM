@@ -52,8 +52,11 @@ behaviour:
   instances:
     type: integer
     format: int64
-    description: "Number of instances of the microservice"  
+    description: "Number of instances of the microservice"
   shots:
     type: integer
     format: int64
-    description: "Number of shots of the quantum circuit"  
+    description: "Number of shots of the quantum circuit"
+  mandatory:
+    type: boolean
+    description: "Indicates if the microservice must appear in the deployment"  

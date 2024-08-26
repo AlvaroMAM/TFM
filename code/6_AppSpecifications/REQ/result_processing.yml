@@ -14,3 +14,4 @@ behaviour:
   execution_time: 100
   availability: 24
   instances: 1
+  mandatory: true
