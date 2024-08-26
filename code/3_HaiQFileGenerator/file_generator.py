@@ -69,7 +69,7 @@ def classical_generator_string(candidates):
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_cpu_machines.copy() # Por cada servicio me creo una copia
         for instance_number in range(int(attributes["ms_instances"])):
-            if attributes["ms_mandatory"]:
+            if "ms_mandatory" in attributes:
                 value = attributes["ms_mandatory"]
                 if value:
                     # The service is mandatory so it would be one
@@ -139,8 +139,8 @@ def quantum_generator_string(candidates):
     for service_name, attributes in candidates.items():
         not_used_machines = cloud_provider_qpu_machines.copy()
         #Para los cuánticos, su instancia es única
-        if attributes["mandatory"]:
-                value = attributes["ms_mandatory"]
+        if "mandatory" in attributes:
+                value = attributes["mandatory"]
                 if value:
                     # The service is mandatory so it would be one
                     service_instance = "one sig "+service_name+" extends "+"Quantum_"+service_name.capitalize()+" {}\n"
