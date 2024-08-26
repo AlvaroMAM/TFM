@@ -168,7 +168,7 @@ def machine_restriction(l, used):
         result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list if item in used])
         if result:
             result = "all s:"+service_name.capitalize()+" | " + result
-        restriction = restriction + result + "\n"
+            restriction = restriction + result + "\n"
         result = ""
     return restriction
 
