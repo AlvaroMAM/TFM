@@ -91,7 +91,7 @@ def classical_generator_string(candidates):
             for machine_array in attributes["selected_cpus"]:
                 machine_name =  machine_array[0]
                 machine_characteristics = machine_array[1]
-                # Elimino la máquina de la copia
+                # Elimino la máquina de la lista de todas las máquinas del servicio
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
@@ -109,7 +109,8 @@ def classical_generator_string(candidates):
             # si no está creo restricción
             machine_services_restrictions.append(tuple((service_name,not_used_machines))) # Conjunto de pares servicio con máquinas no usadas \ 
             #para especificar las 
-    return machines, services, machine_services_restrictions
+            # Devuelve todas las máquinas que se han puesto y esto es usado para generar las restricciones y no generar restricciones de máquinas que no se han puesto
+    return machines, services, machine_services_restrictions, processed_machines
 
 def quantum_generator_string(candidates):
     services = ""
@@ -157,35 +158,41 @@ def quantum_generator_string(candidates):
                     machines = machines + machine_instance+"\n"
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE COMPLETED")
             machine_services_restrictions.append(tuple((service_name,not_used_machines)))
-    return machines, services, machine_services_restrictions
+    return machines, services, machine_services_restrictions, processed_machines
 
-def machine_restriction(l):
+def machine_restriction(l, used):
     result = ""
     restriction = ""
+    print("USED")
+    print(used)
     for pair in l:
         service_name, machine_list = pair
+        # for item in machine_list
+        #   if item in used:
+        # añado restricción
+        # y concateno
         result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list])
         result = "all s:"+service_name.capitalize()+" | " + result
         restriction = restriction + result + "\n"
     return restriction
 
-def predicate_and_properties(use_case_restrictions, quantum, classical):
+def predicate_and_properties(use_case_restrictions, quantum, classical, quantum_used, classical_used):
     properties = "run show for 25\n\
 label done [some UseCase:workflowDone=true]\n\
 property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
 property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
 property SminR{" + 'performanceRew' + "}[F done]\n\
 property SminR{" + 'costRew' + "}[F done]\n"
-    quantum_machine_restriction = machine_restriction(quantum)
-    classical_machine_restriction = machine_restriction(classical)
+    quantum_machine_restriction = machine_restriction(quantum, quantum_used)
+    classical_machine_restriction = machine_restriction(classical, classical_used)
     predicate = "\npred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
     return (predicate + properties)
 
 def haiq_file_generator():
     global cpu_candidates, qpu_candidates, behavioural_restrictions
     print("HAIQ GENERATOR STARTED")
-    qpu_machines, qpu_services, quantum = quantum_generator_string(qpu_candidates)
-    cpu_machines, cpu_services, classical = classical_generator_string(cpu_candidates)
+    qpu_machines, qpu_services, quantum, quantum_used_machines = quantum_generator_string(qpu_candidates)
+    cpu_machines, cpu_services, classical, classical_used_machines = classical_generator_string(cpu_candidates)
     # Concatenar todo
     architectural_style_string = ""
     with open("./architectural_specification/quantum-classical-app.als", 'r', encoding='utf-8') as architectural_model_file:
@@ -195,7 +202,7 @@ def haiq_file_generator():
     with open("./temp/restrictions.txt", 'r', encoding='utf-8') as architectural_model_file:
         restrictions_string = architectural_model_file.read()
     # String (behavioural) DEBE VENIR YA COMO STRING CUANDO SE LEE DE KAFKA
-    file_string = architectural_style_string + behavioural_string + predicate_and_properties(restrictions_string,quantum,classical) + qpu_machines + cpu_machines + qpu_services + cpu_services
+    file_string = architectural_style_string + behavioural_string + predicate_and_properties(restrictions_string, quantum, classical, quantum_used_machines, classical_used_machines) + qpu_machines + cpu_machines + qpu_services + cpu_services
     # Guardar string como archivo .haiq en carpeta ./temp
     with open("./temp/hybrid-iot.haiq","w", encoding='utf-8') as haiq_file:
         haiq_file.write(file_string)
