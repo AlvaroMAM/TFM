@@ -167,6 +167,7 @@ def machine_restriction(l, used):
     print(used)
     for pair in l:
         service_name, machine_list = pair
+        print(machine_list)
         # for item in machine_list
         #   if item in used:
         # añado restricción
