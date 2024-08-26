@@ -147,7 +147,7 @@ def start_processing():
                         if req_content["behaviour"]["instances"]: # READING EXECUTION AVAILABILITY
                             microservice_dict["instances"] = req_content["behaviour"]["instances"]
                             logging.debug("REQUEST /start --> INSTANCES LOADED")
-                        if req_content["behaviour"]["mandatory"]: # READING EXECUTION AVAILABILITY
+                        if "mandatory" in req_content["behaviour"]: # READING EXECUTION AVAILABILITY
                             microservice_dict["mandatory"] = req_content["behaviour"]["mandatory"]
                             logging.debug("REQUEST /start --> MANDATORY LOADED")   
                         if req_content["minimum_hw_req"]["cpu"]: # READING CPU ATTRIBUTE
@@ -168,7 +168,7 @@ def start_processing():
                             if req_content["behaviour"]["shots"]: # READING SHOTS ATTRIBUTE
                                 quantum_microservice["shots"] = req_content["behaviour"]["shots"]
                                 logging.debug("REQUEST /start --> SHOTS LOADED")
-                            if req_content["behaviour"]["mandatory"]: # READING EXECUTION AVAILABILITY
+                            if "mandatory" in req_content["behaviour"]: # READING EXECUTION AVAILABILITY
                                 quantum_microservice["mandatory"] = req_content["behaviour"]["mandatory"]
                                 logging.debug("REQUEST /start --> MANDATORY LOADED")   
                             #ADDING MICROSERVICES TO QUANTUM_JSON
