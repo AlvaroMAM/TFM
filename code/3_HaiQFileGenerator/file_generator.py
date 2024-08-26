@@ -163,13 +163,13 @@ def quantum_generator_string(candidates):
 def machine_restriction(l, used):
     result = ""
     restriction = ""
-    sorted_used = sorted(used)
     for pair in l:
         service_name, machine_list = pair
-        if not (sorted(machine_list) == sorted_used):
-            result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list if item in used])
+        result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list if item in used])
+        if result:
             result = "all s:"+service_name.capitalize()+" | " + result
-            restriction = restriction + result + "\n"
+        restriction = restriction + result + "\n"
+        result = ""
     return restriction
 
 def predicate_and_properties(use_case_restrictions, quantum, classical, quantum_used, classical_used):
