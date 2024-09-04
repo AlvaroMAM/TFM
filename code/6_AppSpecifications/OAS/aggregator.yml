@@ -3,7 +3,7 @@ info:
   title: Aggregator service
   description: |
     This is a description of a service that is in charge of recieving the temperatures
-    from the sensor microservices and process them to send to the quantum Grover service.
+    from the sensor microservices and process them to send to the search service.
   # Extension for requirements
   x-req:
     type: classical
