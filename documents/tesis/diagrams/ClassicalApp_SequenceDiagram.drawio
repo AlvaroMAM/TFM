@@ -1,185 +1,185 @@
-<mxfile host="app.diagrams.net" modified="2024-05-08T15:52:54.126Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="21zU9LR5Ln1A4SjgZV4H" version="24.3.1" type="device">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0" version="24.7.10">
   <diagram name="Página-1" id="wN3zh7x_to7Bgk0YpBpk">
-    <mxGraphModel dx="1050" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1562" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2NMCAECLGo8Og_-4-Das-1" value="&lt;div&gt;:Data&amp;nbsp;&lt;/div&gt;&lt;div&gt;Service 1 &lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-1" value="&lt;div&gt;:Data&amp;nbsp;&lt;/div&gt;&lt;div&gt;Service 1 &lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="80" y="40" width="100" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-2" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-2" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-1" vertex="1">
           <mxGeometry x="45" y="144" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-3" value="&lt;div&gt;:Data&lt;/div&gt;&lt;div&gt;Service 2&lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-3" value="&lt;div&gt;:Data&lt;/div&gt;&lt;div&gt;Service 2&lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="190" y="40" width="100" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-4" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-3">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-4" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-3" vertex="1">
           <mxGeometry x="45" y="183" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-5" value="&lt;div&gt;:Data&lt;/div&gt;&lt;div&gt;Service 3&lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-5" value="&lt;div&gt;:Data&lt;/div&gt;&lt;div&gt;Service 3&lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="300" y="40" width="100" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-6" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-5">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-6" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-5" vertex="1">
           <mxGeometry x="45" y="224" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-7" value="&lt;div&gt;:Aggregator&lt;/div&gt;&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-7" value="&lt;div&gt;:Aggregator&lt;/div&gt;&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="490" y="40" width="110" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-8" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-8" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="144" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-9" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-9" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="183" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-10" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-10" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="224" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-11" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-11" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="264" width="10" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" edge="1" parent="2NMCAECLGo8Og_-4-Das-7" source="2NMCAECLGo8Og_-4-Das-11" target="2NMCAECLGo8Og_-4-Das-11">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" parent="2NMCAECLGo8Og_-4-Das-7" source="2NMCAECLGo8Og_-4-Das-11" target="2NMCAECLGo8Og_-4-Das-11" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-13" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-13" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="381" width="10" height="9" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-14" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-7">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-14" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-7" vertex="1">
           <mxGeometry x="50" y="100" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-15" value="&lt;div&gt;:Binary Search&lt;br&gt;&lt;/div&gt;&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-15" value="&lt;div&gt;:Binary Search&lt;br&gt;&lt;/div&gt;&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="727" y="40" width="100" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-16" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-15">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-16" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-15" vertex="1">
           <mxGeometry x="45" y="325" width="10" height="66" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;" edge="1" parent="2NMCAECLGo8Og_-4-Das-15" source="2NMCAECLGo8Og_-4-Das-16" target="2NMCAECLGo8Og_-4-Das-16">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;" parent="2NMCAECLGo8Og_-4-Das-15" source="2NMCAECLGo8Og_-4-Das-16" target="2NMCAECLGo8Og_-4-Das-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-18" value="&lt;div&gt;Lanzamiento proceso&lt;/div&gt;&lt;div&gt;Búsqueda Binaria&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-17">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-18" value="&lt;div&gt;Lanzamiento proceso&lt;/div&gt;&lt;div&gt;Búsqueda Binaria&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-17" vertex="1" connectable="0">
           <mxGeometry x="-0.1439" y="-2" relative="1" as="geometry">
             <mxPoint x="60" y="-6" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-15">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-15" vertex="1">
           <mxGeometry x="45" y="407" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-22" value=":Result Processing&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-22" value=":Result Processing&lt;div&gt;Service&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="899" y="40" width="120" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-23" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-22">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-23" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-22" vertex="1">
           <mxGeometry x="55" y="407" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="2NMCAECLGo8Og_-4-Das-22">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NMCAECLGo8Og_-4-Das-22" vertex="1">
           <mxGeometry x="55" y="457" width="10" height="9" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-2" target="2NMCAECLGo8Og_-4-Das-8">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-2" target="2NMCAECLGo8Og_-4-Das-8" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-26" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-25">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-26" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-25" vertex="1" connectable="0">
           <mxGeometry x="0.0909" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=12 12;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-8" target="2NMCAECLGo8Og_-4-Das-2">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=12 12;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-8" target="2NMCAECLGo8Og_-4-Das-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-28" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-27">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-28" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-27" vertex="1" connectable="0">
           <mxGeometry x="0.0785" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-4" target="2NMCAECLGo8Og_-4-Das-9">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-4" target="2NMCAECLGo8Og_-4-Das-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-30" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-29">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-30" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-29" vertex="1" connectable="0">
           <mxGeometry x="0.0118" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-9" target="2NMCAECLGo8Og_-4-Das-4">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-9" target="2NMCAECLGo8Og_-4-Das-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-32" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-31">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-32" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-31" vertex="1" connectable="0">
           <mxGeometry x="-0.0514" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-6" target="2NMCAECLGo8Og_-4-Das-10">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-6" target="2NMCAECLGo8Og_-4-Das-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-34" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-33">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-34" value="/requestData" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-33" vertex="1" connectable="0">
           <mxGeometry x="-0.027" y="-1" relative="1" as="geometry">
             <mxPoint y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-10" target="2NMCAECLGo8Og_-4-Das-6">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-10" target="2NMCAECLGo8Og_-4-Das-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-36" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-35">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-36" value="OK : List&amp;lt;int&amp;gt; temperaturas" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-35" vertex="1" connectable="0">
           <mxGeometry x="-0.056" relative="1" as="geometry">
             <mxPoint x="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-11" target="2NMCAECLGo8Og_-4-Das-16">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-11" target="2NMCAECLGo8Og_-4-Das-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-38" value="/launchBinarySearch/{temperatures}" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-37">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-38" value="/launchSearch/{values}" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-37" vertex="1" connectable="0">
           <mxGeometry x="0.0643" relative="1" as="geometry">
             <mxPoint x="-5" y="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-20" target="2NMCAECLGo8Og_-4-Das-23">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-20" target="2NMCAECLGo8Og_-4-Das-23" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-40" value="/processing{result}" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-39">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-40" value="/processing{result}" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-39" vertex="1" connectable="0">
           <mxGeometry x="0.1236" y="2" relative="1" as="geometry">
             <mxPoint x="-18" y="2" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-23" target="2NMCAECLGo8Og_-4-Das-20">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;" parent="1" source="2NMCAECLGo8Og_-4-Das-23" target="2NMCAECLGo8Og_-4-Das-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-42" value="OK" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-41">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-42" value="OK" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-41" vertex="1" connectable="0">
           <mxGeometry x="-0.0604" y="1" relative="1" as="geometry">
             <mxPoint x="-18" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;endArrow=none;endFill=0;dashed=1;dashPattern=1 2;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-44">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;endArrow=none;endFill=0;dashed=1;dashPattern=1 2;" parent="1" source="2NMCAECLGo8Og_-4-Das-44" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="570" y="324" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-44" value="&lt;div&gt;Agrupación temperaturas&amp;nbsp;&lt;/div&gt;&lt;div&gt;y&amp;nbsp;&lt;/div&gt;&lt;div&gt;preparación entrada &lt;br&gt;&lt;/div&gt;&lt;div&gt;para&lt;/div&gt;algoritmo de Búsqueda Binaria" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=8;verticalAlign=top;align=center;" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-44" value="&lt;div&gt;Agrupación temperaturas&amp;nbsp;&lt;/div&gt;&lt;div&gt;y&amp;nbsp;&lt;/div&gt;&lt;div&gt;preparación entrada &lt;br&gt;&lt;/div&gt;&lt;div&gt;para&lt;/div&gt;algoritmo de Búsqueda" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=8;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="590" y="184" width="120" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-45" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-45" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
           <mxGeometry y="40" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-65" target="2NMCAECLGo8Og_-4-Das-14">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-65" target="2NMCAECLGo8Og_-4-Das-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-47" value="/launchAnalysis" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-46">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-47" value="/launchAnalysis" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-46" vertex="1" connectable="0">
           <mxGeometry x="-0.0286" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-14" target="2NMCAECLGo8Og_-4-Das-65">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;dashed=1;dashPattern=8 8;" parent="1" source="2NMCAECLGo8Og_-4-Das-14" target="2NMCAECLGo8Og_-4-Das-65" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-49" value="OK: Analysis Launched" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-48">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-49" value="OK: Analysis Launched" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-48" vertex="1" connectable="0">
           <mxGeometry x="-0.0377" y="-2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-16" target="2NMCAECLGo8Og_-4-Das-13">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;dashed=1;dashPattern=8 8;" parent="1" source="2NMCAECLGo8Og_-4-Das-16" target="2NMCAECLGo8Og_-4-Das-13" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-56" value="OK: Binary Search Launched" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-55">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-56" value="OK: Search Launched" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-55" vertex="1" connectable="0">
           <mxGeometry x="-0.0084" y="-2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;endArrow=none;endFill=0;" edge="1" parent="1" target="2NMCAECLGo8Og_-4-Das-62">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;endArrow=none;endFill=0;" parent="1" target="2NMCAECLGo8Og_-4-Das-62" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="15" y="680" as="targetPoint" />
             <mxPoint x="15" y="119" as="sourcePoint" />
@@ -189,18 +189,18 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-62" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-62" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="10" y="497" width="10" height="9" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;" edge="1" parent="1" source="2NMCAECLGo8Og_-4-Das-24" target="2NMCAECLGo8Og_-4-Das-62">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;" parent="1" source="2NMCAECLGo8Og_-4-Das-24" target="2NMCAECLGo8Og_-4-Das-62" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-64" value="Notificación de Resultado Post-Procesamiento" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2NMCAECLGo8Og_-4-Das-63">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-64" value="Notificación de Resultado Post-Procesamiento" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2NMCAECLGo8Og_-4-Das-63" vertex="1" connectable="0">
           <mxGeometry x="-0.1519" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2NMCAECLGo8Og_-4-Das-65" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+        <mxCell id="2NMCAECLGo8Og_-4-Das-65" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
           <mxGeometry x="10" y="140" width="10" height="30" as="geometry" />
         </mxCell>
       </root>
