@@ -457,7 +457,7 @@ formula cost = 0;
 />
 one sig resultprocessing0 extends ResultProcessing {}
 </
-formula ms_logical_performance_factor = 1e-05;
+formula ms_logical_performance_factor = 15;
 formula ms_ram = 6;
 formula ms_bandwidth = 60.0;
 formula ms_execution_time = 100;
@@ -468,7 +468,7 @@ formula cost = 0;
 />
 lone sig binarysearch0 extends BinarySearch {}
 </
-formula ms_logical_performance_factor = 2.4e-05;
+formula ms_logical_performance_factor = 2.45;
 formula ms_ram = 8;
 formula ms_bandwidth = 3.6;
 formula ms_execution_time = 1;
@@ -479,7 +479,7 @@ formula cost = 0;
 />
 one sig aggregator0 extends Aggregator {}
 </
-formula ms_logical_performance_factor = 4e-06;
+formula ms_logical_performance_factor = 46;
 formula ms_ram = 4;
 formula ms_bandwidth = 240.0;
 formula ms_execution_time = 1;
@@ -490,7 +490,7 @@ formula cost = 0;
 />
 lone sig groveralg0 extends GroverAlg {}
 </
-formula ms_logical_performance_factor = 4e-06;
+formula ms_logical_performance_factor = 46;
 formula ms_ram = 4;
 formula ms_bandwidth = 60.0;
 formula ms_execution_time = 10;
@@ -501,7 +501,7 @@ formula cost = 0;
 />
 one sig sensor0 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
+formula ms_logical_performance_factor = 36;
 formula ms_ram = 2;
 formula ms_bandwidth = 72.0;
 formula ms_execution_time = 1;
@@ -512,7 +512,7 @@ formula cost = 0;
 />
 one sig sensor1 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
+formula ms_logical_performance_factor = 36;
 formula ms_ram = 2;
 formula ms_bandwidth = 72.0;
 formula ms_execution_time = 1;
@@ -523,7 +523,7 @@ formula cost = 0;
 />
 one sig sensor2 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
+formula ms_logical_performance_factor = 36;
 formula ms_ram = 2;
 formula ms_bandwidth = 72.0;
 formula ms_execution_time = 1;
