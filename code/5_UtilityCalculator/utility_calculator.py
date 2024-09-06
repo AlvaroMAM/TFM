@@ -36,10 +36,11 @@ def insert_sorted_tuple_list(l,t):
     #Insert new element
     if position_to_insert >= 0:
         l.insert(position_to_insert,t)
-        if len(l)>3:
-            return l[:-1]
-        else:
-            return l
+        # Eliminando esa comprobación serviría para tener una lista completa de los valores de utilidad
+        #if len(l)>3:
+        #    return l[:-1]
+        #else:
+        #    return l
     else:
         return l
 
@@ -75,10 +76,12 @@ def utility_calculation(utility_values):
         print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
         utility_tuple_sorted_list = insert_sorted_tuple_list(utility_tuple_sorted_list,utility_tuple) # Comprobar que se modifica la lista correctamente
         print("AFTER INSERT INTO SORTED TUPLE LIST", utility_tuple_sorted_list)
-    top3_values = utility_tuple_sorted_list[:3]
+    #top3_values = utility_tuple_sorted_list[:3]
     print("PREPARING REQUEST")
     logging.debug("UTILITY-CALCULATOR : PREPARING FOR SEND NEW RANKING")  
-    data = json.dumps(top3_values)
+    #data = json.dumps(top3_values)
+    #Probar a enviar todas las soluciones
+    data = json.dumps(utility_tuple_sorted_list)
     header = {
         "Content-Type": "application/json"
         }

@@ -30,8 +30,9 @@
                 <a href="http://127.0.0.1:8585/" class="btn btn-info"></a>
                 {% else %}
                 <!-- Flujo correcto -->
-                <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateInputs()">
                     <div class="form-group text-center">
+                        <p>Los valores de los pesos deben de estar en el rango de 0.0 y 1.0. Siendo la suma de ambos pesos = 1.</p>
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-3">
@@ -77,4 +78,35 @@
         </div>
     </div>
 </div>
+<script>
+function validateInputs() {
+    var cost = document.getElementById('cost_input').value;
+    var performance = document.getElementById('performance_input').value;
+
+    // Intentamos convertir los valores a números flotantes
+    cost = parseFloat(cost);
+    performance = parseFloat(performance);
+
+    // Comprobamos que sean números válidos
+    if (isNaN(cost) || isNaN(performance)) {
+        alert("Por favor, ingrese números válidos en ambos campos.");
+        return false;
+    }
+
+    // Verificar que estén entre 0.0 y 1.0
+    if (cost < 0 || cost > 1 || performance < 0 || performance > 1) {
+        alert("Los valores deben estar entre 0.0 y 1.0.");
+        return false;
+    }
+
+    // Verificar que la suma sea igual a 1
+    if ((cost + performance).toFixed(2) != 1) {
+        alert("La suma de Cost Weight y Performance Weight debe ser igual a 1.");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
 {% endblock %}
