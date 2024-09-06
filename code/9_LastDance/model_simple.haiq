@@ -1,0 +1,34 @@
+ModelType: dtmc;
+
+sig PU {services : some Service}
+</
+    formula cpu;
+    [services:pair] true -> true;
+/>
+
+abstract sig Service {
+    machines : some PU,
+    hybrid_service : set Service,
+    link : some Service
+}
+</
+    formula ms;
+    var finished : bool init false;
+
+    [machines:pair] (finished=false) -> (finished'=true);
+
+    reward costRew [machines:pair] true : ms;
+/>
+
+pred SHOW {}
+
+run SHOW for 4
+
+label done [some Service:finished=true]
+
+property rangeR{costRew} [F done] as totalCost;
+
+sig classical0 extends Service {}
+</
+    formula ms = 5;
+/>
