@@ -9,29 +9,29 @@
 
 abstract sig PU {services : some Service}
 </
-formula cpu_logical_performance_factor;
-formula cpu_ram;
-formula cpu_bandwidth;
-formula cpu_cost_factor;
-formula qpu_prize;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
 />
 abstract sig QPU extends PU {}
 </
-formula cpu_logical_performance_factor;
-formula cpu_ram;
-formula cpu_bandwidth;
-formula cpu_cost_factor;
-formula qpu_prize;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
 var dummy : bool init false
 [services:qpair] true -> (dummy'=true);
 />
 abstract sig CPU extends PU {}
 </
-formula cpu_logical_performance_factor;
-formula cpu_ram;
-formula cpu_bandwidth;
-formula cpu_cost_factor;
-formula qpu_prize;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
 var dummy : bool init false
 [services:cpair] true -> (dummy'=true);
 />
@@ -42,10 +42,10 @@ abstract sig Service {
 	link: some Service // Comunicación entre servicios del caso de uso
 }
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -53,10 +53,10 @@ abstract sig Service {
 />
 abstract sig ClassicalService extends Service {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -64,10 +64,10 @@ abstract sig ClassicalService extends Service {}
 />
 abstract sig QuantumService extends Service {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -187,10 +187,10 @@ all cd: ClassicalDeployment | #(cd.services & QuantumService) = 0
 }
 abstract sig Aggregator extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -201,16 +201,16 @@ abstract sig Aggregator extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 
 abstract sig Sensor extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -221,16 +221,16 @@ abstract sig Sensor extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 
 abstract sig GroverAlg extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -241,16 +241,16 @@ abstract sig GroverAlg extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 
 abstract sig QuantumGroverAlg extends QuantumService{}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -261,16 +261,16 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 
 abstract sig BinarySearch extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -281,16 +281,16 @@ abstract sig BinarySearch extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 
 abstract sig ResultProcessing extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
     formula ms_availability;
     formula shots;
     formula performance;
@@ -301,8 +301,8 @@ abstract sig ResultProcessing extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [deployment:activationCall] true : ms_logical_performance_factor/machines.cpu_logical_performance_factor+ ms_ram/machines.cpu_ram + ms_bandwidth/machines.cpu_bandwidth/3;
-    reward costRew [deployment:activationCall] true : machines.cpu_cost_factor*ms_availability + machines.qpu_prize*shots;
+    reward performanceRew [deployment:activationCall] true : mslogicalperformancefactor/machines.cpulogicalperformancefactor+ msram/machines.cpuram + msbandwidth/machines.cpubandwidth/3;
+    reward costRew [deployment:activationCall] true : machines.cpucostfactor*ms_availability + machines.qpuprize*shots;
 />
 pred show {
 //--------------------------------------------------Use-Case----------------------------------------------------------------
@@ -342,114 +342,114 @@ property SminR{costRew} [F fin]
 
 sig aria1 extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.03;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.03;
 />
 sig aria2 extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.03;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.03;
 />
 sig aspenm3 extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.00035;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.00035;
 />
 sig harmony extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.01;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.01;
 />
 sig lucy extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.00035;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.00035;
 />
 sig dm1 extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.075;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.075;
 />
 sig sv1 extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0.075;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.075;
 />
 sig local extends QPU {}
 </
-formula cpu_logical_performance_factor = 0;
-formula cpu_ram = 0;
-formula cpu_bandwidth = 0;
-formula cpu_cost_factor = 0;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0;
 />
 sig t3large extends CPU {}
 </
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 8.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0944;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 5.0;
+formula cpuram = 8.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.0944;
+formula qpuprize = 0;
 />
 sig t3xlarge extends CPU {}
 </
-formula cpu_logical_performance_factor = 20.0;
-formula cpu_ram = 16.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.1888;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 20.0;
+formula cpuram = 16.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.1888;
+formula qpuprize = 0;
 />
 sig t32xlarge extends CPU {}
 </
-formula cpu_logical_performance_factor = 80.0;
-formula cpu_ram = 32.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.3776;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 80.0;
+formula cpuram = 32.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.3776;
+formula qpuprize = 0;
 />
 sig t3medium extends CPU {}
 </
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 4.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0472;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 5.0;
+formula cpuram = 4.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.0472;
+formula qpuprize = 0;
 />
 sig t3small extends CPU {}
 </
-formula cpu_logical_performance_factor = 5.0;
-formula cpu_ram = 2.0;
-formula cpu_bandwidth = 5000;
-formula cpu_cost_factor = 0.0236;
-formula qpu_prize = 0;
+formula cpulogicalperformancefactor = 5.0;
+formula cpuram = 2.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.0236;
+formula qpuprize = 0;
 />
 lone sig quantumgroveralg0 extends QuantumGroverAlg {}
 </
-formula ms_logical_performance_factor = 0;
-formula ms_ram = 0;
-formula ms_bandwidth = 0;
-formula ms_execution_time = 0;
+formula mslogicalperformancefactor = 0;
+formula msram = 0;
+formula msbandwidth = 0;
+formula msexecutiontime = 0;
 formula ms_availability = 0;
 formula shots = 1500;
 formula performance = 0;
@@ -457,10 +457,10 @@ formula cost = 0;
 />
 one sig resultprocessing0 extends ResultProcessing {}
 </
-formula ms_logical_performance_factor = 1e-05;
-formula ms_ram = 6;
-formula ms_bandwidth = 60.0;
-formula ms_execution_time = 100;
+formula mslogicalperformancefactor = 1e-05;
+formula msram = 6;
+formula msbandwidth = 60.0;
+formula msexecutiontime = 100;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -468,10 +468,10 @@ formula cost = 0;
 />
 lone sig binarysearch0 extends BinarySearch {}
 </
-formula ms_logical_performance_factor = 2.4e-05;
-formula ms_ram = 8;
-formula ms_bandwidth = 3.6;
-formula ms_execution_time = 1;
+formula mslogicalperformancefactor = 2.4e-05;
+formula msram = 8;
+formula msbandwidth = 3.6;
+formula msexecutiontime = 1;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -479,10 +479,10 @@ formula cost = 0;
 />
 one sig aggregator0 extends Aggregator {}
 </
-formula ms_logical_performance_factor = 4e-06;
-formula ms_ram = 4;
-formula ms_bandwidth = 240.0;
-formula ms_execution_time = 1;
+formula mslogicalperformancefactor = 4e-06;
+formula msram = 4;
+formula msbandwidth = 240.0;
+formula msexecutiontime = 1;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -490,10 +490,10 @@ formula cost = 0;
 />
 lone sig groveralg0 extends GroverAlg {}
 </
-formula ms_logical_performance_factor = 4e-06;
-formula ms_ram = 4;
-formula ms_bandwidth = 60.0;
-formula ms_execution_time = 10;
+formula mslogicalperformancefactor = 4e-06;
+formula msram = 4;
+formula msbandwidth = 60.0;
+formula msexecutiontime = 10;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -501,10 +501,10 @@ formula cost = 0;
 />
 one sig sensor0 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
+formula mslogicalperformancefactor = 3e-06;
+formula msram = 2;
+formula msbandwidth = 72.0;
+formula msexecutiontime = 1;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -512,10 +512,10 @@ formula cost = 0;
 />
 one sig sensor1 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
+formula mslogicalperformancefactor = 3e-06;
+formula msram = 2;
+formula msbandwidth = 72.0;
+formula msexecutiontime = 1;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
@@ -523,10 +523,10 @@ formula cost = 0;
 />
 one sig sensor2 extends Sensor {}
 </
-formula ms_logical_performance_factor = 3e-06;
-formula ms_ram = 2;
-formula ms_bandwidth = 72.0;
-formula ms_execution_time = 1;
+formula mslogicalperformancefactor = 3e-06;
+formula msram = 2;
+formula msbandwidth = 72.0;
+formula msexecutiontime = 1;
 formula ms_availability = 24;
 formula shots = 0;
 formula performance = 0;
