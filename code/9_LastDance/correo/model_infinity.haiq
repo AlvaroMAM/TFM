@@ -48,6 +48,8 @@ abstract sig Service {
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
 />
 abstract sig ClassicalService extends Service {}
 </
@@ -57,6 +59,8 @@ abstract sig ClassicalService extends Service {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
 />
 abstract sig QuantumService extends Service {}
 </
@@ -66,6 +70,8 @@ abstract sig QuantumService extends Service {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
 />
 abstract sig Deployment {services: some Service}
 </
@@ -187,6 +193,8 @@ abstract sig Aggregator extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:cpair] (current_status=none) -> (current_status'=initial);
@@ -205,6 +213,8 @@ abstract sig Sensor extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:cpair] (current_status=none) -> (current_status'=initial);
@@ -223,6 +233,8 @@ abstract sig GroverAlg extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:cpair] (current_status=none) -> (current_status'=initial);
@@ -241,6 +253,8 @@ abstract sig BinarySearch extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:cpair] (current_status=none) -> (current_status'=initial);
@@ -259,6 +273,8 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:qpair] (current_status=none) -> (current_status'=initial);
@@ -277,6 +293,8 @@ abstract sig ResultProcessing extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
     enum status_microservice:{initial, done, none};
     var current_status:[status_microservice] init none;
     [machines:cpair] (current_status=none) -> (current_status'=initial);
@@ -307,6 +325,10 @@ all hd: HybridDeployment | #(hd.services & QuantumGroverAlg) = 1 and #(hd.servic
 // Para todo despliegue clásico no debe haber ningún gover clásico ni gover cuántico y un solo búsqueda binaria
 all cd: ClassicalDeployment | #(cd.services & QuantumGroverAlg) = 0 and #(cd.services & GroverAlg) = 0  and #(cd.services & BinarySearch) = 1
 //---------------------------------------------------------------------------------------------------------------------------
+all s:ResultProcessing | #(s.machines & t3small) = 0 and #(s.machines & t3medium) = 0
+all s:BinarySearch | #(s.machines & t3small) = 0 and #(s.machines & t3medium) = 0
+all s:Aggregator | #(s.machines & t3small) = 0
+all s:GroverAlg | #(s.machines & t3small) = 0
 
 }
 run show for 25
@@ -318,6 +340,54 @@ property rangeR{performanceRew} [F fin] as totalPerformance;
 property SminR{performanceRew} [F fin]
 property SminR{costRew} [F fin]
 
+sig aria1 extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.03;
+/>
+sig aria2 extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.03;
+/>
+sig aspenm3 extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.00035;
+/>
+sig harmony extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.01;
+/>
+sig lucy extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.00035;
+/>
+sig dm1 extends QPU {}
+</
+formula cpulogicalperformancefactor = 0;
+formula cpuram = 0;
+formula cpubandwidth = 0;
+formula cpucostfactor = 0;
+formula qpuprize = 0.075;
+/>
 sig sv1 extends QPU {}
 </
 formula cpulogicalperformancefactor = 0;
@@ -358,6 +428,22 @@ formula cpubandwidth = 5000;
 formula cpucostfactor = 0.3776;
 formula qpuprize = 0;
 />
+sig t3medium extends CPU {}
+</
+formula cpulogicalperformancefactor = 5.0;
+formula cpuram = 4.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.0472;
+formula qpuprize = 0;
+/>
+sig t3small extends CPU {}
+</
+formula cpulogicalperformancefactor = 5.0;
+formula cpuram = 2.0;
+formula cpubandwidth = 5000;
+formula cpucostfactor = 0.0236;
+formula qpuprize = 0;
+/>
 
 one sig resultprocessing0 extends ResultProcessing {}
 </
@@ -367,6 +453,8 @@ formula msbandwidth = 60.0;
 formula msexecutiontime = 100;
 formula msavailability = 24;
 formula shots = 0;
+formula performance = 0;
+formula cost = 0;
 />
 lone sig binarysearch0 extends BinarySearch {}
 </
@@ -376,6 +464,8 @@ formula msbandwidth = 3.6;
 formula msexecutiontime = 1;
 formula msavailability = 24;
 formula shots = 0;
+formula performance = 0;
+formula cost = 0;
 />
 one sig aggregator0 extends Aggregator {}
 </
@@ -385,6 +475,8 @@ formula msbandwidth = 240.0;
 formula msexecutiontime = 1;
 formula msavailability = 24;
 formula shots = 0;
+formula performance = 0;
+formula cost = 0;
 />
 lone sig groveralg0 extends GroverAlg {}
 </
@@ -394,6 +486,8 @@ formula msbandwidth = 60.0;
 formula msexecutiontime = 10;
 formula msavailability = 24;
 formula shots = 0;
+formula performance = 0;
+formula cost = 0;
 />
 one sig sensor0 extends Sensor {}
 </
@@ -403,8 +497,31 @@ formula msbandwidth = 72.0;
 formula msexecutiontime = 1;
 formula msavailability = 24;
 formula shots = 0;
+formula performance = 0;
+formula cost = 0;
 />
-
+one sig sensor1 extends Sensor {}
+</
+formula mslogicalperformancefactor = 0.05;
+formula msram = 2;
+formula msbandwidth = 72.0;
+formula msexecutiontime = 1;
+formula msavailability = 24;
+formula shots = 0;
+formula performance = 0;
+formula cost = 0;
+/>
+one sig sensor2 extends Sensor {}
+</
+formula mslogicalperformancefactor = 0.05;
+formula msram = 2;
+formula msbandwidth = 72.0;
+formula msexecutiontime = 1;
+formula msavailability = 24;
+formula shots = 0;
+formula performance = 0;
+formula cost = 0;
+/>
 lone sig quantumgroveralg0 extends QuantumGroverAlg {}
 </
 formula mslogicalperformancefactor = 0;
@@ -413,4 +530,6 @@ formula msbandwidth = 0;
 formula msexecutiontime = 0;
 formula msavailability = 0;
 formula shots = 1500;
+formula performance = 0;
+formula cost = 0;
 />
