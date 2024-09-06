@@ -36,6 +36,7 @@ def insert_sorted_tuple_list(l,t):
     #Insert new element
     if position_to_insert >= 0:
         l.insert(position_to_insert,t)
+        return l
         # Eliminando esa comprobación serviría para tener una lista completa de los valores de utilidad
         #if len(l)>3:
         #    return l[:-1]
