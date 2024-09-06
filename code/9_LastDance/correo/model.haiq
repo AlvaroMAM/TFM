@@ -281,8 +281,8 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : 0;
-    reward costRew [machines:cpair] true : machines.qpuprize*shots;
+    reward performanceRew [machines:qpair] true : 0;
+    reward costRew [machines:qpair] true : machines.qpuprize*shots;
 />
 
 abstract sig ResultProcessing extends ClassicalService {}
