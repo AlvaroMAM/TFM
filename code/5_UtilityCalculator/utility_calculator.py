@@ -74,9 +74,10 @@ def utility_calculation(utility_values):
                         key_utility_value = 0
                 sol_utility_value = sol_utility_value + key_utility_value
             utility_tuple = (sol, sol_utility_value, metrics)
-        print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
+        #print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
         utility_tuple_sorted_list = insert_sorted_tuple_list(utility_tuple_sorted_list,utility_tuple) # Comprobar que se modifica la lista correctamente
-        print("AFTER INSERT INTO SORTED TUPLE LIST", utility_tuple_sorted_list)
+        #print("AFTER INSERT INTO SORTED TUPLE LIST", utility_tuple_sorted_list)
+    print("UTILITY VALUES CALCULATED")
     #top3_values = utility_tuple_sorted_list[:3]
     print("PREPARING REQUEST")
     logging.debug("UTILITY-CALCULATOR : PREPARING FOR SEND NEW RANKING")  
