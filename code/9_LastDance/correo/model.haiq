@@ -201,7 +201,7 @@ abstract sig Aggregator extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : ((mslogicalperformancefactor/machines.cpulogicalperformancefactor)+(msram/machines.cpuram)+(msbandwidth/machines.cpubandwidth)/3);
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
@@ -221,7 +221,7 @@ abstract sig Sensor extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : ((mslogicalperformancefactor/machines.cpulogicalperformancefactor)+(msram/machines.cpuram)+(msbandwidth/machines.cpubandwidth)/3);
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
@@ -241,7 +241,7 @@ abstract sig GroverAlg extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : ((mslogicalperformancefactor/machines.cpulogicalperformancefactor)+(msram/machines.cpuram)+(msbandwidth/machines.cpubandwidth)/3);
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
@@ -261,7 +261,7 @@ abstract sig BinarySearch extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : ((mslogicalperformancefactor/machines.cpulogicalperformancefactor)+(msram/machines.cpuram)+(msbandwidth/machines.cpubandwidth)/3);
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
@@ -281,7 +281,7 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:qpair] true : 0;
+    reward performanceRew [machines:qpair] true : 1;
     reward costRew [machines:qpair] true : machines.qpuprize*shots;
 />
 
@@ -301,7 +301,7 @@ abstract sig ResultProcessing extends ClassicalService {}
     [deployment:activationCall] (current_status=initial) -> (current_status'=done);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [machines:cpair] true : ((mslogicalperformancefactor/machines.cpulogicalperformancefactor)+(msram/machines.cpuram)+(msbandwidth/machines.cpubandwidth)/3);
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 pred show {
