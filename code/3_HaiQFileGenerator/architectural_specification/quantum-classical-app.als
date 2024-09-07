@@ -49,8 +49,6 @@ abstract sig Service {
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
 />
 abstract sig ClassicalService extends Service {}
 </
@@ -60,8 +58,6 @@ abstract sig ClassicalService extends Service {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
 />
 abstract sig QuantumService extends Service {}
 </
@@ -71,8 +67,6 @@ abstract sig QuantumService extends Service {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
 />
 abstract sig Deployment {services: some Service}
 </

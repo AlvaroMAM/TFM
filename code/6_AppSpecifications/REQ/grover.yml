@@ -1,6 +1,6 @@
 spil4ha: 1.0.0 #SPILab 4 hibrid architectures
 context:
-  id: grover_alg
+  id: groveralg
   api: ../OAS/grover.yml
   mode: QPU
   author: SPILab

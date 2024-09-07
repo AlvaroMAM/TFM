@@ -6,8 +6,6 @@ abstract sig Aggregator extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:cpair] (finished=false) -> (finished'=true);
 
@@ -24,8 +22,6 @@ abstract sig Sensor extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:cpair] (finished=false) -> (finished'=true);
 
@@ -42,8 +38,6 @@ abstract sig GroverAlg extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:cpair] (finished=false) -> (finished'=true);
 
@@ -60,8 +54,6 @@ abstract sig BinarySearch extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:cpair] (finished=false) -> (finished'=true);
 
@@ -78,8 +70,6 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:qpair] (finished=false) -> (finished'=true);
 
@@ -96,8 +86,6 @@ abstract sig ResultProcessing extends ClassicalService {}
     formula msexecutiontime;
     formula msavailability;
     formula shots;
-    formula performance;
-    formula cost;
     var finished : bool init false;
     [machines:cpair] (finished=false) -> (finished'=true);
 

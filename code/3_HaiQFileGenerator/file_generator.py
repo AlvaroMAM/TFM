@@ -73,23 +73,23 @@ def classical_generator_string(candidates):
                 value = attributes["ms_mandatory"]
                 if value:
                     # The service is mandatory so it would be one
-                    service_instance = "one sig "+service_name+"_"+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
+                    service_instance = "one sig "+service_name+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
                 else:
                     # The service isn't mandatory so it would be lone
-                    service_instance = "lone sig "+service_name+"_"+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
+                    service_instance = "lone sig "+service_name+str(instance_number)+" extends "+service_name.capitalize()+" {}\n"
             logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE CREATED")
             service_formulas = "</"
             if attributes["ms_logical_performance_factor"]:
-                service_formulas= service_formulas + "\nformula ms_logical_performance_factor = "+str(attributes["ms_logical_performance_factor"])+";"
+                service_formulas= service_formulas + "\nformula mslogicalperformancefactor = "+str(attributes["ms_logical_performance_factor"])+";"
             if attributes["ms_ram"]:
-                service_formulas=service_formulas + "\nformula ms_ram = "+str(attributes["ms_ram"])+";"
+                service_formulas=service_formulas + "\nformula msram = "+str(attributes["ms_ram"])+";"
             if attributes["ms_bandwidth"]:
-                service_formulas=service_formulas +"\nformula ms_bandwidth = "+str(attributes["ms_bandwidth"])+";"
+                service_formulas=service_formulas +"\nformula msbandwidth = "+str(attributes["ms_bandwidth"])+";"
             if attributes["ms_execution_time"]:
-                service_formulas=service_formulas +"\nformula ms_execution_time = "+str(attributes["ms_execution_time"])+";"
+                service_formulas=service_formulas +"\nformula msexecutiontime = "+str(attributes["ms_execution_time"])+";"
             if attributes["ms_availability"]:
-                service_formulas=service_formulas +"\nformula ms_availability = "+str(attributes["ms_availability"])+";"
-            service_formulas=service_formulas +"\nformula cost = 0;\nformula performance = 0;\n/>" # En microservicio clásico sería cost y performance
+                service_formulas=service_formulas +"\nformula msavailability = "+str(attributes["ms_availability"])+";"
+            service_formulas=service_formulas +"\nformula shots;\n/>" # En microservicio clásico sería cost y performance
             service_instance = service_instance + service_formulas
             logging.debug("FILE-GENERATOR : CLASSICAL SERVICE INSTANCE COMPLETED")
             services = services + service_instance + "\n"
@@ -102,12 +102,12 @@ def classical_generator_string(candidates):
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
-                    machine_instance = "sig "+machine_name+" extends CPU {}\n"
+                    machine_instance = "sig "+machine_name.replace("_","")+" extends CPU {}\n"#Revisar para eliminar el _ o .
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
-                    machine_formulas = machine_formulas+"\n[services:cpair] true -> true;\n/>"
+                    machine_formulas = machine_formulas+"\nformula qpuprize = 0;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
                     machines = machines + machine_instance+"\n"
@@ -143,15 +143,15 @@ def quantum_generator_string(candidates):
                 value = attributes["mandatory"]
                 if value:
                     # The service is mandatory so it would be one
-                    service_instance = "one sig "+service_name+" extends "+"Quantum_"+service_name.capitalize()+" {}\n"
+                    service_instance = "one sig "+service_name+" extends "+"Quantum"+service_name.capitalize()+" {}\n"#Revisar por si hay que cambiar segunda letra del modelo
                 else:
                     # The service isn't mandatory so it would be lone
-                    service_instance = "lone sig "+service_name+" extends "+"Quantum_"+service_name.capitalize()+" {}\n"
+                    service_instance = "lone sig "+service_name+" extends "+"Quantum"+service_name.capitalize()+" {}\n"
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE CREATED")
         service_formulas = "</"
         if attributes["shots"]:
             service_formulas= service_formulas + "\nformula shots = "+str(attributes["shots"])+";"
-        service_formulas= service_formulas + "\nformula cost = 0;\n/>" # En microservicio clásico sería cost y performance
+        service_formulas= service_formulas + "\nformula mslogicalperformancefactor = 0;\nformula msram = 0;\nformula msbandwidth = 0;\nformula msexecutiontime = 0;\nformula msavailability = 0;\n/>" # En microservicio clásico sería cost y performance
         service_instance = service_instance + service_formulas
         logging.debug("FILE-GENERATOR : QUANTUM SERVICE INSTANCE COMPLETED")
         services = services + service_instance + "\n"
@@ -162,12 +162,12 @@ def quantum_generator_string(candidates):
                 not_used_machines.remove(machine_name)
                 if machine_name not in processed_machines:
                     processed_machines.append(machine_name)
-                    machine_instance = "sig "+machine_name+" extends QPU {}\n"
+                    machine_instance = "sig "+machine_name.replace("_","")+" extends QPU {}\n"
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
                         machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+str(characteristic[1])+";"
-                    machine_formulas = machine_formulas+"\n[services:qpair] true -> true;\n/>"
+                    machine_formulas = machine_formulas+"\nformula cpulogicalperformancefactor = 0;\nformula cpuram = 0;\nformula cpubandwidth = 0;\nformula cpucostfactor = 0;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     machines = machines + machine_instance+"\n"
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE COMPLETED")
@@ -179,7 +179,7 @@ def machine_restriction(l, used):
     restriction = ""
     for pair in l:
         service_name, machine_list = pair
-        result = ' and '.join([f'#({service_name.capitalize()} & {item}) = 0' for item in machine_list if item in used])
+        result = ' and '.join([f'#(s.machines & {item}) = 0' for item in machine_list if item in used])
         if result:
             result = "all s:"+service_name.capitalize()+" | " + result
             restriction = restriction + result + "\n"
@@ -188,11 +188,11 @@ def machine_restriction(l, used):
 
 def predicate_and_properties(use_case_restrictions, quantum, classical, quantum_used, classical_used):
     properties = "run show for 25\n\
-label done [some UseCase:workflowDone=true]\n\
-property rangeR{" + 'performanceRew' + "}[F done] totalPerformance;\n\
-property rangeR{" + 'costRew' + "}[F done] as totalCost;\n\
-property SminR{" + 'performanceRew' + "}[F done]\n\
-property SminR{" + 'costRew' + "}[F done]\n"
+label fin [some Service:finished=true]\n\
+property rangeR{" + 'performanceRew' + "}[F fin] totalPerformance;\n\
+property rangeR{" + 'costRew' + "}[F fin] as totalCost;\n\
+property SminR{" + 'performanceRew' + "}[F fin]\n\
+property SminR{" + 'costRew' + "}[F fin]\n"
     quantum_machine_restriction = machine_restriction(quantum, quantum_used)
     classical_machine_restriction = machine_restriction(classical, classical_used)
     predicate = "\npred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
