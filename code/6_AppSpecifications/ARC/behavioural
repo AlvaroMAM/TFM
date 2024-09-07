@@ -30,7 +30,7 @@ abstract sig Sensor extends ClassicalService {}
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
-abstract sig GroverAlg extends ClassicalService {}
+abstract sig Groveralg extends ClassicalService {}
 </
     formula mslogicalperformancefactor;
     formula msram;
@@ -46,7 +46,7 @@ abstract sig GroverAlg extends ClassicalService {}
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
-abstract sig BinarySearch extends ClassicalService {}
+abstract sig Binarysearch extends ClassicalService {}
 </
     formula mslogicalperformancefactor;
     formula msram;
@@ -62,7 +62,7 @@ abstract sig BinarySearch extends ClassicalService {}
     reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
-abstract sig QuantumGroverAlg extends QuantumService{}
+abstract sig QuantumGroveralg extends QuantumService{}
 </
     formula mslogicalperformancefactor;
     formula msram;
@@ -78,7 +78,7 @@ abstract sig QuantumGroverAlg extends QuantumService{}
     reward costRew [machines:qpair] true : machines.qpuprize*shots;
 />
 
-abstract sig ResultProcessing extends ClassicalService {}
+abstract sig Resultprocessing extends ClassicalService {}
 </
     formula mslogicalperformancefactor;
     formula msram;
