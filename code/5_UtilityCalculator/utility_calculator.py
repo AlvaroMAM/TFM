@@ -67,13 +67,15 @@ def utility_calculation(utility_values):
                 print("METRICS")
                 print(metric)
                 for k,v in metric.items():
-
                     key_utility_value = None
                     if k == 'totalCost':
+                        print("Entro en cost")
                         key_utility_value = cost_weight*float(v)
                     elif k == 'totalPerformance': # Change for performance
+                        print("entro en performance")
                         key_utility_value = performance_weight*float(v)
                     else:
+                        print(k)
                         key_utility_value = 0
                 sol_utility_value = sol_utility_value + key_utility_value
             utility_tuple = (sol.replace("-",""), sol_utility_value, metrics)
