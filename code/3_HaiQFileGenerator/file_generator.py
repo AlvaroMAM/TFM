@@ -189,10 +189,10 @@ def machine_restriction(l, used):
 def predicate_and_properties(use_case_restrictions, quantum, classical, quantum_used, classical_used):
     properties = "run show for 25\n\
 label fin [some Service:finished=true]\n\
-property rangeR{" + 'performanceRew' + "}[F fin] totalPerformance;\n\
-property rangeR{" + 'costRew' + "}[F fin] as totalCost;\n\
-property SminR{" + 'performanceRew' + "}[F fin]\n\
-property SminR{" + 'costRew' + "}[F fin]\n"
+property rangeR{" + 'performanceRew' + "} [F fin] as totalPerformance;\n\
+property rangeR{" + 'costRew' + "} [F fin] as totalCost;\n\
+property SminR{" + 'performanceRew' + "} [F fin]\n\
+property SminR{" + 'costRew' + "} [F fin]\n"
     quantum_machine_restriction = machine_restriction(quantum, quantum_used)
     classical_machine_restriction = machine_restriction(classical, classical_used)
     predicate = "\npred show {\n" + use_case_restrictions + quantum_machine_restriction + classical_machine_restriction + "\n}\n"
