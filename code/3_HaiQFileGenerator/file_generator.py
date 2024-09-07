@@ -179,7 +179,7 @@ def machine_restriction(l, used):
     restriction = ""
     for pair in l:
         service_name, machine_list = pair
-        result = ' and '.join([f'#(s.machines & {item}) = 0' for item in machine_list if item in used])
+        result = ' and '.join([f'#(s.machines & {item.replace("_","")}) = 0' for item in machine_list if item in used])
         if result:
             result = "all s:"+service_name.capitalize()+" | " + result
             restriction = restriction + result + "\n"
