@@ -66,9 +66,9 @@ def utility_calculation(utility_values):
             for metric in metrics:
                 for k,v in metric.items():
                     key_utility_value = None
-                    if k == 'cost':
+                    if k == 'totalCost':
                         key_utility_value = cost_weight*float(v)
-                    elif k == 'reliability': # Change for performance
+                    elif k == 'totalPerformance': # Change for performance
                         key_utility_value = performance_weight*float(v)
                     else:
                         key_utility_value = 0

@@ -21,7 +21,7 @@ def downloadsol():
     print("DOWNLOAD REQUEST ACHIEVED")
     logging.debug("HAIQ LAUNCHER --> DOWNLOAD REQUEST ACHIEVED")
     solution_name = request.args.get('value')  # El valor enviado en la solicitud GET
-    solutions_path = "/Users/iquantum/Desktop/HaiQ-project/results/tasconfigs/" #ACTUALIZAR CUANDO SEPA RUTA REAL
+    solutions_path = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/qcconfigs"
     if not solution_name:
         print("SOLUTION NAME NOT PROVIDED")
         logging.debug("HAIQ LAUNCHER --> SOLUTION NAME NOT PROVIDED")
@@ -50,8 +50,8 @@ def launch_haiq():
     """
     # Se guarda 
     recieved_file = None
-    #path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/" El bueno
-    path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/tas/"
+    path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/" #Production
+    #path_to_save = "/Users/iquantum/Desktop/HaiQ-project/examples/tas/" # Testing
     logging.debug("HAIQ LAUNCHER --> /launch-haiq")
     if request.files:
         logging.debug("HAIQ LAUNCHER --> File recieved")
@@ -99,13 +99,10 @@ def launch_haiq():
                 print(e)
                 return Response("EXCEPTION", status=500, mimetype='text/plain')
             
-            haiq_result_path = "/Users/iquantum/Desktop/HaiQ-project/results/" #To Complete
-            #haiq_result_path = '' #To Complete 
+            haiq_result_path = "/Users/iquantum/Desktop/HaiQ-project/examples/QuantumClassicalApp/" 
             if os.path.exists(haiq_result_path):
                 try:
-                    # Mandar resultado a INFO PROCESSING 
-                    # MODIFICAR POR NOMBRE DE ARCHIVO REAL
-                    result_file = os.path.join(haiq_result_path,'tasdata.json') 
+                    result_file = os.path.join(haiq_result_path,'qcdata.json') 
                     url = INFORMATION_PROCESSING_URL_OUT+"/haiq-result"
                     files = {"haiq-result": open(result_file, 'rb')}
                     response = requests.post(url, files=files)
