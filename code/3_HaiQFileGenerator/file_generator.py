@@ -106,7 +106,7 @@ def classical_generator_string(candidates):
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
-                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+format(float(str(characteristic[1])),"f")+";"
+                        machine_formulas=machine_formulas+"\nformula "+characteristic[0].replace("_","")+" = "+format(float(str(characteristic[1])),"f")+";"
                     machine_formulas = machine_formulas+"\nformula qpuprize = 0.0;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     logging.debug("FILE-GENERATOR : CLASSICAL MACHINE INSTANCE COMPLETED")
@@ -166,7 +166,7 @@ def quantum_generator_string(candidates):
                     logging.debug("FILE-GENERATOR : QUANTUM MACHINE INSTANCE CREATED")
                     machine_formulas = "</"
                     for characteristic in machine_characteristics.items():
-                        machine_formulas=machine_formulas+"\nformula "+characteristic[0]+" = "+format(float(str(characteristic[1])),"f")+";"
+                        machine_formulas=machine_formulas+"\nformula "+characteristic[0].replace("_","")+" = "+format(float(str(characteristic[1])),"f")+";"
                     machine_formulas = machine_formulas+"\nformula cpulogicalperformancefactor = 0.0;\nformula cpuram = 0.0;\nformula cpubandwidth = 0.0;\nformula cpucostfactor = 0.0;\n/>"
                     machine_instance = machine_instance + machine_formulas
                     machines = machines + machine_instance+"\n"
