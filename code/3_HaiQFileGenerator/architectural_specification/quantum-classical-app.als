@@ -6,25 +6,35 @@
 //	Descripcion:
 //	Especificación del modelo arquitectural de aplicaciones híbridas (clásico-cuánticas)
 
+ModelType: dtmc;
 
 abstract sig PU {services : some Service}
 </
-formula cpu_logical_performance_factor;
-formula cpu_ram;
-formula cpu_bandwidth;
-formula cpu_cost_factor;
-formula qpu_prize;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
 />
 abstract sig QPU extends PU {}
 </
-formula qpu_prize;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
+var dummy : bool init false
+[services:qpair] true -> (dummy'=true);
 />
 abstract sig CPU extends PU {}
 </
-formula cpu_logical_performance_factor;
-formula cpu_ram;
-formula cpu_bandwidth;
-formula cpu_cost_factor;
+formula cpulogicalperformancefactor;
+formula cpuram;
+formula cpubandwidth;
+formula cpucostfactor;
+formula qpuprize;
+var dummy : bool init false
+[services:cpair] true -> (dummy'=true);
 />
 abstract sig Service {
 	machines : some PU,
@@ -33,65 +43,60 @@ abstract sig Service {
 	link: some Service // Comunicación entre servicios del caso de uso
 }
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
     formula shots;
-    formula cost;
-/>
-abstract sig Classical_Service extends Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
     formula performance;
     formula cost;
 />
-abstract sig Quantum_Service extends Service {}
+abstract sig ClassicalService extends Service {}
 </
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
     formula shots;
+    formula performance;
+    formula cost;
+/>
+abstract sig QuantumService extends Service {}
+</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
+    formula performance;
     formula cost;
 />
 abstract sig Deployment {services: some Service}
 </
-    enum status_analysis:{none, launchAnalysis, done};
-    var current_status:[status_analysis] init none;
-    var workflowDone: bool init false;
+    formula dummy;
 />
-abstract sig Hybrid_Deployment extends Deployment {}
+abstract sig HybridDeployment extends Deployment {}
 </
-    enum status_analysis:{none, launchAnalysis, done};
-    var current_status:[status_analysis] init none;
-    var workflowDone: bool init false;
+    formula dummy;
+    var finished : bool init false;
+    [] (finished=false) -> (finished'=true);
 />
-abstract sig Classical_Deployment extends Deployment {}
+abstract sig ClassicalDeployment extends Deployment {}
 </
-    enum status_analysis:{none, launchAnalysis, done};
-    var current_status:[status_analysis] init none;
-    var workflowDone: bool init false;
+    formula dummy;
+    var finished : bool init false;
+    [] (finished=false) -> (finished'=true);
 />
-lone sig HybridUseCase extends Hybrid_Deployment {}
+lone sig HybridUseCase extends HybridDeployment {}
 </
-    enum status_analysis:{none, launchAnalysis, done};
-    var current_status:[status_analysis] init none;
-    var workflowDone: bool init false;
-    [launch] (current_status=none) -> (current_status'=launchAnalysis);
-    // 1. Launching Analysis
-    [services:activationCall] (current_status=launchAnalysis) & -> (workflowDone'=true) & (current_status'=done); // Se sincroniza con aggregator
+    formula dummy = 0;
 />
-lone sig ClassicalUseCase extends Classical_Deployment {}
+lone sig ClassicalUseCase extends ClassicalDeployment {}
 </
-    enum status_analysis:{none, launchAnalysis, done};
-    var current_status:[status_analysis] init none;
-    var workflowDone: bool init false;
-    [launch] (current_status=none) -> (current_status'=launchAnalysis);
-    // 1. Launching Analysis
-    [services:activationCall] (current_status=launchAnalysis) & -> (workflowDone'=true) & (current_status'=done); // Se sincroniza con aggregator
+    formula dummy = 0;
 />
 
 fact {

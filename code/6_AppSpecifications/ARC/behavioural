@@ -1,120 +1,107 @@
-abstract sig Aggregator extends Classical_Service {}
+abstract sig Aggregator extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
-/>
-
-abstract sig Sensor extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
-/>
-
-abstract sig Grover_alg extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
-    formula performance;
-    formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
-/>
-
-abstract sig Quantum_Grover_alg extends Quantum_Service{}
-</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
     formula shots;
-    formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:qpair] (current_status=none) -> (cost'=machines.qpu_prize*shots) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
-
-    // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
-/>
-
-abstract sig Binary_search extends Classical_Service {}
-</
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
     formula performance;
     formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
+    var finished : bool init false;
+    [machines:cpair] (finished=false) -> (finished'=true);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
+    reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
 
-abstract sig Result_processing extends Classical_Service {}
+abstract sig Sensor extends ClassicalService {}
 </
-    formula ms_logical_performance_factor;
-    formula ms_ram;
-    formula ms_bandwidth;
-    formula ms_execution_time;
-    formula ms_availability;
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
     formula performance;
     formula cost;
-    enum status_microservice:{initial, done, none};
-    var current_status:[status_microservice] init none;
-
-     //Calcular coste y rendimiento según la máquina con la que esté relacionada
-    [machines:cpair] (current_status=none) -> (cost'=machines.cpu_cost_factor*ms_availability) & (performance'=((ms_logical_performance_factor/machines.cpu_logical_performance_factor)+(ms_ram/machines.cpu_ram)+(ms_bandwidth/machines.cpu_bandwidth))/3) & (current_status'=initial);
-    [link:activationCall] (current_status=initial) -> (current_status'=done);
+    var finished : bool init false;
+    [machines:cpair] (finished=false) -> (finished'=true);
 
     // Sumar solo las propiedades cuando se ejecuta
-    reward performanceRew [link:activationCall] true : performance;
-    reward costRew [link:activationCall] true : cost;
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
+    reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
+/>
+
+abstract sig GroverAlg extends ClassicalService {}
+</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
+    formula performance;
+    formula cost;
+    var finished : bool init false;
+    [machines:cpair] (finished=false) -> (finished'=true);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
+    reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
+/>
+
+abstract sig BinarySearch extends ClassicalService {}
+</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
+    formula performance;
+    formula cost;
+    var finished : bool init false;
+    [machines:cpair] (finished=false) -> (finished'=true);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
+    reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
+/>
+
+abstract sig QuantumGroverAlg extends QuantumService{}
+</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
+    formula performance;
+    formula cost;
+    var finished : bool init false;
+    [machines:qpair] (finished=false) -> (finished'=true);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [machines:qpair] true : 1;
+    reward costRew [machines:qpair] true : machines.qpuprize*shots;
+/>
+
+abstract sig ResultProcessing extends ClassicalService {}
+</
+    formula mslogicalperformancefactor;
+    formula msram;
+    formula msbandwidth;
+    formula msexecutiontime;
+    formula msavailability;
+    formula shots;
+    formula performance;
+    formula cost;
+    var finished : bool init false;
+    [machines:cpair] (finished=false) -> (finished'=true);
+
+    // Sumar solo las propiedades cuando se ejecuta
+    reward performanceRew [machines:cpair] true : ((machines.cpulogicalperformancefactor/mslogicalperformancefactor)+(machines.cpuram/msram)+(machines.cpubandwidth/msbandwidth)/3);
+    reward costRew [machines:cpair] true : machines.cpucostfactor*msavailability;
 />
