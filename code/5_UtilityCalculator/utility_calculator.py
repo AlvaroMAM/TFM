@@ -63,22 +63,20 @@ def utility_calculation(utility_values):
         for sol, metrics in elem.items():
             utility_tuple = None
             sol_utility_value = 0
+            metrics_list = []
             for metric in metrics:
-                print("METRICS")
-                print(metric)
                 for k,v in metric.items():
                     key_utility_value = None
+                    metrics_list.append(v) # Just for visualization in table
                     if k == 'totalCost':
-                        print("Entro en cost")
                         key_utility_value = cost_weight*float(v)
                     elif k == 'totalPerformance': # Change for performance
-                        print("entro en performance")
                         key_utility_value = performance_weight*float(v)
                     else:
                         print(k)
                         key_utility_value = 0
                 sol_utility_value = sol_utility_value + key_utility_value
-            utility_tuple = (sol.replace("-",""), sol_utility_value, metrics)
+            utility_tuple = (sol.replace("-",""), sol_utility_value, metrics_list)
         #print("BEFORE INSERT INTO SORTED TUPLE LIST",utility_tuple_sorted_list)
         #utility_tuple_sorted_list = insert_sorted_tuple_list(utility_tuple_sorted_list,utility_tuple) # Comprobar que se modifica la lista correctamente
         utility_tuple_sorted_list.append(utility_tuple)
