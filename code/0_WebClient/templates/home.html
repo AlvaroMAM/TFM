@@ -32,14 +32,17 @@
                 <!-- Flujo correcto -->
                 <form class="form-horizontal" action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateInputs()">
                     <div class="form-group text-center">
-                        <p>Los valores de los pesos deben de estar en el rango de 0.0 y 1.0. Siendo la suma de ambos pesos = 1.</p>
+                        <p>Los valores de los pesos de coste y rendimiento deben de estar en el rango de 0.0 y 1.0.</p> 
+                        <p>Siendo la suma de ambos pesos = 1.</p>
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-3">
+                                <label for="cost_input">Cost Weight</label>
                                 <input type="text" id="cost_input" name="cost" placeholder="Cost Weight" required>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
+                                <label for="performance_input">Performance Weight</label>
                                 <input type="text" id="performance_input" name="performance" placeholder="Performance" required>
                             </div>
                             <div class="col-md-2"></div>
